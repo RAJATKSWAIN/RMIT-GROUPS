@@ -265,7 +265,7 @@ body {
 }
 .sidebar {
   width: 250px;
-  background: #fff;
+  background: #f4f089;
   border-radius: var(--card-radius);
   padding: 20px;
   min-height: 100vh;

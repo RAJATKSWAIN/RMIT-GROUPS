@@ -282,7 +282,7 @@ body {
 .btn-glass {
   backdrop-filter: blur(6px);
   border: 1px solid rgba(255,255,255,0.2);
-  color: #fff;
+  color: #200a78d2;
   transition: 0.3s;
 }
 .btn-glass:hover {

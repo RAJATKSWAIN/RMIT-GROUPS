@@ -264,12 +264,21 @@ body {
   margin-top: 80px;
 }
 .sidebar {
+  width: 250px;
+  background: #fff;
+  border-radius: var(--card-radius);
+  padding: 20px;
+  min-height: 100vh;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/*.sidebar {
   background: linear-gradient(135deg, #0d1b4c, #6a1b1a);
   color: #fff;
   min-height: 100vh;
   padding: 20px;
   border-radius: 20px;
-}
+}*/
 .btn-glass {
   backdrop-filter: blur(6px);
   border: 1px solid rgba(255,255,255,0.2);

@@ -272,13 +272,6 @@ body {
   box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
-/*.sidebar {
-  background: linear-gradient(135deg, #0d1b4c, #6a1b1a);
-  color: #fff;
-  min-height: 100vh;
-  padding: 20px;
-  border-radius: 20px;
-}*/
 .btn-glass {
   backdrop-filter: blur(6px);
   border: 1px solid rgba(255,255,255,0.2);
@@ -563,7 +556,7 @@ body {
   <!-- ============== Sidebar ============== -->
 	<div class="sidebar bg-gradient shadow-lg p-3 rounded-4">
   <div class="text-center mb-4">
-    <img src="/images/admin-avatar.png" class="rounded-circle mb-2" width="60">
+    <img src="/rmit-smartcampus/images/admin-avatar.png" class="rounded-circle mb-2" width="60">
     <h5 class="fw-bold"><?= htmlspecialchars($profile['full_name']) ?></h5>
     <small class="text-light"><?= htmlspecialchars($profile['email']) ?></small>
     <div class="text-muted small"><?= htmlspecialchars($institute) ?></div>

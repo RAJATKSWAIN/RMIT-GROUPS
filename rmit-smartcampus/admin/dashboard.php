@@ -264,11 +264,21 @@ body {
   margin-top: 80px;
 }
 .sidebar {
-  width: 250px;
-  background: #fff;
-  border-radius: var(--card-radius);
+  background: linear-gradient(135deg, #0d1b4c, #6a1b1a);
+  color: #fff;
+  min-height: 100vh;
   padding: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  border-radius: 20px;
+}
+.btn-glass {
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  transition: 0.3s;
+}
+.btn-glass:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(255,255,255,0.2);
 }
 .sidebar h5 {
   margin-bottom: 0.5rem;
@@ -542,32 +552,37 @@ body {
 <div class="dashboard container-fluid">
 
   <!-- ============== Sidebar ============== -->
-	<div class="sidebar">
-    <h5><?= htmlspecialchars($profile['full_name']) ?></h5>
-    <small><?= htmlspecialchars($profile['email']) ?></small>
-    <div class="text-muted mb-3"><?= htmlspecialchars($institute) ?></div>
+	<div class="sidebar bg-gradient shadow-lg p-3 rounded-4">
+  <div class="text-center mb-4">
+    <img src="/images/admin-avatar.png" class="rounded-circle mb-2" width="60">
+    <h5 class="fw-bold"><?= htmlspecialchars($profile['full_name']) ?></h5>
+    <small class="text-light"><?= htmlspecialchars($profile['email']) ?></small>
+    <div class="text-muted small"><?= htmlspecialchars($institute) ?></div>
+  </div>
 
-    <!-- Add Student: primary with hover shadow -->
-    <a href="add_student.php" class="btn btn-primary w-100 mb-2 btn-hover-shadow">➕ Add Student</a>
-
-    <!-- Add Staff: secondary with pulse effect -->
-    <a href="add_staff.php" class="btn btn-secondary w-100 mb-2 btn-pulse">➕ Add Staff</a>
-
-    <!-- Assign Subject: success with gradient -->
-    <a href="add_subject.php" class="btn btn-success w-100 mb-2 btn-gradient">Assign Subject</a>
-
-    <!-- Publish Result: info with scale on hover -->
-    <a href="publish_result.php" class="btn btn-info w-100 mb-2 btn-scale">Publish Result</a>
-
-    <!-- Publish Result: info with scale on hover -->
-    <a href="Download_Reports.php" class="btn btn-info w-100 mb-2 btn-scale">Download Reports</a>
-
-    <!-- Role Management: dark with rotate icon on hover -->
-    <a href="manage_roles.php" class="btn btn-dark w-100 btn-rotate-icon">Role Management</a>
-        
-    <a href="/rmit-smartcampus/auth/logout.php" class="btn btn-danger mt-3 w-100">Logout</a>
-	</div>
-
+  <div class="d-grid gap-2">
+    <a href="dashboard.php" class="btn btn-outline-light btn-glass">🏠 Dashboard</a>
+    <a href="add_student.php" class="btn btn-primary btn-glass">➕ Add Student</a>
+    <a href="view_students.php" class="btn btn-outline-primary btn-glass">👥 View Students</a>
+    <a href="add_staff.php" class="btn btn-secondary btn-glass">➕ Add Staff</a>
+    <a href="manage_courses.php" class="btn btn-success btn-glass">📚 Manage Courses</a>
+    <a href="add_subject.php" class="btn btn-success btn-glass">📖 Assign Subject</a>
+    <a href="attendance_panel.php" class="btn btn-warning btn-glass">🗓️ Attendance Panel</a>
+    <a href="publish_result.php" class="btn btn-info btn-glass">📤 Publish Result</a>
+    <a href="Download_Reports.php" class="btn btn-info btn-glass">📥 Download Reports</a>
+    <a href="fee_collection.php" class="btn btn-danger btn-glass">💰 Fee Collection</a>
+    <a href="fee_reports.php" class="btn btn-outline-danger btn-glass">📊 Fee Reports</a>
+    <a href="notice_board.php" class="btn btn-outline-secondary btn-glass">📢 Notice Board</a>
+    <a href="send_communication.php" class="btn btn-outline-dark btn-glass">✉️ Send SMS/Email</a>
+    <a href="gov_reports.php" class="btn btn-outline-success btn-glass">📄 Govt Compliance</a>
+    <a href="backup_restore.php" class="btn btn-outline-warning btn-glass">🗂️ Backup & Restore</a>
+    <a href="portal_settings.php" class="btn btn-outline-light btn-glass">⚙️ Portal Settings</a>
+    <a href="branding.php" class="btn btn-outline-light btn-glass">🎨 Theme & Branding</a>
+    <a href="manage_roles.php" class="btn btn-dark btn-glass">🧑‍💼 Role Management</a>
+    <a href="/rmit-smartcampus/auth/logout.php" class="btn btn-danger mt-3 btn-glass">🚪 Logout</a>
+  </div>
+</div>
+  <!-- ============== Sidebar ============== -->
 
   <!-- ============== Main Content ==============-->
   <div class="main">

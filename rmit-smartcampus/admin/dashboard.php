@@ -265,7 +265,7 @@ body {
 }
 .sidebar {
   width: 250px;
-  background: #efecf485;
+  background: #d3b3fa85;
   border-radius: var(--card-radius);
   padding: 20px;
   min-height: 100vh;
@@ -274,7 +274,6 @@ body {
 
 .btn-glass {
   backdrop-filter: blur(6px);
-  background: #f5f1fb;
   border: 1px solid rgba(255,255,255,0.2);
   color: #200a78d2;
   transition: 0.3s;

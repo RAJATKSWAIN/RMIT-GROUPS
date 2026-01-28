@@ -556,7 +556,7 @@ body {
   <!-- ============== Sidebar ============== -->
 	<div class="sidebar bg-gradient shadow-lg p-3 rounded-4">
   <div class="text-center mb-4">
-    <img src="/rmit-smartcampus/images/admin-avatar.png" class="rounded-circle mb-2" width="60">
+    <img src="/rmit-smartcampus/images/admin-avatar.png" class="rounded-circle mb-2" width="60" border-radius="50px">
     <h5 class="fw-bold"><?= htmlspecialchars($profile['full_name']) ?></h5>
     <small class="text-light"><?= htmlspecialchars($profile['email']) ?></small>
     <div class="text-muted small"><?= htmlspecialchars($institute) ?></div>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9fafb;
+      color: #1f2937;
+    }
+
+    header {
+      background-color: #1e3a8a;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    main {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h1, h2 {
+      color: #1e3a8a;
+    }
+
+    .about {
+      margin-bottom: 40px;
+    }
+
+    .about p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .read-more-content {
+      display: none;
+    }
+
+    .team {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .member {
+      flex: 1 1 220px;
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      text-align: center;
+    }
+
+    .member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .member h3 {
+      margin: 10px 0 5px;
+    }
+
+    .btn {
+      margin-top: 10px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #e2e8f0;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>About Us</h1>
+</header>
+
+<main>
+  <section class="about">
+    <h2>Who We Are</h2>
+    <p>
+      We are a team of passionate developers and educators committed to building innovative, efficient, and accessible online examination systems.
+      <span class="read-more-content">
+        Our mission is to revolutionize digital learning by providing robust tools that make assessments easier for students and staff alike.
+        We believe in transparency, performance, and user-centered design. From concept to deployment, we ensure every feature adds value to your experience.
+      </span>
+    </p>
+    <button class="btn" onclick="toggleReadMore(this)">Read More</button>
+  </section>
+
+  <section class="team">
+    <h2>Our Team</h2>
+
+    <div class="member">
+      <img src="assets/falguni.jpg" alt="Team Member 1">
+      <h3>Falguni Mathur</h3>
+      <p>Lead Developer</p>
+      <p>UI/UX Designer</p>
+    </div>
+
+    <div class="member">
+      <img src="assets/rahul.jpg" alt="Team Member 3">
+      <h3>Rahul Pal</h3>
+      <p>Backend Engineer</p>
+    </div>
+  </section>
+</main>
+
+
+
+<script>
+  function toggleReadMore(button) {
+    const content = button.previousElementSibling.querySelector('.read-more-content');
+    if (content.style.display === "inline") {
+      content.style.display = "none";
+      button.textContent = "Read More";
+    } else {
+      content.style.display = "inline";
+      button.textContent = "Read Less";
+    }
+  }
+</script>
+
+</body>
+</html>

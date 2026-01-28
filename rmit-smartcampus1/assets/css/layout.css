@@ -1,0 +1,24 @@
+.hero {
+  padding: 120px;
+  text-align: center;
+  color: white;
+  background: linear-gradient(135deg, var(--primary-color), #111);
+}
+
+.sidebar {
+  width: 220px;
+  background: #222;
+  color: #fff;
+  min-height: 100vh;
+  padding: 20px;
+}
+.sidebar a {
+  display: block;
+  color: #ddd;
+  margin: 10px 0;
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+}

@@ -1,0 +1,84 @@
+/* Base button styling */
+.btn-success {
+  background: linear-gradient(135deg, #3e2cca, #43b5db);
+  color: #fff;
+  border: 2px solid #000;   /* black border */
+  border-radius: 50px;      /* round pill shape */
+  padding: 10px 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover effect */
+.btn-success:hover {
+  background: linear-gradient(135deg, #2d0c78, #b82fc7);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  color: #fff;
+  border-color: #000; /* keep black border on hover */
+}
+
+/* Icon animation */
+.btn-success i {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.btn-success:hover i {
+  transform: translateX(5px); /* arrow slides right */
+}
+
+/* Optional ripple effect */
+.btn-success::after {
+  content: "";
+  position: absolute;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.8s ease;
+}
+
+.btn-success:hover::after {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+}
+
+/* Tablets */
+@media (max-width: 991px) {
+  .logo-holder {
+    max-width: 130px;
+    line-height: 55px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .logo-holder {
+    max-width: 110px;
+    line-height: 50px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .logo-holder {
+    max-width: 90px;
+    line-height: 45px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+  .logo-holder {
+    max-width: 80px;
+    line-height: 40px;
+  }
+}

@@ -1,0 +1,8 @@
+:root {
+  --primary-color: #6a1b1a;
+}
+
+[data-inst="HIT"] { --primary-color: #6a1b1a; }
+[data-inst="RMIT"] { --primary-color: #003366; }
+[data-inst="RMITC"] { --primary-color: #2e7d32; }
+[data-inst="CPS"] { --primary-color: #f57c00; }

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Documentation | Online Examination System</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+      color: #333;
+    }
+
+    header {
+      background: #1e3a8a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    nav {
+      background: #2563eb;
+      display: flex;
+      padding: 10px;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      color: #1e3a8a;
+    }
+
+    pre {
+      background-color: #e2e8f0;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #e2e8f0;
+      font-size: 14px;
+    }
+
+    .toggle-btn {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .collapsible {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Online Examination System - Documentation</h1>
+</header>
+
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#setup">Setup</a>
+  <a href="#database">Database</a>
+  <a href="#features">Features</a>
+  <a href="#usage">Usage</a>
+</nav>
+
+<main>
+
+  <section id="overview">
+    <h2>Overview</h2>
+    <p>
+      The Online Examination System allows administrators, staff, and students to manage and attend exams online with ease. It provides real-time results, scheduling, and secure access controls.
+    </p>
+  </section>
+
+  <section id="setup">
+    <h2>Setup Instructions</h2>
+    <p>Follow these steps to run the project locally using XAMPP:</p>
+    <ol>
+      <li>Install XAMPP and start Apache & MySQL modules.</li>
+      <li>Place the project folder inside <code>htdocs</code>.</li>
+      <li>Open phpMyAdmin and create a database: <code>online_exam</code>.</li>
+      <li>Import the SQL file: <code>online_exam.sql</code>.</li>
+      <li>Visit <code>http://localhost/your-project-folder</code> in your browser.</li>
+    </ol>
+  </section>
+
+  <section id="database">
+    <h2>Database Configuration</h2>
+    <p>Database connection (in <code>db.php</code>):</p>
+    <pre>
+&lt;?php
+$conn = new mysqli("localhost", "root", "", "online_examination_system");
+if ($conn-&gt;connect_error) {
+    die("Connection failed: " . $conn-&gt;connect_error);
+}
+?&gt;
+    </pre>
+    <button class="toggle-btn" onclick="toggleCode('sqlSchema')">Toggle Schema Example</button>
+    <pre class="collapsible" id="sqlSchema">
+CREATE TABLE students (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(100) UNIQUE,
+  password VARCHAR(255)
+);
+
+CREATE TABLE exams (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  subject VARCHAR(100),
+  date DATE,
+  status VARCHAR(50)
+);
+
+CREATE TABLE results (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  student_id INT,
+  exam_id INT,
+  marks INT,
+  feedback TEXT,
+  FOREIGN KEY (student_id) REFERENCES students(id),
+  FOREIGN KEY (exam_id) REFERENCES exams(id)
+);
+    </pre>
+  </section>
+
+  <section id="features">
+    <h2>Features</h2>
+    <ul>
+      <li>Student Sign-up & Login</li>
+      <li>Staff Exam Management</li>
+      <li>Admin Approval Workflow</li>
+      <li>Real-time Result Display</li>
+      <li>Recheck & Feedback Requests</li>
+      <li>Responsive UI Design</li>
+    </ul>
+  </section>
+
+  <section id="usage">
+    <h2>Usage Guidelines</h2>
+    <p>Students:</p>
+    <ul>
+      <li>Login to your dashboard</li>
+      <li>Start active exams</li>
+      <li>View scores under Results tab</li>
+    </ul>
+    <p>Staff:</p>
+    <ul>
+      <li>Create and schedule exams</li>
+      <li>Submit them for admin approval</li>
+      <li>Review student performance</li>
+    </ul>
+    <p>Admin:</p>
+    <ul>
+      <li>Approve or reject exam requests</li>
+      <li>Manage users and data</li>
+    </ul>
+  </section>
+
+</main>
+
+
+
+<script>
+  function toggleCode(id) {
+    const section = document.getElementById(id);
+    if (section.style.display === "block") {
+      section.style.display = "none";
+    } else {
+      section.style.display = "block";
+    }
+  }
+</script>
+
+</body>
+</html>

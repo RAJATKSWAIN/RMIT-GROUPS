@@ -1,0 +1,236 @@
+/* =========================
+   RMIT HOME PAGE STYLES
+   ========================= */
+
+:root {
+  --primary-blue: #0044cc;
+  --secondary-blue: #00aaff;
+  --gradient-blue: linear-gradient(135deg, #00c6ff, #1e90ff, #87cefa);
+  --gradient-red: linear-gradient(90deg, #b11226, #d62828, #ff4d4d);
+}
+
+/* ====== Common Headings ====== */
+.gradient-heading {
+  font-weight: 800;
+  font-size: 34px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.divider {
+  height: 8px;
+  background: var(--gradient-blue);
+  margin: 12px auto;
+  border-radius: 70px;
+  width: 60%;
+}
+
+/* ====== Hero Section ====== */
+.hero-section {
+  background: linear-gradient(135deg, #e0f7ff, #b3e9fc);
+  padding: 80px 0;
+}
+
+.hero-image {
+  border-radius: 20px;
+  width: 100%;
+  height: 720px;
+  object-fit: cover;
+}
+
+.hero-box {
+  background: var(--gradient-blue);
+  padding: 10px;
+  border-radius: 15px;
+}
+
+/* ====== Vision Text ====== */
+.vision-text p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.vision-highlights li {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* ====== CTA Buttons ====== */
+.btn-rmit {
+  background: var(--gradient-blue);
+  color: #fff;
+  padding: 12px 26px;
+  font-weight: 700;
+  border-radius: 30px;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-rmit-outline {
+  border: 2px solid #1e90ff;
+  color: #1e90ff;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 700;
+  background: transparent;
+}
+
+.btn-rmit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* ====== Important Links ====== */
+.rmit-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 50px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.rmit-link {
+  background: #fff;
+  border-radius: 14px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.rmit-link:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.rmit-link img {
+  width: 60px;
+  margin-bottom: 12px;
+}
+
+.rmit-link span {
+  display: block;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.rmit-link small {
+  font-size: 13px;
+  color: #666;
+}
+
+/* ====== Programs ====== */
+.program-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+}
+
+.program-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.program-card h5 {
+  padding: 15px;
+  font-weight: 700;
+}
+
+.program-card p {
+  padding: 0 15px 20px;
+  font-size: 14px;
+}
+
+/* ====== Cards ====== */
+.card-box {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.card-box:hover {
+  transform: translateY(-6px);
+}
+
+/* ====== Stats ====== */
+.stat-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.stat-card:hover {
+  background: var(--gradient-blue);
+  color: #fff;
+  transform: translateY(-8px);
+}
+
+/* Placement RMIT */
+
+/* Placement Card */
+.placement-card {
+  border-radius: 20px;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  background: #fff;
+  transition: transform 0.3s ease;
+}
+
+.placement-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Student Image Wrapper */
+.student-img {
+  margin: 0 auto 15px;
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+/* Student Image */
+.student-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;          /* makes it perfectly round */
+  object-fit: cover;           /* crops neatly */
+  border: 4px solid #1e90ff;   /* highlighted border */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* Student Name */
+.placement-card h5 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 6px;
+}
+
+/* Degree */
+.placement-card .degree {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+/* Company */
+.placement-card .company {
+  font-size: 14px;
+  color: #1e90ff;
+  font-weight: 500;
+}

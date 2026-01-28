@@ -1,0 +1,131 @@
+/* Fixed header container */
+.cps-header-fixed{
+  background:linear-gradient(90deg, #ff9800, #002766, #004bb5, #ff9800);
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:9999;
+  display:flex;
+  justify-content:center;
+  pointer-events:none;
+}
+
+/* Boxed header */
+.cps-header-box{
+  background: linear-gradient(90deg, #002766, #004bb5);
+  width:75%;
+  max-width:1320px;
+  margin:20px 16px;
+  border-radius:18px;
+  padding:14px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 8px 25px rgba(0,0,0,0.25);
+  pointer-events:auto;
+}
+
+/* Logo */
+.cps-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:white;
+  font-weight:700;
+  text-decoration:none;
+}
+.cps-logo img{height:65px;
+			border-radius:18px;}
+
+/* Nav */
+.cps-nav{
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
+.cps-nav a{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+}
+.cps-nav a:hover{color:#ffd54f}
+
+/* Dropdown */
+.cps-dropdown{position:relative}
+.cps-dropdown-menu{
+  position:absolute;
+  top:120%;
+  left:0;
+  background:#004bb5;
+  border-radius:10px;
+  padding:10px 0;
+  display:none;
+  min-width:180px;
+}
+.cps-dropdown:hover .cps-dropdown-menu{display:block}
+.cps-dropdown-menu a{
+  display:block;
+  padding:8px 16px;
+  color:white;
+}
+.cps-dropdown-menu a:hover{background:#002766}
+
+/* Apply button */
+.cps-apply-btn{
+  background:linear-gradient(90deg,#ffd54f,#ff9800);
+  color:#003c8f !important;
+  padding:8px 18px;
+  border-radius:20px;
+  font-weight:700;
+}
+
+/* Mobile */
+.cps-toggle{
+  display:none;
+  background:none;
+  border:none;
+  font-size:24px;
+  color:white;
+}
+
+/*@media(max-width:900px){
+  .cps-toggle{display:block}
+  .cps-nav{
+    position:absolute;
+    top:100%;
+    right:0;
+    background:#003c8f;
+    flex-direction:column;
+    padding:16px;
+    border-radius:16px;
+    display:none;
+    margin-top:10px;
+  }
+  .cps-nav.active{display:flex}
+}*/
+
+@media (max-width: 1200px) {
+  .cps-toggle {
+    display: block;
+  }
+
+  .cps-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #003c8f;
+    flex-direction: column;
+    padding: 16px;
+    border-radius: 16px;
+    display: none;
+    margin-top: 10px;
+    width: 240px;
+    z-index: 10000;
+  }
+
+  .cps-nav.active {
+    display: flex;
+  }
+}
+
+

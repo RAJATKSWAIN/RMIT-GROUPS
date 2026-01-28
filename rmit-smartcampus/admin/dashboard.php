@@ -559,6 +559,9 @@ body {
     <!-- Publish Result: info with scale on hover -->
     <a href="publish_result.php" class="btn btn-info w-100 mb-2 btn-scale">Publish Result</a>
 
+    <!-- Publish Result: info with scale on hover -->
+    <a href="Download_Reports.php" class="btn btn-info w-100 mb-2 btn-scale">Download Reports</a>
+
     <!-- Role Management: dark with rotate icon on hover -->
     <a href="manage_roles.php" class="btn btn-dark w-100 btn-rotate-icon">Role Management</a>
         

@@ -128,5 +128,9 @@ For suggestions or contributions, please fork the repository and submit a pull r
 ---
 
 ## 📜 License
-© RMIT Group of Institutions. All rights reserved.  
-Developed by [TrinityWebEdge](https://trinitywebedge.com).
+**Project ID:** RMIT Group of Institutions  
+**Designed & Developed by:**  [TrinityWebEdge](https://trinitywebedge.com).
+
+© 2026 RMIT Group of Institutions / TrinityWebEdge.  
+All rights reserved. This project and its source code are proprietary.  
+Unauthorized copying, modification, distribution, or use of any part of this repository is strictly prohibited. 

@@ -98,6 +98,7 @@ body {
 
 .logo {
   max-height: 72px;
+  width:120px;
   margin-bottom: 18px;
 }
 

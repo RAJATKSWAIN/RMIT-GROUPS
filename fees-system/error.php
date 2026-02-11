@@ -20,7 +20,7 @@ http_response_code($code);
    =============================== */
 $home       = '/fees-system/index.php';
 $institute  = 'Fees Management System v1.0.0';
-$logo       = '/fees-system/assets/logos/fms.png';   // place your logo here
+$logo       = '/fees-system/assets/logos/FMS-v1.0.0.png';   // place your logo here
 $themeColor = '#2c3e50';   // deep slate blue/gray
 $bodyClass  = 'fms';
 ?>

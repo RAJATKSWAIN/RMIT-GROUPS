@@ -1,0 +1,486 @@
+<!--======================================================
+    File Name   : dashboard.php
+    Project     : RMIT Groups - FMS - Fees Management System
+    Description : FMS - Fees Management System | Dashboard Page
+    Developed By: TrinityWebEdge
+    Date Created: 05-02-2025
+    Last Updated: <?php echo date("d-m-Y"); ?>
+    Note         : This page defines the FMS - Fees Management System | Dashboard Page of RMIT Groups website.
+=======================================================-->
+
+<?php
+require_once "../core/auth.php";
+require_once "../config/db.php";
+require_once "../config/audit.php";
+
+checkLogin();
+
+audit_log($conn, 'VIEW_DASHBOARD', 'ADMIN_MASTER', $_SESSION['admin_id']);
+
+
+$adminId   = $_SESSION['admin_id'];
+$adminName = $_SESSION['admin_name'];
+
+/* ===============================
+   STATS (Based on your DB)
+================================ */
+
+$students  = $conn->query("SELECT COUNT(*) c FROM STUDENTS WHERE STATUS='A'")->fetch_assoc()['c'];
+$courses   = $conn->query("SELECT COUNT(*) c FROM COURSES WHERE STATUS='A'")->fetch_assoc()['c'];
+$collected = $conn->query("SELECT IFNULL(SUM(PAID_AMOUNT),0) s FROM PAYMENTS WHERE PAYMENT_STATUS='SUCCESS'")->fetch_assoc()['s'];
+$pending   = $conn->query("SELECT IFNULL(SUM(BALANCE_AMOUNT),0) s FROM STUDENT_FEE_LEDGER")->fetch_assoc()['s'];
+$today     = $conn->query("SELECT IFNULL(SUM(PAID_AMOUNT),0) s FROM PAYMENTS WHERE DATE(PAYMENT_DATE)=CURDATE()")->fetch_assoc()['s'];
+
+/* audit dashboard view */
+audit_log($conn,'VIEW_DASHBOARD','ADMIN_MASTER',$adminId);
+
+// Last 5 logs
+$logs = $conn->query("
+    SELECT ACTION_TYPE, CREATED_AT
+    FROM AUDIT_LOG
+    ORDER BY CREATED_AT DESC
+    LIMIT 5
+");
+
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<!-- Essential Meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO Title -->
+<title>Admin Dashboard | Fees Management System (FMS)</title>
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="Secure Admin Dashboard for the Fees Management System (FMS). Manage students, fee collection, reports, and audits with a modern ERP interface.">
+<meta name="keywords" content="Fees Management System, FMS, Admin Dashboard, Student Fees, ERP, College ERP, School ERP, Fee Collection, Education Management">
+<meta name="author" content="TrinityWebEdge">
+
+<!-- Retina PNG versions -->
+<link rel="icon" href="images/favicon_32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="images/favicon_64.png" sizes="64x64" type="image/png">
+<link rel="icon" href="images/favicon_180.png" sizes="180x180" type="image/png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'> <text y='12' font-size='8' fill='white'>FMS</text></svg>">
+
+<!-- Modern UI Frameworks -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+
+	<style>
+		:root {--sidebar-width: 260px;}
+	
+		body {background: #f4f6fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow-x: hidden;    }
+	
+		/* --- SIDEBAR LOGIC --- */
+		.sidebar {
+			width: var(--sidebar-width);
+			height: 100vh;
+			position: fixed;
+			left: 0;
+			top: 0;
+			background: #1f2937;
+			color: #fff;
+			overflow-y: auto;
+			transition: all 0.3s ease;
+			z-index: 1050; /* Above everything */
+		}
+	
+		/* --- MAIN CONTENT LOGIC --- */
+		.main {
+			margin-left: var(--sidebar-width);
+			padding: 25px;
+			transition: all 0.3s ease;
+		}
+	
+		/* --- MOBILE STATES --- */
+		@media (max-width: 992px) {
+			.sidebar {
+				left: calc(-1 * var(--sidebar-width));
+			}
+			.main { margin-left: 0;}
+			/* When active, slide sidebar in */
+			.sidebar.active {left: 0;}
+			/* Overlay to darken background when sidebar is open */
+			.sidebar-overlay { display: none;  position: fixed;  width: 100vw;  height: 100vh; background: rgba(0,0,0,0.5);  z-index: 1040; }
+			.sidebar-overlay.active {display: block;}
+		}
+	
+		/* Sidebar Styling */
+		.section-title { font-size: 12px; margin-top: 3px; color: #6c757d; font-weight: 800; padding: 15px 20px 5px 20px; text-transform: uppercase; letter-spacing: 1.2px;}
+		.sidebar a { display: block; color: #d1d5db; text-decoration: none; padding: 10px 15px; font-size: 12px; transition: 0.5s;}
+		.sidebar a:hover { background: #374151; color: #fbbf24; padding-left: 22px; /*text-decoration: underline;  underline only on hover */ }
+		.sidebar a i, .sidebar a bi { margin-right: 10px; width: 20px; text-align: center; }
+	
+		/* Top Mobile Bar */
+		.mobile-top-nav {display: none; background: #fff; padding: 10px 15px; border-bottom: 1px solid #dee2e6; }
+		@media (max-width: 992px) {
+			.mobile-top-nav { display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; }
+		}
+		.card-box{ border-radius:14px;box-shadow:0 4px 10px rgba(0,0,0,.06)}
+		.stat{font-size:22px;font-weight:600}
+	</style>
+	
+</head>
+
+
+<body>
+
+<!-- =====================================================
+   SIDEBAR (ALL FEATURES)
+===================================================== -->
+<div class="mobile-top-nav">
+    <button class="btn btn-dark" id="sidebarToggle">
+        <i class="bi bi-list fs-4"></i>
+    </button>
+    <span class="fw-bold"></span>
+    <div style="width: 40px;"></div> </div>
+
+<div class="sidebar-overlay" id="overlay"></div>
+
+<div class="sidebar" id="sidebar">
+
+  <!-- Brand Box -->
+  <div class="sidebar-brand text-center p-0 border-bottom" style="background:#0d47a1; color:#fff;">
+
+    <!-- Logo -->
+    <img src="/images/logo.png" alt="College Logo" class="img-fluid mb-0" style="height:50px;width:auto;object-fit:contain;">
+    <!-- Icon + Title -->
+    <i class="bi bi-cash-stack fs-2 text-primary mb-0"></i>
+    <h6 class="text-white mb-0">Fees Management System</h6>
+    <small class="text-muted">Admin Dashboard</small>
+  </div>
+
+<a href="dashboard.php">🏠 Dashboard</a>
+
+<div class="section-title">Students</div>
+<a href="students/add.php"><i class="bi bi-person-plus"></i> Add Student</a>
+<a href="students/list.php"><i class="bi bi-people"></i> View / Edit</a>
+<a href="students/profile.php"><i class="bi bi-person-badge"></i> View Profile</a>
+<a href="students/disable.php"><i class="bi bi-person-x"></i> Disable Student</a>
+<a href="students/bulk_upload.php"><i class="bi bi-upload"></i> CSV Upload</a>
+<a href="students/template.php"><i class="bi bi-download"></i> Download Template</a>
+
+<div class="section-title">Courses</div>
+<a href="courses/add.php"><i class="bi bi-journal-plus"></i> Add Course</a>
+<a href="courses/list.php"><i class="bi bi-journal-text"></i> Edit Course</a>
+<a href="courses/bulk_upload.php"><i class="bi bi-upload"></i> Bulk Upload</a>
+
+<div class="section-title">Fees Configuration</div>
+<a href="fees/header_add.php"><i class="bi bi-wallet2"></i> Fee Header</a>
+<a href="fees/map_course.php"><i class="bi bi-link"></i> Assign Fee to Course</a>
+<a href="fees/bulk_map.php"><i class="bi bi-upload"></i> Bulk Mapping CSV</a>
+<a href="fees/copy_structure.php"><i class="bi bi-files"></i> Duplicate Fee Structure</a>
+
+<div class="section-title">Collections</div>
+<a href="payments/collect.php"><i class="bi bi-cash-stack"></i> Collect Payment</a>
+<a href="payments/receipt.php"><i class="bi bi-receipt"></i> Print Receipt</a>
+<a href="payments/receipt_history.php"><i class="bi bi-journal-text"></i>Receipt History</a>
+<a href="payments/bulk_bank_upload.php"><i class="bi bi-bank"></i> Bank/UPI Upload</a>
+<a href="payments/bulk_invoice.php"><i class="bi bi-file-earmark-text"></i> Bulk Invoice Print</a>
+
+<div class="section-title">Reports</div>
+<a href="reports/total.php"><i class="bi bi-bar-chart-line"></i> Total Collection</a>
+<a href="reports/course.php"><i class="bi bi-bar-chart"></i> Course Wise</a>
+<a href="reports/student.php"><i class="bi bi-person-lines-fill"></i> Student Wise</a>
+<a href="reports/daily.php"><i class="bi bi-calendar-day"></i> Daily Summary</a>
+<a href="reports/dues.php"><i class="bi bi-exclamation-triangle"></i> Pending Dues</a>
+
+<div class="section-title">Security</div>
+<a href="audit/view.php"><i class="bi bi-shield-lock"></i> Audit Log Viewer</a>
+<a href="backup/backup.php"><i class="bi bi-hdd"></i> Backup DB</a>
+<a href="backup/restore.php"><i class="bi bi-arrow-repeat"></i> Restore Backup</a>
+
+<hr>
+<a href="logout.php" class="text-danger mb-3"><i class="bi bi-box-arrow-right"></i> Logout</a>
+
+</div>
+
+<!-- Start Of Brand Heading-->
+<div class="portal-header-bg p-1" style=" background:#2c3e50; border-bottom: 5px solid #ffc107; text-align:right;">
+  <a href="dashboard.php" 
+     style="font-family:'Raleway',sans-serif; font-weight:800; text-decoration:none; display:inline-block; color:#ffffff; font-size:1rem;">
+    Edu<span style="color:#ffc107;">Remit™</span>
+  </a>
+  <span style="display:block; font-size:0.45rem; letter-spacing:3px; text-transform:uppercase; opacity:0.5; font-weight:bold; margin-top:0; color:#ffffff;">
+    By TrinityWebEdge
+  </span>
+</div>
+<!-- End Of Brand Heading-->    
+
+<!-- =====================================================
+   MAIN CONTENT
+===================================================== -->
+    
+
+<div class="main">
+
+
+
+<h3>Welcome, <?= $adminName ?></h3>
+<p class="text-muted">Fees Management System Overview</p>
+
+
+<!-- ================= KPI CARDS ================= -->
+
+<div class="row g-3">
+
+<div class="col-md-3">
+<div class="card card-box p-3">
+<div>Total Students</div>
+<div class="stat"><?= $students ?></div>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card card-box p-3">
+<div>Total Collection</div>
+<div class="stat">₹<?= number_format($collected,2) ?></div>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card card-box p-3">
+<div>Pending Dues</div>
+<div class="stat text-danger">₹<?= number_format($pending,2) ?></div>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card card-box p-3">
+<div>Today Collection</div>
+<div class="stat text-success">₹<?= number_format($today,2) ?></div>
+</div>
+</div>
+
+</div>
+
+
+
+<!-- ================= QUICK ACTIONS ================= -->
+
+<div class="card card-box mt-4 p-3">
+<h6>Quick Actions</h6>
+
+<a href="students/add.php" class="btn btn-primary btn-sm">Add Student</a>
+<a href="payments/collect.php" class="btn btn-success btn-sm">Collect Payment</a>
+<a href="fees/header_add.php" class="btn btn-warning btn-sm">Add Fee</a>
+<a href="reports/daily.php" class="btn btn-info btn-sm">Daily Report</a>
+</div>
+
+
+
+<!-- ================= RECENT PAYMENTS ================= -->
+
+<div class="card card-box mt-4 p-3">
+
+<h6>Recent Payments</h6>
+
+<table class="table table-sm table-bordered mt-2">
+<tr>
+<th>Receipt</th>
+<th>Student</th>
+<th>Amount</th>
+<th>Date</th>
+</tr>
+
+<?php
+$q = $conn->query("
+SELECT P.RECEIPT_NO,
+CONCAT(S.FIRST_NAME,' ',S.LAST_NAME) STU,
+P.PAID_AMOUNT,
+P.PAYMENT_DATE
+FROM PAYMENTS P
+JOIN STUDENTS S ON S.STUDENT_ID=P.STUDENT_ID
+ORDER BY P.PAYMENT_ID DESC LIMIT 10
+");
+
+while($r=$q->fetch_assoc()):
+?>
+<tr>
+<td><?= $r['RECEIPT_NO'] ?></td>
+<td><?= $r['STU'] ?></td>
+<td>₹<?= $r['PAID_AMOUNT'] ?></td>
+<td><?= $r['PAYMENT_DATE'] ?></td>
+</tr>
+<?php endwhile; ?>
+</table>
+
+</div>
+
+
+
+<!-- ================= COURSE COLLECTION REPORT ================= -->
+
+<div class="card shadow-sm border-0 mt-4">
+
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h6 class="mb-0">
+            <i class="fas fa-chart-bar me-2"></i> Course Wise Collection
+        </h6>
+
+        <span class="badge bg-light text-dark">
+            <?= date('d M Y') ?>
+        </span>
+    </div>
+
+    <div class="card-body p-0">
+
+        <table class="table table-hover align-middle mb-0 text-center">
+            <thead class="table-light">
+                <tr>
+                    <th class="text-start">Course</th>
+                    <th>Students</th>
+                    <th>Collection</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            <?php
+            $totalStudents = 0;
+            $totalAmount   = 0;
+
+            $q = $conn->query("
+                SELECT C.COURSE_NAME,
+                       COUNT(DISTINCT S.STUDENT_ID) students,
+                       IFNULL(SUM(P.PAID_AMOUNT),0) amount
+                FROM COURSES C
+                LEFT JOIN STUDENTS S ON S.COURSE_ID=C.COURSE_ID
+                LEFT JOIN PAYMENTS P ON P.STUDENT_ID=S.STUDENT_ID
+                GROUP BY C.COURSE_ID
+            ");
+
+            while($r=$q->fetch_assoc()):
+                $totalStudents += $r['students'];
+                $totalAmount   += $r['amount'];
+            ?>
+
+            <tr>
+                <td class="text-start fw-semibold"><?= $r['COURSE_NAME'] ?></td>
+                <td>
+                    <span class="badge bg-info"><?= $r['students'] ?></span>
+                </td>
+                <td class="text-success fw-bold">
+                    ₹<?= number_format($r['amount'],2) ?>
+                </td>
+            </tr>
+
+            <?php endwhile; ?>
+
+            </tbody>
+
+            <tfoot class="table-secondary fw-bold">
+                <tr>
+                    <td class="text-start">Total</td>
+                    <td><?= $totalStudents ?></td>
+                    <td class="text-success">₹<?= number_format($totalAmount,2) ?></td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</div>
+
+
+
+<!-- ================= RECENT ADMIN ACTIVITY ================= -->
+
+<div class="card shadow-sm border-0 mt-5">
+
+    <div class="card-header bg-dark text-white">
+        <h6 class="mb-0">
+            <i class="fas fa-history me-2"></i> Recent Admin Activity
+        </h6>
+    </div>
+
+    <div class="card-body p-0">
+
+        <table class="table table-hover table-sm align-middle mb-0 text-center">
+            <thead class="table-light">
+                <tr>
+                    <th>Action</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            <?php while($l = $logs->fetch_assoc()): ?>
+            <tr>
+                <td>
+                    <span class="badge bg-secondary">
+                        <?= htmlspecialchars($l['ACTION_TYPE']) ?>
+                    </span>
+                </td>
+                <td><?= date('d M Y h:i A', strtotime($l['CREATED_AT'])) ?></td>
+            </tr>
+            <?php endwhile; ?>
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+   
+<!--========= Start of footer  ==========-->    
+<footer class="mt-auto pt-5">
+    <hr class="text-muted opacity-25">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="mb-0 text-muted small">
+                    &copy; <?= date('Y'); ?> 
+                    <strong>
+                        <span style="color: black;">RMIT</span> 
+                        <span style="color: red;">GROUP OF INSTITUTIONS</span>
+                    </strong>. All Rights Reserved.
+                </p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <small class="text-black-50" style="font-size: 0.95rem; letter-spacing: 0.3px;">
+            		&copy;<span class="fw-bold">EduRemit™</span> | 
+            		Product of <a href="#" class="text-decoration-none text-secondary fw-semibold">TrinityWebEdge</a>
+        		</small>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--========= End of footer  ==========-->        
+</div> 
+       
+<!--========= All JS Script ==========--> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
+    
+<script>
+    const btn = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+    }
+
+    btn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu); // Close when clicking outside
+</script>
+    
+</body>
+
+</html>

@@ -1,0 +1,4893 @@
+{
+    "description": "DO NOT DELETE THIS FILE. This file is used to keep track of which files have been synced in the most recent deployment. If you delete this file a resync will need to be done (which can take a while) - read more: https://github.com/SamKirkland/FTP-Deploy-Action",
+    "version": "1.0.0",
+    "generatedTime": 1769843097742,
+    "data": [
+        {
+            "type": "file",
+            "name": ".htaccess",
+            "size": 4128,
+            "hash": "bc4330374725cde6ea6085bcc5ca746fc79f46fc847b2ca9c9738932a9f62859"
+        },
+        {
+            "type": "file",
+            "name": "LICENSE",
+            "size": 2162,
+            "hash": "fc419e229bd522b17c6fed7277dd348825470febf2ccb98fbbd90a588b4f15e2"
+        },
+        {
+            "type": "file",
+            "name": "README.md",
+            "size": 5217,
+            "hash": "90b87137799246f9369e68f34c623c87a034acc1065e359ea2d62737f0314885"
+        },
+        {
+            "type": "folder",
+            "name": "assets"
+        },
+        {
+            "type": "folder",
+            "name": "cps"
+        },
+        {
+            "type": "folder",
+            "name": "css"
+        },
+        {
+            "type": "file",
+            "name": "error.php",
+            "size": 5378,
+            "hash": "07fd579f52e1075f5e2a9585baaeb985d156abc2b3fe28196c738e821b9625f0"
+        },
+        {
+            "type": "folder",
+            "name": "fonts"
+        },
+        {
+            "type": "folder",
+            "name": "hit"
+        },
+        {
+            "type": "folder",
+            "name": "images"
+        },
+        {
+            "type": "file",
+            "name": "index.php",
+            "size": 15375,
+            "hash": "af7a7c9837fb13c8c9d695daba9a73c6de73dc42f69600e38dc1f8086d11769f"
+        },
+        {
+            "type": "folder",
+            "name": "js"
+        },
+        {
+            "type": "folder",
+            "name": "rmit"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus1"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam"
+        },
+        {
+            "type": "folder",
+            "name": "rmitc"
+        },
+        {
+            "type": "folder",
+            "name": "assets/images"
+        },
+        {
+            "type": "file",
+            "name": "cps/.htaccess",
+            "size": 102,
+            "hash": "df64093832d54f78a5e897735bb63d3bc0ea5bfd1d55616034c9d4f95e2d54c9"
+        },
+        {
+            "type": "file",
+            "name": "cps/Affiliation.php",
+            "size": 14580,
+            "hash": "4dcde0ff9a8baf1a87db7c22a228cd85609d15c54dc6e03639a1b649261d7894"
+        },
+        {
+            "type": "file",
+            "name": "cps/aboutus.php",
+            "size": 18577,
+            "hash": "c98631683c245298fcfeba74b15cdee91bfd6a3ca6155b1d9124f47fee820619"
+        },
+        {
+            "type": "folder",
+            "name": "cps/css"
+        },
+        {
+            "type": "folder",
+            "name": "cps/images"
+        },
+        {
+            "type": "folder",
+            "name": "cps/includes"
+        },
+        {
+            "type": "file",
+            "name": "cps/index.php",
+            "size": 26449,
+            "hash": "03a3555c3733d968a1dfdc9fb741b5c7b9eb26756f56362bf19bc5ba67e3f98d"
+        },
+        {
+            "type": "folder",
+            "name": "cps/js"
+        },
+        {
+            "type": "file",
+            "name": "css/custom.css",
+            "size": 1639,
+            "hash": "32bdbd9d515b5f99c121d406ea65aedfc1959a9287f18b71c4bd2ead08dd18e9"
+        },
+        {
+            "type": "file",
+            "name": "css/plugins.css",
+            "size": 111755,
+            "hash": "5789bd52b38d209eb01591ee6389a2fdfa15931aa292572b75760f9805408edb"
+        },
+        {
+            "type": "file",
+            "name": "css/reset.css",
+            "size": 1074,
+            "hash": "b2ced34432a9f0074334ad4a1ae83fa87a3f122d48e52e556719b45d50ce4c00"
+        },
+        {
+            "type": "file",
+            "name": "css/style.css",
+            "size": 48650,
+            "hash": "16d5435b6d5c5fb333aa134a9a4d8e20dcb78e8da89a9159416a2d59f7f0b8ed"
+        },
+        {
+            "type": "file",
+            "name": "fonts/FuturaPT-Book_gdi.woff",
+            "size": 27560,
+            "hash": "9113d09e65061263576e60249c3ffa65b702f2e9fb369146d25b953c5c1bc055"
+        },
+        {
+            "type": "file",
+            "name": "fonts/fontawesome-webfont (1).woff2",
+            "size": 77160,
+            "hash": "2adefcbc041e7d18fcf2d417879dc5a09997aa64d675b7a3c4b6ce33da13f3fe"
+        },
+        {
+            "type": "file",
+            "name": "fonts/futurastd-bold.woff",
+            "size": 29592,
+            "hash": "669b72a74c4e21a624dcc72abd60839187d895c9f3cd85e6ffc9408710ac1b3c"
+        },
+        {
+            "type": "file",
+            "name": "hit/.htaccess",
+            "size": 102,
+            "hash": "df64093832d54f78a5e897735bb63d3bc0ea5bfd1d55616034c9d4f95e2d54c9"
+        },
+        {
+            "type": "file",
+            "name": "hit/Admistration.php",
+            "size": 18230,
+            "hash": "55632418673c0cd177b8900ce26646b8d056ffed25ec956f049ec341cce9b676"
+        },
+        {
+            "type": "file",
+            "name": "hit/Affiliation.php",
+            "size": 16498,
+            "hash": "b0034e247bfd8900a28961732a74ae9f4c588d80184cb6f4d5e3378329e115b3"
+        },
+        {
+            "type": "file",
+            "name": "hit/Career.php",
+            "size": 14651,
+            "hash": "e47336010a2efdf0b5423c1a93ae5f64d4b57bea2151144b4577365000dba3f3"
+        },
+        {
+            "type": "file",
+            "name": "hit/CivilEngg.php",
+            "size": 21092,
+            "hash": "68b983281ae6dc056068e9abc3d4bcc280b77fda6a4dd70377cee5e9f2d8b2bb"
+        },
+        {
+            "type": "file",
+            "name": "hit/ComputerScienceEngg.php",
+            "size": 21207,
+            "hash": "9ab66a2c34b9d6c73b35ca3fe3cf321558cbd23614ec1c58cf2255958fbce6fb"
+        },
+        {
+            "type": "file",
+            "name": "hit/Documents.php",
+            "size": 19777,
+            "hash": "9390fc5f55eb5ba68fabe46dc63f13546e6713038b2a97820f576834a0a21eb3"
+        },
+        {
+            "type": "file",
+            "name": "hit/DownloadAdmissionForm.php",
+            "size": 11248,
+            "hash": "420b9beb9faeb70c84dc700342ef8e81819f40d40344248ceec9cf0f266df241"
+        },
+        {
+            "type": "file",
+            "name": "hit/ElectricalEngg.php",
+            "size": 21232,
+            "hash": "2666c0a6e4931fdd4982043e7d042de5a30efad6cdde3458942c63b450cf1a17"
+        },
+        {
+            "type": "file",
+            "name": "hit/EnquireDownloadBrochure.php",
+            "size": 11152,
+            "hash": "5193e5b9c7ea7b8e73db0f3df7bbb8103b2f02d326c61714b8b71479a2b3f2ea"
+        },
+        {
+            "type": "file",
+            "name": "hit/Gallery.php",
+            "size": 19524,
+            "hash": "b8a045413bf9874bc155e0884da3ec409d81ddb4babc7c4afc710181782d5f79"
+        },
+        {
+            "type": "file",
+            "name": "hit/Infrastructure.php",
+            "size": 16744,
+            "hash": "d89bbc83f1b7874c6afa7e1bb91058d853e1a54ef026ec75b81f986950d57d3b"
+        },
+        {
+            "type": "file",
+            "name": "hit/MechanicalEngg.php",
+            "size": 21755,
+            "hash": "75c61536db4da315ac3af6a39c71b66568248527cc0b9c4ebaf3123ee462c7ec"
+        },
+        {
+            "type": "file",
+            "name": "hit/Mission&Vision.php",
+            "size": 15590,
+            "hash": "772e8317d87c190895027a3533ac2c3a8b7ab6cb711f5f3bccc989cc87c2a81f"
+        },
+        {
+            "type": "file",
+            "name": "hit/Questions.php",
+            "size": 17052,
+            "hash": "66dcbbd79577f21f81bf4aed08d786f7be73ac9a564ef367d729d24aa568135d"
+        },
+        {
+            "type": "file",
+            "name": "hit/RighttoInformation.php",
+            "size": 13439,
+            "hash": "e5fc8d31952d9bc2cdac20a7df012eb5fef02e95f8db0b9af979ec2bb8fc84b0"
+        },
+        {
+            "type": "file",
+            "name": "hit/Staffinformation.php",
+            "size": 13813,
+            "hash": "af2893838706346e06a98e948642f81c7849288ffbd57f5eef3c0aa7358c2f6e"
+        },
+        {
+            "type": "file",
+            "name": "hit/aboutus.php",
+            "size": 18143,
+            "hash": "d13a344af3537f725f16e7d8bd7bb5e6fe29d6b989d99600e4888fe249a52ab0"
+        },
+        {
+            "type": "file",
+            "name": "hit/admissionlist.php",
+            "size": 13511,
+            "hash": "abc0c368fc63370ebe7661496adffd76e91df9645a52efe1ebb9f3e22f0c5c13"
+        },
+        {
+            "type": "file",
+            "name": "hit/contact.php",
+            "size": 14024,
+            "hash": "33b608855737ef1ebf12714365c1857bc196966d0a2949eff79c490b63b2fb34"
+        },
+        {
+            "type": "folder",
+            "name": "hit/css"
+        },
+        {
+            "type": "folder",
+            "name": "hit/documents"
+        },
+        {
+            "type": "file",
+            "name": "hit/facilities.php",
+            "size": 16546,
+            "hash": "7b6bc3bcef23353de3c7f2de8ce06f144b893d5aa44314301b08143e03369b11"
+        },
+        {
+            "type": "file",
+            "name": "hit/feepayment.php",
+            "size": 9836,
+            "hash": "027eb3a042170f331bd283ba25ab3193a2a98cd61f299d6e5209de8b3dfa9ce2"
+        },
+        {
+            "type": "folder",
+            "name": "hit/fonts"
+        },
+        {
+            "type": "folder",
+            "name": "hit/images"
+        },
+        {
+            "type": "folder",
+            "name": "hit/includes"
+        },
+        {
+            "type": "file",
+            "name": "hit/index.php",
+            "size": 40811,
+            "hash": "18acc29c63bd6885053228ee0a24e90d0d56719778d4854acdc49c7e19f77bf7"
+        },
+        {
+            "type": "file",
+            "name": "hit/insurance.php",
+            "size": 10334,
+            "hash": "27e102e647ec0d1df56b6077f5401a1c80a6711ee5abe97f108a432b71c7faa1"
+        },
+        {
+            "type": "folder",
+            "name": "hit/js"
+        },
+        {
+            "type": "file",
+            "name": "hit/message.php",
+            "size": 15121,
+            "hash": "f3bef8c3b37172ff8ef08164b942c38ddc1b9cd6ab8b6ba23ad30748aeb14175"
+        },
+        {
+            "type": "file",
+            "name": "hit/recruittedstudents.php",
+            "size": 12524,
+            "hash": "bcd37e21364a1a23a2890b02bcb57edd44fc82697064b162a3e8ffa8999b7bbc"
+        },
+        {
+            "type": "file",
+            "name": "hit/recrutingcompanies.php",
+            "size": 32912,
+            "hash": "41bf06694e44dabcc78a3b600b60254d1e1e5d3fc35a93a97bd2cda1eb03b412"
+        },
+        {
+            "type": "file",
+            "name": "images/bca.jpg",
+            "size": 71733,
+            "hash": "b6046a931a7432ddb20bb2c1f0d87f35b109d06e3c8005de545e682180d81ac2"
+        },
+        {
+            "type": "file",
+            "name": "images/bes .jpg",
+            "size": 46864,
+            "hash": "9eebff93a0ae7f47cc45faa26865b093dac1232012ae620591bde1859e8d2661"
+        },
+        {
+            "type": "file",
+            "name": "images/chiragpublicschool.png",
+            "size": 1055440,
+            "hash": "6e7804092b88c4d2fd7357e5f7bc7a71d32ffe151988b256befa9d3bd23ced66"
+        },
+        {
+            "type": "file",
+            "name": "images/chiragpublicschool.webp",
+            "size": 136177,
+            "hash": "3c56a11abb5d3de8b0c371a420afdf4f2d7a5b31623b9b0684f2f6e070af0034"
+        },
+        {
+            "type": "file",
+            "name": "images/cpslogo.png",
+            "size": 116114,
+            "hash": "cffb5c69b598c3602267e031b19e27417eb76af2ac5b39c1533eccbcb997fbfd"
+        },
+        {
+            "type": "file",
+            "name": "images/cpslogom1.png",
+            "size": 167851,
+            "hash": "2f5bd8e8b604cb837b2a1e47f2c6ca9af2031a826c35b58ca65297f2722a8779"
+        },
+        {
+            "type": "file",
+            "name": "images/cpslogomain.png",
+            "size": 290811,
+            "hash": "b58f2d9eba6819d0a328a07046d1e630d2dbe7e2f1fbd9554f09a9c18f2ae07c"
+        },
+        {
+            "type": "file",
+            "name": "images/favicon_32.png",
+            "size": 8438,
+            "hash": "f1484222c3b2b9a9819c3eeccc947cd6f181f267def993a1c0ccffb428a3d4cf"
+        },
+        {
+            "type": "file",
+            "name": "images/hit.png",
+            "size": 707357,
+            "hash": "06684446bd7b1c27649dbbd0130ca550fda1112c6b59d6025dfc0156dca5ce7f"
+        },
+        {
+            "type": "file",
+            "name": "images/hit.webp",
+            "size": 159798,
+            "hash": "b9ed11db3f0a305ef7122a9c0e693ef53bf4fc013e0eb51bcd7e1bbe8bd2a4c9"
+        },
+        {
+            "type": "folder",
+            "name": "images/icons"
+        },
+        {
+            "type": "file",
+            "name": "images/logo.png",
+            "size": 1847,
+            "hash": "d0dfe698279ff3cbbb4906044cdb8e3c12292c8a563e722cbf52675d53229acc"
+        },
+        {
+            "type": "file",
+            "name": "images/rmit.png",
+            "size": 457280,
+            "hash": "ddc194e8ee520795bce3dd178a115989a9f75951db2328a13eb594b67b8a8de7"
+        },
+        {
+            "type": "file",
+            "name": "images/rmitc.png",
+            "size": 787012,
+            "hash": "108ea5453319e0ae1eb4735f30507ec80c67500c4734082ac969ea5f40bfb425"
+        },
+        {
+            "type": "file",
+            "name": "images/rmitc.webp",
+            "size": 204373,
+            "hash": "d0cf6b2f2da5bfe236740268241ae92a10c2424f8ec6459b20c2123bc8680e2f"
+        },
+        {
+            "type": "file",
+            "name": "images/trinitywebedge.png",
+            "size": 105818,
+            "hash": "2008964430e650fa675a06ec67fdf3d767af48e8b20ed1dbabf80a0fd4625b29"
+        },
+        {
+            "type": "file",
+            "name": "js/core.js",
+            "size": 17735,
+            "hash": "0d8cd19d523b46a168db0eabe020063f52eab254bf2b8435fc831a6f81601b69"
+        },
+        {
+            "type": "file",
+            "name": "js/custom.js",
+            "size": 171,
+            "hash": "ab663d25c92ae1ad0be91c8f317e426126e677a8ab39f22937f5a8349c5a5fa1"
+        },
+        {
+            "type": "file",
+            "name": "js/jquery.min.js",
+            "size": 84344,
+            "hash": "ab0d063b4ff2827192c0e44103d3091457a1d2374c3b6243721c5679bb61eae2"
+        },
+        {
+            "type": "file",
+            "name": "js/plugins.js",
+            "size": 263800,
+            "hash": "a9d8addbb5b6438fe64d8fa5b4dfe360cc86d5b5c64250531aff11b1b53ce7ba"
+        },
+        {
+            "type": "file",
+            "name": "js/scripts.js",
+            "size": 22034,
+            "hash": "d06b4c48d844ebd0b3629165c05141feb28f17eeecbc9f9b9ad5f7ae8bc15e6c"
+        },
+        {
+            "type": "file",
+            "name": "rmit/.htaccess",
+            "size": 0,
+            "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+            "type": "file",
+            "name": "rmit/Admistration.php",
+            "size": 19990,
+            "hash": "c6ef3913087419374e1bb7bd6f4b0d121009dfbba815a9eb64f9ad4338579f70"
+        },
+        {
+            "type": "file",
+            "name": "rmit/Affiliation.php",
+            "size": 18230,
+            "hash": "76be469d271ce29fb4e562fd3da8a1ff06ff51205b8c3f55b4e25c3ce5d242f0"
+        },
+        {
+            "type": "file",
+            "name": "rmit/Career.php",
+            "size": 17049,
+            "hash": "e860dfbdce5227e1bc40eb5360176503d0c24e110eb15da3f187dca7acee0e72"
+        },
+        {
+            "type": "file",
+            "name": "rmit/Documents.php",
+            "size": 19652,
+            "hash": "84f59a97689a8d60b60ae3c24b3bd2d8b06e14d94250479b1983f66073f05977"
+        },
+        {
+            "type": "file",
+            "name": "rmit/DownloadAdmissionForm.php",
+            "size": 12380,
+            "hash": "07e722cc60530c45d667bfc5f1c3267907fa1f8c2e840e4f62712bec4f7a526c"
+        },
+        {
+            "type": "file",
+            "name": "rmit/EnquireDownloadBrochure.php",
+            "size": 12295,
+            "hash": "7054cfe1180dd8ee244ad690a6ea50a89a108e90426df79dcda77eae88f0f24c"
+        },
+        {
+            "type": "file",
+            "name": "rmit/Gallery.php",
+            "size": 20933,
+            "hash": "1e180dd0696796e800b24c03c1fadc86abf63ca9301e57e464176ed6298a5836"
+        },
+        {
+            "type": "file",
+            "name": "rmit/Infrastructure.php",
+            "size": 15825,
+            "hash": "c679af046c625944610b1fee95b42819f7fd7317f9dc5a8d28379450761f24fa"
+        },
+        {
+            "type": "file",
+            "name": "rmit/Mission&Vision.php",
+            "size": 18951,
+            "hash": "b2af39ba4e0434938f0c34d9519388194573942ebdde32c6eb91d3a5feec10c7"
+        },
+        {
+            "type": "file",
+            "name": "rmit/Questions.php",
+            "size": 20823,
+            "hash": "575f049594d4f990b7146a7fcddbb105f91cae23ccdca98baae863d74eb9e25b"
+        },
+        {
+            "type": "file",
+            "name": "rmit/RighttoInformation.php",
+            "size": 13696,
+            "hash": "660af0519c911099060621ba16bfecb56a8af944c8efa92f608b3c9f8b7ff091"
+        },
+        {
+            "type": "file",
+            "name": "rmit/Staffinformation.php",
+            "size": 14519,
+            "hash": "cec24b1172f6168650f6b1cb7d9c91e752ba822dad668a334dd755976c856129"
+        },
+        {
+            "type": "file",
+            "name": "rmit/aboutus.php",
+            "size": 17435,
+            "hash": "ad8bcf7aabed43dc01d19e4b75ecbbc67e04d27af2bd7dda1a070c4a863582e8"
+        },
+        {
+            "type": "file",
+            "name": "rmit/admissionlist.php",
+            "size": 14535,
+            "hash": "aad23c8dd54a3aed00df96c65b8673c5948d9b22b384a30926eddca5d7991aa9"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/assets"
+        },
+        {
+            "type": "file",
+            "name": "rmit/bca.php",
+            "size": 23146,
+            "hash": "dbbe90645389c98127b590e6d6c057be7a34aa0f38c6e377333c1554ebbfafb5"
+        },
+        {
+            "type": "file",
+            "name": "rmit/bse.php",
+            "size": 23710,
+            "hash": "fb6af9bf7bc2a325e5eddf9594ffb343654d27b332ad78664730b196f30b4995"
+        },
+        {
+            "type": "file",
+            "name": "rmit/contact.php",
+            "size": 16389,
+            "hash": "8dfeb26abd640cabf49902247d13f5443fc808c639a8609c162882d6db55bf5a"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/css"
+        },
+        {
+            "type": "file",
+            "name": "rmit/facilities.php",
+            "size": 15806,
+            "hash": "97cfd69a57e604cbded2c9ecbd0a7082f73055d4f9f9f09eec6c3f0595214aee"
+        },
+        {
+            "type": "file",
+            "name": "rmit/feepayment.php",
+            "size": 9269,
+            "hash": "e514c8ab08ea9aeab44b53ed965eca64f617be2725dd9dc67101cff6a8f99cf9"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/fonts"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/images"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/includes"
+        },
+        {
+            "type": "file",
+            "name": "rmit/index.php",
+            "size": 35586,
+            "hash": "edbfc41ed82d2862627b3a2fb8ddd02ded9879021a588b507dc28cabc295ba81"
+        },
+        {
+            "type": "file",
+            "name": "rmit/insurance.php",
+            "size": 11736,
+            "hash": "8175b05c507263291c0966493a342503abf37b883493576fcb8d47130b9b48fb"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/js"
+        },
+        {
+            "type": "file",
+            "name": "rmit/message.php",
+            "size": 15909,
+            "hash": "830857cd5e42cf9a396bd51230a5896e2a2f1d5fb04c4edd98bb35b954927c67"
+        },
+        {
+            "type": "file",
+            "name": "rmit/notice.php",
+            "size": 15422,
+            "hash": "87bd87688a91e62d8b3fb73edd1d65a9783503bea69e2de443bceb57dc978542"
+        },
+        {
+            "type": "file",
+            "name": "rmit/recruittedstudents.php",
+            "size": 13476,
+            "hash": "43feb8bf2b6d0651b1277e5984819bf7f190e1bbd34a513006b497d05088d837"
+        },
+        {
+            "type": "file",
+            "name": "rmit/recrutingcompanies.php",
+            "size": 33428,
+            "hash": "895a85635c6ec45f16e77d1147ecf79e25db95d2d249908ed2e74f00d6960e2e"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/README.md",
+            "size": 992,
+            "hash": "6658da42fcd86f5aa18bbb0aa5e9b6b16c3788add52854c6e8802cd13cb68885"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus/admin"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus/assets"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus/auth"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/background.jpg",
+            "size": 44588,
+            "hash": "8b0220bc636335f765f83cad18e4040f54917c6157a9bb4f4da75c1237ae8ebb"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/composer.json",
+            "size": 58,
+            "hash": "445324dca037eba382ad2edee6c3f4cacd66f15bda963e4d7df09d4c09792ba5"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus/config"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus/faculty"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus/images"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus/includes"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/index.php",
+            "size": 16783,
+            "hash": "a85a17aa7d36e87a10a88399efd63c775c19ef73fb700ef78d2a7870ff6b0469"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/rmit_portal.sql",
+            "size": 4329,
+            "hash": "715318672c985e1e7e2181077f7869696ac703db5c3d6c7324b83b3c6682662f"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus/setup"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus/student"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus1/assets"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus1/auth"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus1/config"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus1/hit"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus1/images"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus1/includes"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/index.php",
+            "size": 12015,
+            "hash": "91a5a3e55ab18f35009d4c69829e75d0dbcde53db1de732acbaa153d081252b3"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/index1.html",
+            "size": 10128,
+            "hash": "01a176eac55681e33f04d1f53dec24f47cd7f7dbe9f7ae537b82c37196db0ace"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus1/student"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/FAQ.html",
+            "size": 3147,
+            "hash": "5cdb47bc74d7c959ab34a55cb3efa5a8cd71ee641cfa331271ced2b005b605bf"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/README.md",
+            "size": 3414,
+            "hash": "8bd7cfd9cd51d50998d90ab3ed01fd5fa8a579a635c70906aa95a22f958e1659"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/aboutus.html",
+            "size": 3016,
+            "hash": "7ce1031a130b6c91219a3e996fa8b8b651f6e8daf6f40995ca57b9209d3754e2"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/admindashboard.php",
+            "size": 92159,
+            "hash": "fe6e1f24efa2dc12b5e9c648a70da9816eb1e9609634400f3c087c761b129fa9"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/assets"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/background.jpg",
+            "size": 44588,
+            "hash": "8b0220bc636335f765f83cad18e4040f54917c6157a9bb4f4da75c1237ae8ebb"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/composer.json",
+            "size": 66,
+            "hash": "6961a02d41bdb58a0414e7beb1180bf883be390c190f86acebf0184958c10261"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/composer.lock",
+            "size": 4126,
+            "hash": "51d5042ea464a00396866ed04a1924f065f0df9bb0ee4673f0e22ed5c5ecea6b"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/contact.html",
+            "size": 3043,
+            "hash": "4c53b0351dac7954b54242f93e58532010620125696ca289b7a29d1a216da3d5"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/documentation.html",
+            "size": 4528,
+            "hash": "986e8db5f5fbf326bc23e978854de71c509ccf829807f2c32f84180e7a43a861"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/email_activity.log",
+            "size": 170,
+            "hash": "97e36db496b59664a2242ddd50fba982025dc4bfc0f54bd4e92381ece097aa53"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/exam_result.php",
+            "size": 32929,
+            "hash": "a3db4f9bc7342e0c1232ad82eab9038047e8fa87b84601025c531ef63a925607"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/forgotpassword.php",
+            "size": 19879,
+            "hash": "2f3f2667a4586aeee8078753700dbda87bd26a6040325bc6f5032435b445d1cf"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/index.php",
+            "size": 34472,
+            "hash": "2ec84bcbfd535c20002aa6ea5c21b61eda03d7a4578717aecfe6ffb7b860d4bd"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/login.php",
+            "size": 17143,
+            "hash": "9abad397cdb0284d9f5e64e3c129dd2860d3ba4aa658e9f9f97ac078a8ac4b3e"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/logout.php",
+            "size": 98,
+            "hash": "2bf263b017820ec98c5083dc7c8563a78a7a7aebccff2a7ec4be1b9301fea026"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/reset_password.php",
+            "size": 16117,
+            "hash": "ee536535b0b0143cc80c42f3805291db7120a2c5151e64b0aac9189a589a342c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/signup.php",
+            "size": 13004,
+            "hash": "6a1828677c1a16136c929a9e6862a6d170c6f6228082e0cf041d67da38cd692f"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/staffdashboard.php",
+            "size": 93586,
+            "hash": "fa8e8584ecfb2fcba4b9e16065bf84c7470abb547e4651470784f361190887cb"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/studentdashboard.php",
+            "size": 86703,
+            "hash": "31461afdc4ec46396a2eeac81b7e54bc9870b150b0e010b14483cbe643f26e36"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/take_exam.php",
+            "size": 23609,
+            "hash": "ed6f1aa6c15a302d28c75bbb500d88d5dcad9882a65a72e1c2cac6a9e2a690b4"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/.htaccess",
+            "size": 102,
+            "hash": "df64093832d54f78a5e897735bb63d3bc0ea5bfd1d55616034c9d4f95e2d54c9"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/Admistration.php",
+            "size": 19803,
+            "hash": "255323e70b149ad9d1c5985c5083ec41dcc33e1730ade3ec94a4372561c61d08"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/Affiliation.php",
+            "size": 17478,
+            "hash": "6d163cc08045ad60b1ddf6eb5dea0e39e7a0cf32136d206c20cf9c35140116dc"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/Career.php",
+            "size": 17228,
+            "hash": "f8bd103c76559bc85f43828a8a69ebc2292ab84911bd8c4597c8d580fea02b26"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/Documents.php",
+            "size": 19652,
+            "hash": "84f59a97689a8d60b60ae3c24b3bd2d8b06e14d94250479b1983f66073f05977"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/DownloadAdmissionForm.php",
+            "size": 12522,
+            "hash": "f7d40f9fb134dc57d62c758759aa2989a2ed5683462740ab5601854940d9104e"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/Electrician.php",
+            "size": 20951,
+            "hash": "4e6acaf361da508cd9b1b8e44e088c0a8fdc13812346be3c2d3c5fec05865854"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/Electronics.php",
+            "size": 20793,
+            "hash": "1c0d9bce2fe22f9b3c83abfd4bfe70eafe56c4890245c54e2aebe2977b91ee73"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/EnquireDownloadBrochure.php",
+            "size": 12433,
+            "hash": "67160cb37a6820a6371bd87e1b9b2dccf38221f6b56c41a456025569525f656c"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/Gallery.php",
+            "size": 20933,
+            "hash": "1e180dd0696796e800b24c03c1fadc86abf63ca9301e57e464176ed6298a5836"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/Infrastructure.php",
+            "size": 15737,
+            "hash": "0c3cd311b505de432c12e57052e383d921658477e0fd13cc494635977580f226"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/Mission&Vision.php",
+            "size": 18647,
+            "hash": "0ede872bd98d41c36683e96972b1dacea45b02ca1208f0506d76c188ec58de83"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/Questions.php",
+            "size": 20931,
+            "hash": "672459076fe44cbb2865d8b7d80b9d579875685fafda60862371d6fd39439c73"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/RighttoInformation.php",
+            "size": 13797,
+            "hash": "a90f6d04606fe7017c645b7429613d9ffd4b644daef313a7d156fc39d254af79"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/Staffinformation.php",
+            "size": 14677,
+            "hash": "94274b334e754ca32c625013c522714eeafd4aa5dd362289e9d64dd02149e2ce"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/aboutus.php",
+            "size": 17354,
+            "hash": "f46264d6a839e6c1bb3e4253d89ebe95879679b6f5b37f18210d669d780ae94d"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/admissionlist.php",
+            "size": 15595,
+            "hash": "5d4b15e943c43c459e32f8743e404ee70eff05b9f2229ca8c13de6c9741061df"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/contact.php",
+            "size": 16427,
+            "hash": "68afad8dd5942ea6b9c3bcebf4906f65d7f175ad894652229eed78d6db211c48"
+        },
+        {
+            "type": "folder",
+            "name": "rmitc/css"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/facilities.php",
+            "size": 16099,
+            "hash": "5a9d9dddbe600f6c5004fc6d7cc777e2f7681404f944ac652aa3ce027b3f0756"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/feepayment.php",
+            "size": 9269,
+            "hash": "e514c8ab08ea9aeab44b53ed965eca64f617be2725dd9dc67101cff6a8f99cf9"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/fitter.php",
+            "size": 20790,
+            "hash": "d057ece361e50887a53eea0c6431ce16a780c33b4ee0dc5db98068b9f2d841d5"
+        },
+        {
+            "type": "folder",
+            "name": "rmitc/images"
+        },
+        {
+            "type": "folder",
+            "name": "rmitc/includes"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/index.php",
+            "size": 43863,
+            "hash": "a1ef52797c728f509dd1e15b248f63ba631811d8e2dd8a02d0956c3bdbe2d512"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/insurance.php",
+            "size": 11780,
+            "hash": "a2d0e9da2da524c321038b3ee5981f86bc2e025711a08b6b4275ee29bee2c293"
+        },
+        {
+            "type": "folder",
+            "name": "rmitc/js"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/message.php",
+            "size": 16599,
+            "hash": "8e865c66797505dcec78997f418bd30ac13f74e93f1037b8b1633e2a29e5361e"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/recruittedstudents.php",
+            "size": 14815,
+            "hash": "6d122e104f2eff87d01da4b8ae459f37d7f5d17ca430c8cf4af203f7dcccafb7"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/recrutingcompanies.php",
+            "size": 33407,
+            "hash": "8bd561e21fac043e7b6e5a9744f76b02827860406032714edd3da9f2c11185aa"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/welder.php",
+            "size": 20737,
+            "hash": "4341ee1269297f90435c144f44a0eb039d8b23940aa591456a385b3d3b77d217"
+        },
+        {
+            "type": "file",
+            "name": "assets/images/no-photo.png",
+            "size": 3809,
+            "hash": "e55526d5ccfbbd092a61a2632018fe798255d2472990a2abfd522314297d4897"
+        },
+        {
+            "type": "file",
+            "name": "cps/images/5years.png",
+            "size": 677448,
+            "hash": "964d2926c677d40c89aa0ce437ee81589562e633910a39a5ad03f088a885e83f"
+        },
+        {
+            "type": "file",
+            "name": "cps/images/campus.jpg",
+            "size": 98786,
+            "hash": "e07a75b89f59634c6491741c44cc98559f5353aaff2dfc60f3bb677f3b2f6084"
+        },
+        {
+            "type": "folder",
+            "name": "cps/images/logos"
+        },
+        {
+            "type": "folder",
+            "name": "cps/images/sliders"
+        },
+        {
+            "type": "folder",
+            "name": "cps/images/students"
+        },
+        {
+            "type": "file",
+            "name": "cps/images/vision.jpg",
+            "size": 259114,
+            "hash": "96960845a87c71dadbeabf0e79b0dc67e0e4e5d12bc6cee01e848256cb3a2b02"
+        },
+        {
+            "type": "file",
+            "name": "cps/css/animate.css",
+            "size": 57095,
+            "hash": "59a1460df6cb458204ec993345ff4964fa7e1a77da4ab7137e50fce8434c1d6a"
+        },
+        {
+            "type": "file",
+            "name": "cps/css/bootstrap-select.min.css",
+            "size": 8116,
+            "hash": "1806d5d46550e2d262f09c0a296bc9a5c2b4ae1d7a1af9d3f91563ef40eec2d4"
+        },
+        {
+            "type": "file",
+            "name": "cps/css/bootstrap.min.css",
+            "size": 117305,
+            "hash": "f04b517ba5d6a0510485689a3e42dac000f51640fd71b986804cba178eae42a5"
+        },
+        {
+            "type": "file",
+            "name": "cps/css/cps-header.css",
+            "size": 2269,
+            "hash": "dc9e8350dd93d489881abec3149bb48d608f9a5423c9bc95201f6e8fd3cb88c9"
+        },
+        {
+            "type": "file",
+            "name": "cps/css/font-awesome.min.css",
+            "size": 31000,
+            "hash": "799aeb25cc0373fdee0e1b1db7ad6c2f6a0e058dfadaa3379689f583213190bd"
+        },
+        {
+            "type": "file",
+            "name": "cps/css/home.css",
+            "size": 4241,
+            "hash": "3fc2256a5226450dad86fbd5bd833f752318bb96f434e36be616ac8a6bc1e659"
+        },
+        {
+            "type": "file",
+            "name": "cps/css/jquery-ui.min.css",
+            "size": 32076,
+            "hash": "ac1c8f94750b39b12327a5d0c56fdf946dabfb6d91e5d2a202879ff9a5d67e29"
+        },
+        {
+            "type": "file",
+            "name": "cps/css/magnific-popup.css",
+            "size": 5522,
+            "hash": "e3b69c4fe1374ad504a09324de6a664fd2940b749b08a547c68f8aac36e04953"
+        },
+        {
+            "type": "file",
+            "name": "cps/css/owl.carousel.min.css",
+            "size": 2904,
+            "hash": "25b2af81cd4ab2f55a7c1cdc809e129d97103c910b80d46af1129f5bbde8c4a5"
+        },
+        {
+            "type": "file",
+            "name": "cps/css/responsive.css",
+            "size": 23870,
+            "hash": "935ddcdc89eae548b9cf9a5d5cd8bfd3371c38e6903a537679dae71f8699a041"
+        },
+        {
+            "type": "file",
+            "name": "cps/css/style.css",
+            "size": 147639,
+            "hash": "831ff96b7127b3bfc6521eb069add1ac46dbd73ec8e0d4ecf3c8a6b1114d6199"
+        },
+        {
+            "type": "file",
+            "name": "cps/css/swiper.min.css",
+            "size": 17210,
+            "hash": "dad55f2ff48383de4129b35c7207558a458e4db528f43de17acf80c1dcdc85af"
+        },
+        {
+            "type": "file",
+            "name": "cps/includes/footer.php",
+            "size": 5158,
+            "hash": "f9d32efa3b93c4072b5be9527bb5499ca0c2bb4eb654912f1e1b61005e3544f2"
+        },
+        {
+            "type": "file",
+            "name": "cps/includes/header.php",
+            "size": 1234,
+            "hash": "233f2b91ddb24058095548973a867647658e92d31b6b8d5c6dac56c2198b5788"
+        },
+        {
+            "type": "file",
+            "name": "cps/includes/socialmedia.php",
+            "size": 2781,
+            "hash": "dd00444a568952a2fe23e2c870e143a7cc0420312674e3de72060fd0baa7aee3"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/bootstrap-select.min.js",
+            "size": 33963,
+            "hash": "243de0fab07d0635bafdc184bb00ae7b5b06b62b5bd9a41536cfe9978d75e174"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/bootstrap.min.js",
+            "size": 35951,
+            "hash": "d5fd173d00d9733900834e0e1083de86b532e048b15c0420ba5c2db0623644b8"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/countdown.js",
+            "size": 1076,
+            "hash": "fe11963dff5f4cc745c774c5587d4c11bcb2478f0aa10bf19ef5fdb643c73dc8"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/custom.js",
+            "size": 32708,
+            "hash": "6e11e25eec058428ab556721f7592b0c9544f3c4466b4fe866c433102f128da8"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/home.js",
+            "size": 2843,
+            "hash": "9caf5d27ce1909bcefafac4a1c75d1d68914084185c366c7bd9e0429d47b84bc"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/isotope.min.js",
+            "size": 34694,
+            "hash": "625503ddbed92974eb98acad3b007e335e791694c54a40057062689cd64b4bdd"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/jquery-3.1.1.min.js",
+            "size": 86709,
+            "hash": "85556761a8800d14ced8fcd41a6b8b26bf012d44a318866c0d81a62092efd9bf"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/jquery-ui.min.js",
+            "size": 253669,
+            "hash": "28ce75d953678c4942df47a11707a15e3c756021cf89090e3e6aa7ad6b6971c3"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/jquery.ajaxchimp.js",
+            "size": 2687,
+            "hash": "dd7eac5ea9437e581a2fa1fe6d49c79009117f1f3dacdffebd91b610050d9d06"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/jquery.countTo.js",
+            "size": 2012,
+            "hash": "3763f05a9a5af66d98e9945bf0485bae58daeba66097ba2f9259696551b29455"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/jquery.easypiechart.min.js",
+            "size": 3990,
+            "hash": "f73f452b5961dbe04bffdc40586dc8c689e172c2dcbfa90353d92acb7a08c444"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/jquery.inview.min.js",
+            "size": 1438,
+            "hash": "ba732a6d0b4db5e763fcba62ac2f0931e440fc10d1645597de4e3ec9890bcea9"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/jquery.magnific-popup.min.js",
+            "size": 20216,
+            "hash": "3fddc6d28aba3c13d64cfd4847c333ff48c71d4a5a58bd1a0494ca6ae8ac1bb4"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/owl.carousel.min.js",
+            "size": 42786,
+            "hash": "af87161a15cc1bf49eac4cc3a2e4a9612ddba841c740856e4e4f06c200a13c0b"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/swiper.min.js",
+            "size": 96824,
+            "hash": "ea8c5df320f2b420d4c8a074eb2ce1f9274827e1711954bfd6b01db9da4a5d3c"
+        },
+        {
+            "type": "folder",
+            "name": "cps/js/tinymce"
+        },
+        {
+            "type": "file",
+            "name": "hit/css/animate.css",
+            "size": 57095,
+            "hash": "59a1460df6cb458204ec993345ff4964fa7e1a77da4ab7137e50fce8434c1d6a"
+        },
+        {
+            "type": "file",
+            "name": "hit/css/bootstrap-select.min.css",
+            "size": 8116,
+            "hash": "1806d5d46550e2d262f09c0a296bc9a5c2b4ae1d7a1af9d3f91563ef40eec2d4"
+        },
+        {
+            "type": "file",
+            "name": "hit/css/bootstrap.min.css",
+            "size": 117305,
+            "hash": "f04b517ba5d6a0510485689a3e42dac000f51640fd71b986804cba178eae42a5"
+        },
+        {
+            "type": "file",
+            "name": "hit/css/font-awesome.min.css",
+            "size": 31000,
+            "hash": "799aeb25cc0373fdee0e1b1db7ad6c2f6a0e058dfadaa3379689f583213190bd"
+        },
+        {
+            "type": "file",
+            "name": "hit/css/home.css",
+            "size": 3230,
+            "hash": "c5e6498eca6088e4d9915862174f5284aa3893678dfe503c62bc329ac3fe2b0f"
+        },
+        {
+            "type": "file",
+            "name": "hit/css/jquery-ui.min.css",
+            "size": 32076,
+            "hash": "ac1c8f94750b39b12327a5d0c56fdf946dabfb6d91e5d2a202879ff9a5d67e29"
+        },
+        {
+            "type": "file",
+            "name": "hit/css/magnific-popup.css",
+            "size": 5522,
+            "hash": "e3b69c4fe1374ad504a09324de6a664fd2940b749b08a547c68f8aac36e04953"
+        },
+        {
+            "type": "file",
+            "name": "hit/css/owl.carousel.min.css",
+            "size": 2904,
+            "hash": "25b2af81cd4ab2f55a7c1cdc809e129d97103c910b80d46af1129f5bbde8c4a5"
+        },
+        {
+            "type": "file",
+            "name": "hit/css/responsive.css",
+            "size": 23870,
+            "hash": "935ddcdc89eae548b9cf9a5d5cd8bfd3371c38e6903a537679dae71f8699a041"
+        },
+        {
+            "type": "file",
+            "name": "hit/css/style.css",
+            "size": 148006,
+            "hash": "d8f88e35c1292d1a9341171c9dd5c8708ff72374f27f57b810dc7786f7d6dceb"
+        },
+        {
+            "type": "file",
+            "name": "hit/css/swiper.min.css",
+            "size": 17210,
+            "hash": "dad55f2ff48383de4129b35c7207558a458e4db528f43de17acf80c1dcdc85af"
+        },
+        {
+            "type": "file",
+            "name": "hit/documents/HIT_Admission_Form_Diploma.docx",
+            "size": 45532,
+            "hash": "8a6b5b74c0e35fc921431d8a6cce02c4eb6a67b0bc59bc36c601eb024e9d437b"
+        },
+        {
+            "type": "file",
+            "name": "hit/fonts/fontawesome-webfont.woff2",
+            "size": 77160,
+            "hash": "2adefcbc041e7d18fcf2d417879dc5a09997aa64d675b7a3c4b6ce33da13f3fe"
+        },
+        {
+            "type": "folder",
+            "name": "hit/images/branch"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/civil.jpg",
+            "size": 71317,
+            "hash": "f22d48062ebbccf6e5323c2c9896f4a8f7ff7feb7754c60aa4a8877b3a43ec1e"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/computersc.jpg",
+            "size": 110025,
+            "hash": "49e06343e8b80303d17c8ad119323d245edf86c52cf1e9bdb5a6d4f3d3decd82"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/electrical.jpg",
+            "size": 126739,
+            "hash": "5f08b7f9c5fcb556b6bfd7cf945525367c77958fcf5ca85f92ea81e646b1bb4a"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/favicon_64.png",
+            "size": 8802,
+            "hash": "97d33a6808b98342f35d50d3f4d5d0c04876594aada7953297547de5cf0614eb"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/footerlogo.png",
+            "size": 23084,
+            "hash": "2f8b7a7818c27baec963d975b9e45e7552f3993acc4b8fdcdee5872f5f006f2e"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/footerlogo1.png",
+            "size": 76041,
+            "hash": "228c65670f3e419983d8cc22ea6a63270d0bae8c7e34bd75c4f795b3ff1b53f6"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/hit15years.png",
+            "size": 721125,
+            "hash": "cb831fa3300b035ec49c478ae0251631515a1a7cfebdda83265fc60f0e6c79b3"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/hitlogo.png",
+            "size": 23908,
+            "hash": "fb77cd5740827fb8a7c23331020485d54dd31f7bd84377b5bcd2b5d106b522a3"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/mechanical.jpg",
+            "size": 43279,
+            "hash": "c17831a7c56b7681ee85c5131ac50ea9e29f790393041e24c28dc94f44c8d93b"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/product1.jpg",
+            "size": 235305,
+            "hash": "8efdfe07f2d4a24e38a8a26e0cd9ec9e53a7a000605f6c3d35e6b6aab98c8e2b"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/slider1 (1).jpg",
+            "size": 1390145,
+            "hash": "68a8be0b05f625cf7285b77c7209c2ecc1fdf9aa1b291144fe354e626ad229f8"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/slider1.jpg",
+            "size": 383386,
+            "hash": "45509e24b39b39358ad7a2954e5b8a05359c225e6993ab7915a394909fb49bba"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/slider2.jpg",
+            "size": 382088,
+            "hash": "24f6590cc972af560a8821e285217c9cf5133820bef2c710744b11cce6eb59ea"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/slider3.png",
+            "size": 665688,
+            "hash": "2cac6843529d10322f05e25897339951a84f4675b5960021b490400507758082"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/slider4.png",
+            "size": 757612,
+            "hash": "26fa6b418443168e1dc09d24244a191c95f5894d724b70992e0c64895ca79b1e"
+        },
+        {
+            "type": "folder",
+            "name": "hit/images/students"
+        },
+        {
+            "type": "file",
+            "name": "hit/includes/footer.php",
+            "size": 7883,
+            "hash": "28584883aaa9e56df37c5b34f5a4b91ceb3fab199b4d2ab1e107e394a388fdc9"
+        },
+        {
+            "type": "file",
+            "name": "hit/includes/header.php",
+            "size": 9291,
+            "hash": "d102c6aad0dd3ce724f055dd7279bb5b1963787d5c70c5d91f84dbb8bcbdb616"
+        },
+        {
+            "type": "file",
+            "name": "hit/includes/socialmedia.php",
+            "size": 2781,
+            "hash": "dd00444a568952a2fe23e2c870e143a7cc0420312674e3de72060fd0baa7aee3"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/bootstrap.min.js",
+            "size": 35951,
+            "hash": "d5fd173d00d9733900834e0e1083de86b532e048b15c0420ba5c2db0623644b8"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/bootstrap-select.min.js",
+            "size": 33963,
+            "hash": "243de0fab07d0635bafdc184bb00ae7b5b06b62b5bd9a41536cfe9978d75e174"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/core.js",
+            "size": 17735,
+            "hash": "0d8cd19d523b46a168db0eabe020063f52eab254bf2b8435fc831a6f81601b69"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/countdown.js",
+            "size": 1076,
+            "hash": "fe11963dff5f4cc745c774c5587d4c11bcb2478f0aa10bf19ef5fdb643c73dc8"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/custom.js",
+            "size": 32708,
+            "hash": "6e11e25eec058428ab556721f7592b0c9544f3c4466b4fe866c433102f128da8"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/isotope.min.js",
+            "size": 34694,
+            "hash": "625503ddbed92974eb98acad3b007e335e791694c54a40057062689cd64b4bdd"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/jquery-3.1.1.min.js",
+            "size": 86709,
+            "hash": "85556761a8800d14ced8fcd41a6b8b26bf012d44a318866c0d81a62092efd9bf"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/jquery-ui.min.js",
+            "size": 253669,
+            "hash": "28ce75d953678c4942df47a11707a15e3c756021cf89090e3e6aa7ad6b6971c3"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/jquery.ajaxchimp.js",
+            "size": 2687,
+            "hash": "dd7eac5ea9437e581a2fa1fe6d49c79009117f1f3dacdffebd91b610050d9d06"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/jquery.countTo.js",
+            "size": 2012,
+            "hash": "3763f05a9a5af66d98e9945bf0485bae58daeba66097ba2f9259696551b29455"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/jquery.easypiechart.min.js",
+            "size": 3990,
+            "hash": "f73f452b5961dbe04bffdc40586dc8c689e172c2dcbfa90353d92acb7a08c444"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/jquery.inview.min.js",
+            "size": 1438,
+            "hash": "ba732a6d0b4db5e763fcba62ac2f0931e440fc10d1645597de4e3ec9890bcea9"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/jquery.magnific-popup.min.js",
+            "size": 20216,
+            "hash": "3fddc6d28aba3c13d64cfd4847c333ff48c71d4a5a58bd1a0494ca6ae8ac1bb4"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/jquery.min.js",
+            "size": 84344,
+            "hash": "ab0d063b4ff2827192c0e44103d3091457a1d2374c3b6243721c5679bb61eae2"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/owl.carousel.min.js",
+            "size": 42786,
+            "hash": "af87161a15cc1bf49eac4cc3a2e4a9612ddba841c740856e4e4f06c200a13c0b"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/plugins.js",
+            "size": 263800,
+            "hash": "a9d8addbb5b6438fe64d8fa5b4dfe360cc86d5b5c64250531aff11b1b53ce7ba"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/scripts.js",
+            "size": 22034,
+            "hash": "d06b4c48d844ebd0b3629165c05141feb28f17eeecbc9f9b9ad5f7ae8bc15e6c"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/swiper.min.js",
+            "size": 96824,
+            "hash": "ea8c5df320f2b420d4c8a074eb2ce1f9274827e1711954bfd6b01db9da4a5d3c"
+        },
+        {
+            "type": "folder",
+            "name": "hit/js/tinymce"
+        },
+        {
+            "type": "file",
+            "name": "images/icons/aictelogo.png",
+            "size": 21912,
+            "hash": "e84018370e596f7b867f43487bda943a4c0a4e1f55365616bddaab466a2ff4c9"
+        },
+        {
+            "type": "file",
+            "name": "images/icons/bulogo.png",
+            "size": 16222,
+            "hash": "74394ffbe04dfa37339f445ddda32eebb5134d7ee9e44fbbda399f826ec6b8f1"
+        },
+        {
+            "type": "file",
+            "name": "images/icons/cbsc-board.png",
+            "size": 340821,
+            "hash": "adf31f31fdf503c45f75ac695cd9fd338dd9946bee379ffe2edb41031964f11a"
+        },
+        {
+            "type": "file",
+            "name": "images/icons/ncvt-logo.png",
+            "size": 135951,
+            "hash": "01afc1445a32187d925a8a00382afa0d35c19d99f0088a1bb789395cb73acd09"
+        },
+        {
+            "type": "file",
+            "name": "images/icons/odishassc.png",
+            "size": 54819,
+            "hash": "ce8bb6d859c6c1469b0b7a3672fe526903760092f2c46d852f66de450bfee39d"
+        },
+        {
+            "type": "file",
+            "name": "images/icons/sctevtlogob.png",
+            "size": 18253,
+            "hash": "81db8ff5cd43ca44a8d414c641d8eb909e780f8b53b97f8f0574ad848c0d917f"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/assets/pdf"
+        },
+        {
+            "type": "file",
+            "name": "rmit/css/animate.css",
+            "size": 57095,
+            "hash": "59a1460df6cb458204ec993345ff4964fa7e1a77da4ab7137e50fce8434c1d6a"
+        },
+        {
+            "type": "file",
+            "name": "rmit/css/bootstrap-select.min.css",
+            "size": 8116,
+            "hash": "1806d5d46550e2d262f09c0a296bc9a5c2b4ae1d7a1af9d3f91563ef40eec2d4"
+        },
+        {
+            "type": "file",
+            "name": "rmit/css/bootstrap.min.css",
+            "size": 117305,
+            "hash": "f04b517ba5d6a0510485689a3e42dac000f51640fd71b986804cba178eae42a5"
+        },
+        {
+            "type": "file",
+            "name": "rmit/css/font-awesome.min.css",
+            "size": 31000,
+            "hash": "799aeb25cc0373fdee0e1b1db7ad6c2f6a0e058dfadaa3379689f583213190bd"
+        },
+        {
+            "type": "file",
+            "name": "rmit/css/home.css",
+            "size": 4241,
+            "hash": "3fc2256a5226450dad86fbd5bd833f752318bb96f434e36be616ac8a6bc1e659"
+        },
+        {
+            "type": "file",
+            "name": "rmit/css/jquery-ui.min.css",
+            "size": 32076,
+            "hash": "ac1c8f94750b39b12327a5d0c56fdf946dabfb6d91e5d2a202879ff9a5d67e29"
+        },
+        {
+            "type": "file",
+            "name": "rmit/css/magnific-popup.css",
+            "size": 5522,
+            "hash": "e3b69c4fe1374ad504a09324de6a664fd2940b749b08a547c68f8aac36e04953"
+        },
+        {
+            "type": "file",
+            "name": "rmit/css/responsive.css",
+            "size": 23870,
+            "hash": "935ddcdc89eae548b9cf9a5d5cd8bfd3371c38e6903a537679dae71f8699a041"
+        },
+        {
+            "type": "file",
+            "name": "rmit/css/style.css",
+            "size": 147639,
+            "hash": "831ff96b7127b3bfc6521eb069add1ac46dbd73ec8e0d4ecf3c8a6b1114d6199"
+        },
+        {
+            "type": "file",
+            "name": "rmit/css/owl.carousel.min.css",
+            "size": 2904,
+            "hash": "25b2af81cd4ab2f55a7c1cdc809e129d97103c910b80d46af1129f5bbde8c4a5"
+        },
+        {
+            "type": "file",
+            "name": "rmit/css/swiper.min.css",
+            "size": 17210,
+            "hash": "dad55f2ff48383de4129b35c7207558a458e4db528f43de17acf80c1dcdc85af"
+        },
+        {
+            "type": "file",
+            "name": "rmit/fonts/fontawesome-webfont.woff2",
+            "size": 77160,
+            "hash": "2adefcbc041e7d18fcf2d417879dc5a09997aa64d675b7a3c4b6ce33da13f3fe"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/15years.png",
+            "size": 764380,
+            "hash": "3a07a01a5b25f47a2235496fd46933640502f5b1a3d1eead3c1900b9ba3431a2"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/images/Affiliation"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/images/Infrastructure"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/aboutsu.jpg",
+            "size": 169217,
+            "hash": "23529a2ee6a18da7deca3be24264c6c957ae3183a2ad42970de43f951ca2b535"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/images/administration"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/bca.jpg",
+            "size": 71733,
+            "hash": "b6046a931a7432ddb20bb2c1f0d87f35b109d06e3c8005de545e682180d81ac2"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/bes.jpg",
+            "size": 46864,
+            "hash": "9eebff93a0ae7f47cc45faa26865b093dac1232012ae620591bde1859e8d2661"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/bgpic.png",
+            "size": 238063,
+            "hash": "895d55ffd006e6f6b4a18357481b24ee68a78c2da4a4ea34dcce40ffaed945d8"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/bgpic1.jpeg",
+            "size": 13877,
+            "hash": "6e1a5e2a1a9399ee64a4c51668ffa5153a3f92e082565089f684c8445b51587e"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/images/branch"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/images/companies"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/favicon_180.png",
+            "size": 21282,
+            "hash": "37235f7d6b06b254587261a1e7f438cdbcdccc33c859e871da1574e2d6379c5d"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/favicon_64.png",
+            "size": 8615,
+            "hash": "f2fd03dac9669207f51863e7446b063254bebdae9bc9285fa19552501e050b1a"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/footerlogo.png",
+            "size": 46486,
+            "hash": "2f65734382ac6f6f013780f40dfbbb28a96fde0dd18bdee3bb9e7cf1be7815ea"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/ftrlogo.png",
+            "size": 55984,
+            "hash": "6b23927a5663d707bbbb1dfaf879dbcc9e9de8826699ffbbc17de358f6f3409d"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/images/gallery"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/homelogo.png",
+            "size": 141624,
+            "hash": "845aa31e08b8c834422cd8f8e31ece4f43fbce1bb14ac00ef74d6f57dd5c4423"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/images/homepage"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/images/icons"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/loaction.png",
+            "size": 155244,
+            "hash": "e624b2c5b825dd475f9b718ed9c9bf00e358f63300c771283e15b135cfa8a654"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/images/sliders"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/rmitmainlogo.png",
+            "size": 19072,
+            "hash": "c6428b1b85805e4ab6d7e6bdaefdf284ee334d38a5310b8b60ec1f90564e69de"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/images/staffinfo"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/images/students"
+        },
+        {
+            "type": "file",
+            "name": "rmit/includes/footer.php",
+            "size": 8664,
+            "hash": "f8e54328ed3c2e4615ed0226c6a712b86b13119b148f6315e6fb4f34c1c297ee"
+        },
+        {
+            "type": "file",
+            "name": "rmit/includes/header.php",
+            "size": 8536,
+            "hash": "bfe0caa82ac1ea02eaf7ef79a77fcbf3bf3f8a89afaa0a99fb59d9783057045f"
+        },
+        {
+            "type": "file",
+            "name": "rmit/includes/socialmedia.php",
+            "size": 2781,
+            "hash": "dd00444a568952a2fe23e2c870e143a7cc0420312674e3de72060fd0baa7aee3"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/bootstrap-select.min.js",
+            "size": 33963,
+            "hash": "243de0fab07d0635bafdc184bb00ae7b5b06b62b5bd9a41536cfe9978d75e174"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/bootstrap.min.js",
+            "size": 35951,
+            "hash": "d5fd173d00d9733900834e0e1083de86b532e048b15c0420ba5c2db0623644b8"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/countdown.js",
+            "size": 1076,
+            "hash": "fe11963dff5f4cc745c774c5587d4c11bcb2478f0aa10bf19ef5fdb643c73dc8"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/custom.js",
+            "size": 32708,
+            "hash": "6e11e25eec058428ab556721f7592b0c9544f3c4466b4fe866c433102f128da8"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/isotope.min.js",
+            "size": 34694,
+            "hash": "625503ddbed92974eb98acad3b007e335e791694c54a40057062689cd64b4bdd"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/jquery-3.1.1.min.js",
+            "size": 86709,
+            "hash": "85556761a8800d14ced8fcd41a6b8b26bf012d44a318866c0d81a62092efd9bf"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/jquery-ui.min.js",
+            "size": 253669,
+            "hash": "28ce75d953678c4942df47a11707a15e3c756021cf89090e3e6aa7ad6b6971c3"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/jquery.ajaxchimp.js",
+            "size": 2687,
+            "hash": "dd7eac5ea9437e581a2fa1fe6d49c79009117f1f3dacdffebd91b610050d9d06"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/jquery.countTo.js",
+            "size": 2012,
+            "hash": "3763f05a9a5af66d98e9945bf0485bae58daeba66097ba2f9259696551b29455"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/jquery.easypiechart.min.js",
+            "size": 3990,
+            "hash": "f73f452b5961dbe04bffdc40586dc8c689e172c2dcbfa90353d92acb7a08c444"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/jquery.inview.min.js",
+            "size": 1438,
+            "hash": "ba732a6d0b4db5e763fcba62ac2f0931e440fc10d1645597de4e3ec9890bcea9"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/jquery.magnific-popup.min.js",
+            "size": 20216,
+            "hash": "3fddc6d28aba3c13d64cfd4847c333ff48c71d4a5a58bd1a0494ca6ae8ac1bb4"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/owl.carousel.min.js",
+            "size": 42786,
+            "hash": "af87161a15cc1bf49eac4cc3a2e4a9612ddba841c740856e4e4f06c200a13c0b"
+        },
+        {
+            "type": "folder",
+            "name": "rmit/js/tinymce"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/swiper.min.js",
+            "size": 96824,
+            "hash": "ea8c5df320f2b420d4c8a074eb2ce1f9274827e1711954bfd6b01db9da4a5d3c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/admin/add_staff.php",
+            "size": 22642,
+            "hash": "8077dae5d6979c0524cf9fe23eeb1b7c4db36c873c578486ac09af7cd5be311d"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/admin/add_student.php",
+            "size": 31478,
+            "hash": "0a8a4429a65b44f7809c1c9b2d3b504679521243209324e6a06f9e689f9f6915"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus/admin/api"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/admin/dashboard.php",
+            "size": 21397,
+            "hash": "9ce7b4ea7c67b8f54d0ed91cf7f094f937c39d321917b086e1edb39bf301a592"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus/assets/css"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus/assets/img"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/auth/login.php",
+            "size": 13316,
+            "hash": "09b6dc923d17b44dbdf91b9a93f242c5bf5da716dcac489280ba3438c35d4881"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/auth/forgotpassword.php",
+            "size": 11203,
+            "hash": "1a49c7cc88019e609841d516328314d489d90411d5702619097d699ef35d0b90"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/auth/logout.php",
+            "size": 76,
+            "hash": "5f768e25b4429bebadfb3cf83f942c76368ccf98d21dc353761234f8ddf59c34"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/auth/signup.php",
+            "size": 24318,
+            "hash": "0faaf0049a868709442fbf9c4b7df0f6a1280b91792552c0b13dac64cc2df896"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/config/institutions.json",
+            "size": 245,
+            "hash": "7c3bbb62396a785c2e48ecec09078935b859e0dcd37da7199e309c62dafa38b6"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/config/roles.json",
+            "size": 39,
+            "hash": "2fee3090ca9dadf0790d8d9a1869d13c97766d5138dd135a1fb43371c926b621"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/faculty/add_assignment.php",
+            "size": 9408,
+            "hash": "4005ba9c8aa6d20930b6dbabc4412817cca7c76555d61cf01003bf1d6f9821c3"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/faculty/create_course.php",
+            "size": 9381,
+            "hash": "cd4299e7db3e4139aa93abc4caf710f5aeb5066786a30c97d026e7d941084e15"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/faculty/dashboard.php",
+            "size": 14554,
+            "hash": "2f83802a8fe2625e096a9db153be3e9e498aa604b8b09caf3356b86017dc727e"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/faculty/take-attendance.php",
+            "size": 2648,
+            "hash": "a169f14f8eec310709370114c2c0d46cca3be9f5b814014eb0f7518a184de627"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/images/favicon-64.png",
+            "size": 5013,
+            "hash": "9eee1ef8aca28ffb4f29d0d0a1357b260c921af87af87f91900067f13501e846"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/images/favicon-128.png",
+            "size": 12695,
+            "hash": "1262f9f6c39896baff0cd839b23f31a8276e26f7118b5ab07107bc7afc91d4af"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/images/rmit-sclogo.png",
+            "size": 186525,
+            "hash": "68270e2ca1a3a32dae5579107b64220683de210e17093479c6b9427b240a3311"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/images/rmitsclogo1.png",
+            "size": 197123,
+            "hash": "e2805e97c4da7827224122ec31983e1c7e97595b313056a68634cf8e5d42b4ed"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/includes/config.php",
+            "size": 199,
+            "hash": "c5a85936bffda967d4ffaab40f66f6130d40a1f75378f760447ff6a2fc13caf2"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/includes/auth.php",
+            "size": 264,
+            "hash": "89772079189ecc281591d939c12c00ab0995030d7923cdcacd56a73de89a2773"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/includes/db.php",
+            "size": 389,
+            "hash": "21ee35965ecc453f2d78f5cc575b28f6da03ae733d07982c2d9f7942905b23fc"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/includes/footer.php",
+            "size": 827,
+            "hash": "2125bc622651f6d32762a4747e7b7e084af3dfd0eb41ec98facded17ef5e8a73"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/includes/helpers.php",
+            "size": 272,
+            "hash": "72138c657488a70ecb3683389b589e6ffa77b1d2a95226c84a927add78b035ea"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/setup/create_default_admins.php",
+            "size": 1119,
+            "hash": "6f5aa11f9b3212f0182012d2f32edfc0fd0fa65dfbc294ec4c5cccad4c7f5ac8"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/student/attendance.php",
+            "size": 912,
+            "hash": "7425402a2652cbe8ae7c0ba2e31458cf9624a204f9010f0daa4f45a0c73b0136"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/student/dashboard.php",
+            "size": 11794,
+            "hash": "b9f1e661eef40762d768a0b64634cba3f747e4b10521e67cd8b32d353ce1d378"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/student/exam_result.php",
+            "size": 449,
+            "hash": "230223edc744f798a91ac4ec0f7cfb2f4b52e27942bf92c5246fea3ca59c7ef6"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/student/fees.php",
+            "size": 2093,
+            "hash": "e75a0c319d9e368e73eeafcee496662db18f01e3fa0c17531c2700b8c1e177ef"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus1/assets/css"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampus1/assets/js"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/auth/login.php",
+            "size": 17788,
+            "hash": "1b25cd2ac6da2069f7905ed7a4afb4b5cf91e7376a8aaebe788dd675b3c72771"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/auth/logout.php",
+            "size": 76,
+            "hash": "5f768e25b4429bebadfb3cf83f942c76368ccf98d21dc353761234f8ddf59c34"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/auth/signup.php",
+            "size": 11308,
+            "hash": "4c6aa7e57d0d0e3f23c56bff576d8a01044ed17635be73dec1a21b6fdde4d551"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/config/institutions.json",
+            "size": 245,
+            "hash": "7c3bbb62396a785c2e48ecec09078935b859e0dcd37da7199e309c62dafa38b6"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/config/roles.json",
+            "size": 39,
+            "hash": "2fee3090ca9dadf0790d8d9a1869d13c97766d5138dd135a1fb43371c926b621"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/hit/hit.php",
+            "size": 2172,
+            "hash": "41a607bbb398dd429c4333aae23c539377670d232b8051fde5d4805252918479"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/images/cpslogom1.png",
+            "size": 2434361,
+            "hash": "be37615e47bda65144e5189e86b46f341b733aaf348b1ed3c423f716b2f192fe"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/images/hit.png",
+            "size": 707357,
+            "hash": "06684446bd7b1c27649dbbd0130ca550fda1112c6b59d6025dfc0156dca5ce7f"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/images/logo.png",
+            "size": 1847,
+            "hash": "d0dfe698279ff3cbbb4906044cdb8e3c12292c8a563e722cbf52675d53229acc"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/images/rmit.png",
+            "size": 457280,
+            "hash": "ddc194e8ee520795bce3dd178a115989a9f75951db2328a13eb594b67b8a8de7"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/images/rmitc.png",
+            "size": 787012,
+            "hash": "108ea5453319e0ae1eb4735f30507ec80c67500c4734082ac969ea5f40bfb425"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/includes/auth.php",
+            "size": 264,
+            "hash": "89772079189ecc281591d939c12c00ab0995030d7923cdcacd56a73de89a2773"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/includes/config.php",
+            "size": 199,
+            "hash": "c5a85936bffda967d4ffaab40f66f6130d40a1f75378f760447ff6a2fc13caf2"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/includes/db.php",
+            "size": 389,
+            "hash": "c1952b06cb412f75bf1e189e4b839aad03047c518d391e0259e32dec2b3f6346"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/includes/helpers.php",
+            "size": 272,
+            "hash": "72138c657488a70ecb3683389b589e6ffa77b1d2a95226c84a927add78b035ea"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/student/attendance.php",
+            "size": 912,
+            "hash": "7425402a2652cbe8ae7c0ba2e31458cf9624a204f9010f0daa4f45a0c73b0136"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/student/dashboard.php",
+            "size": 546,
+            "hash": "b9620c2a2dc6a5e5fdbbdf71e44ea37ae9ec80cb67ff4d2ee5198d64391cd16f"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/student/exam_result.php",
+            "size": 449,
+            "hash": "230223edc744f798a91ac4ec0f7cfb2f4b52e27942bf92c5246fea3ca59c7ef6"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/student/fees.php",
+            "size": 2093,
+            "hash": "e75a0c319d9e368e73eeafcee496662db18f01e3fa0c17531c2700b8c1e177ef"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/assets/falguni.jpg",
+            "size": 84887,
+            "hash": "67390d3b3b4b3e6f8b34147df29117afb6d3cf0c933533beb1f2e7329a74f30d"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/assets/rahul.jpg",
+            "size": 84777,
+            "hash": "3f8ccad784240ba19b7a29206d8465beeba1d97eebd59c87deaee0225d684b14"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/autoload.php",
+            "size": 748,
+            "hash": "d8e6b2e2b2cbebb67927cdbaac64cdba7209cc995625fa5e4ca1b73a42abdb9a"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/composer"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/css/animate.css",
+            "size": 57095,
+            "hash": "59a1460df6cb458204ec993345ff4964fa7e1a77da4ab7137e50fce8434c1d6a"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/css/bootstrap-select.min.css",
+            "size": 8116,
+            "hash": "1806d5d46550e2d262f09c0a296bc9a5c2b4ae1d7a1af9d3f91563ef40eec2d4"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/css/bootstrap.min.css",
+            "size": 117305,
+            "hash": "f04b517ba5d6a0510485689a3e42dac000f51640fd71b986804cba178eae42a5"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/css/font-awesome.min.css",
+            "size": 31000,
+            "hash": "799aeb25cc0373fdee0e1b1db7ad6c2f6a0e058dfadaa3379689f583213190bd"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/css/home.css",
+            "size": 5764,
+            "hash": "5989733dc197201b70582e419656a16b396b55ed414f438b41edbf2488ecac41"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/css/jquery-ui.min.css",
+            "size": 32076,
+            "hash": "ac1c8f94750b39b12327a5d0c56fdf946dabfb6d91e5d2a202879ff9a5d67e29"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/css/magnific-popup.css",
+            "size": 5522,
+            "hash": "e3b69c4fe1374ad504a09324de6a664fd2940b749b08a547c68f8aac36e04953"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/css/owl.carousel.min.css",
+            "size": 2904,
+            "hash": "25b2af81cd4ab2f55a7c1cdc809e129d97103c910b80d46af1129f5bbde8c4a5"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/css/responsive.css",
+            "size": 23870,
+            "hash": "935ddcdc89eae548b9cf9a5d5cd8bfd3371c38e6903a537679dae71f8699a041"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/css/style.css",
+            "size": 140089,
+            "hash": "f69d21c77fe251a9f308f6eaa3b4b02a2a753155f717320a4351cd374a5560d4"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/css/swiper.min.css",
+            "size": 17210,
+            "hash": "dad55f2ff48383de4129b35c7207558a458e4db528f43de17acf80c1dcdc85af"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/35years.png",
+            "size": 40182,
+            "hash": "dabb887bf264430985aff01a46b6586a6e4bb7902fce65257e401dfae6375ea2"
+        },
+        {
+            "type": "folder",
+            "name": "rmitc/images/Infrastructure"
+        },
+        {
+            "type": "folder",
+            "name": "rmitc/images/administration"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/bgpic.jpeg",
+            "size": 47904,
+            "hash": "09e71885d83d85db96ffbe943b02e3259e67ee6aa1293dfdde71da842be99035"
+        },
+        {
+            "type": "folder",
+            "name": "rmitc/images/companies"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/favicon-64.png",
+            "size": 6716,
+            "hash": "75f2227bc6a4baae7b36450b5df84afdb5ae818677cf275d2c502b4fe9dd37cd"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/footerlogo (1).png",
+            "size": 21577,
+            "hash": "01554a2a89d872cd313916094bae8012daed95b17a765b013b327ea5d61f1248"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/footerlogo.png",
+            "size": 79206,
+            "hash": "88795e633bf5ab3cf2ebea3f30d57a7d18e019567240892a969f1428d493b967"
+        },
+        {
+            "type": "folder",
+            "name": "rmitc/images/icons"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/rmitcmainlogo.png",
+            "size": 27415,
+            "hash": "155acd253759e6b0e8bd152490c2377b085023134d5ecb7d6d2699575913aae9"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/slider1 (3).png",
+            "size": 648631,
+            "hash": "5564782e42f84cafe66528d2044a04d8868a269a99961bce8536d6ac12b2f5fa"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/slider1 (4).png",
+            "size": 300997,
+            "hash": "c093f3c9204d867ff4419279298e27b53bfbcbf287eeec8dfe5fc6f9309ed71d"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/slider1.png",
+            "size": 638875,
+            "hash": "9608091b59d7d6872906188469e22a4f5799b4e702759114fb939c927fdbb356"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/slider2.png",
+            "size": 653758,
+            "hash": "0e57674ef9673ead9434018a817660cdaf51f65a056453433ce93f764852fcab"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/slider3.png",
+            "size": 386925,
+            "hash": "6043770e70b68d9fcb80ac99ec042512a9e03ceb2dfedac4f9adb22481f2ab5a"
+        },
+        {
+            "type": "folder",
+            "name": "rmitc/images/students"
+        },
+        {
+            "type": "folder",
+            "name": "rmitc/images/trades"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/workshop1-4.png",
+            "size": 111773,
+            "hash": "c323b4ae9662668e3c7c25d9fc7f59124677833ff8ddc089262a5c963ea817bb"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/includes/footer.php",
+            "size": 8694,
+            "hash": "db4497e34e030a93abd690e7a16ec44f5ede13773d689c8703d4ac0cb9486425"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/includes/header.php",
+            "size": 8685,
+            "hash": "a2b2e2a6ab072eee0f56d8c34a01e2f8c3721eacd78ae7ee6fdeaa78996fe1c1"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/includes/socialmedia.php",
+            "size": 2781,
+            "hash": "dd00444a568952a2fe23e2c870e143a7cc0420312674e3de72060fd0baa7aee3"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/bootstrap-select.min.js",
+            "size": 33963,
+            "hash": "243de0fab07d0635bafdc184bb00ae7b5b06b62b5bd9a41536cfe9978d75e174"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/bootstrap.min.js",
+            "size": 35951,
+            "hash": "d5fd173d00d9733900834e0e1083de86b532e048b15c0420ba5c2db0623644b8"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/countdown.js",
+            "size": 1076,
+            "hash": "fe11963dff5f4cc745c774c5587d4c11bcb2478f0aa10bf19ef5fdb643c73dc8"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/custom.js",
+            "size": 32708,
+            "hash": "6e11e25eec058428ab556721f7592b0c9544f3c4466b4fe866c433102f128da8"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/img-fallback.js",
+            "size": 2402,
+            "hash": "d6cc44dd83550e6f65682a7cb8ddd4322c4736a31b9f53235e06a0ed2456969c"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/isotope.min.js",
+            "size": 34694,
+            "hash": "625503ddbed92974eb98acad3b007e335e791694c54a40057062689cd64b4bdd"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/jquery-3.1.1.min.js",
+            "size": 86709,
+            "hash": "85556761a8800d14ced8fcd41a6b8b26bf012d44a318866c0d81a62092efd9bf"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/jquery-ui.min.js",
+            "size": 253669,
+            "hash": "28ce75d953678c4942df47a11707a15e3c756021cf89090e3e6aa7ad6b6971c3"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/jquery.ajaxchimp.js",
+            "size": 2687,
+            "hash": "dd7eac5ea9437e581a2fa1fe6d49c79009117f1f3dacdffebd91b610050d9d06"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/jquery.easypiechart.min.js",
+            "size": 3990,
+            "hash": "f73f452b5961dbe04bffdc40586dc8c689e172c2dcbfa90353d92acb7a08c444"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/jquery.countTo.js",
+            "size": 2012,
+            "hash": "3763f05a9a5af66d98e9945bf0485bae58daeba66097ba2f9259696551b29455"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/jquery.inview.min.js",
+            "size": 1438,
+            "hash": "ba732a6d0b4db5e763fcba62ac2f0931e440fc10d1645597de4e3ec9890bcea9"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/jquery.magnific-popup.min.js",
+            "size": 20216,
+            "hash": "3fddc6d28aba3c13d64cfd4847c333ff48c71d4a5a58bd1a0494ca6ae8ac1bb4"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/owl.carousel.min.js",
+            "size": 42786,
+            "hash": "af87161a15cc1bf49eac4cc3a2e4a9612ddba841c740856e4e4f06c200a13c0b"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/swiper.min.js",
+            "size": 96824,
+            "hash": "ea8c5df320f2b420d4c8a074eb2ce1f9274827e1711954bfd6b01db9da4a5d3c"
+        },
+        {
+            "type": "folder",
+            "name": "rmitc/js/tinymce"
+        },
+        {
+            "type": "file",
+            "name": "cps/images/sliders/cpsslider1.png",
+            "size": 614415,
+            "hash": "69b32538f4df16bc44250a7935581469a83718b686fca7fdf8f41cd14e009f35"
+        },
+        {
+            "type": "file",
+            "name": "cps/images/logos/ChatGPT Image Dec 23, 2025, 03_13_51 PM.png",
+            "size": 495323,
+            "hash": "c29f46eedfc9bb8899ebfd353f6e1eb8420977ef96f32f92ecd5b4296e3ab8e5"
+        },
+        {
+            "type": "file",
+            "name": "cps/images/logos/cpshdrlogo.png",
+            "size": 424593,
+            "hash": "37e8c2c8290584818452d4f0ea317b3156afce3750973ff6f12dae110c275016"
+        },
+        {
+            "type": "file",
+            "name": "cps/images/logos/cpshdrlogomain.png",
+            "size": 818507,
+            "hash": "40a8d3f2905732ac85b9e2f998e85de862e666fa98123d673077bc9bcc70d983"
+        },
+        {
+            "type": "file",
+            "name": "cps/images/logos/cpslogom1.png",
+            "size": 167851,
+            "hash": "2f5bd8e8b604cb837b2a1e47f2c6ca9af2031a826c35b58ca65297f2722a8779"
+        },
+        {
+            "type": "file",
+            "name": "cps/images/logos/cpslogosvg.png",
+            "size": 114267,
+            "hash": "249fd8bcdcf5788b8a4990517a5453fd6624bb9baf0f297d3509bf91b3977e7e"
+        },
+        {
+            "type": "file",
+            "name": "cps/images/logos/favicon-64.png",
+            "size": 8181,
+            "hash": "e1024be022a44e74793249c72e8a8ed14e14b8e4aacb65685b6260d2f27fefc1"
+        },
+        {
+            "type": "file",
+            "name": "cps/images/students/1.png",
+            "size": 68378,
+            "hash": "652e2fc29d4f907ff6a03384cc9fdfb4f9c77dcc8f13c78d12044b5c82b02a7c"
+        },
+        {
+            "type": "file",
+            "name": "cps/js/tinymce/tinymce.min.js",
+            "size": 405092,
+            "hash": "0cd26af25c51872d49b7190ce37fe36003aab882a34d78a7d524f97cd1e58d31"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/branch/civil1.png",
+            "size": 7066,
+            "hash": "b2fa0aabbcdefa14b9cbee87c9361c59a50fe0a92eb36d2030a884cb784c7c6d"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/branch/civil2.png",
+            "size": 6715,
+            "hash": "0bad1e94080b428f585426a16dbb4f3d508132e7c8194e7b573eecf49d17d76f"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/branch/civil3.png",
+            "size": 8110,
+            "hash": "4ee9bcf92c9320f5b76507908198fd605ae1ab1f2a1f4d8277dfb19eb81098e7"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/branch/cs1.png",
+            "size": 131698,
+            "hash": "ae872d2e9cbd852b9206fff332d7ac191b88271f4d3e1361bad46fc486cd3784"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/branch/cs2.png",
+            "size": 100685,
+            "hash": "56661c8e8ceff26721b2bd5da83ec435d3e53b753ba7a034dbff66d9e81cbb59"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/branch/cs3.png",
+            "size": 9420,
+            "hash": "1a58572cec7eb89178d20b462ad6b69d632190d486e3a7e00d0cddc5149dff47"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/branch/ele1.png",
+            "size": 755171,
+            "hash": "03739c6804885a50ce5652735c1c94cd48cfb57f2180fc71abc2b5c507b93c73"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/branch/mec1.png",
+            "size": 8303,
+            "hash": "fe0e94ad439ca6f6df7b0ec197230e1a87b36f6e5e1d675013a5250b679c3014"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/branch/mec2.png",
+            "size": 32328,
+            "hash": "5c42ac1c24e7b4aa4d678def4d865da562a396c865b9ae1c536b316ce1613655"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/branch/mec3.png",
+            "size": 10153,
+            "hash": "9a1d1b1c1b11d7ac4beec6a0141fdcbed243b0297d0ce485c1652e831b3bdc99"
+        },
+        {
+            "type": "file",
+            "name": "hit/images/students/student1.jpg",
+            "size": 97594,
+            "hash": "5843f52a2d814d9a6b008475d7063f2035b25e30350c739c8abdc0bc30ea9246"
+        },
+        {
+            "type": "file",
+            "name": "hit/js/tinymce/tinymce.min.js",
+            "size": 405092,
+            "hash": "0cd26af25c51872d49b7190ce37fe36003aab882a34d78a7d524f97cd1e58d31"
+        },
+        {
+            "type": "file",
+            "name": "rmit/assets/pdf/AdmissionformRMIT.pdf",
+            "size": 445195,
+            "hash": "ac218f524ecf94632980b80333a839e3ba9392d02849c6c459b19276cf4352e3"
+        },
+        {
+            "type": "file",
+            "name": "rmit/assets/pdf/RMIT_Holiday_List_2026-27.pdf",
+            "size": 508309,
+            "hash": "d55a2b173cbefc07290c187437cf72a7d4faf73e9ba52eb6891e63b9a69a3e79"
+        },
+        {
+            "type": "file",
+            "name": "rmit/assets/pdf/RMIT_Holiday_List_2026.pdf",
+            "size": 618163,
+            "hash": "9c048a1be3e93e17cec2f9b3f33c9f0df2fac9b3b97f358f245eb2cdc17154d8"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/Affiliation/bulogo.png",
+            "size": 16222,
+            "hash": "74394ffbe04dfa37339f445ddda32eebb5134d7ee9e44fbbda399f826ec6b8f1"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/Infrastructure/auditorium.jpg",
+            "size": 10322,
+            "hash": "c3881766bd84d288957f0055072f041688c5afe369fa61d2f22bf4d8a5f7d560"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/Infrastructure/campus1.jpg",
+            "size": 235305,
+            "hash": "8efdfe07f2d4a24e38a8a26e0cd9ec9e53a7a000605f6c3d35e6b6aab98c8e2b"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/Infrastructure/canteen.jpg",
+            "size": 119065,
+            "hash": "3cc946d4e6ae67e2e0fa461f981f4cc99d34e5b04f196bfd8283ed13812281c1"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/Infrastructure/classroom.jpg",
+            "size": 112538,
+            "hash": "85fab9dbe16c98cb7a3b76ba04e599b7f6b92bbbd392a8b9b397155925979169"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/Infrastructure/classroom1.jpg",
+            "size": 8214,
+            "hash": "8e50e163388d96057f5bfe7b87ffd2a170cd7e7d8cd9ff3cf34d4142ca190268"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/Infrastructure/college_campus.jpg",
+            "size": 98786,
+            "hash": "e07a75b89f59634c6491741c44cc98559f5353aaff2dfc60f3bb677f3b2f6084"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/Infrastructure/hostel.jpg",
+            "size": 24770,
+            "hash": "d517d68fef486089e255144870575198cde21155b42efcb80554dd3ef778ed45"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/Infrastructure/lab.jpg",
+            "size": 9394,
+            "hash": "ec7a9db89efe946101c4c0440fe7281b74617e82cffda4a7c795ceb256c565ec"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/Infrastructure/library.jpg",
+            "size": 202801,
+            "hash": "a1e7e9002ac46588dd797d2289c645d9387f67add014ce5e89dba0e46901122d"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/Infrastructure/sports.jpg",
+            "size": 232102,
+            "hash": "0093f71baf6e9a1c0655f8a8c26b87a4fbbcc46b68a4545337ec6461ee649593"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/Infrastructure/transport1.jpg",
+            "size": 166588,
+            "hash": "fca3328e4f353e09e3e972c887bbd9853cc170d22b4f122e9c2f41f1c4e39868"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/administration/Super.jpg",
+            "size": 6832,
+            "hash": "3806ab38e9f7b412de3316e4690afc06137a31b841e891e30c8454d443687b51"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/administration/accountant.jpg",
+            "size": 7714,
+            "hash": "b2c82d6d9539e6b54f79c7859f60d79ad00fb2f1b1c90548b88eaf41ded899ae"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/administration/admin_head.jpg",
+            "size": 29676,
+            "hash": "8c8f6fe61fa5015093e99204e2916dfd72641c8871b401bd33217016d6d0929d"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/administration/admin_staff.jpg",
+            "size": 20812,
+            "hash": "f9629c7e579fe205cd6440206659f384a0bc8444ada5f06675fb328267d83a5d"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/administration/admini_head.jpg",
+            "size": 6746,
+            "hash": "9770e388c58d4267d48aef657a63bc7c21b8d9a3eb13caaa5224e6d9536621ad"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/administration/coordinator.jpg",
+            "size": 7859,
+            "hash": "8d890ce3eee4e47b8467fcd2213d15ee73de0c218e81cf039e4ab32017ab571e"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/administration/it_admin.jpg",
+            "size": 34565,
+            "hash": "a387c3a07cc628cc12b3ecb19b6919b61cef6c873d72e21daa513a8c26e4f381"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/administration/placement.jpg",
+            "size": 3689,
+            "hash": "66bcca98b6226240c5b3fd1ffd8358b27688a086959f75e5f88a6a5cf31798d1"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/administration/supervisor.jpg",
+            "size": 3961,
+            "hash": "5dcc8b40dc2bc0ba518d787f8029679dc6819fda78db5269f7448b3926cbf3c3"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/branch/bac_1.png",
+            "size": 57119,
+            "hash": "6f0153d2d8dd74f9194b5ee514d4e180ef53ac7457299973b6af7a2a04badede"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/branch/bac_2.png",
+            "size": 35526,
+            "hash": "854369a7a2ea0126ef3adca9b2cdcd602c38d12ac57267cd9c23baff42cc2498"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/branch/bca_3.png",
+            "size": 409392,
+            "hash": "94aef66af6c00fb67861ea17d3ec70b17364d5a6a54eb074f5770fffd378e08d"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/branch/bes_1.jpg",
+            "size": 42328,
+            "hash": "a8fe939ed94bfe88f770e04748b7e0079b30aef03a94c271396215f02747762d"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/branch/bes_3.png",
+            "size": 1011861,
+            "hash": "ad4b86de08ccc9c315234447be7175e9ec17a00d18df35f87889d6013332f36b"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/branch/bes_4.png",
+            "size": 886875,
+            "hash": "b0da0d5a1eed6bed8f3e1d4c903293cf6c2096a82f6aa8cfb830e92cc1c6d252"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/branch/bse_2.jpg",
+            "size": 128702,
+            "hash": "70f4a6fd0590cb02663a27e9bdcda2f5a3275a49a6b7464a226121644b5e2d21"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa1.png",
+            "size": 11046,
+            "hash": "54e712e67b21c6b19638b51bef6bb990eb19b2f945f656556eb7ab9efa53e0fe"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa10.png",
+            "size": 19349,
+            "hash": "499b85429b873cb5983b00bbae9c17500103f5ee22112df60534c13da4e9ef76"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa11.png",
+            "size": 7121,
+            "hash": "10060e5e30602f870d0bccde2a4d774c1dbed94e293dbf457d9e78ec46006bef"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa12.jpg",
+            "size": 35531,
+            "hash": "49cf2d4a6c7a2c87d5209e6ebf3b52a15e0d380c93c3620fad04232ae774df89"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa13.jpg",
+            "size": 23807,
+            "hash": "eebf0fbf72b4c8443414a3f5a5e5307dd505cfa8f107abe289acb3251539e732"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa14.png",
+            "size": 7943,
+            "hash": "0aac3b12d6a5170e9ccfec74ff0054146778a4ffc5c41a3f86b08095eaa43081"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa15.png",
+            "size": 8403,
+            "hash": "c764dff0bd3e800364fd2d9a3b28f0784a931f7ec65f6c8643a32c2df5103361"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa16.png",
+            "size": 9501,
+            "hash": "6c7a1d253a2b44869539f3696c86897f4daea9975c0f1ff8553791e850a4ef93"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa17.png",
+            "size": 4321,
+            "hash": "ae3ccfef71f696da06dfbd6accbe1f870f525a9e19c0c0e0ef65826e6ae9c98e"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa18.png",
+            "size": 7012,
+            "hash": "ecaa30345e013801c54c93cec87fb5a017928e56adddeb20f1bbac5350fa4d48"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa19.png",
+            "size": 5183,
+            "hash": "3ea4bb4f7a7b1513b32c15b48cdb7342e9f995676da4a99c0184e310defe43c8"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa2.png",
+            "size": 36585,
+            "hash": "20ebe281e59315d04f6d428f8995e14f9c217ee1b8474508a395af6fc61288aa"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa20.png",
+            "size": 5816,
+            "hash": "525bcc8c971864c647a76efe7a893a3414ffcb3d7cf26b28927501efebcff9ef"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa21.png",
+            "size": 15634,
+            "hash": "290a9de700391af7b3979c016712969964187df29351a2a650bbe232dc713f51"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa22.png",
+            "size": 7270,
+            "hash": "bd43baddfc5c244d46a14309b997d48764f5c393c3a7f3c8cb7e8eafa3478711"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa23.png",
+            "size": 4987,
+            "hash": "3bf6c0cfd6d748346456723d3956335a2581806bbbef985db8fad8b8be388d15"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa24.png",
+            "size": 8046,
+            "hash": "b28534e35e41670194d61c237bad76ce9a25c409010232343e85e3e23ddca854"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa25.png",
+            "size": 6821,
+            "hash": "8e74a374827b39120e483120a6afe815a696eed6df45ff6966aa88fbc38bf7e6"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa26.png",
+            "size": 10341,
+            "hash": "3562e8630cd75a0ae81cb8cff597fb95c065ff01601e51db3f7d38764e07b432"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa27.png",
+            "size": 7370,
+            "hash": "7a6196eb1ec324deb27a061239445128a6c4a22f07cbfdf2a2017d8b27be04f4"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa28.png",
+            "size": 7358,
+            "hash": "4f2023ebd491955227d48d50b1852c2b7b4311f8ff22f87501fe9c75a750de16"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa29.png",
+            "size": 4474,
+            "hash": "0b08bdad0dca12d8791b28b02c68781168af909005504f0987f2421cd03d46df"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa3.png",
+            "size": 22853,
+            "hash": "00bd129e66f2a3bd5456ef5a2547716d6824a578f56daf92b042f9754aab2917"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa30.png",
+            "size": 7379,
+            "hash": "bc884ed4c034fc6357ff44e0c6d94c507babf3c55928210f41009d2f16a25255"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa31.png",
+            "size": 8594,
+            "hash": "6ba87042a217762dd728124edd1aec74ad51b5535a80e0fad75f1baf58db6e5c"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa32.png",
+            "size": 9816,
+            "hash": "ec771e9925663abbf0fc14cea12f9c3c447ef87a91ccd38dfbe8334b97182c00"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa5.png",
+            "size": 13037,
+            "hash": "afec44d85c33d7b193172674e50133609cd753d5c10bc0dd65be214c2e610be6"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa4.png",
+            "size": 24446,
+            "hash": "8ce0983e1c615736037535e02cc19fe91b1ee7d6756b497de2d44ddb2cff3270"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa6.png",
+            "size": 20470,
+            "hash": "2cc0c2a3963cef21e0f5716aa30bc5f1b90669b2ab1773bc17329ccbb4ac78b5"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa7.png",
+            "size": 11756,
+            "hash": "a19f5bc3edb2cbbba9d37c9ab0393026059186e0159f87b962cc0191ecaf9d96"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa8.png",
+            "size": 55342,
+            "hash": "3ebd665dedb6239aea47c41848cc7412b30d6c025268dcc3e38680d736ca6508"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/companies/aa9.png",
+            "size": 20519,
+            "hash": "27500ecb57b5fb42d5dccb19ac79ae7edc6839ba564caf9368ae37013a11f17d"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/aboutsu.jpg",
+            "size": 169217,
+            "hash": "23529a2ee6a18da7deca3be24264c6c957ae3183a2ad42970de43f951ca2b535"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/auditorium.jpg",
+            "size": 10322,
+            "hash": "c3881766bd84d288957f0055072f041688c5afe369fa61d2f22bf4d8a5f7d560"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/canteen.jpg",
+            "size": 119065,
+            "hash": "3cc946d4e6ae67e2e0fa461f981f4cc99d34e5b04f196bfd8283ed13812281c1"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/classroom.jpeg",
+            "size": 112538,
+            "hash": "85fab9dbe16c98cb7a3b76ba04e599b7f6b92bbbd392a8b9b397155925979169"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/classroom1.jpeg",
+            "size": 8214,
+            "hash": "8e50e163388d96057f5bfe7b87ffd2a170cd7e7d8cd9ff3cf34d4142ca190268"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/classroom3.jpg",
+            "size": 145400,
+            "hash": "968af36765381a0e111f9b9ae37be07e8b579d12125b1133f5d47cc7e2ad6070"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/college_campus.jpg",
+            "size": 98786,
+            "hash": "e07a75b89f59634c6491741c44cc98559f5353aaff2dfc60f3bb677f3b2f6084"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/computerlab.jpg",
+            "size": 11617,
+            "hash": "9ff18e5571b10e3a382713fef14eea88ae5b79ba3a9c6f5349743d177c67bbaf"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/culture1.jpeg",
+            "size": 10834,
+            "hash": "b79d5197546ade7029151b4b17268cd5115bbd2793a8fc1bad597725784bb01d"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/culture2.jpg",
+            "size": 9236,
+            "hash": "ef36c905cc50fec18c8e4070c95edfe4f863aea8257cebc60f3cd739e40c46bf"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/g1.jpg",
+            "size": 235305,
+            "hash": "8efdfe07f2d4a24e38a8a26e0cd9ec9e53a7a000605f6c3d35e6b6aab98c8e2b"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/g2.jpg",
+            "size": 201420,
+            "hash": "aae1112a1869f5148c2bdd716f903750045e7d55669fb86199da0ef5e097ce19"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/g3.jpg",
+            "size": 202801,
+            "hash": "a1e7e9002ac46588dd797d2289c645d9387f67add014ce5e89dba0e46901122d"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/g4.jpg",
+            "size": 8214,
+            "hash": "8e50e163388d96057f5bfe7b87ffd2a170cd7e7d8cd9ff3cf34d4142ca190268"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/ganeshpooja.jpg",
+            "size": 172223,
+            "hash": "e363072917efd6b21ef364a40033c1f0aec05e4a33d47c049289e1f5a7e9ab43"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/library.jpg",
+            "size": 67284,
+            "hash": "28c1b2493ad050b5fda82734bfd07101db625a8835e8922ca9cc6e4e40e3f67d"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/sports.jpg",
+            "size": 232102,
+            "hash": "0093f71baf6e9a1c0655f8a8c26b87a4fbbcc46b68a4545337ec6461ee649593"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/sports1.jpg",
+            "size": 128607,
+            "hash": "0bdbc454d49c39cd48aa5a40d38631981139f99f5879809b498dc2bab3e8c097"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/sports2.jpg",
+            "size": 136383,
+            "hash": "ebc46ea400aacad5f67a3b0b5aaecf03a45ff6519df4b03eee9cbdf4ed9bcd77"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/gallery/transport.jpg",
+            "size": 166588,
+            "hash": "fca3328e4f353e09e3e972c887bbd9853cc170d22b4f122e9c2f41f1c4e39868"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/homepage/homelogo.png",
+            "size": 141624,
+            "hash": "845aa31e08b8c834422cd8f8e31ece4f43fbce1bb14ac00ef74d6f57dd5c4423"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/admission.png",
+            "size": 410960,
+            "hash": "de124208bdda6a9d469ce97105d6761405fb1fdd77fc51edfaac01ce5de778bb"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/admissionenquiry.png",
+            "size": 40017,
+            "hash": "618a0eb98f27c06243b13686c72f9f4fbbdcfdb3a8fa9fe3eb04492cc81049db"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/alumni.png",
+            "size": 38605,
+            "hash": "1931620e7fcebceef13f6d8be54bae4c17822ceae1c83f5bdafdc06234ba8124"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/brochures-icon.png",
+            "size": 112988,
+            "hash": "61db4302fb9d0de24bbd4a637152841363763c0fd248d4046492783ec6067e07"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/downloadfrm.png",
+            "size": 9635,
+            "hash": "7c96705bbf228482993e90561e66b984c1fbbfce80f8639d8c9d3e1ea9f96042"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/feedback.png",
+            "size": 37913,
+            "hash": "b3736133ee2acdb10cb6607e7a40917ade32702e919b1c93fd2b7fb80fc753cb"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/feedback1.png",
+            "size": 31080,
+            "hash": "0024ff76a7165b9acd0029686bece8ddee49406cffc09e485375a0492098978f"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/guideline.png",
+            "size": 11743,
+            "hash": "61f1a0bb9a2b1131ed053b465223d2c00c415aeb6eb2b16bca070a4459d3bdcf"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/holiday.png",
+            "size": 53319,
+            "hash": "c33ad03d73a8bc3344f3b7b442a38091e1b26d6ea72dcc4ac98af28e0dfee49d"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/payment.png",
+            "size": 27090,
+            "hash": "dc04d9e7149386f3b0fe5023f124b819c14749fbbd1c1b14b23123c17ebbf3d7"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/rmit-smrtclogo.png",
+            "size": 94117,
+            "hash": "95e8dbbcd2070d7f8d6aaba42a16aea5a5eb3e67b80ea8c97dab4f73edecd58d"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/rmitsmart.png",
+            "size": 506983,
+            "hash": "71fb073904b175648295e0c587827afe3e10506eae26b2e90dd58946ac7f95c6"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/icons/rmitsmart1.png",
+            "size": 191521,
+            "hash": "50ee2ce9ef6f34cc16921ab7dd1348d123dfdf29d8c09391114a091b66ec1728"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/sliders/slider1.jpg",
+            "size": 240185,
+            "hash": "cfc561281525171353d444fb78f8c2db999d70bf672f5238cf1ff79ffedc92ed"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/sliders/slider2.png",
+            "size": 292777,
+            "hash": "878f03d2c9353dab0ba339915d8009428dd4cab1977b9c776ee71438b2c855ba"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/sliders/slider3.png",
+            "size": 440857,
+            "hash": "b7d7521d8222fdda9c826e0ecfcf81bf375a4fbbd7953cd583231fcf6ac3b18e"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/staffinfo/staff1.jpg",
+            "size": 5324,
+            "hash": "1ce08e4a73f78cdfbcc79b998d4caa760cc984fbd337588a1a3a1aa090154365"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/staffinfo/staff2.jpg",
+            "size": 6849,
+            "hash": "2d0bd3cda400d1ab7a737aa37180135d36e257a70247a4489b0d43a2fb83c992"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/staffinfo/staff3.jpg",
+            "size": 120590,
+            "hash": "5f32715b14960282c49ff45eb5ce5f0500fb82b4ff9b18fa225a1789f2adba31"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/staffinfo/staff4.jpg",
+            "size": 44906,
+            "hash": "fa00c4e790078317646798ba287a0df65b0419b02ddf453a4ae087375159fe1a"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/staffinfo/staff5.jpg",
+            "size": 80363,
+            "hash": "5de8812a69ee2bbc98d571d23adecf85350cdbd5c41ab8c94af3ea7f35e92c47"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/staffinfo/staff6 .png",
+            "size": 37301,
+            "hash": "a69d540b13fe1ab5ecaa926cadfeccf3fc8070b7f55116adcd6c296187ad55c0"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/staffinfo/staff7.png",
+            "size": 29317,
+            "hash": "c6d4639ae762b80ea0c2e80f17a665129684260016a42dec90e0bf89bd38737c"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/staffinfo/staff_1.png",
+            "size": 180551,
+            "hash": "aec7b63fa17a918715ae5c56dea9bf1f45c3f6ae83c7bff7d2c5bbfb3f63abd0"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/staffinfo/staff_p.png",
+            "size": 68314,
+            "hash": "6ba8fa57881bd033601f7b21bf1a70bebaa240a39e4048f1805261b2aba8468a"
+        },
+        {
+            "type": "file",
+            "name": "rmit/images/students/rahul-patra.jpg",
+            "size": 97594,
+            "hash": "5843f52a2d814d9a6b008475d7063f2035b25e30350c739c8abdc0bc30ea9246"
+        },
+        {
+            "type": "file",
+            "name": "rmit/js/tinymce/tinymce.min.js",
+            "size": 405092,
+            "hash": "0cd26af25c51872d49b7190ce37fe36003aab882a34d78a7d524f97cd1e58d31"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/admin/api/get_next_roll.php",
+            "size": 1481,
+            "hash": "49821205605c820ef7a8da018bec7ffabcbd2504305fcda56efb5abf9e881a3e"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/assets/css/footer.css",
+            "size": 1102,
+            "hash": "96d42bb39fe889073b95ccde939e229827f5b017f52fd5fba9df9a580b8a6010"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/assets/css/rmitscstyles.css",
+            "size": 15734,
+            "hash": "e2e058c4eff678c27918ac46f81e0ec4d4bb0723052f1a98012697f9b93eba75"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/assets/css/styles.css",
+            "size": 16278,
+            "hash": "725751f55d1b516e7c2f5fe1b5eccc5d8bed56e58d03a8e735995c03629f4e25"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/assets/img/hit-logo.png",
+            "size": 23908,
+            "hash": "fb77cd5740827fb8a7c23331020485d54dd31f7bd84377b5bcd2b5d106b522a3"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/assets/img/rmit-logo.png",
+            "size": 19072,
+            "hash": "c6428b1b85805e4ab6d7e6bdaefdf284ee334d38a5310b8b60ec1f90564e69de"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus/assets/img/rmitc-logo.png",
+            "size": 27415,
+            "hash": "155acd253759e6b0e8bd152490c2377b085023134d5ecb7d6d2699575913aae9"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/assets/css/base.css",
+            "size": 89,
+            "hash": "8708d7a93f5bda706b53dfe39faea9408801eb7f768f127bad0da9026277b119"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/assets/css/components.css",
+            "size": 114,
+            "hash": "c0b4530952e0e6e3283fb12457e38c74d5ed2bef1b6e40d4b03e817f6a176cef"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/assets/css/layout.css",
+            "size": 344,
+            "hash": "f4f0168babe345387ff51936c8148ead429aa3e4fc307d07917f83886ace91e4"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/assets/css/rmitscstyles.css",
+            "size": 16278,
+            "hash": "725751f55d1b516e7c2f5fe1b5eccc5d8bed56e58d03a8e735995c03629f4e25"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/assets/css/style.css",
+            "size": 1495,
+            "hash": "205ff23a1a90933161aeaa26fba20b63393d1cf795709f3ee2e57c5a3ea2092e"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/assets/js/main.js",
+            "size": 436,
+            "hash": "a7e38e0899b2b6fe316560e74c58a5dfdfbddb2745be80f6e508d735c3a74f28"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/composer/ClassLoader.php",
+            "size": 16378,
+            "hash": "d4b2313e562edf942838ec316d983c1a3459ca67da3e5658e861200b0b3693c2"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampus1/assets/css/themes.css",
+            "size": 234,
+            "hash": "236ad2c11b85a7040fc1c340afa66c97fc86b2648ba2d870ae35bc7561b407e8"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/composer/InstalledVersions.php",
+            "size": 17395,
+            "hash": "1e4525198301d1ed1f87ac3df2a8555a6f139f8df30a703d0b775a61963c96e4"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/composer/LICENSE",
+            "size": 1070,
+            "hash": "c8cce4b6b9729f264ffdf9296d505d63432497feeed1f586d1902b942197e024"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/composer/autoload_classmap.php",
+            "size": 222,
+            "hash": "375085d0d6690301081436cd75755cb2c882f8a7f6fc385c8814a11734fc413a"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/composer/autoload_namespaces.php",
+            "size": 139,
+            "hash": "ede505407590638a435137f4e060136f1008de79fc169b3de9793423b0cea38c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/composer/autoload_psr4.php",
+            "size": 213,
+            "hash": "37fe79fff76d924ed6640c7d700bdd0f35cfc736587f0fc3d6ead4649ce2eeb3"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/composer/autoload_real.php",
+            "size": 1137,
+            "hash": "f379b22b0976de306815a501b80d1ed3772385b4904666cad4491d1dc330fa55"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/composer/autoload_static.php",
+            "size": 1093,
+            "hash": "f57137af1426f4cd677b1294322f379b4184c6258ea9f00d754b7677cc3ae055"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/composer/installed.json",
+            "size": 3769,
+            "hash": "231f16da7c40959472e5cdee26f30c989420721be6eef0c4e18b155e8281caa9"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/composer/installed.php",
+            "size": 1054,
+            "hash": "d20c3c40f81acbe93f1ced6e1d06293311dc65e09e0ce7f3215cf8d35ce04bb1"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/composer/platform_check.php",
+            "size": 925,
+            "hash": "680f7726ea57d47a1ab675dba38cbdb25e135dca8124583024361f67157c8b1a"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/Infrastructure/classroom.jpg",
+            "size": 170224,
+            "hash": "04b4898492bdfba4fa538da75621f78a35a03a5a46d341ec48730ef694e76b3a"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/Infrastructure/library.jpg",
+            "size": 31263,
+            "hash": "5f2e59154a8f0c1106aba3ed72401c0a1d0a788566cb2c4e2e804fcc3835e93b"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/Infrastructure/placement.jpg",
+            "size": 8709,
+            "hash": "0eee36cece2052b954e2e6569fe002a9ff2277404c261b13fc8538aa4e90f212"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/Infrastructure/rmitc-campus.png",
+            "size": 818862,
+            "hash": "538d8b894b88479914ba8fd95a6fa35b73949d7dad2529408cb303eb8c402e74"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/Infrastructure/safety.jpg",
+            "size": 91707,
+            "hash": "0f4b236df92c971267290820d202932c7609094b142a4ea3bc64f08487036f9b"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/Infrastructure/workshop_electrician.jpg",
+            "size": 2554208,
+            "hash": "33fdb02257604e37a138c1616e1d1347a48e1e6c8a5e07d389017ec99c3099ef"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/Infrastructure/workshop_electronics.jpg",
+            "size": 12179,
+            "hash": "b19539c2a539bbeb46ea118db832af8dd095a703458ba160c1ddc3bfe487ce06"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/Infrastructure/workshop_fitter.jpg",
+            "size": 9371,
+            "hash": "67f429e0c510844f3f6391ead98e1c65ca36fbfe22a95ffd8505c2983ef86109"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/Infrastructure/workshop_welder.jpg",
+            "size": 8965,
+            "hash": "9a56a2aa1ec029291b1f8cbbc9a5178c83d16c8180b070fb3b08c246fcadeda3"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/administration/Super.jpg",
+            "size": 6832,
+            "hash": "3806ab38e9f7b412de3316e4690afc06137a31b841e891e30c8454d443687b51"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/administration/accountant.jpg",
+            "size": 7714,
+            "hash": "b2c82d6d9539e6b54f79c7859f60d79ad00fb2f1b1c90548b88eaf41ded899ae"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/administration/admin_head.jpg",
+            "size": 29676,
+            "hash": "8c8f6fe61fa5015093e99204e2916dfd72641c8871b401bd33217016d6d0929d"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/administration/admin_staff.jpg",
+            "size": 20812,
+            "hash": "f9629c7e579fe205cd6440206659f384a0bc8444ada5f06675fb328267d83a5d"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/administration/admini_head.jpg",
+            "size": 6746,
+            "hash": "9770e388c58d4267d48aef657a63bc7c21b8d9a3eb13caaa5224e6d9536621ad"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/administration/coordinator.jpg",
+            "size": 7859,
+            "hash": "8d890ce3eee4e47b8467fcd2213d15ee73de0c218e81cf039e4ab32017ab571e"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/administration/supervisor.jpg",
+            "size": 3961,
+            "hash": "5dcc8b40dc2bc0ba518d787f8029679dc6819fda78db5269f7448b3926cbf3c3"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa1.png",
+            "size": 11046,
+            "hash": "54e712e67b21c6b19638b51bef6bb990eb19b2f945f656556eb7ab9efa53e0fe"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa10.png",
+            "size": 19349,
+            "hash": "499b85429b873cb5983b00bbae9c17500103f5ee22112df60534c13da4e9ef76"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa11.png",
+            "size": 10284,
+            "hash": "a9c927b09eab19df3c42f7d8157380fa3af36d2304c027eaae2f9f3525c693cb"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/administration/placement.jpg",
+            "size": 3689,
+            "hash": "66bcca98b6226240c5b3fd1ffd8358b27688a086959f75e5f88a6a5cf31798d1"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa12.jpg",
+            "size": 35531,
+            "hash": "49cf2d4a6c7a2c87d5209e6ebf3b52a15e0d380c93c3620fad04232ae774df89"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/administration/it_admin.jpg",
+            "size": 34565,
+            "hash": "a387c3a07cc628cc12b3ecb19b6919b61cef6c873d72e21daa513a8c26e4f381"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa12.png",
+            "size": 9140,
+            "hash": "f5e8704d1c7a5f208ca0c6b3c7a564d5824da10d637e3e7ef9089a85e5db86e9"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa13.jpg",
+            "size": 23807,
+            "hash": "eebf0fbf72b4c8443414a3f5a5e5307dd505cfa8f107abe289acb3251539e732"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa13.png",
+            "size": 5103,
+            "hash": "c65ea9b2dbc5a22a1ec6f2d1dc44aa06e45e0d2d87252835b01fed335731c906"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa14.png",
+            "size": 2122,
+            "hash": "10b857436730daea0a9cffa1e4353dd3dd28d3170a194b7f839977cae5a64c28"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa15.png",
+            "size": 3978,
+            "hash": "6d46d549005e976aad7802cb1f28101d62f3e42ddbfb311d850dbe6bf8b05d38"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa16.png",
+            "size": 2211,
+            "hash": "399c0bb3cfcf474d5f28408d2757597caa706037515a63ffffce6521264b7f0c"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa17.png",
+            "size": 5095,
+            "hash": "ee3bd810a749ceb9ef75f578e14edce36ec3a57e82a46fc1e1c453279b9790aa"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa18.png",
+            "size": 208096,
+            "hash": "7e05ad3e32bf55d7a3b4b9e965242372adde9315ee7cfffd675015813e459ae1"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa19.png",
+            "size": 5183,
+            "hash": "3ea4bb4f7a7b1513b32c15b48cdb7342e9f995676da4a99c0184e310defe43c8"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa2.png",
+            "size": 36585,
+            "hash": "20ebe281e59315d04f6d428f8995e14f9c217ee1b8474508a395af6fc61288aa"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa20.png",
+            "size": 5816,
+            "hash": "525bcc8c971864c647a76efe7a893a3414ffcb3d7cf26b28927501efebcff9ef"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa22.png",
+            "size": 7270,
+            "hash": "bd43baddfc5c244d46a14309b997d48764f5c393c3a7f3c8cb7e8eafa3478711"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa23.png",
+            "size": 4987,
+            "hash": "3bf6c0cfd6d748346456723d3956335a2581806bbbef985db8fad8b8be388d15"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa24.png",
+            "size": 8046,
+            "hash": "b28534e35e41670194d61c237bad76ce9a25c409010232343e85e3e23ddca854"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa25.png",
+            "size": 6821,
+            "hash": "8e74a374827b39120e483120a6afe815a696eed6df45ff6966aa88fbc38bf7e6"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa26.png",
+            "size": 10341,
+            "hash": "3562e8630cd75a0ae81cb8cff597fb95c065ff01601e51db3f7d38764e07b432"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa21.png",
+            "size": 15634,
+            "hash": "290a9de700391af7b3979c016712969964187df29351a2a650bbe232dc713f51"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa28.png",
+            "size": 7358,
+            "hash": "4f2023ebd491955227d48d50b1852c2b7b4311f8ff22f87501fe9c75a750de16"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa29.png",
+            "size": 4474,
+            "hash": "0b08bdad0dca12d8791b28b02c68781168af909005504f0987f2421cd03d46df"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa3.png",
+            "size": 22853,
+            "hash": "00bd129e66f2a3bd5456ef5a2547716d6824a578f56daf92b042f9754aab2917"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa30.png",
+            "size": 7379,
+            "hash": "bc884ed4c034fc6357ff44e0c6d94c507babf3c55928210f41009d2f16a25255"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa31.png",
+            "size": 8594,
+            "hash": "6ba87042a217762dd728124edd1aec74ad51b5535a80e0fad75f1baf58db6e5c"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa32.png",
+            "size": 9816,
+            "hash": "ec771e9925663abbf0fc14cea12f9c3c447ef87a91ccd38dfbe8334b97182c00"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa4.png",
+            "size": 24446,
+            "hash": "8ce0983e1c615736037535e02cc19fe91b1ee7d6756b497de2d44ddb2cff3270"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa5.png",
+            "size": 13037,
+            "hash": "afec44d85c33d7b193172674e50133609cd753d5c10bc0dd65be214c2e610be6"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa6.png",
+            "size": 20470,
+            "hash": "2cc0c2a3963cef21e0f5716aa30bc5f1b90669b2ab1773bc17329ccbb4ac78b5"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa7.png",
+            "size": 11756,
+            "hash": "a19f5bc3edb2cbbba9d37c9ab0393026059186e0159f87b962cc0191ecaf9d96"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa8.png",
+            "size": 55342,
+            "hash": "3ebd665dedb6239aea47c41848cc7412b30d6c025268dcc3e38680d736ca6508"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa27.png",
+            "size": 7370,
+            "hash": "7a6196eb1ec324deb27a061239445128a6c4a22f07cbfdf2a2017d8b27be04f4"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/companies/aa9.png",
+            "size": 20519,
+            "hash": "27500ecb57b5fb42d5dccb19ac79ae7edc6839ba564caf9368ae37013a11f17d"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/icons/aictelogo.png",
+            "size": 21912,
+            "hash": "e84018370e596f7b867f43487bda943a4c0a4e1f55365616bddaab466a2ff4c9"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/icons/ncvt-logo.png",
+            "size": 135951,
+            "hash": "01afc1445a32187d925a8a00382afa0d35c19d99f0088a1bb789395cb73acd09"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/students/no-photo.png",
+            "size": 3809,
+            "hash": "e55526d5ccfbbd092a61a2632018fe798255d2472990a2abfd522314297d4897"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/trades/electricallogo.png",
+            "size": 225868,
+            "hash": "70c81a7b357da8db5b615c13413028963efa74a6cb24bc247e055fbc8b6612e7"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/trades/electricianlogo.png",
+            "size": 221851,
+            "hash": "9c49fdb5c2927747c36d7441d4ad1e1889465b82d554469319d65269d115f246"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/trades/electronics.png",
+            "size": 271972,
+            "hash": "75c3cb45cba58f42733b5b690e82e71916b60095ae50ae58485ec8d9bead6281"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/trades/fitterlogo.png",
+            "size": 252250,
+            "hash": "118886c0ff89312645e1ba10e3e6a522d2378fca1e1306673d842db9e4a2b7b8"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/images/trades/welderlogo.png",
+            "size": 244441,
+            "hash": "2ce8efc2b2e4636dcd1e857311b1225dcf0e273c388b5bc7b9f5f3052c7ac5df"
+        },
+        {
+            "type": "file",
+            "name": "rmitc/js/tinymce/tinymce.min.js",
+            "size": 405092,
+            "hash": "0cd26af25c51872d49b7190ce37fe36003aab882a34d78a7d524f97cd1e58d31"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/.phan"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/LICENSE",
+            "size": 26529,
+            "hash": "a1a33180d02960ab1c5de36cf20b1a2f0fe9888d83826ad263da5db52f1b183b"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/composer.json",
+            "size": 2775,
+            "hash": "988c74b659c07ecc32f6473ee151eb808a7f74cb1e3c3e2f14562caaf9c5785a"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/get_oauth_token.php",
+            "size": 6261,
+            "hash": "9564843fbfc9f153e464849e736d08cb41f124f1acb2fcd6c129d50be14d52b8"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/phpdoc.dist.xml",
+            "size": 451,
+            "hash": "762dca8aeb35e8cfea5fa614d1ca607bf93042e3622a3842ac1c814b472013e8"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/src"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/.phan/config.php",
+            "size": 1328,
+            "hash": "d2eaa3fdfa7ca0936fe89e7ecce1d839a60c7d0389d456f0313eeca7f63a9a1d"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/DKIM_gen_keys.phps",
+            "size": 3317,
+            "hash": "3357cb25505fb3118be83b504c3974eebfe4f48379758b85722b347ea2b187ce"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/DKIM_sign.phps",
+            "size": 1769,
+            "hash": "89380b93b21716a16533ba09ea29bb5487f780a07c3e3c5bdb764a43b925bf3b"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/azure_xoauth2.phps",
+            "size": 4050,
+            "hash": "4ed02911cc6357d7ab18bdb21d0b80eae9a1fe48c11bce62457e456dd2dac09c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/callback.phps",
+            "size": 2291,
+            "hash": "654576ff2ea5a4f8ca968fda5825df107cc67f058f7bdc824bfa4fc5f124a6e3"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/contactform-ajax.phps",
+            "size": 5115,
+            "hash": "8ac208174ceb7476858180743d636fe1f391045e7b81fb90427a9379580c7fa3"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/contactform.phps",
+            "size": 3597,
+            "hash": "e9eb477674c53fbc2ab1f4b7360f6cca110fc9184923da8787c3e06cf06d21e4"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/contents.html",
+            "size": 568,
+            "hash": "0475c69864421ef33d9e013a19d59b7e1fa57bb84a96ce03ba2f67a7ff1dd2cc"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/contentsutf8.html",
+            "size": 1159,
+            "hash": "c2ceb6f8a68e803569b116eff16985a36e614802f2a18dad57560e386cd67e4e"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/exceptions.phps",
+            "size": 1659,
+            "hash": "f4018a7561687a0ea8947f32f7e19fb590e1236ff0d6b178b61127d859f87c60"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/extending.phps",
+            "size": 2618,
+            "hash": "bf377abdc64ff96614ed80e4c08c59daf247e1a811bbc229b26cf967cf66364a"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/gmail.phps",
+            "size": 3744,
+            "hash": "c6390d803723a924d796a0a934072f08f9854a9150113a8c58f4a395ed04a14c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/gmail_xoauth.phps",
+            "size": 3881,
+            "hash": "8b087c3691ae0dd65797f2dd5b6bd621ce166e7d04508be22bfddba1b7f99cc5"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/images"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/mail.phps",
+            "size": 1145,
+            "hash": "2a0e70de60f5414c1a31dd2c30b207b4d641344946ed226d89c53a9a3c32bed8"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/mailing_list.phps",
+            "size": 3201,
+            "hash": "7e4debd3b697cfbf184534a9e4add6e4cd7cfef0044f0b68f4a2563ddc59538c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/pop_before_smtp.phps",
+            "size": 2429,
+            "hash": "9eec6853995a3aa4daa2ce0a72aaa328c520421b26000ffcb489fbfd9569227f"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/send_file_upload.phps",
+            "size": 2080,
+            "hash": "7fc69127f94b9198cb64f66068af9d9fbe60b5744681ab49b9b2b49744a1404c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/send_multiple_file_upload.phps",
+            "size": 2029,
+            "hash": "1327634eb56074c398ede37b900a0be957b62cc768ae5c706561c680fdc7ad5a"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/sendmail.phps",
+            "size": 1216,
+            "hash": "a70f17717b43ec1032e8fae77d2ebc5d27e27e509c839753963a4eef7c470177"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/sendoauth2.phps",
+            "size": 5561,
+            "hash": "434ecb76d098977b4b5c222a36e83152728d811e6bdcde6a3839ec698f4a2710"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/simple_contact_form.phps",
+            "size": 3873,
+            "hash": "5e314a269650f73cfcd0134b8be4dcca8fffefe9bb532c6b309c846b481c96d8"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/smime_signed_mail.phps",
+            "size": 4285,
+            "hash": "46c82be44067709008726e820447171ddafcb0d983df2a543e27fb121ffa9235"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/smtp.phps",
+            "size": 2246,
+            "hash": "d660ec963f94eb265af7de15fb840523d8893d0872e7f8ee83beac704cb073c8"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/smtp_check.phps",
+            "size": 2062,
+            "hash": "8923ad1e6b04ef45bdef84e7223a44602172977ac0d523c152f5b1b3e92077e6"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/smtp_low_memory.phps",
+            "size": 4931,
+            "hash": "80388a0f7ee51af3347c088213ecb282f23ac11cf22e8d5fafeb3a0848b5f373"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/smtp_no_auth.phps",
+            "size": 1865,
+            "hash": "63ac85a535cd13726ee945d6afbe0c1a71e3701323ab0fee838d07b3f1e7c159"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/ssl_options.phps",
+            "size": 2332,
+            "hash": "252bf894420446c3bca4592be89782fbd2021e61e412d3fcb76ee09a52bc4170"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-af.php",
+            "size": 1584,
+            "hash": "d4c5272712f1b1cd6b3d08f83a89fbdae257de308a58e6eee1f4e7f519c86062"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-ar.php",
+            "size": 2024,
+            "hash": "ad11ffbf21f84fe6e812a0cf4f82df4412dd232ab6f6b6fe47e2c760845ec04f"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-as.php",
+            "size": 3792,
+            "hash": "8aaaa3925b2e79a475ffd7b65e29406b1e86c8ea48a666ec32243668f5e28494"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-az.php",
+            "size": 1749,
+            "hash": "8b116561af83e2bd1ef3319ff8103f169883e89efab592115d98c9ae7c09d6df"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-ba.php",
+            "size": 1745,
+            "hash": "df573ba9a9431bff2c602b7b297040e0f9cf9b319562f17c686f01f1ed4ebfad"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-be.php",
+            "size": 2178,
+            "hash": "47c51cef7371142b993b58764c0abd4e82fe7213f9bd85b6dcfb24d0acd223ec"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-bg.php",
+            "size": 2196,
+            "hash": "9a556b5ad45ead80d7331f5ed713799e7fb810c52f8d7913725585fbeff084c2"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-bn.php",
+            "size": 3845,
+            "hash": "ff7842ce6fdc7cbb846b16f292e126fbc578e0c27da48092e4a5f44d928aebe6"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-ca.php",
+            "size": 1730,
+            "hash": "2b62db0921d2d321c80869bc9544b744747fd7cf398cc17358c0ae0b2533548c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-cs.php",
+            "size": 1798,
+            "hash": "4bdb6445032c31fa1c41d65b8840f4fed0c30b96a6e68418ea6968e6de49f664"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-da.php",
+            "size": 2409,
+            "hash": "32a35e1df4a39d8d4bd7c4daad3a19eae2c139cdb1b58dead36a2b5dc91e83db"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-de.php",
+            "size": 1886,
+            "hash": "41e9bee22a8b00d42b28ebadae85ba531134a2482108489c0e5ced6ddc25b062"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-el.php",
+            "size": 3307,
+            "hash": "3760e138e5c0fdc17a896718d2d86239b6d2d936abc0cf016fc5350ee034a8dd"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-eo.php",
+            "size": 1665,
+            "hash": "d7dc252b77f7a098e4b3c3e7beca875be08b6f01bf68129bc658fce26b06bb31"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-es.php",
+            "size": 2588,
+            "hash": "6f84a5e4b7fe9fb5867941bb23e21189caaf52b97948a87589132f6bd9ae34f7"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-et.php",
+            "size": 1744,
+            "hash": "7a854b796bc5058913ab5f5ad489b02ed246ad49220e844a1c3fbb0ffa908fa6"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-fa.php",
+            "size": 2079,
+            "hash": "7e38e2e75326d9d7bbb87fc4f6dc5c40ce79c9ce43016a707e84af9d7e332102"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-fi.php",
+            "size": 1659,
+            "hash": "3efb47c9e164860b45ee3a9f707975210d7f87bbc356a7dada075528fc37052c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-fo.php",
+            "size": 1637,
+            "hash": "2b778d73170ff1864126bd65839d39098a9dde290e31fe6ea6719b68a030daa2"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-fr.php",
+            "size": 2732,
+            "hash": "1d816ccae7fa8eea24907686ffeeeeb5861ffdf794690e6a91c142d49d05efd7"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-gl.php",
+            "size": 1742,
+            "hash": "fe2fd5068446a04e73ca767ca05eba81f6648fcb93988a307a4dbd619054780a"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-he.php",
+            "size": 1812,
+            "hash": "7d944fe5e073d0dfb8a53cf9f8e9c409d40f5f0149ce6d47c1f4088cb28d69fe"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-hi.php",
+            "size": 3768,
+            "hash": "2a260e1b5f0d7efbfccc436ea040aa172ecd5ac8ea394482c0dd9a2e7c9d3206"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-hr.php",
+            "size": 1754,
+            "hash": "b337f280f2e5f087daaa44bd1f359bbc41e01062cbd07a5c67345a45a01ccbaf"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-hu.php",
+            "size": 1717,
+            "hash": "94045618ef5a86dc4f8176f3ebae3fbb1e29b7ef7cb1ce99ba57ee4724aef3be"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-hy.php",
+            "size": 2185,
+            "hash": "52fc3f40d24d55ef95702a59ec006c4c5996a22e54a6b00e54a25707db341629"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-id.php",
+            "size": 1997,
+            "hash": "a9c606b5da1470c02140c96c1ef3fc5ba1175ad0ce119b6f2d93e02c112d2ae1"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-it.php",
+            "size": 1819,
+            "hash": "06e7faf9dc2dabebe8ea8c684eb9b798ffd241ce039945a8e5583993705b1c3e"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-ja.php",
+            "size": 2934,
+            "hash": "c1cb38a994fb2f1b523dc622174dd4f7b9e9ba20e8cd864ae44744bd2b8050fc"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-ka.php",
+            "size": 2884,
+            "hash": "0bf765b1e28e33947df929657c325cd957c506ec42d44d2a32b3d30794f09b31"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-ko.php",
+            "size": 1771,
+            "hash": "674f7f333694475a3a6164c1c5cb84e25f94a5b0d3118cb49ff2e5a318260c64"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-ku.php",
+            "size": 2238,
+            "hash": "4cc2ad8c0516ce01090997c802c7cdc3362e974e55ea26823140e60d50328f71"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-lt.php",
+            "size": 1627,
+            "hash": "ee21a138a136caf9b213b3fe9f070afb9c20f4cdd51178045798bb60ccc82865"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-lv.php",
+            "size": 1643,
+            "hash": "a986f934cb4a2b9cf5bad1c150f0af9d8a0c7745d36b9904882d68b1bb07fb5d"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-mg.php",
+            "size": 1782,
+            "hash": "eebd4b1c9caa2b0ad5637b623cad66a0b67363a2e752cbd86eacb2139636fd85"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-mn.php",
+            "size": 2186,
+            "hash": "e1b246c27568a92fef27a44e9601ce3ff41ca0dac0f564782dc46bfd03f42724"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-ms.php",
+            "size": 1734,
+            "hash": "f6b8ec01f2734624eadb3e9135e408a5a6da20a5a684b5577d7ba29bddd4b5aa"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-nb.php",
+            "size": 2288,
+            "hash": "3f7070f004b6f6b3e3c64a6ce63ebe32c861bfbd5bd7c6ddd40c4e19a37fadb8"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-nl.php",
+            "size": 2365,
+            "hash": "9d43b5bcdd2446f3bc6eea5aec01b7084a9a83ec0c50a73ac968b6c1260dcbe3"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-pl.php",
+            "size": 2635,
+            "hash": "130beb1aedccab6f9aff7eb76db0e477c40a15485d1eb129555e7d28ec2ee6f9"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-pt.php",
+            "size": 2465,
+            "hash": "588e547a80a7c867594f2e956ca12625d3b48446b16cd0e47f48fea71ef3ed2c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-pt_br.php",
+            "size": 2719,
+            "hash": "8965d817b5667787efd6ffe58b15af236e51ff085594562fafccaf85d9f1bcd8"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-ro.php",
+            "size": 2448,
+            "hash": "f0cf6c8032723215293095e7a9b2f2a9c1159bb51221511efb6163f4096b9232"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-ru.php",
+            "size": 3297,
+            "hash": "981aa0630326df0b5dd48da086c19c4a329571a7426c36f6e08ff6470f24687d"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-si.php",
+            "size": 3425,
+            "hash": "502364f4ccb0c546093c13b4fc2a9ef15e0d47b4e4b789729d72b6cb33c6871e"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-sk.php",
+            "size": 1909,
+            "hash": "b3327b7d377f16e0aeabca54ca2c8906e23c5a77cdb19d2d4fb85f0bbd39d3cd"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-sl.php",
+            "size": 2577,
+            "hash": "642ab71b9a02ee00abc39516e6d005957beff6dde91948155d0f25ce4f98630d"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-sr.php",
+            "size": 2301,
+            "hash": "9982802bafa971f1d2e376fca86f8da86c7e43158ef6d3cb6f7c3ff51cc1c7e9"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-sr_latn.php",
+            "size": 1814,
+            "hash": "0f67cf31fa3b5f2db2a2c74911096a73892377096c966923c0dc1fbbbc612a32"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-sv.php",
+            "size": 1610,
+            "hash": "c1cb0390311cdff2f93ab37fff165b389fa74dca7f6341ce08240eca886b5ac3"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-tl.php",
+            "size": 1721,
+            "hash": "48fa60bb2a88fdeb53960878fd0cdf88f7a59736a9efa487787b61de1c5d9db9"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-tr.php",
+            "size": 2606,
+            "hash": "9f19069be7c25d8a0563ee535bbc57ebe3c65698b2af99320349a4002db99091"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-uk.php",
+            "size": 2282,
+            "hash": "767609225673b2983c2cf7b208ae954d49d7728287da2c2cb859ca8c9273efd3"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-ur.php",
+            "size": 2265,
+            "hash": "4404c38f4f64a1098678e0d30a62c63cd1dd56949fcc7f6ea89557fbf0693e06"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-vi.php",
+            "size": 1793,
+            "hash": "3b5acbfceceb34f90dc7f905f044a51e48cce7f79cbf998b579b8bf00fa1fabc"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-zh.php",
+            "size": 1669,
+            "hash": "ad235ae24994a85b63ff1bd2dadab9de1f2806a9764c162cf047459fa037814c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/language/phpmailer.lang-zh_cn.php",
+            "size": 2333,
+            "hash": "cd53b733c64eeac233b140e33a6d58d337cd1ac28d6a5cd3231d87169f548c07"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/src/DSNConfigurator.php",
+            "size": 6883,
+            "hash": "429f5f0a962864ec7b67efd572c0f85cc0f33fd4585413d8dc80d41c8562399e"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/src/Exception.php",
+            "size": 1256,
+            "hash": "22ab858ae438d98f58f41f38ad2191d1b0d59570aebea0463a7948cfae1021b7"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/src/OAuth.php",
+            "size": 3791,
+            "hash": "44b2c9a3b6e538a65b90261251f197d700e2eb90d51d4944fb80577263210fb4"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/src/OAuthTokenProvider.php",
+            "size": 1538,
+            "hash": "f2318ea1b2841b2481b636e205c281a733f9de944a71ae403e0b59fa71219572"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/src/PHPMailer.php",
+            "size": 187770,
+            "hash": "835a15b6067083d7c92ea245c9ffab3ef23a8ac16bfe14a61e953741a661b9e2"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/src/POP3.php",
+            "size": 12352,
+            "hash": "42baf6cd05e05c8dba369cf7da411955b5e0b1c791828d538ca99b17335d7df9"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/src/SMTP.php",
+            "size": 50097,
+            "hash": "9bc105018f6ef2576c2c4a246a46fc41ada546111fc8fb1ffce86421af35e78c"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/DebugLogTestListener.php",
+            "size": 1069,
+            "hash": "af7a28c3eb2893facbf049777bded3ecd0d48ecc94567726a0b65c825b5a4258"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Language"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/OAuth"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/POP3"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PreSendTestCase.php",
+            "size": 1415,
+            "hash": "4d84bd565a348c3d1c8bea8f47ddb0a27cc88d2edf2f982e52516ec7b7bc1560"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Security"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/SendTestCase.php",
+            "size": 4330,
+            "hash": "227cb8b5e696b9e20d690f31c5bb7d5dec4869396cac7cbe4b86162215fdb178"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/TestCase.php",
+            "size": 12334,
+            "hash": "247765ce75eb425b844c14850af19414df6b2cd93f7f923f2413d0647be8d16c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/fakepopserver.sh",
+            "size": 3060,
+            "hash": "56fb71c52cb5a13be2866586458e205f36d7c86d78733fe4792465a1a24e5b78"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/fakesendmail.sh",
+            "size": 496,
+            "hash": "14a4c517dce87ef75a03c8d2923c84eb4a8bcfd7783a764a5f676eb64264ef3f"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/runfakepopserver.sh",
+            "size": 295,
+            "hash": "ed1c2361e5154d5caf362f284d66b3cdeb5c14504e1cf3f6beae165ec707bd0b"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/testbootstrap-dist.php",
+            "size": 240,
+            "hash": "edd010491878d49fc164e1b439381a156fad4fd0acd51aeaf354214234c4c059"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/validators.php",
+            "size": 169,
+            "hash": "be5540ac203b90dc28f01f5b99b0484ff0a18b45e6bd7a9bee31f5c59ba043ff"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/images/PHPMailer card logo.afdesign",
+            "size": 29525,
+            "hash": "0475a3f39b0dfe2048707fd65de3607816489f1367ca88060bb6c1066b0b0306"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/images/PHPMailer card logo.png",
+            "size": 26755,
+            "hash": "4889d55fee6e90edf07a77e852a17d9b4cfb44becaf57c15d2cc5ac87dd3fbf3"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/images/PHPMailer card logo.svg",
+            "size": 54659,
+            "hash": "d85ab2a1f76f5a91b35ad415bba949c70e6d0d047bc98f314b4ea1de275cecda"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/images/phpmailer.png",
+            "size": 5831,
+            "hash": "6dce87c35df4ae42d5857671663676391f33e1b61dcfecc7851fd91b23ff629a"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/examples/images/phpmailer_mini.png",
+            "size": 1842,
+            "hash": "08b000251387bde7187ce99ab3fac5ace33ea51443e51333833ebbafedd292ac"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/FileIsAccessibleTest"
+        },
+        {
+            "type": "folder",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/LocalizationTest"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Language/TranslationCompletenessTest.php",
+            "size": 3300,
+            "hash": "fd95410aff45ba436a2a1d48556fe48918a383526bcac2dfd9d6e00bbfdd0956"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/OAuth/OAuthTest.php",
+            "size": 2467,
+            "hash": "dc0b9d2b5bf90bb112a0a1c80c21df3aaa4c31785bf0abe3effa6debaa893e29"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/AddEmbeddedImageTest.php",
+            "size": 6442,
+            "hash": "6bfd07f83fe95529900915983e7ede694d7879cb64703c211399da66e1971048"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/AddStringAttachmentTest.php",
+            "size": 5181,
+            "hash": "e10ed73667c7f28ac9cafadacb7037e2594308274d2b10a96153e0858ccb5b1c"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/AddStringEmbeddedImageTest.php",
+            "size": 5520,
+            "hash": "cb8a9d36c8d21e46e8141c6dded100ce4645e08eb01fa1f7b29542c5253a7c50"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/AddrFormatTest.php",
+            "size": 2075,
+            "hash": "ffb5e584f5fc0aad31593a617155b8199cc752462e24831dbe57965deb1685f5"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/AuthCRAMMD5Test.php",
+            "size": 1545,
+            "hash": "22ecf8fc75b18159b2c1ca3a9a0676ef3c4f1804eb2537edc322ea69d9b0ea20"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/CustomHeaderTest.php",
+            "size": 9149,
+            "hash": "5ce89bf8beab101b1e5ca6310950bd114c1e3055dadf93acec9a4b9ef115585e"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/DKIMTest.php",
+            "size": 9098,
+            "hash": "81d11b230ea4b43987a490f270aa7ebe7692c195a4301232e0269c49905505ed"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/DKIMWithoutExceptionsTest.php",
+            "size": 1221,
+            "hash": "1950ac03ab447d9afcb91a3637966c6dee175ce93ae595f65bb2e5641f108c11"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/DSNConfiguratorTest.php",
+            "size": 6439,
+            "hash": "a3ed1db6108bc57b7ba69120f14d4d63c7a9b9ecd31807ba73142837ec4ef836"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/EncodeQTest.php",
+            "size": 3962,
+            "hash": "bc60ad89d395c7b5296922c0d172e5242f5f5c033243287bd4ef03e5fdb29c23"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/EncodeStringTest.php",
+            "size": 4572,
+            "hash": "24cbc3227b655f5568fa32634b6fc732822c78cb05d0de7343b0bc92f63ee234"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/FileIsAccessibleTest.php",
+            "size": 3312,
+            "hash": "8344c7dc5eb35999b572e152906e13f8c6fb169540946fd25f9cdf00e6a18a65"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/FilenameToTypeTest.php",
+            "size": 2217,
+            "hash": "1bffffa87911c71771bb99fd7b8ca6182164251ac135d45abcab704ee7c14efa"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/GenerateIdTest.php",
+            "size": 2630,
+            "hash": "b331ab854de562351e19096b92a182645dec762230e7bd3c5ec8b3d5a42ccc31"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/GetLastMessageIDTest.php",
+            "size": 3310,
+            "hash": "06852a08972a9561e3cb58bf8a4e6960f3a9afce264999bddb019807e9e74f40"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/HasLineLongerThanMaxTest.php",
+            "size": 4703,
+            "hash": "1e5e242e0b017501ba55e2fdc7bcfeb5f185933cc06b95b25b37af8bccffe206"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/Html2TextTest.php",
+            "size": 9740,
+            "hash": "d7b2589defd00cc162116f36062429bda4810c6d6e3f27e251cf43bfab2617c2"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/ICalTest.php",
+            "size": 4309,
+            "hash": "6d2ad52a184e809365fc038a4045ef6679b386d937945cf04680aced648be138"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/IsPermittedPathTest.php",
+            "size": 3738,
+            "hash": "2fc68a674f38f286dc48d331fd5e1a3d54c1bdb2b9b4dbf006f071fc0818a0e0"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/IsValidHostTest.php",
+            "size": 4188,
+            "hash": "bf93479f2d2740dfec7fd164644270865d60aa3286a95efa6b216bd0f13911d5"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/LocalizationTest.php",
+            "size": 18487,
+            "hash": "e2e57406162aa233251cb9c0a43962a716053adb3dfc37a47ad96d29bd99cc82"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/MailTransportTest.php",
+            "size": 3669,
+            "hash": "73618b97334eec454b83c3a537029fd7188f1cbfb145fa15a4c172fed3b2b7bc"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/MbPathinfoTest.php",
+            "size": 5719,
+            "hash": "5956c95b652e96f37b0ee1098adb67ad3d2d7eab376f51a5e9f42843f91d51a6"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/MimeTypesTest.php",
+            "size": 1925,
+            "hash": "2f4f9a256c4d438f53ba9a7892fd447bfa44bd5b8c0c48afd86e7b43101bf683"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/NormalizeBreaksTest.php",
+            "size": 3613,
+            "hash": "0b24aeaae8a0259d1be950778b8e9e389dac2dc82ea22ac4a46e746906a09b2a"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/PHPMailerTest.php",
+            "size": 50647,
+            "hash": "fe9e083be067aa55701c072e3adcc3e0c95d73bc43fd47cd0630b9ac94882307"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/ParseAddressesTest.php",
+            "size": 14276,
+            "hash": "37536b073431a7dee34fd7b9ab2d1b0c70a13753deef2919ad2b6488698326d5"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/PunyencodeAddressTest.php",
+            "size": 4758,
+            "hash": "36cdd23ae47a4167b1da4b539e28df86b4c399b040252d01f69e22b308b8e288"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/QuotedStringTest.php",
+            "size": 2081,
+            "hash": "d170fffc5de0e56ee696f4a07204f30fb2609c9c1735e77155f106c43977871d"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/ReplyToGetSetClearTest.php",
+            "size": 17173,
+            "hash": "f3cfecd6f90f5329900795a4898c9fb7ccb13cbea3f3ac18427a649541dd73e8"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/SetErrorTest.php",
+            "size": 5181,
+            "hash": "da88a583b5d2176cc55f3edac41d2452c776853c5298961c87844ee868748f39"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/SetFromTest.php",
+            "size": 7062,
+            "hash": "89393cd678af44618a956b28e31f265992d75e9c221024236abf38675b248db8"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/SetTest.php",
+            "size": 2314,
+            "hash": "71686a9885a60750dc5ee88c496af6c5fa4067d341950163ffa203898e7e447e"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/SetWordWrapTest.php",
+            "size": 4006,
+            "hash": "7e27d48d8d1213451d5ff9024532f780fe6e62240e57d781ccd572e790e42154"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/Utf8CharBoundaryTest.php",
+            "size": 1948,
+            "hash": "967effbffe14c46972d59107146684d1317e6f72da94d4d8916a7c7b6497e42e"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/ValidateAddressCustomValidatorTest.php",
+            "size": 3634,
+            "hash": "8e4c5cd3aca4bfd75bb71762072d1fd16c5c0344743bede7fd19d14f41f8c2e8"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/ValidateAddressTest.php",
+            "size": 17076,
+            "hash": "e0673a9d3382a0309463b99ebf8af0f26850b7bd59f72a1299a651d0fea9ff08"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/WrapTextTest.php",
+            "size": 6089,
+            "hash": "735a478924475bf732c2c635f5d61b424d52e818fafa3753a7c803d3aeed33e0"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/PHPMailer/XMailerTest.php",
+            "size": 1987,
+            "hash": "4f50a11e8b8802474bacad8ce811d6d400446a09fd9484f7705380f196385699"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/POP3/PopBeforeSmtpTest.php",
+            "size": 3756,
+            "hash": "1c52fe5b0471125342b279bd39661391a0a60fb83a50808a04fa121d065dc8c2"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Security/DenialOfServiceVectorsTest.php",
+            "size": 1598,
+            "hash": "4bc3cf02c9ac4fa8e55afaf3bc1c9d716b4487881402ff1ac5b7d0dbf14bc25d"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/FileIsAccessibleTest/accessible.txt",
+            "size": 13,
+            "hash": "850c9947f3863ff54812e309eee8504b00b4146d25225d832e5b33652e9e5a38"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/FileIsAccessibleTest/inaccessible.txt",
+            "size": 13,
+            "hash": "850c9947f3863ff54812e309eee8504b00b4146d25225d832e5b33652e9e5a38"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/LocalizationTest/phpmailer.lang-fr.php",
+            "size": 256,
+            "hash": "b40c4613fa40bb355f18b6efcfe05e43017ca3c325c95f298cf18fc781a7fb42"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/LocalizationTest/phpmailer.lang-nl.php",
+            "size": 256,
+            "hash": "2245cef1e699769814c765d409b907bfe66869e5ce5644b6f3713d120076f624"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/LocalizationTest/phpmailer.lang-xa_scri_cc.php",
+            "size": 181,
+            "hash": "47743ac4059a4b4155a82b39dc0858a96f4581e1de31493bd5bbf0eac3cbb83a"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/LocalizationTest/phpmailer.lang-xb_scri.php",
+            "size": 173,
+            "hash": "8ebf21cd3665c9ebc45ebb3dd63f2c64dd2b9e9bf229e5a16dfbc54a4c3d095a"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/LocalizationTest/phpmailer.lang-xc_cc.php",
+            "size": 174,
+            "hash": "663b717008cfd2390b288f33eb176c0280e34fdf7c3302ec84ce402ff3385b30"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/LocalizationTest/phpmailer.lang-xd_cc.php",
+            "size": 174,
+            "hash": "0fc16daea07192e5d0d3c3f40f049e64ba522a4d97e2022de1cd330a6ccbfc6b"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/LocalizationTest/phpmailer.lang-xd_scri.php",
+            "size": 173,
+            "hash": "c63e12fd5bd92ee653906ff0f2a74717a833800638c5ceac0ab3212824aa81c3"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/LocalizationTest/phpmailer.lang-xe.php",
+            "size": 166,
+            "hash": "434a74df8206dd0437ca4b6f8c0d07fb7a7813a8d6cf010e575cefba81aa6f2b"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/LocalizationTest/phpmailer.lang-xx.php",
+            "size": 184,
+            "hash": "e1ed028f4896faa47cac621d703d468278c9f26f20b60c6a7bec9ec74e74f5d9"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/LocalizationTest/phpmailer.lang-yy.php",
+            "size": 583,
+            "hash": "d5982b412a96b54ba21eea057516a99a74e9fae1f087aeb77baef5bbe1699aa9"
+        },
+        {
+            "type": "file",
+            "name": "rmit-smartcampusonlineexam/vendor/phpmailer/phpmailer/test/Fixtures/LocalizationTest/phpmailer.lang-zz.php",
+            "size": 847,
+            "hash": "2de3a2cb1e0929fefbfb59c7b59ac1a3d11a7a5bf2ebca136b23f9808f2fa5ad"
+        }
+    ]
+}

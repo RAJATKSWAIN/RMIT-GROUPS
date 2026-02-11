@@ -1,24 +1,184 @@
 <?php
 // Load configuration constants (branding, base URL, timezone)
-include_once("includes/config.php");
+include_once("/rmit-smartcampus/config.php");
 
 // Load database connection
-include_once("includes/db.php");
+include_once("/rmit-smartcampus/includes/db.php");
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?php echo $page_title; ?></title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<link href="assets/css/rmitscstyles.css?v=1.0" rel="stylesheet">
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Mobile viewport optimized -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Page Title -->
+  <title>RMIT SmartCampus Portal | Academic Management System for Students, Faculty & Administration</title>
+
+  <!-- Meta Description -->
+  <meta name="description" content="RMIT SmartCampus Portal is the academic management system for RMIT Group of Institutions. Access student registration, faculty services, administration tools, admissions, 		and online campus resources in one secure platform.">
+
+  <!-- Meta Keywords -->
+  <meta name="keywords" content="RMIT SmartCampus, RMIT Group of Institutions, Academic Management System, Student Portal, Faculty Portal, Administration Portal, RMIT Registration, RMIT Admission, RMIT Online 	Services">
+
+  <!-- Author -->
+  <meta name="author" content="RMIT Group of Institutions">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/rmit-smartcampus/assets/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="64x64" href="/rmit-smartcampus/images/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/rmit-smartcampus/images/favicon-128.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/rmit-smartcampus/assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="/rmit-smartcampus/assets/img/site.webmanifest">
+  <link rel="mask-icon" href="/rmit-smartcampus/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#2d89ef">
+  <meta name="theme-color" content="#ffffff">
+    
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,400i,700,800|Varela+Round" rel="stylesheet">
+	
+  <!-- CSS links -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="assets/css/styles.css?v=1.0" rel="stylesheet">
+  <link href="assets/css/rmitscstyles.css?v=1.0" rel="stylesheet">
+  <link href="assets/css/footer.css?v=1.0" rel="stylesheet">
     
 
 </head>
+
+<style>
+/* ===================== MOBILE RESPONSIVE ===================== */
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Navbar */
+  /* Ensure brand + toggle align horizontally */
+.navbar .navbar-brand {
+  display: flex;
+  align-items: center;
+  margin-right: auto; /* push logos to the left */
+}
+
+/* Place toggle right next to logos in mobile */
+.navbar .navbar-toggler {
+  margin-left: 10px; /* small spacing */
+  order: 2;          /* force toggle after logos */
+}
+
+/* Optional: adjust spacing between logos */
+.navbar .navbar-brand img:first-child {
+  margin-right: 10px;
+}  
+    
+  .navbar-brand img {
+    height: 18px !important;
+  }
+ 
+  .navbar-brand img {
+		height: 25px;
+		width: 180px;
+		margin: 0 05px;
+	}
+
+  .navbar-nav {
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .navbar-nav .nav-item {
+    margin-bottom: 8px;
+  }
+
+  .navbar .btn {
+    width: 90%;
+    margin: 10px auto;
+  }
+  
+  .navbar-toggler{ 
+     margin-left:05px;}  
+    
+  /* Hero Section */
+  .hero-section {
+    padding-top: 100px;
+    padding-bottom: 60px;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-buttons a {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .hero-image svg {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Features */
+  .features-section {
+    padding: 60px 15px;
+  }
+
+  .feature-card {
+    padding: 20px;
+  }
+
+  /* How It Works */
+  .step-card {
+    margin-bottom: 20px;
+  }
+
+  .step-number {
+    font-size: 1.8rem;
+  }
+
+  /* Stats */
+  .stats-section h3 {
+    font-size: 1.6rem;
+  }
+
+  /* CTA */
+  .cta-title {
+    font-size: 1.6rem;
+  }
+
+  .cta-subtitle {
+    font-size: 1rem;
+  }
+
+  .cta-section .btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  /* Footer */
+  .footer p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+}
+</style>
 
 <body>
 
@@ -28,12 +188,14 @@ include_once("includes/db.php");
     
     <!-- Brand Logo + Text -->
     <a class="navbar-brand d-flex align-items-center" href="index.php">
-      <img src="https://rmitgroups.org/images/logo.png" alt="RMIT Logo" style="height:40px; margin-right:10px;">
-      
+      <img src="/rmit-smartcampus/images/rmitsclogo1.png" alt="RMIT Logo" style="height:45px; width:auto; "> 
+        <span style="border-left:5px solid #ff2f00; height:30px; margin:0 20px; display:inline-block;"></span>
+      <img src="https://rmitgroups.org/images/logo.png" alt="RMIT Logo" style="height:20px; margin-right:10px;">      
     </a>
-
-    <!-- Toggler for mobile -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+	
+      
+    <!-- Toggle Button (RIGHT side of logo) -->
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -44,7 +206,7 @@ include_once("includes/db.php");
         <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
         <li class="nav-item"><a class="nav-link" href="#how-it-works">How It Works</a></li>
         <li class="nav-item ms-3">
-          <a class="btn btn-dark" href="/rmit-smartcampus/auth/login.php">Login</a>
+          <a class="btn btn-info" href="/rmit-smartcampus/auth/login.php">Login</a>
         </li>
       </ul>
     </div>
@@ -59,7 +221,7 @@ include_once("includes/db.php");
 
       <div class="col-lg-6">
         <div class="hero-content">
-          <h1 class="hero-title"> RMIT Student Management Portal </h1>
+          <h1 class="hero-title"> Welcome to RMIT SmartCampus Portal </h1>
 
           <p class="hero-subtitle">
             Official digital platform of <strong>RMIT Group Of Institutions</strong>, 
@@ -97,9 +259,10 @@ include_once("includes/db.php");
 <!-- ================= FEATURES ================= -->
 <section id="features" class="features-section">
   <div class="container">
-    <div class="row mb-5">
-      <div class="col-12 text-center animate-on-scroll">
-        <h2 class="display-4 fw-bold mb-4">Why Choose RMIT Student Portal?</h2>
+    <div class="row mb-5"> 
+        <img src="/rmit-smartcampus/images/rmit-sclogo.png" alt="logo" loading="lazy" decoding="async" style="max-width:145%; height:180px;">
+      <div class="col-12 text-center animate-on-scroll">      
+        <h2 class="display-4 fw-bold mb-4">Key Features</h2>
         <p class="lead text-muted">Discover the integrated features that make student management efficient and transparent</p>
       </div>
     </div>
@@ -253,18 +416,36 @@ include_once("includes/db.php");
 </section>
 <!--================= End CTA Section =================-->
     
-<!-- =================Start  FOOTER ================= -->
-<footer class="footer">
-    <div class="container text-center">
-        <p class="mb-0">
-            © <?php echo date("Y"); ?> RMIT Group Of Institutions – Student Management Portal
-        </p>
-    </div>
-</footer>
-<!-- =================End FOOTER ================= -->
+<!-- ================= FOOTER ================= -->
+<footer class="footer-main">
+  <div class="container footer-container">
 
+    <!-- Left -->
+    <div class="footer-left">
+      <span>
+        © <script>document.write(new Date().getFullYear());</script>
+        <a href="https://rmitgroupsorg.infinityfree.me/">RMIT 
+           <span class="footer-highlight">GROUP OF INSTITUTIONS</span>
+        </a>
+        – Student Management Portal. All rights reserved.
+      </span>
+    </div>
+
+    <!-- Right -->
+    <div class="footer-right">
+      <span class="dev-by">Developed by</span>
+
+      <img src="/images/trinitywebedge.png" alt="TrinityWebEdge Logo" class="dev-logo">
+      <a href="https://trinitywebedge.infinityfree.me" target="_blank" class="dev-link">
+        TrinityWebEdge
+      </a>
+    </div>
+
+  </div>
+</footer>
+<!-- ================= FOOTER END ================= -->
   
-<!-- Scripts -->
+	<!-- ================= All JS Scripts ================= -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Navbar scroll effect

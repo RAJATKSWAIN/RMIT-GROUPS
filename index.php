@@ -30,9 +30,9 @@
 	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 	
 	<!-- Retina PNG versions -->
-	<link rel="icon" href="images/favicon_32.png" sizes="32x32" type="image/png">
-	<link rel="icon" href="images/favicon_64.png" sizes="64x64" type="image/png">
-	<link rel="icon" href="images/favicon_180.png" sizes="180x180" type="image/png">
+	<link rel="icon" href="/images/favicon_32.png" sizes="32x32" type="image/png">
+	<link rel="icon" href="/images/favicon_64.png" sizes="64x64" type="image/png">
+	<link rel="icon" href="/images/favicon_180.png" sizes="180x180" type="image/png">
 	
 	<!-- Apple devices -->
 	<link rel="apple-touch-icon" href="images/favicon_180.png">

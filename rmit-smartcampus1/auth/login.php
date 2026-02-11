@@ -1,490 +1,413 @@
 <?php
 session_start();
-
-// ==========================
-// login.php (Login page using MySQL with database-based admin authentication)
-// ==========================
-
-// 1) Show errors (for debugging; hide in production)
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// 2) Database configuration (must match signup.php)
 $dbConfig = [
-    'host' => 'sql303.infinityfree.com',
-    'user' => 'if0_39529641',
-    'pass' => 'nIzoiCglOv',
-    'name' => 'if0_39529641_online_exam_system'
+    'host' => 'sql100.infinityfree.com',
+    'user' => 'if0_40697103',
+    'pass' => 'rmitgroups123',
+    'name' => 'if0_40697103_rmit_smartcampus'
 ];
 
-// 3) Function to connect to database
 function connectDB($config) {
-    $mysqli = new mysqli($config['host'], $config['user'], $config['pass'], $config['name']);
-    if ($mysqli->connect_errno) {
-        throw new Exception("Database connection failed: " . $mysqli->connect_error);
-    }
-    $mysqli->set_charset("utf8");
-    return $mysqli;
+    $conn = new mysqli($config['host'], $config['user'], $config['pass'], $config['name']);
+    if ($conn->connect_error) die("DB Error: " . $conn->connect_error);
+    $conn->set_charset("utf8");
+    return $conn;
 }
 
-// 4) Handle POST submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
-        // Collect and sanitize input
-        $idInput    = trim($_POST['id']       ?? '');
-        $password   = trim($_POST['password'] ?? '');
-        $userType   = trim($_POST['userType'] ?? '');
 
-        if (empty($idInput) || empty($password) || empty($userType)) {
-            echo "<script>alert('Please fill in all fields and select user type');</script>";
-            exit;
-        }
+    $email = trim($_POST['id'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+    $role = trim($_POST['userType'] ?? '');
 
-        // Connect to database
-        $mysqli = connectDB($dbConfig);
+    if ($email && $password && in_array($role, ['admin','staff','student'])) {
 
-        // 4a) Admin login (now database-backed)
-        if ($userType === 'admin') {
-            // Check if admin table exists, if not create it with default admin
-            $adminTableCheck = $mysqli->query("SHOW TABLES LIKE 'admin'");
-            if ($adminTableCheck->num_rows == 0) {
-                // Create admin table
-                $createAdminTable = "
-                    CREATE TABLE admin (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        name VARCHAR(100) NOT NULL,
-                        email VARCHAR(100) UNIQUE NOT NULL,
-                        password VARCHAR(255) NOT NULL,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    )
-                ";
-                $mysqli->query($createAdminTable);
-                
-                // Insert default admin (you can change these credentials)
-                $defaultAdminName     = 'System Administrator';
-                $defaultAdminEmail    = 'admin@gmail.com';
-                $defaultAdminPassword = password_hash('admin@12345', PASSWORD_DEFAULT);
-                
-                $insertAdmin = $mysqli->prepare("INSERT INTO admin (name, email, password) VALUES (?, ?, ?)");
-                $insertAdmin->bind_param('sss', $defaultAdminName, $defaultAdminEmail, $defaultAdminPassword);
-                $insertAdmin->execute();
-                $insertAdmin->close();
-            }
+        $conn = connectDB($dbConfig);
 
-            // Fetch admin credentials from database
-            $stmt = $mysqli->prepare("SELECT id, name, password FROM admin WHERE email = ?");
-            $stmt->bind_param('s', $idInput);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if ($result->num_rows === 0) {
-                $stmt->close();
-                $mysqli->close();
-                echo "<script>alert('Admin not found. Please check your credentials.');</script>";
-                exit;
-            }
-
-            $adminRow        = $result->fetch_assoc();
-            $adminId         = intval($adminRow['id']);
-            $adminName       = $adminRow['name'];
-            $storedAdminHash = $adminRow['password'];
-            $stmt->close();
-
-            if (password_verify($password, $storedAdminHash)) {
-                $_SESSION['userId']   = $adminId;
-                $_SESSION['userType'] = 'admin';
-                $_SESSION['userName'] = $adminName;
-
-                echo "<script>
-                        alert('Login successful as Admin!');
-                        window.location.href = 'admindashboard.php';
-                      </script>";
-                $mysqli->close();
-                exit;
-            } else {
-                echo "<script>alert('Incorrect Admin password.');</script>";
-                $mysqli->close();
-                exit;
-            }
-        }
-
-        // 4b) Staff / Student login (database-backed)
-        if ($userType !== 'staff' && $userType !== 'student') {
-            echo "<script>alert('Invalid user type selected.');</script>";
-            $mysqli->close();
-            exit;
-        }
-
-        $tableName = ($userType === 'staff') ? 'staff' : 'student';
-        $stmt      = $mysqli->prepare("SELECT id, name, password FROM `$tableName` WHERE email = ?");
-        $stmt->bind_param('s', $idInput);
+        $stmt = $conn->prepare("
+            SELECT u.id, u.role, u.password_hash, u.full_name, u.status, i.name AS institute
+            FROM users u
+            JOIN institutes i ON i.code = u.institute_code
+            WHERE u.email = ? AND u.role = ?
+        ");
+        $stmt->bind_param("ss", $email, $role);
         $stmt->execute();
-        $result = $stmt->get_result();
+        $res = $stmt->get_result();
 
-        if ($result->num_rows === 0) {
-            $stmt->close();
-            $mysqli->close();
-            echo "<script>
-                    alert('{$userType} not found. Redirecting to sign-up.');
-                    window.location.href = 'signup.php';
-                  </script>";
-            exit;
-        }
+        if ($user = $res->fetch_assoc()) {
 
-        $row        = $result->fetch_assoc();
-        $fetchedId   = intval($row['id']);
-        $fetchedName = $row['name'];
-        $storedHash  = $row['password'];
-        $stmt->close();
+            if ($user['status'] !== 'active') die("Account inactive");
+            if (!password_verify($password, $user['password_hash'])) die("Wrong password");
 
-        if (password_verify($password, $storedHash)) {
-            $_SESSION['userId']   = $fetchedId;
-            $_SESSION['userType'] = $userType;
-            $_SESSION['userName'] = $fetchedName;
+            $_SESSION['user'] = [
+                'id' => $user['id'],
+                'name' => $user['full_name'],
+                'role' => $user['role'],
+                'institute' => $user['institute']
+            ];
 
-            $dashboard = ($userType === 'staff') ? 'staffdashboard.php' : 'studentdashboard.php';
-            echo "<script>
-                    alert('Login successful as " . ucfirst($userType) . "!');
-                    window.location.href = '$dashboard';
-                  </script>";
-            $mysqli->close();
+            $_SESSION['flash_success'] = "Login successful. Welcome, {$user['full_name']}!";
+
+            if ($role === 'admin') header("Location: /rmit-smartcampus/admin/dashboard.php");
+            if ($role === 'staff') header("Location: /rmit-smartcampus/faculty/dashboard.php");
+            if ($role === 'student') header("Location: /rmit-smartcampus/student/dashboard.php");
             exit;
         } else {
-            echo "<script>alert('Incorrect password.');</script>";
-            $mysqli->close();
-            exit;
+            die("User not found");
         }
-
-    } catch (Exception $e) {
-        $errorMsg = addslashes($e->getMessage());
-        echo "<script>
-                alert('Error: $errorMsg');
-                window.location.href = 'login.php';
-              </script>";
-        exit;
+    } else {
+        die("Invalid input");
     }
 }
 ?>
+<!-- Your existing HTML login UI remains unchanged -->
+
+<!DOCTYPE html>
 
 <html lang="en">
 
 <head>
-    
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- Mobile viewport optimized -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	
-  <title>RMIT SmartCampus - Registration</title>
-    
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,400i,700,800|Varela+Round" rel="stylesheet">
+  <!-- Mobile viewport optimized -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Page Title -->
+  <title>RMIT SmartCampus Portal | Academic Management System for Students, Faculty & Administration</title>
+
+  <!-- Meta Description -->
+  <meta name="description" content="RMIT SmartCampus Portal is the academic management system for RMIT Group of Institutions. Access student registration, faculty services, administration tools, admissions, 		and online campus resources in one secure platform.">
+
+  <!-- Meta Keywords -->
+  <meta name="keywords" content="RMIT SmartCampus, RMIT Group of Institutions, Academic Management System, Student Portal, Faculty Portal, Administration Portal, RMIT Registration, RMIT Admission, RMIT Online 	Services">
+
+  <!-- Author -->
+  <meta name="author" content="RMIT Group of Institutions">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/rmit-smartcampus/assets/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/rmit-smartcampus/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/rmit-smartcampus/images/favicon-64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/rmit-smartcampus/assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="/rmit-smartcampus/assets/img/site.webmanifest">
+  <link rel="mask-icon" href="/rmit-smartcampus/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#2d89ef">
+  <meta name="theme-color" content="#ffffff">
 
   <!-- CSS links -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link href="assets/css/styles.css?v=1.0" rel="stylesheet">
-  <link href="assets/css/style.css?v=1.0" rel="stylesheet">
-    <style>
-        /* Main Styles */
-        body {
-            background: url('background.jpg') no-repeat center center fixed;
-            font-family: 'Arial', sans-serif;
-            background-size: cover;
-            background-position: center;
-            min-height: 100vh;
-        }
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> 
+  <!--<link href="/rmit-smartcampus/assets/css/styles.css?v=1.0" rel="stylesheet">	-->
+  <link href="/rmit-smartcampus/assets/css/footer.css?v=1.0" rel="stylesheet">
+  <link href="/rmit-smartcampus/assets/css/rmitscstyles.css?v=1.1" rel="stylesheet">
+    
 
-        .navbar {
-            background: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(10px);
-        }
+<style>
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+    
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%), url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
 
-        .navbar-brand {
-            font-size: 1.5rem;
-            color: #007bff !important;
-            font-weight: bold;
-        }
+html {
+    height: 100%;
+}
 
-        .btn-warning {
-            background-color: #ffc107;
-            border-color: #ffc107;
-        }
+.page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+		}
 
-        .main-content {
-            height: calc(100vh - 76px);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
 
-        /* Login Card Styles */
-        .login-card {
-            width: 100%;
-            max-width: 450px;
-            padding: 2.5rem !important;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+.main-content {
+    height: calc(100vh - 76px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 35px;
+}
 
-        .login-card h2 {
-            color: #333;
-            font-weight: 600;
-            margin-bottom: 2rem;
-        }
+.login-card {
+    width: 100%;
+    max-width: 650px;
+    padding: 2.5rem !important;
+    margin-top:20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
-        .user-type-selection {
-            margin-bottom: 1.5rem;
-        }
+.login-card h2 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
 
-        .user-type-selection .btn {
-            border-radius: 25px;
-            padding: 8px 20px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin: 0 5px;
-        }
+.user-type-selection {
+    margin-bottom: 1.5rem;
+}
 
-        .form-control {
-            padding: 0.75rem 1rem;
-            margin-bottom: 1rem;
-            border-radius: 10px;
-            border: 2px solid #e9ecef;
-            transition: all 0.3s ease;
-        }
+.user-type-selection .btn {
+    border-radius: 25px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin: 0 5px;
+}
 
-        .form-control:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
+.form-control {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
 
-        .btn-primary {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border: none;
-            border-radius: 10px;
-            padding: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
+.btn-primary {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
 
-        .password-toggle {
-            position: relative;
-        }
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
 
-        .password-toggle .toggle-icon {
-            position: absolute;
-            right: 15px ;
-            top: 70%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            user-select: none;
+.password-toggle {
+    position: relative;
+}
+
+.password-toggle .toggle-icon {
+    position: absolute;
+    right: 15px ;
+    top: 70%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
+
+.login-links {
+    margin-top: 1.5rem;
+}
+
+.login-links a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.login-links a:hover {
+    color: #764ba2;
+}
+ 
+@media (max-width: 768px) {
+   .main-content  {
+		margin: 20px 0px;
+		padding: 10px 10px;
+		border-radius: 12px;
+		max-width: 110%;
+	}
+	
+	.login-card h2 {
+		font-size: 1.3rem;
+	}
+
+    .user-type-selection .btn {
+        margin: 5px 2px;
+        font-size: 14px;
+        padding: 6px 15px;
     }
+    
+    /* Navbar */
+  /* Ensure brand + toggle align horizontally */
+.navbar .navbar-brand {
+  display: flex;
+  align-items: center;
+  margin-right: auto; /* push logos to the left */
+}
 
-        .login-links {
-            margin-top: 1.5rem;
-        }
+/* Place toggle right next to logos in mobile */
+.navbar .navbar-toggler {
+  margin-left: 10px; /* small spacing */
+  order: 2;          /* force toggle after logos */
+}
 
-        .login-links a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .login-links a:hover {
-            color: #764ba2;
-        }
-
-        /* Admin Info Box */
-        .admin-info {
-            background: linear-gradient(45deg, #17a2b8, #138496);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .admin-info h6 {
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .admin-info p {
-            margin-bottom: 5px;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .login-card {
-                max-width: 90%;
-                padding: 2rem !important;
-            }
-            
-            .user-type-selection .btn {
-                margin: 5px 2px;
-                font-size: 14px;
-                padding: 6px 15px;
-            }
-        }
-    </style>
+/* Optional: adjust spacing between logos */
+.navbar .navbar-brand img:first-child {
+  margin-right: 10px;
+}  
+    
+  .navbar-brand img {
+    height: 18px !important;
+  }
+ 
+  .navbar-brand img {
+		height: 25px;
+		width: 180px;
+		margin: 0 05px;
+	}
+}
+</style>
+    
 </head>
+    
 <body>
-    <!-- =================End Navbar Header================= -->
-	<nav class="navbar navbar-expand-lg navbar-light fixed-top" >
-	<div class="container">
-		
-		<!-- Brand Logo + Text -->
-		<a class="navbar-brand d-flex align-items-center" href="index.php">
-		<img src="https://rmitgroups.org/images/logo.png" alt="RMIT Logo" style="height:40px; margin-right:10px;">
-		
-		</a>
-	
-		<!-- Toggler for mobile -->
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-		<span class="navbar-toggler-icon"></span>
-		</button>
-	
-		<!-- Navbar Links -->
-		<div class="collapse navbar-collapse" id="mainNav">
-		<ul class="navbar-nav ms-auto">
-			<li class="nav-item"><a class="nav-link" href="/rmit-smartcampus/index.php">Home</a></li>
-			<li class="nav-item"><a class="nav-link" href="/rmit-smartcampus/#features">Features</a></li>
-			<li class="nav-item"><a class="nav-link" href="/rmit-smartcampus/#how-it-works">How It Works</a></li>
-			<li class="nav-item ms-3">
-			<a class="btn btn-dark" href="/rmit-smartcampus/auth/login.php">Login</a>
-			</li>
-		</ul>
-		</div>
-	</div>
-	</nav>
-	<!-- =================End Navbar Header================= -->
+    
+<div class="page-content">
 
-    <div class="main-content">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="login-card" id="loginModal">
-                        <h2 class="text-center">Welcome Back</h2>
-                        <form id="loginForm" method="POST" action="">
-                            <div class="user-type-selection text-center">
-                                <button type="button" class="btn btn-outline-primary" onclick="selectUserType('admin')">
-                                    <i class="fas fa-user-shield me-1"></i>Admin
-                                </button>
-                                <button type="button" class="btn btn-outline-primary" onclick="selectUserType('staff')">
-                                    <i class="fas fa-chalkboard-teacher me-1"></i>Staff
-                                </button>
-                                <button type="button" class="btn btn-outline-primary" onclick="selectUserType('student')">
-                                    <i class="fas fa-user-graduate me-1"></i>Student
-                                </button>
-                                <input type="hidden" name="userType" id="userType" value="admin" />
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="idInput" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="idInput" name="id" placeholder="Enter your email address" required />
-                            </div>
-                            
-                            <div class="password-toggle mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required />
-                                <span class="toggle-icon" onclick="togglePassword('password')">👁️</span>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary w-100 py-2">
-                                <i class="fas fa-sign-in-alt me-2"></i>Sign In
+<!-- =================Start Navbar Header================= -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" >
+  <div class="container">
+    
+    <!-- Brand Logo + Text -->
+    <a class="navbar-brand d-flex align-items-center" href="/rmit-smartcampus/index.php">
+      <img src="/rmit-smartcampus/images/rmitsclogo1.png" alt="RMIT Logo" style="height:45px; width:auto; "> 
+        <span style="border-left:5px solid #ff2f00; height:30px; margin:0 20px; display:inline-block;"></span>
+      <img src="https://rmitgroups.org/images/logo.png" alt="RMIT Logo" style="height:20px; margin-right:10px;">      
+    </a>
+
+    <!-- Toggle Button (RIGHT side of logo) -->
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/rmit-smartcampus/index.php">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/rmit-smartcampus/index.php#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="/rmit-smartcampus/index.php#how-it-works">How It Works</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- =================End Navbar Header================= -->
+
+<div class="main-content">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="login-card">
+                    <h2 class="text-center">Welcome Back</h2>
+
+                    <form method="POST">
+                        <div class="user-type-selection text-center">
+                            <button type="button" class="btn btn-outline-primary" onclick="selectUserType('admin')">
+                                <i class="fas fa-user-shield me-1"></i>Admin
                             </button>
-                            
-                            <div class="login-links text-center">
-                                <a href="signup.php" class="me-3">
-                                    <i class="fas fa-user-plus me-1"></i>Create account
-                                </a>
-                                <span class="text-muted">|</span>
-                                <a href="forgotpassword.php" class="ms-3">
-                                    <i class="fas fa-key me-1"></i>Forgot password?
-                                </a>
-                            </div>
-                        </form>
-                    </div>
+                            <button type="button" class="btn btn-outline-primary" onclick="selectUserType('staff')">
+                                <i class="fas fa-chalkboard-teacher me-1"></i>Faculty
+                            </button>
+                            <button type="button" class="btn btn-outline-primary" onclick="selectUserType('student')">
+                                <i class="fas fa-user-graduate me-1"></i>Student
+                            </button>
+                            <input type="hidden" name="userType" id="userType" value="admin" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" name="id" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="password-toggle mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+                            <span class="toggle-icon" onclick="togglePassword(this.previousElementSibling)">👁️</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2">Sign In</button>
+
+                        <div class="login-links text-center">
+                            <a href="signup.php">Create account</a> | 
+                            <a href="forgotpassword.php">Forgot password?</a>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Font Awesome -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</div>
+  
+</div>
     
-    <script>
-        // Toggle password visibility
-        function togglePassword(id) {
-            const input = document.getElementById(id);
-            const icon = input.nextElementSibling;
-            
-            if (input.type === "password") {
-                input.type = "text";
-                icon.textContent = "🙈";
-            } else {
-                input.type = "password";
-                icon.textContent = "👁️";
-            }
-        }
+<!-- ================= FOOTER ================= -->
+<footer class="footer-main">
+  <div class="container footer-container">
 
-        // Select User Type (update button styles and hidden input)
-        function selectUserType(userType) {
-            document.getElementById("userType").value = userType;
-            const buttons = document.querySelectorAll(".user-type-selection button");
-            const adminInfo = document.getElementById("adminInfo");
-            
-            // Reset all buttons
-            buttons.forEach((btn) => {
-                btn.classList.remove("btn-primary");
-                btn.classList.add("btn-outline-primary");
-            });
-            
-            // Highlight selected button
-            const selectedBtn = document.querySelector(`button[onclick="selectUserType('${userType}')"]`);
-            selectedBtn.classList.remove("btn-outline-primary");
-            selectedBtn.classList.add("btn-primary");
-            
-            // Show admin info only for admin selection
-            if (userType === 'admin') {
-                adminInfo.style.display = 'block';
-            } else {
-                adminInfo.style.display = 'none';
-                document.getElementById('idInput').value = '';
-            }
-        }
+    <!-- Left -->
+    <div class="footer-left">
+      <span>
+        © <script>document.write(new Date().getFullYear());</script>
+        <a href="https://rmitgroupsorg.infinityfree.me/">RMIT 
+           <span class="footer-highlight">GROUP OF INSTITUTIONS</span>
+        </a>
+        – Student Management Portal. All rights reserved.
+      </span>
+    </div>
 
-        // Set default to 'admin' on page load
-        document.addEventListener("DOMContentLoaded", function () {
-            selectUserType('admin');
-            
-            // Add some interactive feedback
-            const inputs = document.querySelectorAll('input');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.style.transform = 'scale(1.02)';
-                    this.style.transition = 'transform 0.2s ease';
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.style.transform = 'scale(1)';
-                });
-            });
-        });
-    </script>
+    <!-- Right -->
+    <div class="footer-right">
+      <span class="dev-by">Developed by</span>
+
+      <img src="/images/trinitywebedge.png" alt="TrinityWebEdge Logo" class="dev-logo">
+
+      <a href="https://trinitywebedge.infinityfree.me" target="_blank" class="dev-link">
+        TrinityWebEdge
+      </a>
+    </div>
+
+  </div>
+</footer>
+<!-- ================= FOOTER END ================= -->
+
+<!-- ================= All JS Scripts ================= -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+<script>
+function togglePassword(input){
+    if(input.type==="password"){input.type="text";}else{input.type="password";}
+}
+
+function selectUserType(role){
+    document.getElementById('userType').value = role;
+    const buttons = document.querySelectorAll('.user-type-selection .btn');
+    buttons.forEach(btn => btn.classList.replace('btn-primary','btn-outline-primary'));
+    const selected = Array.from(buttons).find(b => b.textContent.toLowerCase().includes(role));
+    if(selected){selected.classList.replace('btn-outline-primary','btn-primary');}
+}
+document.addEventListener('DOMContentLoaded',()=>selectUserType('admin'));
+</script>
+    
 </body>
+    
 </html>
+

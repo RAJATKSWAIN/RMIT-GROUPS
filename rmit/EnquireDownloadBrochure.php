@@ -186,7 +186,7 @@
                         <!-- Text -->
                         <div class="col-md-8 col-xs-6 " >
                             <div class="job-title">
-                                <a href="documents/RMIT-Brochure.pdf" target="_blank">
+                                <a href="/documents/RMIT_BROCHURE.pdf" target="_blank">
                                     Download College Brochure
                                 </a>
                                 <p class="small-text">
@@ -199,7 +199,7 @@
                         <!-- Button -->
                         <div class="col-md-2 col-xs-3 ptb30 text-center">
                             <div class="job-category">
-                                <a href="documents/RMIT-Brochure.pdf" target="_blank"
+                                <a href="/documents/RMIT_BROCHURE.pdf" target="_blank"
                                    class="btn btn-blue btn-small btn-effect">
                                     Download PDF
                                 </a>

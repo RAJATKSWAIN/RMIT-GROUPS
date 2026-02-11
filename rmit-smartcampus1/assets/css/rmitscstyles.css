@@ -168,7 +168,8 @@
         /* Features Section */
         .features-section {
             padding: 100px 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #fffdf7 0%, #f3f7ee 100%);
+
         }
 
         .feature-card {
@@ -264,7 +265,7 @@
         /* How It Works Section */
         .how-it-works {
             padding: 100px 0;
-            background: white;
+            background: linear-gradient(135deg, #e8f0fb 0%, #c9dbf2 100%);
         }
 
         .step-card {
@@ -464,156 +465,174 @@
         }
 /*End RMIT SmartCampus Protal Home Page Style*/
 
-/*Start of RMIT SmartCampus Login Page Style*/
-/* Main Styles */
-        body {
-            background: url('background.jpg') no-repeat center center fixed;
-            font-family: 'Arial', sans-serif;
-            background-size: cover;
-            background-position: center;
-            min-height: 100vh;
-        }
+/* ================= Login Card ================= */
 
-        .navbar {
-            background: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(10px);
-        }
+.login-card {
+    width: 100%;
+    max-width: 650px;
+    padding: 2.5rem !important;
+    margin-top:20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
-        .navbar-brand {
-            font-size: 1.5rem;
-            color: #007bff !important;
-            font-weight: bold;
-        }
+.login-card h2 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
 
-        .btn-warning {
-            background-color: #ffc107;
-            border-color: #ffc107;
-        }
+.user-type-selection {
+    margin-bottom: 1.5rem;
+}
 
-        .main-content {
-            height: calc(100vh - 76px);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.user-type-selection .btn {
+    border-radius: 25px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin: 0 5px;
+}
 
-        /* Login Card Styles */
-        .login-card {
-            width: 100%;
-            max-width: 450px;
-            padding: 2.5rem !important;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+.form-control {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
 
-        .login-card h2 {
-            color: #333;
-            font-weight: 600;
-            margin-bottom: 2rem;
-        }
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
 
-        .user-type-selection {
-            margin-bottom: 1.5rem;
-        }
+.btn-primary {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
 
-        .user-type-selection .btn {
-            border-radius: 25px;
-            padding: 8px 20px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin: 0 5px;
-        }
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
 
-        .form-control {
-            padding: 0.75rem 1rem;
-            margin-bottom: 1rem;
-            border-radius: 10px;
-            border: 2px solid #e9ecef;
-            transition: all 0.3s ease;
-        }
+.password-toggle {
+    position: relative;
+}
 
-        .form-control:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
+.password-toggle .toggle-icon {
+    position: absolute;
+    right: 15px ;
+    top: 70%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
 
-        .btn-primary {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border: none;
-            border-radius: 10px;
-            padding: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+.login-links {
+    margin-top: 1.5rem;
+}
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
+.login-links a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
 
-        .password-toggle {
-            position: relative;
-        }
-
-        .password-toggle .toggle-icon {
-            position: absolute;
-            right: 15px ;
-            top: 70%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            user-select: none;
+.login-links a:hover {
+    color: #764ba2;
+}
+ 
+@media (max-width: 768px) {
+    .login-card {
+        max-width: 90%;
+        padding: 2rem !important;
     }
 
-        .login-links {
-            margin-top: 1.5rem;
-        }
+    .user-type-selection .btn {
+        margin: 5px 2px;
+        font-size: 14px;
+        padding: 6px 15px;
+    }
+}
 
-        .login-links a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
+/* Error Message */
+.error {
+  background: #ffe4e4;
+  color: #a00000;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
 
-        .login-links a:hover {
-            color: #764ba2;
-        }
-
-        /* Admin Info Box */
-        .admin-info {
-            background: linear-gradient(45deg, #17a2b8, #138496);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .admin-info h6 {
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .admin-info p {
-            margin-bottom: 5px;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .login-card {
-                max-width: 90%;
-                padding: 2rem !important;
-            }
-            
-            .user-type-selection .btn {
-                margin: 5px 2px;
-                font-size: 14px;
-                padding: 6px 15px;
-            }
-        }
-
-/*End of RMIT SmartCampus Login Page Style*/
+/* ================= Signup Box ================= */
+/* Signup Box */
+	.signup-box {
+		max-width: 680px;
+		margin: 5% auto; 
+		padding: 40px;
+		background: #ffffff;
+		border-radius: 16px;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+	}
+	
+	/* Heading */
+	.signup-box h2 {
+		text-align: center;
+		margin-bottom: 25px;
+		font-weight: 700;
+		font-size: 1.6rem;
+		color: #1E90FF;
+		letter-spacing: 0.5px;
+	}
+	
+	/* Badge */
+	.student-badge {
+		background: linear-gradient(90deg, #28a745, #20c997);
+		color: #fff;
+		padding: 12px 25px;
+		border-radius: 30px;
+		font-weight: 600;
+		font-size: 1rem;
+		display: inline-block;
+		margin-bottom: 25px;
+		box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+	}
+	
+	/* Buttons */
+	.btn-primary {
+		background: linear-gradient(45deg, #007bff, #0056b3);
+		border: none;
+		padding: 12px;
+		font-weight: bold;
+		border-radius: 8px;
+		transition: all 0.3s ease;
+	}
+	
+	.btn-primary:hover {
+		transform: translateY(-2px);
+		background: linear-gradient(45deg, #0056b3, #003f7f);
+	}
+	
+	/* Form Inputs */
+	.form-control, .form-select {
+		border-radius: 8px;
+		border: 1px solid #ccc;
+		padding: 10px;
+		transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	}
+	
+	.form-control:focus, .form-select:focus {
+		border-color: #1E90FF;
+		box-shadow: 0 0 6px rgba(30, 144, 255, 0.4);
+	}

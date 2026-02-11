@@ -97,8 +97,8 @@ body {
 }
 
 .logo {
-  max-height: 72px;
-  width:120px;
+  max-height: 120px;
+  width:320px;
   margin-bottom: 18px;
 }
 

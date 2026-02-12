@@ -1,6 +1,6 @@
 <!--======================================================
     File Name   : aboutus.php
-    Project     : RMIT Groups - RMIT
+    Project     : RMIT Groups - RMITC
     Description : About Us Page 
     Developed By: TrinityWebEdge
     Date Created: 17-12-2025
@@ -11,47 +11,51 @@
 
 <html lang="en">
 
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	
-	<!-- Primary Meta Tags -->
-	<meta name="title" content="RMIT - Rajiv Memorial Institute of Technology, Berhampur">
-	<meta name="description" content="Rajiv Memorial Institute of Technology (RMIT), Berhampur — Empowering Minds, Building Futures. A premier institute committed to academic 							excellence, innovation, and leadership in Odisha.">
-	<meta name="keywords" content="RMIT Berhampur, Rajiv Memorial Institute of Technology, RMIT Group of Institutions, Engineering Odisha, Diploma Programs, Degree College Odisha">
+<head>
+    
+    <meta charset="UTF-8">
+
+    <!-- Mobile viewport optimized -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+
+    <!-- Primary Meta Tags -->
+	<meta name="title" content="RMITC - Rajiv Memorial Industrial Training Centre, Berhampur">
+	<meta name="description" content="Rajiv Memorial Industrial Training Centre (RMIT ITI), Berhampur — A premier ITI institute under RMIT Group of Institutions, offering industry-oriented technical training and skill development in Odisha.">
+	<meta name="keywords" content="RMITC, Rajiv Memorial Industrial Training Centre, ITI Berhampur, RMIT Group of Institutions, Industrial Training Institute Odisha, Skill Development Odisha">
 	<meta name="robots" content="index, follow">
-	<meta name="author" content="Rajiv Memorial Institute of Technology - RMIT Group of Institutions">
+	<meta name="author" content="Rajiv Memorial Industrial Training Centre - RMIT Group of Institutions">
 	<meta name="language" content="English">
 	<meta name="theme-color" content="#8b0000">
 	
-	<link rel="canonical" href="https://rmitgroupsorg.infinityfree.me/rmit">
+	<link rel="canonical" href="https://rmitgroupsorg.infinityfree.me/rmitc">
 	
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website">
-	<meta property="og:url" content="https://rmitgroupsorg.infinityfree.me/rmit">
-	<meta property="og:title" content="RMIT - Rajiv Memorial Institute of Technology, Berhampur">
-	<meta property="og:description" content="Empowering Minds, Building Futures — A premier institute committed to academic excellence, innovation, and leadership.">
+	<meta property="og:url" content="https://rmitgroupsorg.infinityfree.me/rmitc">
+	<meta property="og:title" content="RMIT ITI - Rajiv Memorial Industrial Training Centre, Berhampur">
+	<meta property="og:description" content="Industry-ready technical training and skill development under RMIT Group of Institutions.">
 	<meta property="og:image" content="https://rmitgroupsorg.infinityfree.me/rmit/images/rmit-campus.jpg">
-	
+		
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:url" content="https://rmitgroupsorg.infinityfree.me/rmit">
-	<meta name="twitter:title" content="RMIT - Rajiv Memorial Institute of Technology, Berhampur">
-	<meta name="twitter:description" content="Empowering Minds, Building Futures — A premier institute committed to academic excellence, innovation, and leadership.">
+	<meta name="twitter:url" content="https://rmitgroupsorg.infinityfree.me/rmitc">
+	<meta name="twitter:title" content="RMIT ITI - Rajiv Memorial Industrial Training Centre, Berhampur">
+	<meta name="twitter:description" content="Industry-ready technical training and skill development under RMIT Group of Institutions.">
 	<meta name="twitter:image" content="https://rmitgroupsorg.infinityfree.me/rmit/images/rmit-campus.jpg">
 	
 	<!-- Website Title -->
-	<title>RMIT - Rajiv Memorial Institute of Technology, Berhampur | Empowering Minds, Building Futures</title>
+	<title>RMITC - Rajiv Memorial Industrial Training Centre, Berhampur | Empowering Minds, Building Futures</title>
 	
 	<!-- Favicons -->
-	<link rel="icon" href="https://rmitgroupsorg.infinityfree.me/rmit/images/favicon.ico" type="image/x-icon">
-	<link rel="apple-touch-icon" href="https://rmitgroupsorg.infinityfree.me/rmit/images/favicon-180.png">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="images/favicon_32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="images/favicon_64.png" sizes="64x64" type="image/png">
-    <link rel="icon" href="images/favicon_180.png" sizes="180x180" type="image/png">
-    <link rel="apple-touch-icon" href="images/favicon_180.png">
-
+	<link rel="icon" href="https://rmitgroupsorg.infinityfree.me/rmitc/images/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="https://rmitgroupsorg.infinityfree.me/rmitc/images/favicon-64.png">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="images/favicon_32.png" sizes="32x32" type="image/png">
+	<link rel="icon" href="images/favicon-64.png" sizes="64x64" type="image/png">
+	<link rel="icon" href="images/favicon_180.png" sizes="180x180" type="image/png">
+	<link rel="apple-touch-icon" href="images/favicon_180.png">
+	
 	<!-- Google Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,7 +93,7 @@
 
 
     <!-- =============== Start of Page Header 1 Section =============== -->
-    <section class="page-header" style="background: linear-gradient(90deg, #0044cc, #00aaff);">
+    <section class="page-header" style="background: linear-gradient(90deg, #050F24, #0A2A66, #1E88E5);">
         <div class="container">
 
             <!-- Start of Page Title -->
@@ -104,7 +108,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="/rmit/index.php">home</a></li>
+                        <li><a href="/rmitc/index.php">home</a></li>
                         <li class="active">Notice</li>
                     </ul>
                 </div>

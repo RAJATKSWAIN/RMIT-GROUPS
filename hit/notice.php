@@ -123,7 +123,7 @@
             }
 
             .notice-header {
-                background: linear-gradient(90deg, #007bff 0%, #0056d1 100%);
+                background: linear-gradient(90deg, #5e1212 0%, #7b1e1e 45%, #a83232 100%);
                 color: #fff;
                 padding: 16px 24px;
                 font-size: 22px;

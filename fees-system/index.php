@@ -1,3 +1,12 @@
+<!--======================================================
+    File Name   : index.php
+    Project     : RMIT Groups - FMS - Fees Management System
+    Description : FMS Home Page
+    Developed By: TrinityWebEdge
+    Date Created: 06-02-2025
+    Last Updated: <?php echo date("d-m-Y"); ?>
+    Note        : This page defines the FMS - Fees Management System | FMS Home Page of RMIT Groups website.
+=======================================================-->
 <?php
 require_once 'config/config.php';
 // We don't force redirect here; we show the landing page.

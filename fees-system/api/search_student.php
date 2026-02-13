@@ -1,3 +1,12 @@
+<!--======================================================
+    File Name   : search_student.php
+    Project     : RMIT Groups - FMS - Fees Management System
+    Description : Student Registration & Profile Management
+    Developed By: TrinityWebEdge
+    Date Created: 06-02-2025
+    Last Updated: <?php echo date("d-m-Y"); ?>
+    Note        : This page defines the FMS - Fees Management System | Student Module of RMIT Groups website.
+=======================================================-->
 <?php
 require_once '../config/db.php';
 require_once '../core/auth.php';

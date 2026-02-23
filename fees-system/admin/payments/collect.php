@@ -219,24 +219,37 @@ let studentBalance = 0;
 
 function searchStudent() {
     let term = document.getElementById('reg_search').value;
-    if(!term) return;
+    if (!term) return;
 
-    fetch(`../../api/search_student.php?term=${term}`)
-        .then(res => res.json())
+    // 1. Clear previous errors or states if necessary
+    // 2. Use encodeURIComponent to handle special characters (like /) in the Reg No
+    fetch(`../../api/search_student.php?term=${encodeURIComponent(term)}`)
+        .then(res => {
+            // Check if the server actually connected and responded successfully (Status 200-299)
+            if (!res.ok) {
+                throw new Error(`Server Error: ${res.status} ${res.statusText}`);
+            }
+            return res.json();
+        })
         .then(data => {
-            if(data && data.STUDENT_ID) {
+            // Check if the PHP returned an error object (e.g., {"error": "..."})
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            if (data && data.STUDENT_ID) {
                 document.getElementById('student_info').style.display = 'block';
                 document.getElementById('payment_form').style.display = 'block';
                 document.getElementById('form_student_id').value = data.STUDENT_ID;
                 document.getElementById('view_name').innerText = data.FIRST_NAME + ' ' + data.LAST_NAME;
                 document.getElementById('view_course').innerText = data.COURSE_NAME;
-                
+
                 studentBalance = parseFloat(data.BALANCE_AMOUNT);
                 availableFees = data.available_fees;
-                
+
                 let container = document.getElementById('fee_checkbox_container');
                 container.innerHTML = '';
-                
+
                 availableFees.forEach((fee, index) => {
                     container.innerHTML += `
                         <div class="form-check border-bottom py-2">
@@ -249,9 +262,18 @@ function searchStudent() {
                 });
 
                 document.getElementById('view_balance').innerText = `Total Outstanding: ₹${studentBalance.toLocaleString()}`;
-            } else { 
-                alert('Student not found!'); 
+            } else {
+                alert('Student not found!');
             }
+        })
+        .catch(err => {
+            // This captures Network errors, 404/500 errors thrown above, and JSON parsing errors
+            console.error("Critical Error Details:", err);
+            alert("Critical Error: " + err.message);
+            
+            // Hide forms on error to prevent data mismatch
+            document.getElementById('student_info').style.display = 'none';
+            document.getElementById('payment_form').style.display = 'none';
         });
 }
 

@@ -9,6 +9,9 @@
 =======================================================-->
 
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once "../core/auth.php";
 require_once "../config/db.php";
 require_once "../config/audit.php";
@@ -298,8 +301,6 @@ $instBranding = $conn->query("
             <div class="small text-muted mt-1"><?= date('l, d F Y') ?></div>
         </div>
     </div>
-
-
 
 <h3>Welcome, <?= $adminName ?></h3>
 <p class="text-muted">Fees Management System Overview</p>

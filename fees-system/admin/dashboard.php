@@ -74,6 +74,7 @@ $logs = $conn->query($sql_logs);
 ?>
 
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -187,67 +188,67 @@ $logs = $conn->query($sql_logs);
     <small class="text-muted">Admin Dashboard</small>
   </div>
 
-<a href="dashboard.php">🏠 Dashboard</a>
+	<a href="dashboard.php">🏠 Dashboard</a>
+	
+	<div class="section-title">Students</div>
+	<a href="students/add.php"><i class="bi bi-person-plus"></i> Add Student</a>
+	<a href="students/list.php"><i class="bi bi-people"></i> View / Edit</a>
+	<a href="students/profile.php"><i class="bi bi-person-badge"></i> View Profile</a>
+	<a href="students/disable.php"><i class="bi bi-person-x"></i> Disable Student</a>
+	<a href="students/bulk_upload.php"><i class="bi bi-upload"></i> CSV Upload</a>
+	<a href="students/template.php"><i class="bi bi-download"></i> Download Template</a>
+	
+	<div class="section-title">Courses</div>
+	<a href="courses/add.php"><i class="bi bi-journal-plus"></i> Add Course</a>
+	<a href="courses/list.php"><i class="bi bi-journal-text"></i> Edit Course</a>
+	<a href="courses/bulk_upload.php"><i class="bi bi-upload"></i> Bulk Upload</a>
+	
+	<div class="section-title">Fees Configuration</div>
+	<a href="fees/header_add.php"><i class="bi bi-wallet2"></i> Fee Header</a>
+	<a href="fees/map_course.php"><i class="bi bi-link"></i> Assign Fee to Course</a>
+	<a href="fees/bulk_map.php"><i class="bi bi-upload"></i> Bulk Mapping CSV</a>
+	<a href="fees/copy_structure.php"><i class="bi bi-files"></i> Duplicate Fee Structure</a>
+	
+	<div class="section-title">Collections</div>
+	<a href="payments/collect.php"><i class="bi bi-cash-stack"></i> Collect Payment</a>
+	<a href="payments/receipt.php"><i class="bi bi-receipt"></i> Print Receipt</a>
+	<a href="payments/receipt_history.php"><i class="bi bi-journal-text"></i>Receipt History</a>
+	<a href="payments/bulk_bank_upload.php"><i class="bi bi-bank"></i> Bank/UPI Upload</a>
+	<a href="payments/bulk_invoice.php"><i class="bi bi-file-earmark-text"></i> Bulk Invoice Print</a>
+	
+	<div class="section-title">Reports</div>
+	<a href="reports/total.php"><i class="bi bi-bar-chart-line"></i> Total Collection</a>
+	<a href="reports/course.php"><i class="bi bi-bar-chart"></i> Course Wise</a>
+	<a href="reports/student.php"><i class="bi bi-person-lines-fill"></i> Student Wise</a>
+	<a href="reports/daily.php"><i class="bi bi-calendar-day"></i> Daily Summary</a>
+	<a href="reports/dues.php"><i class="bi bi-exclamation-triangle"></i> Pending Dues</a>
+	
+	<?php if ($_SESSION['role_name'] === 'SUPERADMIN'): ?>
+		<div class="section-title">System Security</div>
+		<a href="audit/view.php"><i class="bi bi-shield-lock"></i> Audit Log Viewer</a>
+		<a href="backup/backup.php"><i class="bi bi-hdd"></i> Backup DB</a>
+		<a href="backup/restore.php"><i class="bi bi-arrow-repeat"></i> Restore Backup</a>
+		
+		<div class="section-title">Global Settings</div>
+		<a href="institutes/manage.php"><i class="bi bi-building"></i> Manage Institutes</a>
+	<?php endif; ?>
+	
+	<hr>
+	<a href="logout.php" class="text-danger mb-3"><i class="bi bi-box-arrow-right"></i> Logout</a>
 
-<div class="section-title">Students</div>
-<a href="students/add.php"><i class="bi bi-person-plus"></i> Add Student</a>
-<a href="students/list.php"><i class="bi bi-people"></i> View / Edit</a>
-<a href="students/profile.php"><i class="bi bi-person-badge"></i> View Profile</a>
-<a href="students/disable.php"><i class="bi bi-person-x"></i> Disable Student</a>
-<a href="students/bulk_upload.php"><i class="bi bi-upload"></i> CSV Upload</a>
-<a href="students/template.php"><i class="bi bi-download"></i> Download Template</a>
+	</div>
 
-<div class="section-title">Courses</div>
-<a href="courses/add.php"><i class="bi bi-journal-plus"></i> Add Course</a>
-<a href="courses/list.php"><i class="bi bi-journal-text"></i> Edit Course</a>
-<a href="courses/bulk_upload.php"><i class="bi bi-upload"></i> Bulk Upload</a>
-
-<div class="section-title">Fees Configuration</div>
-<a href="fees/header_add.php"><i class="bi bi-wallet2"></i> Fee Header</a>
-<a href="fees/map_course.php"><i class="bi bi-link"></i> Assign Fee to Course</a>
-<a href="fees/bulk_map.php"><i class="bi bi-upload"></i> Bulk Mapping CSV</a>
-<a href="fees/copy_structure.php"><i class="bi bi-files"></i> Duplicate Fee Structure</a>
-
-<div class="section-title">Collections</div>
-<a href="payments/collect.php"><i class="bi bi-cash-stack"></i> Collect Payment</a>
-<a href="payments/receipt.php"><i class="bi bi-receipt"></i> Print Receipt</a>
-<a href="payments/receipt_history.php"><i class="bi bi-journal-text"></i>Receipt History</a>
-<a href="payments/bulk_bank_upload.php"><i class="bi bi-bank"></i> Bank/UPI Upload</a>
-<a href="payments/bulk_invoice.php"><i class="bi bi-file-earmark-text"></i> Bulk Invoice Print</a>
-
-<div class="section-title">Reports</div>
-<a href="reports/total.php"><i class="bi bi-bar-chart-line"></i> Total Collection</a>
-<a href="reports/course.php"><i class="bi bi-bar-chart"></i> Course Wise</a>
-<a href="reports/student.php"><i class="bi bi-person-lines-fill"></i> Student Wise</a>
-<a href="reports/daily.php"><i class="bi bi-calendar-day"></i> Daily Summary</a>
-<a href="reports/dues.php"><i class="bi bi-exclamation-triangle"></i> Pending Dues</a>
-
-<?php if ($_SESSION['role_name'] === 'SUPERADMIN'): ?>
-    <div class="section-title">System Security</div>
-    <a href="audit/view.php"><i class="bi bi-shield-lock"></i> Audit Log Viewer</a>
-    <a href="backup/backup.php"><i class="bi bi-hdd"></i> Backup DB</a>
-    <a href="backup/restore.php"><i class="bi bi-arrow-repeat"></i> Restore Backup</a>
-    
-    <div class="section-title">Global Settings</div>
-    <a href="institutes/manage.php"><i class="bi bi-building"></i> Manage Institutes</a>
-<?php endif; ?>
-
-<hr>
-<a href="logout.php" class="text-danger mb-3"><i class="bi bi-box-arrow-right"></i> Logout</a>
-
-</div>
-
-<!-- Start Of Brand Heading-->
-<div class="portal-header-bg p-1" style=" background:#2c3e50; border-bottom: 5px solid #ffc107; text-align:right;">
-  <a href="dashboard.php" 
-     style="font-family:'Raleway',sans-serif; font-weight:800; text-decoration:none; display:inline-block; color:#ffffff; font-size:1rem;">
-    Edu<span style="color:#ffc107;">Remit™</span>
-  </a>
-  <span style="display:block; font-size:0.45rem; letter-spacing:3px; text-transform:uppercase; opacity:0.5; font-weight:bold; margin-top:0; color:#ffffff;">
-    By TrinityWebEdge
-  </span>
-</div>
-<!-- End Of Brand Heading-->    
+	<!-- Start Of Brand Heading-->
+	<div class="portal-header-bg p-1" style=" background:#2c3e50; border-bottom: 5px solid #ffc107; text-align:right;">
+	<a href="dashboard.php" 
+		style="font-family:'Raleway',sans-serif; font-weight:800; text-decoration:none; display:inline-block; color:#ffffff; font-size:1rem;">
+		Edu<span style="color:#ffc107;">Remit™</span>
+	</a>
+	<span style="display:block; font-size:0.45rem; letter-spacing:3px; text-transform:uppercase; opacity:0.5; font-weight:bold; margin-top:0; color:#ffffff;">
+		By TrinityWebEdge
+	</span>
+	</div>
+	<!-- End Of Brand Heading-->    
 
 <!-- =====================================================
    MAIN CONTENT
@@ -357,7 +358,7 @@ $logs = $conn->query($sql_logs);
         ?>
         </tbody>
     </table>
-</div>
+	</div>
 
 
 

@@ -237,18 +237,22 @@ function searchStudent() {
                 availableFees = data.available_fees;
                 
                 let container = document.getElementById('fee_checkbox_container');
-                container.innerHTML = '';
-                
-                availableFees.forEach((fee, index) => {
-                    container.innerHTML += `
-                        <div class="form-check border-bottom py-2">
-                            <input class="form-check-input fee-item-check" type="checkbox" value="${fee.amount}" id="fee_${index}" data-name="${fee.fees_name}" onchange="updateTotal()">
-                            <label class="form-check-label d-flex justify-content-between w-100" for="fee_${index}">
-                                <span>${fee.fees_name} <small class="text-muted">(${fee.level})</small></span>
-                                <span class="fw-bold">₹${fee.amount}</span>
-                            </label>
-                        </div>`;
-                });
+container.innerHTML = '';
+
+data.available_fees.forEach((fee, index) => {
+    container.innerHTML += `
+        <div class="form-check border-bottom py-2">
+            <input class="form-check-input fee-item-check" type="checkbox" 
+                   value="${fee.amount}" 
+                   id="fee_${index}" 
+                   data-name="${fee.fees_name}" 
+                   onchange="updateTotal()">
+            <label class="form-check-label d-flex justify-content-between w-100" for="fee_${index}">
+                <span>${fee.fees_name} <small class="text-muted">(${fee.level})</small></span>
+                <span class="fw-bold">₹${fee.amount}</span>
+            </label>
+        </div>`;
+});
 
                 document.getElementById('view_balance').innerText = `Total Outstanding: ₹${studentBalance.toLocaleString()}`;
             } else { 

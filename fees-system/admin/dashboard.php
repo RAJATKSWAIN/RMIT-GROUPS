@@ -164,12 +164,12 @@ if ($role === 'SUPERADMIN') {
 	
 		/* --- MAIN CONTENT LOGIC --- */
 		.main {
-    		margin-left: var--sidebar-width); 
-    		padding: 25px;
-    		min-height: 100vh; /* Minimum height of the full screen */
-    		display: flex;
+			margin-left: var(--sidebar-width);
+			padding: 25px;
+			min-height: 100vh; /* Minimum height of the full screen */
+			display: flex;
     		flex-direction: column; /* Stacks content and footer vertically */
-    		transition: all 0.3s ease;
+			transition: all 0.3s ease;
 		}
 	
 		/* --- MOBILE STATES --- */
@@ -227,8 +227,8 @@ if ($role === 'SUPERADMIN') {
     <!-- Icon + Title -->
     <i class="bi bi-cash-stack fs-2 text-primary mb-0"></i>
     <h6 class="text-white mb-0">Fees Management System</h6>
-    <small class="text-white" style="border:4px solid skyblue; padding:2px 6px; border-radius:4px; front-weight:700px;">
-		  Ver - 1.0.0
+    <small class="text-white" style="border:1px solid skyblue; padding:2px 6px; border-radius:4px; front-weight:700px;">
+		  Ver 1.0.0
 	</small>
   </div>
 

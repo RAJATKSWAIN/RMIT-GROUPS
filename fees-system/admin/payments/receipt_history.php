@@ -4,6 +4,11 @@ require_once BASE_PATH.'/config/db.php';
 require_once BASE_PATH.'/core/auth.php';
 checkLogin();
 
+// Get the institute ID from the session (populated during login)
+$adminId   = $_SESSION['admin_id'];
+$adminName = $_SESSION['admin_name'];
+$instId 	= $_SESSION['inst_id'];
+
 // Enhanced SQL: Fetching Full Name, Reg No, Roll No, and Course Details
 $search = $_GET['search'] ?? '';
 $whereClause = "";
@@ -22,6 +27,7 @@ $sql = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, s.REGISTRATION_NO, s.ROLL_NO, c.C
         JOIN STUDENTS s ON p.STUDENT_ID = s.STUDENT_ID 
         LEFT JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
         $whereClause 
+        AND s.INST_ID = $instId 
         ORDER BY p.PAYMENT_DATE DESC LIMIT 50";
 
 $stmt = $conn->prepare($sql);

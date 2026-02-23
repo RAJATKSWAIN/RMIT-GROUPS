@@ -221,21 +221,13 @@ function searchStudent() {
     let term = document.getElementById('reg_search').value;
     if (!term) return;
 
-    // 1. Clear previous errors or states if necessary
-    // 2. Use encodeURIComponent to handle special characters (like /) in the Reg No
     fetch(`../../api/search_student.php?term=${encodeURIComponent(term)}`)
         .then(res => {
-            // Check if the server actually connected and responded successfully (Status 200-299)
-            if (!res.ok) {
-                throw new Error(`Server Error: ${res.status} ${res.statusText}`);
-            }
+            if (!res.ok) throw new Error(`Server Error: ${res.status}`);
             return res.json();
         })
         .then(data => {
-            // Check if the PHP returned an error object (e.g., {"error": "..."})
-            if (data.error) {
-                throw new Error(data.error);
-            }
+            if (data.error) throw new Error(data.error);
 
             if (data && data.STUDENT_ID) {
                 document.getElementById('student_info').style.display = 'block';
@@ -253,26 +245,25 @@ function searchStudent() {
                 availableFees.forEach((fee, index) => {
                     container.innerHTML += `
                         <div class="form-check border-bottom py-2">
-                            <input class="form-check-input fee-item-check" type="checkbox" value="${fee.amount}" id="fee_${index}" data-name="${fee.fees_name}" onchange="updateTotal()">
+                            <input class="form-check-input fee-item-check" type="checkbox" 
+                                   value="${fee.amount}" id="fee_${index}" 
+                                   data-name="${fee.fees_name}" onchange="updateTotal()">
                             <label class="form-check-label d-flex justify-content-between w-100" for="fee_${index}">
                                 <span>${fee.fees_name} <small class="text-muted">(${fee.level})</small></span>
-                                <span class="fw-bold">₹${fee.amount}</span>
+                                <span class="fw-bold">₹${parseFloat(fee.amount).toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                             </label>
                         </div>`;
                 });
 
                 document.getElementById('view_balance').innerText = `Total Outstanding: ₹${studentBalance.toLocaleString()}`;
-            } else {
-                alert('Student not found!');
+                
+                // Reset inputs for new student search
+                document.getElementById('amount_input').value = "0.00";
+                document.getElementById('paid_input').value = "";
             }
         })
         .catch(err => {
-            // This captures Network errors, 404/500 errors thrown above, and JSON parsing errors
-            console.error("Critical Error Details:", err);
-            alert("Critical Error: " + err.message);
-            
-            // Hide forms on error to prevent data mismatch
-            document.getElementById('student_info').style.display = 'none';
+            alert(err.message);
             document.getElementById('payment_form').style.display = 'none';
         });
 }
@@ -280,15 +271,15 @@ function searchStudent() {
 function updateTotal() {
     let totalPayable = 0;
     document.querySelectorAll('.fee-item-check:checked').forEach(cb => {
-        totalPayable += parseFloat(cb.value);
+        totalPayable += parseFloat(cb.value) || 0;
     });
     
-    // This is the max amount for the SELECTED items
+    // Fixed: Ensure we use a high-precision decimal for the internal calculation
     document.getElementById('amount_input').value = totalPayable.toFixed(2);
     
-    // Auto-fill Paid Input with Total Payable as a default suggestion
     const paidInput = document.getElementById('paid_input');
-    if(paidInput.value == "" || paidInput.value == "0") {
+    // Auto-fill paid amount if empty
+    if(paidInput.value == "" || parseFloat(paidInput.value) === 0) {
         paidInput.value = totalPayable.toFixed(2);
     }
     
@@ -296,12 +287,13 @@ function updateTotal() {
 }
 
 function validatePaidAmount() {
-    const totalSelectedMax = parseFloat(document.getElementById('amount_input').value) || 0;
-    const totalPaid = parseFloat(document.getElementById('paid_input').value) || 0;
+    // We parse as Float then round to 2 decimals to prevent .00000001 errors
+    const totalSelectedMax = Math.round((parseFloat(document.getElementById('amount_input').value) || 0) * 100) / 100;
+    const totalPaid = Math.round((parseFloat(document.getElementById('paid_input').value) || 0) * 100) / 100;
+    
     const warning = document.getElementById('payment_warning');
     const submitBtn = document.querySelector('button[name="collect_now"]');
 
-    // 1. Identify if any "Service" fees are in the current selection
     let hasServiceFee = false;
     document.querySelectorAll('.fee-item-check:checked').forEach(cb => {
         const feeName = cb.getAttribute('data-name');
@@ -311,31 +303,28 @@ function validatePaidAmount() {
         }
     });
 
-    // 2. Validation Logic Chain
     if (totalPaid <= 0) {
         warning.innerText = "Please enter a valid amount.";
         submitBtn.disabled = true;
     } 
-    // RULE A: Absolute Master Price Cap (Never overcharge for specific items)
+    // RULE A: Max selection cap (The error you were hitting)
     else if (totalPaid > totalSelectedMax) {
-        warning.innerText = `Error: Cannot exceed Master Price (Max: ₹${totalSelectedMax.toLocaleString()})`;
+        warning.innerText = `Selection Limit: ₹${totalSelectedMax.toFixed(2)}`;
         submitBtn.disabled = true;
     } 
-    // RULE B: Ledger Balance Protection (Only applies if NO service fee is selected)
-    else if (!hasServiceFee && totalPaid > studentBalance) {
-        warning.innerText = `Error: Amount exceeds Ledger Balance (₹${studentBalance.toLocaleString()})`;
+    // RULE B: Ledger Balance Protection
+    else if (!hasServiceFee && totalPaid > (studentBalance + 0.01)) {
+        warning.innerText = `Balance Limit: ₹${studentBalance.toFixed(2)}`;
         submitBtn.disabled = true;
     } 
-    // RULE C: Success Case
     else {
         warning.innerText = "";
         submitBtn.disabled = false;
     }
 }
 
-// Single Consolidated Submit Handler
 document.getElementById('payment_form').onsubmit = function() {
-    const totalPaid = parseFloat(document.getElementById('paid_input').value);
+    const totalPaid = parseFloat(document.getElementById('paid_input').value) || 0;
     const selectedBoxes = document.querySelectorAll('.fee-item-check:checked');
 
     if (selectedBoxes.length === 0) {
@@ -344,11 +333,10 @@ document.getElementById('payment_form').onsubmit = function() {
     }
 
     if (totalPaid <= 0) {
-        alert("Please enter a valid paid amount.");
+        alert("Please enter a valid amount.");
         return false;
     }
 
-    // Logic: Sort fees by amount (Max to Min) for the Receipt Description
     let selectedFees = [];
     selectedBoxes.forEach(cb => {
         selectedFees.push({
@@ -357,11 +345,8 @@ document.getElementById('payment_form').onsubmit = function() {
         });
     });
 
-    selectedFees.sort((a, b) => b.amount - a.amount);
-    
-    const namesOnly = selectedFees.map(f => f.name);
-    document.getElementById('selected_fees_json').value = JSON.stringify(namesOnly);
-    
+    // Send the names to the hidden JSON input
+    document.getElementById('selected_fees_json').value = JSON.stringify(selectedFees.map(f => f.name));
     return true;
 };
 </script>

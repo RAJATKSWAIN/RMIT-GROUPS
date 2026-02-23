@@ -4,6 +4,11 @@
 $adminRoot = "/fees-system/admin/"; 
 $adminName = $_SESSION['admin_name'] ?? 'Admin';
 
+$adminId   = $_SESSION['admin_id'];
+$adminName = $_SESSION['admin_name'];
+$role      = $_SESSION['role_name'];
+$inst_id   = $_SESSION['inst_id'];
+
 // 1. Get the current URL path
 $current_page = $_SERVER['SCRIPT_NAME'];
 
@@ -129,10 +134,15 @@ html, body {
 	<a href="<?= $adminRoot ?>reports/daily.php"><i class="bi bi-calendar-day"></i> Daily Summary</a>
 	<a href="<?= $adminRoot ?>reports/dues.php"><i class="bi bi-exclamation-triangle"></i> Pending Dues</a>
 
-	<div class="section-title">Security</div>
-	<a href="<?= $adminRoot ?>audit/view.php"><i class="bi bi-shield-lock"></i> Audit Log Viewer</a>
-	<a href="<?= $adminRoot ?>backup/backup.php"><i class="bi bi-hdd"></i> Backup DB</a>
-	<a href="<?= $adminRoot ?>backup/restore.php"><i class="bi bi-arrow-repeat"></i> Restore Backup</a>
+	<?php if ($_SESSION['role_name'] === 'SUPERADMIN'): ?>
+		<div class="section-title">System Security</div>
+		<a href="audit/view.php"><i class="bi bi-shield-lock"></i> Audit Log Viewer</a>
+		<a href="backup/backup.php"><i class="bi bi-hdd"></i> Backup DB</a>
+		<a href="backup/restore.php"><i class="bi bi-arrow-repeat"></i> Restore Backup</a>
+		
+		<div class="section-title">Global Settings</div>
+		<a href="institutes/manage.php"><i class="bi bi-building"></i> Manage Institutes</a>
+	<?php endif; ?>
 
     <hr>
     <a href="<?= $adminRoot ?>logout.php" class="text-danger mb-3"><i class="bi bi-box-arrow-right"></i> Logout</a>

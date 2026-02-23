@@ -18,7 +18,7 @@ $summarySql = "SELECT c.COURSE_CODE, c.COURSE_NAME,
                FROM COURSES c
                LEFT JOIN STUDENTS s ON c.COURSE_ID = s.COURSE_ID
                LEFT JOIN PAYMENTS p ON s.STUDENT_ID = p.STUDENT_ID 
-                    AND p.PAYMENT_STATUS = 'SUCCESS' 
+                    WHERE p.PAYMENT_STATUS = 'SUCCESS' 
                     AND c.INST_ID = s.INST_ID
                     AND s.INST_ID = $instId
                     AND DATE(p.PAYMENT_DATE) BETWEEN ? AND ?

@@ -9,7 +9,7 @@ require_once BASE_PATH.'/core/auth.php';
 require_once BASE_PATH.'/services/PaymentService.php'; 
 require_once BASE_PATH.'/services/InvoiceService.php';
 
-checkLogin();
+checkLogin(); 
 
 $paymentService = new PaymentService($conn);
 $invoiceService = new InvoiceService($conn);

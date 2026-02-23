@@ -19,7 +19,7 @@ if(!empty($search)) {
     $whereClause = "WHERE p.RECEIPT_NO LIKE ? OR s.REGISTRATION_NO LIKE ? OR s.ROLL_NO LIKE ? OR s.FIRST_NAME LIKE ? OR s.LAST_NAME LIKE ? AND s.INST_ID = ?";
     $param = "%$search%";
     $params = [$param, $param, $param, $param, $param, $instId];
-    $types = "sssss";
+    $types = "sssssi";
 }
 
 $sql = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, s.REGISTRATION_NO, s.ROLL_NO, c.COURSE_NAME 

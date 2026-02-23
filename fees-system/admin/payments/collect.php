@@ -11,11 +11,6 @@ require_once BASE_PATH.'/services/InvoiceService.php';
 
 checkLogin();
 
-// Get the institute ID from the session (populated during login)
-$adminId   = $_SESSION['admin_id'];
-$adminName = $_SESSION['admin_name'];
-$instId 	= $_SESSION['inst_id'];
-
 $paymentService = new PaymentService($conn);
 $invoiceService = new InvoiceService($conn);
 
@@ -70,7 +65,6 @@ $historyQuery = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, i.FILE_PATH
                  JOIN STUDENTS s ON p.STUDENT_ID = s.STUDENT_ID 
                  LEFT JOIN INVOICES i ON p.PAYMENT_ID = i.PAYMENT_ID
                  WHERE DATE(p.PAYMENT_DATE) = '$today' 
-				 
                  ORDER BY p.PAYMENT_ID DESC LIMIT 10";
 $historyResult = $conn->query($historyQuery);
 ?>

@@ -222,7 +222,7 @@ function searchStudent() {
     if(!term) return;
 
     // Use absolute path to avoid directory depth issues
-    fetch(`/fees-system/api/search_student.php?term=${term}`)
+    fetch(window.location.origin + '/fees-system/api/search_student.php?term=' + encodeURIComponent(term))
         .then(res => res.json())
         .then(data => {
             if(data && data.STUDENT_ID) {

@@ -8,25 +8,30 @@ checkLogin();
 // 1. Get the institute ID from the session
 $instId = $_SESSION['inst_id'];
 
-// Filter logic: Filter by Course or search by Name/Reg No
+// Filter logic
 $course_filter = $_GET['course'] ?? '';
 $search = $_GET['search'] ?? '';
 
-$where = "WHERE l.BALANCE_AMOUNT > 0";
-$params = [];
-$types = "";
+// 2. Initialize WHERE with INST_ID to ensure data privacy
+$where = "WHERE s.INST_ID = ? AND l.BALANCE_AMOUNT > 0";
+$params = [$instId];
+$types = "i";
 
 if ($course_filter) {
     $where .= " AND s.COURSE_ID = ?";
     $params[] = $course_filter;
     $types .= "i";
 }
+
 if ($search) {
-    $where .= " AND (s.FIRST_NAME LIKE ? OR s.REGISTRATION_NO LIKE ?)";
+    // Wrap OR conditions in parentheses so they don't break the AND logic
+    $where .= " AND (s.FIRST_NAME LIKE ? OR s.LAST_NAME LIKE ? OR s.REGISTRATION_NO LIKE ? OR s.ROLL_NO LIKE ?)";
     $search_param = "%$search%";
     $params[] = $search_param;
     $params[] = $search_param;
-    $types .= "ss";
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $types .= "ssss";
 }
 
 $sql = "SELECT s.*, c.COURSE_NAME, c.COURSE_CODE, l.BALANCE_AMOUNT, l.LAST_PAYMENT_DATE
@@ -43,8 +48,11 @@ if ($params) {
 $stmt->execute();
 $students = $stmt->get_result();
 
-// Fetch courses for the filter dropdown
-$courses = $conn->query("SELECT * FROM COURSES WHERE INST_ID = $instId");
+// 3. Fetch courses using Prepared Statement for security
+$c_stmt = $conn->prepare("SELECT * FROM COURSES WHERE INST_ID = ? ORDER BY COURSE_NAME ASC");
+$c_stmt->bind_param("i", $instId);
+$c_stmt->execute();
+$courses = $c_stmt->get_result();
 ?>
 
 <?php include BASE_PATH.'/admin/layout/header.php'; ?>

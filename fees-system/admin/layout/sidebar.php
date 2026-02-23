@@ -2,10 +2,10 @@
 // Calculate the correct path to the root 'admin' folder dynamically
 // This ensures that whether you are in /admin/ or /admin/students/, the links stay unique.
 $adminRoot = "/fees-system/admin/"; 
-$adminName = $_SESSION['admin_name'] ?? 'Admin';
+$adminName = $_SESSION['admin_name'] ?? 'ADMIN';
 
 $adminId   = $_SESSION['admin_id'];
-$adminName = $_SESSION['admin_name'];
+//$adminName = $_SESSION['admin_name'];
 $role      = $_SESSION['role_name'];
 $inst_id   = $_SESSION['inst_id'];
 

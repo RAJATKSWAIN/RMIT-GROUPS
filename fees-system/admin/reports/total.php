@@ -3,23 +3,36 @@ define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
 require_once BASE_PATH.'/config/db.php';
 require_once BASE_PATH.'/core/auth.php';
 
-// Filter Logic: Default to current month
+checkLogin(); // Ensure session is active
+
+// Filter Logic
 $start_date = $_GET['start_date'] ?? date('Y-m-01');
 $end_date = $_GET['end_date'] ?? date('Y-m-d');
 
-// Get the institute ID from the session (populated during login)
-$adminId   = $_SESSION['admin_id'];
-$adminName = $_SESSION['admin_name'];
-$instId 	= $_SESSION['inst_id'];
+$role    = $_SESSION['role_name'];
+$instId  = $_SESSION['inst_id'];
 
-// 1. Get Total Summary (Mode-wise breakdown)
-$summarySql = "SELECT PAYMENT_MODE, SUM(PAID_AMOUNT) as mode_total, COUNT(*) as txn_count 
-               FROM PAYMENTS  P
-               LEFT JOIN STUDENTS S ON P.STUDENT_ID = S.STUDENT_ID
-               WHERE PAYMENT_STATUS = 'SUCCESS'
-               AND S.INST_ID = $instId 
-               AND DATE(PAYMENT_DATE) BETWEEN ? AND ? 
-               GROUP BY PAYMENT_MODE";
+/* =========================================================
+   1. MODE-WISE SUMMARY QUERY
+   ========================================================= */
+if ($role === 'SUPERADMIN') {
+    // Superadmin sees everything
+    $summarySql = "SELECT PAYMENT_MODE, SUM(PAID_AMOUNT) as mode_total, COUNT(*) as txn_count 
+                   FROM PAYMENTS 
+                   WHERE PAYMENT_STATUS = 'SUCCESS' 
+                   AND DATE(PAYMENT_DATE) BETWEEN ? AND ? 
+                   GROUP BY PAYMENT_MODE";
+} else {
+    // Admin sees only their institute
+    $summarySql = "SELECT P.PAYMENT_MODE, SUM(P.PAID_AMOUNT) as mode_total, COUNT(*) as txn_count 
+                   FROM PAYMENTS P
+                   JOIN STUDENTS S ON P.STUDENT_ID = S.STUDENT_ID
+                   WHERE P.PAYMENT_STATUS = 'SUCCESS'
+                   AND S.INST_ID = $instId 
+                   AND DATE(P.PAYMENT_DATE) BETWEEN ? AND ? 
+                   GROUP BY P.PAYMENT_MODE";
+}
+
 $sStmt = $conn->prepare($summarySql);
 $sStmt->bind_param("ss", $start_date, $end_date);
 $sStmt->execute();
@@ -32,16 +45,30 @@ while($row = $summaryResult->fetch_assoc()) {
     $grand_total += $row['mode_total'];
 }
 
-// 2. Get All Detailed Transactions
-$sql = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, s.REGISTRATION_NO, c.COURSE_CODE 
-        FROM PAYMENTS p
-        JOIN STUDENTS s ON p.STUDENT_ID = s.STUDENT_ID
-        JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
-        WHERE p.PAYMENT_STATUS = 'SUCCESS'
-        AND s.INST_ID = c.INST_ID
-        AND s.INST_ID = $instId 
-        AND DATE(p.PAYMENT_DATE) BETWEEN ? AND ?
-        ORDER BY p.PAYMENT_DATE DESC";
+/* =========================================================
+   2. DETAILED TRANSACTIONS QUERY
+   ========================================================= */
+if ($role === 'SUPERADMIN') {
+    // Superadmin query: Include Institute Name
+    $sql = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, s.REGISTRATION_NO, c.COURSE_CODE, i.INST_NAME
+            FROM PAYMENTS p
+            JOIN STUDENTS s ON p.STUDENT_ID = s.STUDENT_ID
+            JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
+            JOIN MASTER_INSTITUTES i ON s.INST_ID = i.INST_ID
+            WHERE p.PAYMENT_STATUS = 'SUCCESS'
+            AND DATE(p.PAYMENT_DATE) BETWEEN ? AND ?
+            ORDER BY p.PAYMENT_DATE DESC";
+} else {
+    // Admin query: Filtered by InstId
+    $sql = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, s.REGISTRATION_NO, c.COURSE_CODE
+            FROM PAYMENTS p
+            JOIN STUDENTS s ON p.STUDENT_ID = s.STUDENT_ID
+            JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
+            WHERE p.PAYMENT_STATUS = 'SUCCESS'
+            AND s.INST_ID = $instId 
+            AND DATE(p.PAYMENT_DATE) BETWEEN ? AND ?
+            ORDER BY p.PAYMENT_DATE DESC";
+}
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $start_date, $end_date);
@@ -60,7 +87,7 @@ $result = $stmt->get_result();
         <div class="col-md-4">
             <div class="card bg-primary text-white shadow-sm border-0">
                 <div class="card-body">
-                    <h6 class="text-uppercase small">Grand Total Collection</h6>
+                    <h6 class="text-uppercase small"><?= ($role === 'SUPERADMIN') ? 'Global' : 'Institute' ?> Collection</h6>
                     <h2 class="fw-bold mb-0">₹<?= number_format($grand_total, 2) ?></h2>
                     <small>Total Transactions: <?= $result->num_rows ?></small>
                 </div>
@@ -80,7 +107,10 @@ $result = $stmt->get_result();
 
     <div class="card shadow-sm border-0">
         <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-            <h5 class="mb-0 fw-bold"><i class="bi bi-bar-chart-line text-primary"></i> Total Collection Report</h5>
+            <h5 class="mb-0 fw-bold">
+                <i class="bi bi-bar-chart-line text-primary"></i> 
+                <?= ($role === 'SUPERADMIN') ? 'Global Collection Report' : 'Institute Collection Report' ?>
+            </h5>
             <form class="d-flex gap-2">
                 <input type="date" name="start_date" class="form-control form-control-sm" value="<?= $start_date ?>">
                 <input type="date" name="end_date" class="form-control form-control-sm" value="<?= $end_date ?>">
@@ -92,10 +122,11 @@ $result = $stmt->get_result();
                 <thead>
                     <tr>
                         <th>Date</th>
+                        <?php if($role === 'SUPERADMIN'): ?><th>Institute</th><?php endif; ?>
                         <th>Receipt No</th>
                         <th>Student Details</th>
                         <th>Course</th>
-                        <th>Payment Mode</th>
+                        <th>Mode</th>
                         <th>Amount</th>
                     </tr>
                 </thead>
@@ -103,6 +134,9 @@ $result = $stmt->get_result();
                     <?php while($row = $result->fetch_assoc()): ?>
                     <tr>
                         <td><?= date('d-m-Y', strtotime($row['PAYMENT_DATE'])) ?></td>
+                        <?php if($role === 'SUPERADMIN'): ?>
+                            <td class="small fw-bold text-primary"><?= $row['INST_NAME'] ?></td>
+                        <?php endif; ?>
                         <td class="fw-bold"><?= $row['RECEIPT_NO'] ?></td>
                         <td>
                             <?= strtoupper($row['FIRST_NAME'].' '.$row['LAST_NAME']) ?><br>
@@ -134,8 +168,8 @@ $(document).ready(function() {
     $('#totalTable').DataTable({
         dom: 'Bfrtip',
         buttons: [
-            { extend: 'excelHtml5', className: 'btn btn-success btn-sm', title: 'Total_Collection_Report' },
-            { extend: 'pdfHtml5', className: 'btn btn-danger btn-sm', title: 'Total_Collection_Report' },
+            { extend: 'excelHtml5', className: 'btn btn-success btn-sm', title: 'Collection_Report' },
+            { extend: 'pdfHtml5', className: 'btn btn-danger btn-sm', orientation: 'landscape', title: 'Collection_Report' },
             { extend: 'print', className: 'btn btn-info btn-sm' }
         ],
         "order": [[ 0, "desc" ]]

@@ -14,9 +14,9 @@ require_once '../core/auth.php';
 $term = $_GET['term'] ?? '';
 
 // Get the institute ID from the session (populated during login)
-$adminId   = $_SESSION['admin_id'];
-$adminName = $_SESSION['admin_name'];
-$instId 	= $_SESSION['inst_id'];
+//$adminId   = $_SESSION['admin_id'];
+//$adminName = $_SESSION['admin_name'];
+//$instId 	= $_SESSION['inst_id'];
 
 // Step 1: Get Student and Course ID (Filtered for Active Students)
 $sql = "SELECT s.STUDENT_ID, s.COURSE_ID, s.REGISTRATION_NO, s.FIRST_NAME, s.LAST_NAME, 

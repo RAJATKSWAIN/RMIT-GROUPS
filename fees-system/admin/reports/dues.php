@@ -3,6 +3,11 @@ define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
 require_once BASE_PATH.'/config/db.php';
 require_once BASE_PATH.'/core/auth.php';
 
+// Get the institute ID from the session (populated during login)
+$adminId   = $_SESSION['admin_id'];
+$adminName = $_SESSION['admin_name'];
+$instId 	= $_SESSION['inst_id'];
+
 $course_filter = $_GET['course_id'] ?? '';
 
 $sql = "SELECT s.STUDENT_ID, s.REGISTRATION_NO, s.FIRST_NAME, s.LAST_NAME, s.MOBILE,
@@ -10,7 +15,8 @@ $sql = "SELECT s.STUDENT_ID, s.REGISTRATION_NO, s.FIRST_NAME, s.LAST_NAME, s.MOB
         FROM STUDENTS s
         JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
         JOIN STUDENT_FEE_LEDGER l ON s.STUDENT_ID = l.STUDENT_ID
-        WHERE l.BALANCE_AMOUNT > 0 AND s.STATUS = 'A'";
+        WHERE l.BALANCE_AMOUNT > 0 AND s.STATUS = 'A'
+		AND s.INST_ID = $instId";
 
 if ($course_filter) {
     $sql .= " AND s.COURSE_ID = " . intval($course_filter);
@@ -18,7 +24,7 @@ if ($course_filter) {
 $sql .= " ORDER BY l.BALANCE_AMOUNT DESC";
 
 $result = $conn->query($sql);
-$courses = $conn->query("SELECT * FROM COURSES");
+$courses = $conn->query("SELECT * FROM COURSES WHERE INST_ID = $instId");
 ?>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">

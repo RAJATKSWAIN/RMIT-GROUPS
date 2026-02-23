@@ -5,6 +5,9 @@ require_once BASE_PATH.'/core/auth.php';
 
 checkLogin();
 
+// 1. Get the institute ID from the session
+$instId = $_SESSION['inst_id'];
+
 // Filter logic: Filter by Course or search by Name/Reg No
 $course_filter = $_GET['course'] ?? '';
 $search = $_GET['search'] ?? '';
@@ -41,7 +44,7 @@ $stmt->execute();
 $students = $stmt->get_result();
 
 // Fetch courses for the filter dropdown
-$courses = $conn->query("SELECT * FROM COURSES");
+$courses = $conn->query("SELECT * FROM COURSES WHERE INST_ID = $instId");
 ?>
 
 <?php include BASE_PATH.'/admin/layout/header.php'; ?>

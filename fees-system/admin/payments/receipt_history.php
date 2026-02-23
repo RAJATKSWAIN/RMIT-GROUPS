@@ -16,9 +16,9 @@ $params = [];
 $types = "";
 
 if(!empty($search)) {
-    $whereClause = "WHERE p.RECEIPT_NO LIKE ? OR s.REGISTRATION_NO LIKE ? OR s.ROLL_NO LIKE ? OR s.FIRST_NAME LIKE ? OR s.LAST_NAME LIKE ?";
+    $whereClause = "WHERE p.RECEIPT_NO LIKE ? OR s.REGISTRATION_NO LIKE ? OR s.ROLL_NO LIKE ? OR s.FIRST_NAME LIKE ? OR s.LAST_NAME LIKE ? AND s.INST_ID = ?";
     $param = "%$search%";
-    $params = [$param, $param, $param, $param, $param];
+    $params = [$param, $param, $param, $param, $param, $instId];
     $types = "sssss";
 }
 
@@ -27,7 +27,6 @@ $sql = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, s.REGISTRATION_NO, s.ROLL_NO, c.C
         JOIN STUDENTS s ON p.STUDENT_ID = s.STUDENT_ID 
         LEFT JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
         $whereClause 
-        AND s.INST_ID = $instId 
         ORDER BY p.PAYMENT_DATE DESC LIMIT 50";
 
 $stmt = $conn->prepare($sql);

@@ -2,10 +2,9 @@
 // Calculate the correct path to the root 'admin' folder dynamically
 // This ensures that whether you are in /admin/ or /admin/students/, the links stay unique.
 $adminRoot = "/fees-system/admin/"; 
-$adminName = $_SESSION['admin_name'] ?? 'ADMIN';
 
+$adminName = $_SESSION['admin_name'] ?? 'ADMIN';
 $adminId   = $_SESSION['admin_id'];
-//$adminName = $_SESSION['admin_name'];
 $role      = $_SESSION['role_name'];
 $inst_id   = $_SESSION['inst_id'];
 
@@ -97,7 +96,9 @@ html, body {
     <!-- Icon + Title -->
     <i class="bi bi-cash-stack fs-2 text-primary mb-0"></i>
     <h6 class="text-white mb-0">Fees Management System</h6>
-    <small class="text-muted">Admin Dashboard</small>
+    <small style="background-color: skyblue; color: white; padding: 2px 6px; border-radius: 4px; font-weight:700px;">
+  		Ver - 1.0.0
+	</small>
   </div>
 
     <a href="<?= $adminRoot ?>dashboard.php">🏠 Dashboard</a>
@@ -108,6 +109,7 @@ html, body {
     <a href="<?= $adminRoot ?>students/profile.php"><i class="bi bi-person-badge"></i> View Profile</a>
     <a href="<?= $adminRoot ?>students/disable.php"><i class="bi bi-person-x"></i> Disable Student</a>
     <a href="<?= $adminRoot ?>students/bulk_upload.php"><i class="bi bi-upload"></i> CSV Upload</a>
+	<a href="<?= $adminRoot ?>students/template.php"><i class="bi bi-download"></i> Download Template</a>
 
     <div class="section-title">Courses</div>
     <a href="<?= $adminRoot ?>courses/add.php"><i class="bi bi-journal-plus"></i> Add Course</a>
@@ -136,12 +138,12 @@ html, body {
 
 	<?php if ($_SESSION['role_name'] === 'SUPERADMIN'): ?>
 		<div class="section-title">System Security</div>
-		<a href="audit/view.php"><i class="bi bi-shield-lock"></i> Audit Log Viewer</a>
-		<a href="backup/backup.php"><i class="bi bi-hdd"></i> Backup DB</a>
-		<a href="backup/restore.php"><i class="bi bi-arrow-repeat"></i> Restore Backup</a>
+		<a href="<?= $adminRoot ?>audit/view.php"><i class="bi bi-shield-lock"></i> Audit Log Viewer</a>
+		<a href="<?= $adminRoot ?>backup/backup.php"><i class="bi bi-hdd"></i> Backup DB</a>
+		<a href="<?= $adminRoot ?>backup/restore.php"><i class="bi bi-arrow-repeat"></i> Restore Backup</a>
 		
 		<div class="section-title">Global Settings</div>
-		<a href="institutes/manage.php"><i class="bi bi-building"></i> Manage Institutes</a>
+		<a href="<?= $adminRoot ?>institutes/manage.php"><i class="bi bi-building"></i> Manage Institutes</a>
 	<?php endif; ?>
 
     <hr>

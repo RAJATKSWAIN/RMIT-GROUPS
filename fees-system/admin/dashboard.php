@@ -224,7 +224,7 @@ if ($role === 'SUPERADMIN') {
     <!-- Icon + Title -->
     <i class="bi bi-cash-stack fs-2 text-primary mb-0"></i>
     <h6 class="text-white mb-0">Fees Management System</h6>
-    <small class="text-muted" style="border:1px solid skyblue; padding:2px 6px; border-radius:12px;">
+    <small class="text-white" style="border:4px solid skyblue; padding:2px 6px; border-radius:4px; front-weight:700px;">
 		  Ver - 1.0.0
 	</small>
   </div>

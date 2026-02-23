@@ -381,15 +381,22 @@ while($r=$q->fetch_assoc()):
             $totalStudents = 0;
             $totalAmount   = 0;
 
-            $q = $conn->query("
-                SELECT C.COURSE_NAME,
-                       COUNT(DISTINCT S.STUDENT_ID) students,
-                       IFNULL(SUM(P.PAID_AMOUNT),0) amount
-                FROM COURSES C
-                LEFT JOIN STUDENTS S ON S.COURSE_ID=C.COURSE_ID
-                LEFT JOIN PAYMENTS P ON P.STUDENT_ID=S.STUDENT_ID
-                GROUP BY C.COURSE_ID
-            ");
+            
+// Inside the Course Wise Collection Table loop
+$sql_course_report = ($role === 'SUPERADMIN')
+    ? "SELECT C.COURSE_NAME, COUNT(DISTINCT S.STUDENT_ID) students, IFNULL(SUM(P.PAID_AMOUNT),0) amount 
+       FROM COURSES C 
+       LEFT JOIN STUDENTS S ON S.COURSE_ID=C.COURSE_ID 
+       LEFT JOIN PAYMENTS P ON P.STUDENT_ID=S.STUDENT_ID 
+       GROUP BY C.COURSE_ID"
+    : "SELECT C.COURSE_NAME, COUNT(DISTINCT S.STUDENT_ID) students, IFNULL(SUM(P.PAID_AMOUNT),0) amount 
+       FROM COURSES C 
+       LEFT JOIN STUDENTS S ON S.COURSE_ID=C.COURSE_ID 
+       LEFT JOIN PAYMENTS P ON P.STUDENT_ID=S.STUDENT_ID 
+       WHERE C.INST_ID = $inst_id 
+       GROUP BY C.COURSE_ID";
+
+$q = $conn->query($sql_course_report);
 
             while($r=$q->fetch_assoc()):
                 $totalStudents += $r['students'];

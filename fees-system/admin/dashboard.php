@@ -71,7 +71,7 @@ audit_log($conn, 'VIEW_DASHBOARD', 'ADMIN_MASTER', $adminId);
 // Logs Visibility: Superadmin sees all logs, Admin sees only their own actions
 $sql_logs = ($role === 'SUPERADMIN')
     ? "SELECT ACTION_TYPE, CREATED_AT FROM AUDIT_LOG ORDER BY CREATED_AT DESC LIMIT 5"
-    : "SELECT ACTION_TYPE, CREATED_AT FROM AUDIT_LOG WHERE ADMIN_ID = ORDER BY CREATED_AT DESC LIMIT 5";
+    : "SELECT ACTION_TYPE, CREATED_AT FROM AUDIT_LOG WHERE ADMIN_ID = $adminId ORDER BY CREATED_AT DESC LIMIT 5";
 $logs = $conn->query($sql_logs);
 
 /* =========================================================

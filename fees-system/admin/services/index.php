@@ -1,3 +1,10 @@
+<?php
+define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
+
+include BASE_PATH.'/admin/layout/header.php';
+include BASE_PATH.'/admin/layout/sidebar.php';
+?>
+
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-md-3">

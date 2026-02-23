@@ -96,9 +96,7 @@ html, body {
     <!-- Icon + Title -->
     <i class="bi bi-cash-stack fs-2 text-primary mb-0"></i>
     <h6 class="text-white mb-0">Fees Management System</h6>
-    <small class="text-white" style="border:1px solid skyblue; padding:2px 6px; border-radius:4px; front-weight:700px;">
-		  Ver 1.0.0
-	</small>
+    <p class="badge bg-primary"> Ver 1.0.0 </p>
   </div>
 
     <a href="<?= $adminRoot ?>dashboard.php">🏠 Dashboard</a>

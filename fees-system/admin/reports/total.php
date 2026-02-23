@@ -7,10 +7,17 @@ require_once BASE_PATH.'/core/auth.php';
 $start_date = $_GET['start_date'] ?? date('Y-m-01');
 $end_date = $_GET['end_date'] ?? date('Y-m-d');
 
+// Get the institute ID from the session (populated during login)
+$adminId   = $_SESSION['admin_id'];
+$adminName = $_SESSION['admin_name'];
+$instId 	= $_SESSION['inst_id'];
+
 // 1. Get Total Summary (Mode-wise breakdown)
 $summarySql = "SELECT PAYMENT_MODE, SUM(PAID_AMOUNT) as mode_total, COUNT(*) as txn_count 
-               FROM PAYMENTS 
+               FROM PAYMENTS  P
+               LEFT JOIN STUDENTS S ON P.STUDENT_ID = S.STUDENT_ID
                WHERE PAYMENT_STATUS = 'SUCCESS'
+               AND S.INST_ID = $instId 
                AND DATE(PAYMENT_DATE) BETWEEN ? AND ? 
                GROUP BY PAYMENT_MODE";
 $sStmt = $conn->prepare($summarySql);
@@ -31,6 +38,8 @@ $sql = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, s.REGISTRATION_NO, c.COURSE_CODE
         JOIN STUDENTS s ON p.STUDENT_ID = s.STUDENT_ID
         JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
         WHERE p.PAYMENT_STATUS = 'SUCCESS'
+        AND s.INST_ID = c.INST_ID
+        AND s.INST_ID = $instId 
         AND DATE(p.PAYMENT_DATE) BETWEEN ? AND ?
         ORDER BY p.PAYMENT_DATE DESC";
 

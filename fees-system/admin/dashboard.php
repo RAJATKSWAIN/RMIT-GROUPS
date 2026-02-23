@@ -81,9 +81,9 @@ $logs = $conn->query($sql_logs);
 if ($role === 'SUPERADMIN') {
     // Global System Branding for Superadmin
     $instBranding = [
-        'INST_NAME'   => 'https://rmitgroupsorg.infinityfree.me/images/logo.png',
-        'INST_CODE'   => 'FMS v1.0.0',
-        'LOGO_URL'    => 'https://rmitgroupsorg.infinityfree.me/images/logo.png', // Main group logo
+        'INST_NAME'   => 'RMIT GROUP OF INSTITUTIONS',
+        'INST_CODE'   => 'FMS ver-1.0.0',
+        'LOGO_URL'    => 'fees-system/assets/logos/FMS-v1.0.0.png', // Main group logo
         'BRAND_COLOR' => '#1a3a5a'          // Corporate dark blue
     ];
 } else {
@@ -330,8 +330,8 @@ if ($role === 'SUPERADMIN') {
         </div>
     </div>
 
-<h3>Welcome, <?= $adminName ?></h3>
-<p class="text-muted">Fees Management System Overview</p>
+<!--<h3>Welcome, <?= $adminName ?></h3> -->
+<h3 class="text-muted">Fees Management System Overview</h3>
 
 
 <!-- ================= KPI CARDS ================= -->

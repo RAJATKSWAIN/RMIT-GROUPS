@@ -15,33 +15,61 @@ require_once "../config/audit.php";
 
 checkLogin();
 
-audit_log($conn, 'VIEW_DASHBOARD', 'ADMIN_MASTER', $_SESSION['admin_id']);
-
-
 $adminId   = $_SESSION['admin_id'];
 $adminName = $_SESSION['admin_name'];
+$role      = $_SESSION['role_name'];
+$inst_id   = $_SESSION['inst_id'];
 
-/* ===============================
-   STATS (Based on your DB)
-================================ */
+/* =========================================================
+   ROLE-AWARE FILTERING LOGIC
+   ========================================================= */
 
-$students  = $conn->query("SELECT COUNT(*) c FROM STUDENTS WHERE STATUS='A'")->fetch_assoc()['c'];
-$courses   = $conn->query("SELECT COUNT(*) c FROM COURSES WHERE STATUS='A'")->fetch_assoc()['c'];
-$collected = $conn->query("SELECT IFNULL(SUM(PAID_AMOUNT),0) s FROM PAYMENTS WHERE PAYMENT_STATUS='SUCCESS'")->fetch_assoc()['s'];
-$pending   = $conn->query("SELECT IFNULL(SUM(BALANCE_AMOUNT),0) s FROM STUDENT_FEE_LEDGER")->fetch_assoc()['s'];
-$today     = $conn->query("SELECT IFNULL(SUM(PAID_AMOUNT),0) s FROM PAYMENTS WHERE DATE(PAYMENT_DATE)=CURDATE()")->fetch_assoc()['s'];
+// 1. Total Students
+$sql_students = ($role === 'SUPERADMIN') 
+    ? "SELECT COUNT(*) c FROM STUDENTS WHERE STATUS='A'" 
+    : "SELECT COUNT(*) c FROM STUDENTS WHERE STATUS='A' AND INST_ID = $inst_id";
+$students = $conn->query($sql_students)->fetch_assoc()['c'];
 
-/* audit dashboard view */
-audit_log($conn,'VIEW_DASHBOARD','ADMIN_MASTER',$adminId);
+// 2. Total Courses
+$sql_courses = ($role === 'SUPERADMIN') 
+    ? "SELECT COUNT(*) c FROM COURSES WHERE STATUS='A'" 
+    : "SELECT COUNT(*) c FROM COURSES WHERE STATUS='A' AND INST_ID = $inst_id";
+$courses = $conn->query($sql_courses)->fetch_assoc()['c'];
 
-// Last 5 logs
-$logs = $conn->query("
-    SELECT ACTION_TYPE, CREATED_AT
-    FROM AUDIT_LOG
-    ORDER BY CREATED_AT DESC
-    LIMIT 5
-");
+// 3. Total Collected (Payments Join Students)
+$sql_collected = ($role === 'SUPERADMIN') 
+    ? "SELECT IFNULL(SUM(PAID_AMOUNT),0) s FROM PAYMENTS WHERE PAYMENT_STATUS='SUCCESS'" 
+    : "SELECT IFNULL(SUM(P.PAID_AMOUNT),0) s FROM PAYMENTS P 
+       JOIN STUDENTS S ON P.STUDENT_ID = S.STUDENT_ID 
+       WHERE P.PAYMENT_STATUS='SUCCESS' AND S.INST_ID = $inst_id";
+$collected = $conn->query($sql_collected)->fetch_assoc()['s'];
 
+// 4. Pending Dues (Ledger Join Students)
+$sql_pending = ($role === 'SUPERADMIN') 
+    ? "SELECT IFNULL(SUM(BALANCE_AMOUNT),0) s FROM STUDENT_FEE_LEDGER" 
+    : "SELECT IFNULL(SUM(L.BALANCE_AMOUNT),0) s FROM STUDENT_FEE_LEDGER L 
+       JOIN STUDENTS S ON L.STUDENT_ID = S.STUDENT_ID 
+       WHERE S.INST_ID = $inst_id";
+$pending = $conn->query($sql_pending)->fetch_assoc()['s'];
+
+// 5. Today's Collection
+$sql_today = ($role === 'SUPERADMIN') 
+    ? "SELECT IFNULL(SUM(PAID_AMOUNT),0) s FROM PAYMENTS WHERE DATE(PAYMENT_DATE)=CURDATE() AND PAYMENT_STATUS='SUCCESS'" 
+    : "SELECT IFNULL(SUM(P.PAID_AMOUNT),0) s FROM PAYMENTS P 
+       JOIN STUDENTS S ON P.STUDENT_ID = S.STUDENT_ID 
+       WHERE DATE(P.PAYMENT_DATE)=CURDATE() AND P.PAYMENT_STATUS='SUCCESS' AND S.INST_ID = $inst_id";
+$today = $conn->query($sql_today)->fetch_assoc()['s'];
+
+/* =========================================================
+   AUDIT & LOGS
+   ========================================================= */
+audit_log($conn, 'VIEW_DASHBOARD', 'ADMIN_MASTER', $adminId);
+
+// Logs Visibility: Superadmin sees all logs, Admin sees only their own actions
+$sql_logs = ($role === 'SUPERADMIN')
+    ? "SELECT ACTION_TYPE, CREATED_AT FROM AUDIT_LOG ORDER BY CREATED_AT DESC LIMIT 5"
+    : "SELECT ACTION_TYPE, CREATED_AT FROM AUDIT_LOG WHERE ADMIN_ID = $adminId ORDER BY CREATED_AT DESC LIMIT 5";
+$logs = $conn->query($sql_logs);
 ?>
 
 <!DOCTYPE html>
@@ -193,10 +221,15 @@ $logs = $conn->query("
 <a href="reports/daily.php"><i class="bi bi-calendar-day"></i> Daily Summary</a>
 <a href="reports/dues.php"><i class="bi bi-exclamation-triangle"></i> Pending Dues</a>
 
-<div class="section-title">Security</div>
-<a href="audit/view.php"><i class="bi bi-shield-lock"></i> Audit Log Viewer</a>
-<a href="backup/backup.php"><i class="bi bi-hdd"></i> Backup DB</a>
-<a href="backup/restore.php"><i class="bi bi-arrow-repeat"></i> Restore Backup</a>
+<?php if ($_SESSION['role_name'] === 'SUPERADMIN'): ?>
+    <div class="section-title">System Security</div>
+    <a href="audit/view.php"><i class="bi bi-shield-lock"></i> Audit Log Viewer</a>
+    <a href="backup/backup.php"><i class="bi bi-hdd"></i> Backup DB</a>
+    <a href="backup/restore.php"><i class="bi bi-arrow-repeat"></i> Restore Backup</a>
+    
+    <div class="section-title">Global Settings</div>
+    <a href="institutes/manage.php"><i class="bi bi-building"></i> Manage Institutes</a>
+<?php endif; ?>
 
 <hr>
 <a href="logout.php" class="text-danger mb-3"><i class="bi bi-box-arrow-right"></i> Logout</a>

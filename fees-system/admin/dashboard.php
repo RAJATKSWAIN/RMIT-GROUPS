@@ -70,6 +70,7 @@ $sql_logs = ($role === 'SUPERADMIN')
     ? "SELECT ACTION_TYPE, CREATED_AT FROM AUDIT_LOG ORDER BY CREATED_AT DESC LIMIT 5"
     : "SELECT ACTION_TYPE, CREATED_AT FROM AUDIT_LOG WHERE ADMIN_ID = $adminId ORDER BY CREATED_AT DESC LIMIT 5";
 $logs = $conn->query($sql_logs);
+
 ?>
 
 <!DOCTYPE html>
@@ -313,39 +314,49 @@ $logs = $conn->query($sql_logs);
 <!-- ================= RECENT PAYMENTS ================= -->
 
 <div class="card card-box mt-4 p-3">
+    <h6>Recent Payments</h6>
+    <table class="table table-sm table-bordered mt-2">
+        <thead class="table-light">
+            <tr>
+                <th>Receipt</th>
+                <th>Student</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        // Role-Aware Recent Payments Query
+        $sql_recent = ($role === 'SUPERADMIN') 
+            ? "SELECT P.RECEIPT_NO, CONCAT(S.FIRST_NAME,' ',S.LAST_NAME) STU, P.PAID_AMOUNT, P.PAYMENT_DATE 
+               FROM PAYMENTS P 
+               JOIN STUDENTS S ON S.STUDENT_ID = P.STUDENT_ID 
+               ORDER BY P.PAYMENT_ID DESC LIMIT 10"
+            : "SELECT P.RECEIPT_NO, CONCAT(S.FIRST_NAME,' ',S.LAST_NAME) STU, P.PAID_AMOUNT, P.PAYMENT_DATE 
+               FROM PAYMENTS P 
+               JOIN STUDENTS S ON S.STUDENT_ID = P.STUDENT_ID 
+               WHERE S.INST_ID = $inst_id 
+               ORDER BY P.PAYMENT_ID DESC LIMIT 10";
 
-<h6>Recent Payments</h6>
+        $q_recent = $conn->query($sql_recent);
 
-<table class="table table-sm table-bordered mt-2">
-<tr>
-<th>Receipt</th>
-<th>Student</th>
-<th>Amount</th>
-<th>Date</th>
-</tr>
-
-<?php
-$q = $conn->query("
-SELECT P.RECEIPT_NO,
-CONCAT(S.FIRST_NAME,' ',S.LAST_NAME) STU,
-P.PAID_AMOUNT,
-P.PAYMENT_DATE
-FROM PAYMENTS P
-JOIN STUDENTS S ON S.STUDENT_ID=P.STUDENT_ID
-ORDER BY P.PAYMENT_ID DESC LIMIT 10
-");
-
-while($r=$q->fetch_assoc()):
-?>
-<tr>
-<td><?= $r['RECEIPT_NO'] ?></td>
-<td><?= $r['STU'] ?></td>
-<td>₹<?= $r['PAID_AMOUNT'] ?></td>
-<td><?= $r['PAYMENT_DATE'] ?></td>
-</tr>
-<?php endwhile; ?>
-</table>
-
+        if($q_recent->num_rows > 0):
+            while($r = $q_recent->fetch_assoc()):
+        ?>
+            <tr>
+                <td><?= htmlspecialchars($r['RECEIPT_NO']) ?></td>
+                <td><?= htmlspecialchars($r['STU']) ?></td>
+                <td>₹<?= number_format($r['PAID_AMOUNT'], 2) ?></td>
+                <td><?= date('d-m-Y', strtotime($r['PAYMENT_DATE'])) ?></td>
+            </tr>
+        <?php 
+            endwhile; 
+        else:
+            echo "<tr><td colspan='4' class='text-center text-muted'>No recent payments found.</td></tr>";
+        endif;
+        ?>
+        </tbody>
+    </table>
 </div>
 
 
@@ -353,19 +364,12 @@ while($r=$q->fetch_assoc()):
 <!-- ================= COURSE COLLECTION REPORT ================= -->
 
 <div class="card shadow-sm border-0 mt-4">
-
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-        <h6 class="mb-0">
-            <i class="fas fa-chart-bar me-2"></i> Course Wise Collection
-        </h6>
-
-        <span class="badge bg-light text-dark">
-            <?= date('d M Y') ?>
-        </span>
+        <h6 class="mb-0"><i class="fas fa-chart-bar me-2"></i> Course Wise Collection</h6>
+        <span class="badge bg-light text-dark"><?= date('d M Y') ?></span>
     </div>
 
     <div class="card-body p-0">
-
         <table class="table table-hover align-middle mb-0 text-center">
             <thead class="table-light">
                 <tr>
@@ -374,58 +378,46 @@ while($r=$q->fetch_assoc()):
                     <th>Collection</th>
                 </tr>
             </thead>
-
             <tbody>
-
             <?php
             $totalStudents = 0;
             $totalAmount   = 0;
 
-            
-// Inside the Course Wise Collection Table loop
-$sql_course_report = ($role === 'SUPERADMIN')
-    ? "SELECT C.COURSE_NAME, COUNT(DISTINCT S.STUDENT_ID) students, IFNULL(SUM(P.PAID_AMOUNT),0) amount 
-       FROM COURSES C 
-       LEFT JOIN STUDENTS S ON S.COURSE_ID=C.COURSE_ID 
-       LEFT JOIN PAYMENTS P ON P.STUDENT_ID=S.STUDENT_ID 
-       GROUP BY C.COURSE_ID"
-    : "SELECT C.COURSE_NAME, COUNT(DISTINCT S.STUDENT_ID) students, IFNULL(SUM(P.PAID_AMOUNT),0) amount 
-       FROM COURSES C 
-       LEFT JOIN STUDENTS S ON S.COURSE_ID=C.COURSE_ID 
-       LEFT JOIN PAYMENTS P ON P.STUDENT_ID=S.STUDENT_ID 
-       WHERE C.INST_ID = $inst_id 
-       GROUP BY C.COURSE_ID";
+            // Role-Aware Course Report Query
+            $sql_course_report = ($role === 'SUPERADMIN')
+                ? "SELECT C.COURSE_NAME, COUNT(DISTINCT S.STUDENT_ID) students, IFNULL(SUM(P.PAID_AMOUNT),0) amount 
+                   FROM COURSES C 
+                   LEFT JOIN STUDENTS S ON S.COURSE_ID = C.COURSE_ID 
+                   LEFT JOIN PAYMENTS P ON P.STUDENT_ID = S.STUDENT_ID AND P.PAYMENT_STATUS = 'SUCCESS'
+                   GROUP BY C.COURSE_ID"
+                : "SELECT C.COURSE_NAME, COUNT(DISTINCT S.STUDENT_ID) students, IFNULL(SUM(P.PAID_AMOUNT),0) amount 
+                   FROM COURSES C 
+                   LEFT JOIN STUDENTS S ON S.COURSE_ID = C.COURSE_ID 
+                   LEFT JOIN PAYMENTS P ON P.STUDENT_ID = S.STUDENT_ID AND P.PAYMENT_STATUS = 'SUCCESS'
+                   WHERE C.INST_ID = $inst_id 
+                   GROUP BY C.COURSE_ID";
 
-$q = $conn->query($sql_course_report);
+            $q_course = $conn->query($sql_course_report);
 
-            while($r=$q->fetch_assoc()):
+            while($r = $q_course->fetch_assoc()):
                 $totalStudents += $r['students'];
                 $totalAmount   += $r['amount'];
             ?>
-
-            <tr>
-                <td class="text-start fw-semibold"><?= $r['COURSE_NAME'] ?></td>
-                <td>
-                    <span class="badge bg-info"><?= $r['students'] ?></span>
-                </td>
-                <td class="text-success fw-bold">
-                    ₹<?= number_format($r['amount'],2) ?>
-                </td>
-            </tr>
-
+                <tr>
+                    <td class="text-start fw-semibold"><?= htmlspecialchars($r['COURSE_NAME']) ?></td>
+                    <td><span class="badge bg-info"><?= $r['students'] ?></span></td>
+                    <td class="text-success fw-bold">₹<?= number_format($r['amount'], 2) ?></td>
+                </tr>
             <?php endwhile; ?>
-
             </tbody>
-
             <tfoot class="table-secondary fw-bold">
                 <tr>
                     <td class="text-start">Total</td>
                     <td><?= $totalStudents ?></td>
-                    <td class="text-success">₹<?= number_format($totalAmount,2) ?></td>
+                    <td class="text-success">₹<?= number_format($totalAmount, 2) ?></td>
                 </tr>
             </tfoot>
         </table>
-
     </div>
 </div>
 
@@ -435,10 +427,12 @@ $q = $conn->query($sql_course_report);
 
 <div class="card shadow-sm border-0 mt-5">
 
-    <div class="card-header bg-dark text-white">
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
         <h6 class="mb-0">
-            <i class="fas fa-history me-2"></i> Recent Admin Activity
+            <i class="fas fa-history me-2"></i> 
+            <?= ($role === 'SUPERADMIN') ? "Global System Activity" : "My Recent Activity" ?>
         </h6>
+        <i class="bi bi-shield-check"></i>
     </div>
 
     <div class="card-body p-0">
@@ -446,29 +440,68 @@ $q = $conn->query($sql_course_report);
         <table class="table table-hover table-sm align-middle mb-0 text-center">
             <thead class="table-light">
                 <tr>
-                    <th>Action</th>
+                    <?php if ($role === 'SUPERADMIN'): ?>
+                        <th class="text-start ps-3">Admin</th>
+                    <?php endif; ?>
+                    <th class="<?= ($role === 'SUPERADMIN') ? 'text-start' : '' ?>">Action</th>
                     <th>Time</th>
                 </tr>
             </thead>
 
             <tbody>
 
-            <?php while($l = $logs->fetch_assoc()): ?>
+            <?php
+            // ROLE-AWARE LOG QUERY
+            // Superadmin: See everything + Join with Admin table to see WHO did it
+            // Admin: See only their own ID logs
+            if ($role === 'SUPERADMIN') {
+                $sql_logs = "SELECT L.ACTION_TYPE, L.CREATED_AT, A.ADMIN_NAME 
+                             FROM AUDIT_LOG L 
+                             JOIN ADMIN_MASTER A ON L.ADMIN_ID = A.ADMIN_ID 
+                             ORDER BY L.CREATED_AT DESC LIMIT 5";
+            } else {
+                $sql_logs = "SELECT ACTION_TYPE, CREATED_AT 
+                             FROM AUDIT_LOG 
+                             WHERE ADMIN_ID = $adminId 
+                             ORDER BY CREATED_AT DESC LIMIT 5";
+            }
+
+            $q_logs = $conn->query($sql_logs);
+
+            if ($q_logs && $q_logs->num_rows > 0):
+                while($l = $q_logs->fetch_assoc()): 
+            ?>
             <tr>
-                <td>
-                    <span class="badge bg-secondary">
-                        <?= htmlspecialchars($l['ACTION_TYPE']) ?>
+                <?php if ($role === 'SUPERADMIN'): ?>
+                    <td class="text-start ps-3 small fw-bold text-primary">
+                        <?= htmlspecialchars($l['ADMIN_NAME']) ?>
+                    </td>
+                <?php endif; ?>
+
+                <td class="<?= ($role === 'SUPERADMIN') ? 'text-start' : '' ?>">
+                    <span class="badge rounded-pill bg-secondary px-3" style="font-size: 0.7rem;">
+                        <?= str_replace('_', ' ', htmlspecialchars($l['ACTION_TYPE'])) ?>
                     </span>
                 </td>
-                <td><?= date('d M Y h:i A', strtotime($l['CREATED_AT'])) ?></td>
+                <td class="text-muted small">
+                    <?= date('d M, h:i A', strtotime($l['CREATED_AT'])) ?>
+                </td>
             </tr>
-            <?php endwhile; ?>
+            <?php 
+                endwhile; 
+            else:
+                echo "<tr><td colspan='3' class='py-3 text-muted'>No recent activity recorded.</td></tr>";
+            endif;
+            ?>
 
             </tbody>
-
         </table>
-
     </div>
+    <?php if ($role === 'SUPERADMIN'): ?>
+        <div class="card-footer bg-white text-center">
+            <a href="audit/view.php" class="small text-decoration-none">View Full Audit Trail</a>
+        </div>
+    <?php endif; ?>
 </div>
    
 <!--========= Start of footer  ==========-->    

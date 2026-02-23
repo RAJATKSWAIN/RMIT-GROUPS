@@ -9,7 +9,7 @@ require_once BASE_PATH.'/core/auth.php';
 require_once BASE_PATH.'/services/PaymentService.php'; 
 require_once BASE_PATH.'/services/InvoiceService.php';
 
-checkLogin();  
+checkLogin();
 
 $paymentService = new PaymentService($conn);
 $invoiceService = new InvoiceService($conn);
@@ -221,65 +221,37 @@ function searchStudent() {
     let term = document.getElementById('reg_search').value;
     if(!term) return;
 
-    // Create the full URL dynamically
-    const apiUrl = window.location.origin + '/fees-system/api/search_student.php?term=' + encodeURIComponent(term);
-    
-    console.log("Requesting URL:", apiUrl);
-
-    fetch(apiUrl)
-        .then(res => {
-            if (!res.ok) {
-                throw new Error(`Server responded with status ${res.status}`);
-            }
-            return res.json();
-        })
+    fetch(`../../api/search_student.php?term=${term}`)
+        .then(res => res.json())
         .then(data => {
-            console.log("API Data Received:", data);
-            
             if(data && data.STUDENT_ID) {
-                // Show containers
                 document.getElementById('student_info').style.display = 'block';
                 document.getElementById('payment_form').style.display = 'block';
-                
-                // Set hidden ID
                 document.getElementById('form_student_id').value = data.STUDENT_ID;
-                
-                // Update Student Details
                 document.getElementById('view_name').innerText = data.FIRST_NAME + ' ' + data.LAST_NAME;
                 document.getElementById('view_course').innerText = data.COURSE_NAME;
                 
                 studentBalance = parseFloat(data.BALANCE_AMOUNT);
                 availableFees = data.available_fees;
                 
-                // Build Fees Checkboxes
                 let container = document.getElementById('fee_checkbox_container');
                 container.innerHTML = '';
-
+                
                 availableFees.forEach((fee, index) => {
                     container.innerHTML += `
                         <div class="form-check border-bottom py-2">
-                            <input class="form-check-input fee-item-check" type="checkbox" 
-                                   value="${fee.amount}" 
-                                   id="fee_${index}" 
-                                   data-name="${fee.fees_name}" 
-                                   onchange="updateTotal()">
+                            <input class="form-check-input fee-item-check" type="checkbox" value="${fee.amount}" id="fee_${index}" data-name="${fee.fees_name}" onchange="updateTotal()">
                             <label class="form-check-label d-flex justify-content-between w-100" for="fee_${index}">
                                 <span>${fee.fees_name} <small class="text-muted">(${fee.level})</small></span>
-                                <span class="fw-bold">₹${fee.amount.toLocaleString()}</span>
+                                <span class="fw-bold">₹${fee.amount}</span>
                             </label>
                         </div>`;
                 });
 
                 document.getElementById('view_balance').innerText = `Total Outstanding: ₹${studentBalance.toLocaleString()}`;
             } else { 
-                alert(data.error || 'Student not found!');
-                document.getElementById('student_info').style.display = 'none';
-                document.getElementById('payment_form').style.display = 'none';
+                alert('Student not found!'); 
             }
-        })
-        .catch(err => {
-            console.error("Fetch Error Detailed:", err);
-            alert("Critical Error: Connection failed. \nReason: " + err.message);
         });
 }
 

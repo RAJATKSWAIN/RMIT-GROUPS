@@ -83,7 +83,7 @@ if ($role === 'SUPERADMIN') {
     $instBranding = [
         'INST_NAME'   => 'RMIT GROUP OF INSTITUTIONS',
         'INST_CODE'   => 'FMS ver-1.0.0',
-        'LOGO_URL'    => 'https://rmitgroupsorg.infinityfree.me/fees-system/assets/logos/FMS-v1.0.0.png', // Main group logo
+        'LOGO_URL'    => 'https://rmitgroupsorg.infinityfree.me/fees-system/assets/logos/fms_logo1.png', // Main group logo
         'BRAND_COLOR' => '#1a3a5a'          // Corporate dark blue
     ];
 } else {
@@ -296,8 +296,8 @@ if ($role === 'SUPERADMIN') {
 
     <div class="d-flex align-items-center justify-content-between mb-4 pb-3 border-bottom shadow-none" style="border-bottom: 2px solid #eee !important;">
         <div class="d-flex align-items-center">
-            <div class="me-4 p-1 bg-white border rounded-circle shadow-sm" style="width: 85px; height: 85px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                <img src="<?= $instBranding['LOGO_URL'] ?>" alt="Institute Seal" style="max-width: 80%; max-height: 80%; object-fit: contain;">
+            <div class="me-4 p-1 bg-white border rounded-circle shadow-sm" style="width: 95px; height: 95px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <img src="<?= $instBranding['LOGO_URL'] ?>" alt="Institute Seal" style="max-width: 90%; max-height: 90%; object-fit: contain;">
             </div>
             
             <div>

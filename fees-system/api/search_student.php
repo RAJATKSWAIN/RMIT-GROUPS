@@ -25,7 +25,6 @@ $sql = "SELECT s.STUDENT_ID, s.COURSE_ID, s.REGISTRATION_NO, s.FIRST_NAME, s.LAS
         JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
         JOIN STUDENT_FEE_LEDGER l ON s.STUDENT_ID = l.STUDENT_ID
         WHERE (s.REGISTRATION_NO = ? OR s.ROLL_NO = ?) 
-        AND c.INST_ID = s.INST_ID
         AND s.INST_ID = $instId
         AND s.STATUS = 'A' 
         LIMIT 1";

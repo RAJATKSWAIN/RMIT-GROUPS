@@ -193,10 +193,15 @@ $logs = $conn->query("
 <a href="reports/daily.php"><i class="bi bi-calendar-day"></i> Daily Summary</a>
 <a href="reports/dues.php"><i class="bi bi-exclamation-triangle"></i> Pending Dues</a>
 
-<div class="section-title">Security</div>
-<a href="audit/view.php"><i class="bi bi-shield-lock"></i> Audit Log Viewer</a>
-<a href="backup/backup.php"><i class="bi bi-hdd"></i> Backup DB</a>
-<a href="backup/restore.php"><i class="bi bi-arrow-repeat"></i> Restore Backup</a>
+<?php if ($_SESSION['role_name'] === 'SUPERADMIN'): ?>
+    <div class="section-title">System Security</div>
+    <a href="audit/view.php"><i class="bi bi-shield-lock"></i> Audit Log Viewer</a>
+    <a href="backup/backup.php"><i class="bi bi-hdd"></i> Backup DB</a>
+    <a href="backup/restore.php"><i class="bi bi-arrow-repeat"></i> Restore Backup</a>
+    
+    <div class="section-title">Global Settings</div>
+    <a href="institutes/manage.php"><i class="bi bi-building"></i> Manage Institutes</a>
+<?php endif; ?>
 
 <hr>
 <a href="logout.php" class="text-danger mb-3"><i class="bi bi-box-arrow-right"></i> Logout</a>

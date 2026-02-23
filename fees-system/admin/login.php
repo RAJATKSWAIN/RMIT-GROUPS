@@ -1,5 +1,5 @@
 <!--======================================================
-    File Name   : index.php
+    File Name   : login.php
     Project     : RMIT Groups - FMS - Fees Management System
     Description : FMS - Fees Management System | Login Page
     Developed By: TrinityWebEdge
@@ -7,12 +7,10 @@
     Last Updated: <?php echo date("d-m-Y"); ?>
     Note         : This page defines the FMS - Fees Management System | Login Page of RMIT Groups website.
 =======================================================-->
-
 <?php
 session_start();
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_strict_mode', 1);
-
 
 require_once __DIR__ . "/../config/db.php";
 require_once __DIR__ . "/../config/config.php";
@@ -26,31 +24,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($username && $password) {
 
+        // FIX 1: Corrected "OIN" to "JOIN" and added Institute Name join
         $stmt = $conn->prepare("
-            SELECT A.* ,R.*
+            SELECT A.*, R.ROLE_NAME, I.INST_NAME, I.BRAND_COLOR
             FROM ADMIN_MASTER A
-			OIN FMS_MASTER_ROLE R ON A.ROLE_ID = R.ROLE_ID
-            WHERE USERNAME=? AND STATUS='A'
+            JOIN FMS_MASTER_ROLE R ON A.ROLE_ID = R.ROLE_ID
+            LEFT JOIN MASTER_INSTITUTES I ON A.INST_ID = I.INST_ID
+            WHERE A.USERNAME = ? AND A.STATUS = 'A'
         ");
 
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $res = $stmt->get_result()->fetch_assoc();
 
+        // FIX 2: Check $res and use the correct variable name for session assignment
         if ($res && password_verify($password, $res['PASSWORD_HASH'])) {
 
-            // security
             session_regenerate_id(true);
 
+            // Set Session Variables using $res (not $user)
             $_SESSION['admin_id']   = $res['ADMIN_ID'];
             $_SESSION['admin_name'] = $res['FULL_NAME'];
-			$_SESSION['role_name']  = $user['ROLE_NAME']; // Set to 'SUPERADMIN', 'ADMIN', or 'STUDENT'
-			$_SESSION['inst_id'] 	= $user['INST_ID'];
-            
-            // 🔥 ADD HERE
-			require_once __DIR__.'/../config/audit.php';
-			audit_log($conn, 'LOGIN', 'ADMIN_MASTER', $res['ADMIN_ID']);
+            $_SESSION['role_name']  = $res['ROLE_NAME']; 
+            $_SESSION['inst_id']    = $res['INST_ID'];
+            $_SESSION['inst_name']  = $res['INST_NAME'] ?? 'System Global';
+            $_SESSION['brand_color']= $res['BRAND_COLOR'] ?? '#1a3a5a';
+            $_SESSION['last_action']= time();
 
+            // Audit Log
+            if (file_exists(__DIR__.'/../core/audit.php')) {
+                require_once __DIR__.'/../core/audit.php';
+                audit_log($conn, 'LOGIN', 'ADMIN_MASTER', $res['ADMIN_ID']);
+            }
+
+            // Redirect to shared dashboard
             header("Location: dashboard.php");
             exit;
         }

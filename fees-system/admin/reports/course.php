@@ -3,6 +3,11 @@ define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
 require_once BASE_PATH.'/config/db.php';
 require_once BASE_PATH.'/core/auth.php';
 
+// Get the institute ID from the session (populated during login)
+$adminId   = $_SESSION['admin_id'];
+$adminName = $_SESSION['admin_name'];
+$instId 	= $_SESSION['inst_id'];
+
 $start_date = $_GET['start_date'] ?? date('Y-01-01');
 $end_date = $_GET['end_date'] ?? date('Y-m-d');
 
@@ -14,6 +19,8 @@ $summarySql = "SELECT c.COURSE_CODE, c.COURSE_NAME,
                LEFT JOIN STUDENTS s ON c.COURSE_ID = s.COURSE_ID
                LEFT JOIN PAYMENTS p ON s.STUDENT_ID = p.STUDENT_ID 
                     AND p.PAYMENT_STATUS = 'SUCCESS' 
+                    AND c.INST_ID = s.INST_ID
+                    AND s.INST_ID = $instId
                     AND DATE(p.PAYMENT_DATE) BETWEEN ? AND ?
                GROUP BY c.COURSE_ID
                ORDER BY total_revenue DESC";
@@ -29,7 +36,9 @@ $detailSql = "SELECT s.REGISTRATION_NO, s.FIRST_NAME, s.LAST_NAME, c.COURSE_CODE
               FROM PAYMENTS p
               JOIN STUDENTS s ON p.STUDENT_ID = s.STUDENT_ID
               JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
-              WHERE p.PAYMENT_STATUS = 'SUCCESS' 
+              WHERE p.PAYMENT_STATUS = 'SUCCESS'
+              AND c.INST_ID = s.INST_ID
+              AND s.INST_ID = $instId
               AND DATE(p.PAYMENT_DATE) BETWEEN ? AND ?
               GROUP BY s.STUDENT_ID
               ORDER BY c.COURSE_CODE ASC, student_total DESC";

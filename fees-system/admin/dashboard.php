@@ -164,9 +164,12 @@ if ($role === 'SUPERADMIN') {
 	
 		/* --- MAIN CONTENT LOGIC --- */
 		.main {
-			margin-left: var(--sidebar-width);
-			padding: 25px;
-			transition: all 0.3s ease;
+    		margin-left: var--sidebar-width); 
+    		padding: 25px;
+    		min-height: 100vh; /* Minimum height of the full screen */
+    		display: flex;
+    		flex-direction: column; /* Stacks content and footer vertically */
+    		transition: all 0.3s ease;
 		}
 	
 		/* --- MOBILE STATES --- */

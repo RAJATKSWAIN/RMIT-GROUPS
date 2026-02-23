@@ -3,6 +3,11 @@ define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
 require_once BASE_PATH.'/config/db.php';
 require_once BASE_PATH.'/core/auth.php';
 
+// Get the institute ID from the session (populated during login)
+$adminId   = $_SESSION['admin_id'];
+$adminName = $_SESSION['admin_name'];
+$instId 	= $_SESSION['inst_id'];
+
 // Filter Logic: Default to today if no date is picked
 $start_date = $_GET['start_date'] ?? date('Y-m-d');
 $end_date = $_GET['end_date'] ?? date('Y-m-d');
@@ -14,6 +19,8 @@ $sql = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, s.REGISTRATION_NO, s.SEMESTER,
         JOIN STUDENTS s ON p.STUDENT_ID = s.STUDENT_ID
         JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
         WHERE p.PAYMENT_STATUS = 'SUCCESS'
+        AND c.INST_ID = s.INST_ID
+        AND s.INST_ID = $instId
         AND DATE(p.PAYMENT_DATE) BETWEEN ? AND ?
         ORDER BY p.PAYMENT_DATE DESC";
 

@@ -74,13 +74,41 @@ $sql_logs = ($role === 'SUPERADMIN')
     : "SELECT ACTION_TYPE, CREATED_AT FROM AUDIT_LOG WHERE ADMIN_ID = $adminId ORDER BY CREATED_AT DESC LIMIT 5";
 $logs = $conn->query($sql_logs);
 
-// Fetch branding details for the logged-in institute
-$instBranding = $conn->query("
-    SELECT i.INST_NAME, d.LOGO_URL, i.BRAND_COLOR 
-    FROM MASTER_INSTITUTES i 
-    LEFT JOIN MASTER_INSTITUTE_DTL d ON i.INST_ID = d.INST_ID 
-    WHERE i.INST_ID = $instId
-")->fetch_assoc();
+/* =========================================================
+   Fetch Branding: Superadmin (Global) vs Admin (Institute)
+========================================================= */
+
+if ($role === 'SUPERADMIN') {
+    // Global System Branding for Superadmin
+    $instBranding = [
+        'INST_NAME'   => 'RMIT GROUP OF INSTITUTIONS',
+        'INST_CODE'   => 'FMS v1.0.0',
+        'LOGO_URL'    => 'https://rmitgroupsorg.infinityfree.me/images/logo.png', // Main group logo
+        'BRAND_COLOR' => '#1a3a5a'          // Corporate dark blue
+    ];
+} else {
+    // Fetch Specific Institute Branding for Admins
+    $stmt = $conn->prepare("
+        SELECT i.INST_NAME, i.INST_CODE, d.LOGO_URL, i.BRAND_COLOR 
+        FROM MASTER_INSTITUTES i 
+        LEFT JOIN MASTER_INSTITUTE_DTL d ON i.INST_ID = d.INST_ID 
+        WHERE i.INST_ID = ?
+    ");
+    $stmt->bind_param("i", $inst_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $instBranding = $result->fetch_assoc();
+
+    // Fallback if institute details are missing
+    if (!$instBranding) {
+        $instBranding = [
+            'INST_NAME'   => 'RMIT Group',
+            'INST_CODE'   => 'RMIT',
+            'LOGO_URL'    => 'images/default_logo.png',
+            'BRAND_COLOR' => '#0d47a1'
+        ];
+    }
+}
 
 ?>
 

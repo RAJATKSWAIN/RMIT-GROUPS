@@ -3,6 +3,11 @@ define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
 require_once BASE_PATH.'/config/db.php';
 require_once BASE_PATH.'/core/auth.php';
 
+// Get the institute ID from the session (populated during login)
+$adminId   = $_SESSION['admin_id'];
+$adminName = $_SESSION['admin_name'];
+$instId 	= $_SESSION['inst_id'];
+
 $student_id = $_GET['student_id'] ?? null;
 $student_data = null;
 $payments = [];
@@ -13,7 +18,9 @@ if ($student_id) {
              FROM STUDENTS s 
              JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID 
              JOIN STUDENT_FEE_LEDGER l ON s.STUDENT_ID = l.STUDENT_ID 
-             WHERE s.STUDENT_ID = ?";
+             WHERE s.STUDENT_ID = ?
+             AND c.INST_ID = s.INST_ID
+             AND s.INST_ID = $instId ";
     $stmt = $conn->prepare($sSql);
     $stmt->bind_param("i", $student_id);
     $stmt->execute();

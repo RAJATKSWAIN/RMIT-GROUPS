@@ -70,7 +70,7 @@ $historyQuery = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, i.FILE_PATH
                  JOIN STUDENTS s ON p.STUDENT_ID = s.STUDENT_ID 
                  LEFT JOIN INVOICES i ON p.PAYMENT_ID = i.PAYMENT_ID
                  WHERE DATE(p.PAYMENT_DATE) = '$today' 
-				 AND s.INST_ID = $instId
+				 
                  ORDER BY p.PAYMENT_ID DESC LIMIT 10";
 $historyResult = $conn->query($historyQuery);
 ?>

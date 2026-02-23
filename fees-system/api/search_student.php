@@ -11,7 +11,7 @@
 require_once '../config/db.php';
 require_once '../core/auth.php';
 
-$term = $_GET['term'] ?? '';
+$term = $_GET['term'] ?? ''; 
 
 // Step 1: Get Student and Course ID (Filtered for Active Students)
 $sql = "SELECT s.STUDENT_ID, s.COURSE_ID, s.REGISTRATION_NO, s.FIRST_NAME, s.LAST_NAME, 

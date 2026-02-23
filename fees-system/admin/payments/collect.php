@@ -221,10 +221,12 @@ function searchStudent() {
     let term = document.getElementById('reg_search').value;
     if(!term) return;
 
-    fetch(`../../api/search_student.php?term=${term}`)
+    // Use absolute path to avoid directory depth issues
+    fetch(`/fees-system/api/search_student.php?term=${term}`)
         .then(res => res.json())
         .then(data => {
             if(data && data.STUDENT_ID) {
+                // SUCCESS CASE
                 document.getElementById('student_info').style.display = 'block';
                 document.getElementById('payment_form').style.display = 'block';
                 document.getElementById('form_student_id').value = data.STUDENT_ID;
@@ -250,8 +252,15 @@ function searchStudent() {
 
                 document.getElementById('view_balance').innerText = `Total Outstanding: ₹${studentBalance.toLocaleString()}`;
             } else { 
-                alert('Student not found!'); 
+                // ERROR CASE
+                alert(data.error || 'Student not found!');
+                document.getElementById('student_info').style.display = 'none';
+                document.getElementById('payment_form').style.display = 'none';
             }
+        })
+        .catch(err => {
+            console.error("Fetch Error:", err);
+            alert("Critical Error: Could not connect to the search API.");
         });
 }
 

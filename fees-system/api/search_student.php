@@ -13,18 +13,13 @@ require_once '../core/auth.php';
 
 $term = $_GET['term'] ?? '';
 
-// Get the institute ID from the session (populated during login)
-//$adminId   = $_SESSION['admin_id'];
-//$adminName = $_SESSION['admin_name'];
-//$instId 	= $_SESSION['inst_id'];
-
 // Step 1: Get Student and Course ID (Filtered for Active Students)
 $sql = "SELECT s.STUDENT_ID, s.COURSE_ID, s.REGISTRATION_NO, s.FIRST_NAME, s.LAST_NAME, 
                c.COURSE_NAME, c.COURSE_CODE, l.BALANCE_AMOUNT 
         FROM STUDENTS s
         JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
         JOIN STUDENT_FEE_LEDGER l ON s.STUDENT_ID = l.STUDENT_ID
-        WHERE (s.REGISTRATION_NO = ? OR s.ROLL_NO = ?)
+        WHERE (s.REGISTRATION_NO = ? OR s.ROLL_NO = ?) 
         AND s.STATUS = 'A' 
         LIMIT 1";
 

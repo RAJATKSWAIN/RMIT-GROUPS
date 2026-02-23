@@ -27,8 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($username && $password) {
 
         $stmt = $conn->prepare("
-            SELECT ADMIN_ID, FULL_NAME, PASSWORD_HASH 
-            FROM ADMIN_MASTER 
+            SELECT A.* ,R.*
+            FROM ADMIN_MASTER A
+			OIN FMS_MASTER_ROLE R ON A.ROLE_ID = R.ROLE_ID
             WHERE USERNAME=? AND STATUS='A'
         ");
 
@@ -43,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $_SESSION['admin_id']   = $res['ADMIN_ID'];
             $_SESSION['admin_name'] = $res['FULL_NAME'];
+			$_SESSION['role_name']  = $user['ROLE_NAME']; // Set to 'SUPERADMIN', 'ADMIN', or 'STUDENT'
+			$_SESSION['inst_id'] 	= $user['INST_ID'];
             
             // 🔥 ADD HERE
 			require_once __DIR__.'/../config/audit.php';

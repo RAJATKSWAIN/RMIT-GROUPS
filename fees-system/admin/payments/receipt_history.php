@@ -4,33 +4,44 @@ require_once BASE_PATH.'/config/db.php';
 require_once BASE_PATH.'/core/auth.php';
 checkLogin();
 
-// Get the institute ID from the session (populated during login)
-$adminId   = $_SESSION['admin_id'];
-$adminName = $_SESSION['admin_name'];
-$instId 	= $_SESSION['inst_id'];
+// 1. Get the institute ID from the session
+$instId = $_SESSION['inst_id'];
 
-// Enhanced SQL: Fetching Full Name, Reg No, Roll No, and Course Details
 $search = $_GET['search'] ?? '';
-$whereClause = "";
 $params = [];
 $types = "";
 
-if(!empty($search)) {
-    $whereClause = "WHERE p.RECEIPT_NO LIKE ? OR s.REGISTRATION_NO LIKE ? OR s.ROLL_NO LIKE ? OR s.FIRST_NAME LIKE ? OR s.LAST_NAME LIKE ? AND s.INST_ID = ?";
-    $param = "%$search%";
-    $params = [$param, $param, $param, $param, $param, $instId];
-    $types = "sssssi";
-}
-
+// 2. Base Query (Filtered by INST_ID)
+// Note: We always filter by p.INST_ID or s.INST_ID
 $sql = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, s.REGISTRATION_NO, s.ROLL_NO, c.COURSE_NAME 
         FROM PAYMENTS p 
         JOIN STUDENTS s ON p.STUDENT_ID = s.STUDENT_ID 
-        LEFT JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
-        $whereClause 
-        ORDER BY p.PAYMENT_DATE DESC LIMIT 50";
+        LEFT JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID ";
+
+if(!empty($search)) {
+    // CRITICAL: Parentheses around OR statements so that AND s.INST_ID applies to everything
+    $sql .= " WHERE (p.RECEIPT_NO LIKE ? 
+               OR s.REGISTRATION_NO LIKE ? 
+               OR s.ROLL_NO LIKE ? 
+               OR s.FIRST_NAME LIKE ? 
+               OR s.LAST_NAME LIKE ?) 
+               AND s.INST_ID = ?";
+    
+    $param = "%$search%";
+    // 3. Match types string length to params count (6 types for 6 params)
+    $types = "sssssi"; 
+    $params = [$param, $param, $param, $param, $param, $instId];
+} else {
+    // 4. Default view: Still must filter by INST_ID
+    $sql .= " WHERE s.INST_ID = ?";
+    $types = "i";
+    $params = [$instId];
+}
+
+$sql .= " ORDER BY p.PAYMENT_DATE DESC LIMIT 50";
 
 $stmt = $conn->prepare($sql);
-if(!empty($search)) {
+if(!empty($params)) {
     $stmt->bind_param($types, ...$params);
 }
 $stmt->execute();

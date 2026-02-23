@@ -35,7 +35,7 @@ if ($student_id) {
 }
 
 // Fetch all students for the dropdown search
-$allStudents = $conn->query("SELECT STUDENT_ID, FIRST_NAME, LAST_NAME, REGISTRATION_NO FROM STUDENTS WHERE STATUS = 'A' ORDER BY FIRST_NAME ASC");
+$allStudents = $conn->query("SELECT STUDENT_ID, FIRST_NAME, LAST_NAME, REGISTRATION_NO FROM STUDENTS WHERE STATUS = 'A' AND INST_ID = $instId ORDER BY FIRST_NAME ASC");
 ?>
 
 <?php include BASE_PATH.'/admin/layout/header.php'; ?>

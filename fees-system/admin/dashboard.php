@@ -71,6 +71,14 @@ $sql_logs = ($role === 'SUPERADMIN')
     : "SELECT ACTION_TYPE, CREATED_AT FROM AUDIT_LOG WHERE ADMIN_ID = $adminId ORDER BY CREATED_AT DESC LIMIT 5";
 $logs = $conn->query($sql_logs);
 
+// Fetch branding details for the logged-in institute
+$instBranding = $conn->query("
+    SELECT i.INST_NAME, d.LOGO_URL, i.BRAND_COLOR 
+    FROM MASTER_INSTITUTES i 
+    LEFT JOIN MASTER_INSTITUTE_DTL d ON i.INST_ID = d.INST_ID 
+    WHERE i.INST_ID = $instId
+")->fetch_assoc();
+
 ?>
 
 <!DOCTYPE html>
@@ -253,9 +261,43 @@ $logs = $conn->query($sql_logs);
 <!-- =====================================================
    MAIN CONTENT
 ===================================================== -->
-    
-
 <div class="main">
+
+    <div class="d-flex align-items-center justify-content-between mb-4 pb-3 border-bottom shadow-none" style="border-bottom: 2px solid #eee !important;">
+        <div class="d-flex align-items-center">
+            <div class="me-4 p-1 bg-white border rounded-circle shadow-sm" style="width: 85px; height: 85px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <img src="<?= $instBranding['LOGO_URL'] ?>" alt="Institute Seal" style="max-width: 80%; max-height: 80%; object-fit: contain;">
+            </div>
+            
+            <div>
+                <h2 class="mb-1 fw-bold text-uppercase" style="color: #1a3a5a; letter-spacing: -0.5px; font-size: 1.6rem;">
+                    <?= $instBranding['INST_NAME'] ?>
+                </h2>
+                
+                <div class="d-flex align-items-center flex-wrap gap-3">
+                    <span class="text-secondary small fw-semibold">
+                        <i class="bi bi-mortarboard-fill me-1"></i> <?= $instBranding['INST_CODE'] ?> Group
+                    </span>
+                    <span class="text-secondary small fw-semibold border-start ps-3">
+                        <i class="bi bi-calendar-check me-1"></i> Session: <?= date('Y') ?>-<?= date('y')+1 ?>
+                    </span>
+                    <span class="text-secondary small fw-semibold border-start ps-3">
+                        <i class="bi bi-shield-lock me-1"></i> Auth: <strong><?= $adminName ?></strong> 
+                        <span class="badge rounded-pill bg-dark ms-1" style="font-size: 0.65rem;"><?= $_SESSION['role'] ?></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-end d-none d-lg-block border-start ps-4">
+            <div class="small text-uppercase text-muted fw-bold mb-1" style="letter-spacing: 1px;">Portal Status</div>
+            <div class="d-flex align-items-center justify-content-end text-success fw-bold">
+                <span class="spinner-grow spinner-grow-sm me-2" role="status"></span>
+                SYSTEM ACTIVE
+            </div>
+            <div class="small text-muted mt-1"><?= date('l, d F Y') ?></div>
+        </div>
+    </div>
 
 
 

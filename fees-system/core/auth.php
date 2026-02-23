@@ -8,32 +8,56 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 /**
- * Check if Admin is logged in
+ * Check if User is logged in (Universal for all roles)
  */
 function checkLogin()
 {
-    if (!isset($_SESSION['admin_id'])) {
-        // Redirect to login if session is missing
+    // 1. Basic Authentication Check
+    if (!isset($_SESSION['admin_id']) || !isset($_SESSION['role_name'])) {
         header("Location: " . BASE_URL . "admin/login.php");
         exit;
     }
     
-    // Optional: Check for session timeout (e.g., 30 mins of inactivity)
+    // 2. Session Timeout Logic
     if (isset($_SESSION['last_action']) && (time() - $_SESSION['last_action'] > 1800)) {
         logout();
     }
     $_SESSION['last_action'] = time();
+
+    /* 3. Auto-Routing Logic:
+       Ensures students cannot even view admin-level dashboard pages 
+       unless specifically authorized.
+    */
+    $current_page = basename($_SERVER['PHP_SELF']);
+    if ($_SESSION['role_name'] === 'STUDENT' && $current_page === 'dashboard.php') {
+        header("Location: " . BASE_URL . "admin/students/profile.php");
+        exit;
+    }
 }
 
 /**
- * Check if User has specific Role (e.g., 'MASTER')
+ * Specific Authorization for Admin/Superadmin Features
  */
-function authorize($required_role = 'MASTER')
+function authorize($required_role = 'SUPERADMIN')
 {
+    // Always check if logged in first
     checkLogin();
-    if ($_SESSION['role'] !== $required_role) {
-        // Redirect to dashboard or error page if role doesn't match
-        header("Location: " . BASE_URL . "admin/dashboard.php?error=unauthorized");
+    
+    // SUPERADMIN is the owner of the product - has access to everything
+    if ($_SESSION['role_name'] === 'SUPERADMIN') {
+        return true;
+    }
+
+    // Check if the current user matches the required role
+    if ($_SESSION['role_name'] !== $required_role) {
+        
+        // Handle unauthorized access based on role
+        if ($_SESSION['role_name'] === 'STUDENT') {
+            header("Location: " . BASE_URL . "admin/students/profile.php?error=unauthorized");
+        } else {
+            // Usually for ADMIN trying to access SUPERADMIN-only areas
+            header("Location: " . BASE_URL . "admin/dashboard.php?error=unauthorized");
+        }
         exit;
     }
 }
@@ -43,7 +67,7 @@ function authorize($required_role = 'MASTER')
  */
 function logout()
 {
-    $_SESSION = array(); // Clear session variables
+    $_SESSION = array(); 
     if (ini_get("session.use_cookies")) {
         $params = session_get_cookie_params();
         setcookie(session_name(), '', time() - 42000,

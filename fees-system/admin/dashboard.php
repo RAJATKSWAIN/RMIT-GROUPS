@@ -227,7 +227,7 @@ if ($role === 'SUPERADMIN') {
     <!-- Icon + Title -->
     <i class="bi bi-cash-stack fs-2 text-primary mb-0"></i>
     <h6 class="text-white mb-0">Fees Management System</h6>
-    <p class="badge bg-primary"> Ver 1.2.0 </p>
+    <p class="badge bg-primary"> Ver 1.0.0 </p>
   </div>
 
 	<a href="dashboard.php">🏠 Dashboard</a>

@@ -313,9 +313,11 @@ if ($role === 'SUPERADMIN') {
                         <i class="bi bi-calendar-check me-1"></i> Session: <?= date('Y') ?>-<?= date('y')+1 ?>
                     </span>
                     <span class="text-secondary small fw-semibold border-start ps-3">
-                        <i class="bi bi-shield-lock me-1"></i> Auth: <strong><?= $adminName ?></strong> 
-                        <span class="badge rounded-pill bg-dark ms-1" style="font-size: 0.65rem;"><?= $_SESSION['role_name'] ?></span>
-                    </span>
+    					<i class="bi bi-shield-lock me-1"></i> Auth: <strong><?= htmlspecialchars($adminName) ?></strong> 
+    					<span class="badge rounded-pill bg-dark ms-1" style="font-size: 0.65rem;">
+        				<?= ($role === 'SUPERADMIN') ? "System Master" : $role ?>
+    					</span>
+					</span>
                 </div>
             </div>
         </div>
@@ -527,12 +529,12 @@ if ($role === 'SUPERADMIN') {
             // Superadmin: See everything + Join with Admin table to see WHO did it
             // Admin: See only their own ID logs
             if ($role === 'SUPERADMIN') {
-                $sql_logs = "SELECT L.ACTION_TYPE, L.CREATED_AT, A.ADMIN_NAME 
+                $sql_logs = "SELECT L.ACTION_TYPE, L.CREATED_AT, A.FULL_NAME 
                              FROM AUDIT_LOG L 
                              JOIN ADMIN_MASTER A ON L.ADMIN_ID = A.ADMIN_ID 
                              ORDER BY L.CREATED_AT DESC LIMIT 5";
             } else {
-                $sql_logs = "SELECT L.ACTION_TYPE, L.CREATED_AT, A.ADMIN_NAME 
+                $sql_logs = "SELECT L.ACTION_TYPE, L.CREATED_AT, A.FULL_NAME 
                              FROM AUDIT_LOG L 
                              JOIN ADMIN_MASTER A ON L.ADMIN_ID = A.ADMIN_ID 
 							 AND A.ADMIN_ID = $adminId 
@@ -547,7 +549,7 @@ if ($role === 'SUPERADMIN') {
             <tr>
                 <?php if ($role === 'SUPERADMIN'): ?>
                     <td class="text-start ps-3 small fw-bold text-primary">
-                        <?= htmlspecialchars($l['ADMIN_NAME']) ?>
+                        <?= htmlspecialchars($l['FULL_NAME']) ?>
                     </td>
                 <?php endif; ?>
 

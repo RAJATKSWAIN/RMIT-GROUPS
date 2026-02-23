@@ -119,93 +119,92 @@ $colleges = ($role === 'SUPERADMIN') ? $conn->query("SELECT INST_ID, INST_NAME F
     <?php if ($student_data): ?>
     <div class="row">
         <div class="col-md-4">
-    <div class="card border-0 shadow-sm mb-4 overflow-hidden">
-        <div class="card-header bg-primary text-white p-3">
-            <div class="d-flex justify-content-between align-items-center">
-                <span class="fw-bold"><i class="bi bi-person-badge-fill me-2"></i>Student File</span>
-                <?php if($role === 'SUPERADMIN'): ?>
-                    <span class="badge bg-white text-primary"><?= $student_data['INST_NAME'] ?></span>
-                <?php endif; ?>
-            </div>
-        </div>
-        
-        <div class="card-body">
-            <div class="text-center mb-4">
-                <div class="avatar-placeholder mb-2 mx-auto bg-light d-flex align-items-center justify-content-center rounded-circle" style="width: 80px; height: 80px; border: 2px solid #0d6efd;">
-                    <i class="bi bi-person text-primary fs-1"></i>
-                </div>
-                <h5 class="fw-bold mb-0 text-dark"><?= strtoupper($student_data['FIRST_NAME'].' '.$student_data['LAST_NAME']) ?></h5>
-                <p class="text-muted small mb-2"><?= $student_data['GENDER'] ?> | DOB: <?= date('d M Y', strtotime($student_data['DOB'])) ?></p>
-                <div class="d-flex justify-content-center gap-2">
-                    <span class="badge bg-primary">Reg: <?= $student_data['REGISTRATION_NO'] ?></span>
-                    <span class="badge bg-dark">Roll: <?= $student_data['ROLL_NO'] ?></span>
-                </div>
-            </div>
-
-            <div class="p-3 bg-light rounded mb-4 border-start border-4 border-primary">
-                <h6 class="fw-bold small text-uppercase text-primary mb-3">Academic & Finance</h6>
-                <div class="row g-2">
-                    <div class="col-6">
-                        <small class="text-muted d-block">Course</small>
-                        <span class="fw-bold small"><?= $student_data['COURSE_NAME'] ?></span>
-                    </div>
-                    <div class="col-6">
-                        <small class="text-muted d-block">Semester</small>
-                        <span class="fw-bold small">Sem-<?= $student_data['SEMESTER'] ?></span>
-                    </div>
-                    <div class="col-6 mt-3">
-                        <small class="text-muted d-block">Total Fees</small>
-                        <span class="fw-bold text-dark">₹<?= number_format($student_data['TOTAL_FEE'], 2) ?></span>
-                    </div>
-                    <div class="col-6 mt-3">
-                        <small class="text-muted d-block text-danger">Outstanding</small>
-                        <span class="fw-bold text-danger">₹<?= number_format($student_data['BALANCE_AMOUNT'], 2) ?></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-4">
-                <h6 class="fw-bold small text-uppercase text-muted mb-3">Contact Information</h6>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="bi bi-phone me-3 text-primary"></i>
-                    <div>
-                        <small class="text-muted d-block">Mobile</small>
-                        <span class="small fw-medium"><?= $student_data['MOBILE'] ?></span>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="bi bi-envelope me-3 text-primary"></i>
-                    <div class="text-truncate">
-                        <small class="text-muted d-block">Email Address</small>
-                        <span class="small fw-medium"><?= strtolower($student_data['EMAIL']) ?></span>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <h6 class="fw-bold small text-uppercase text-muted mb-3">Residential Address</h6>
-                <div class="d-flex">
-                    <i class="bi bi-geo-alt me-3 text-primary"></i>
-                    <div>
-                        <span class="small d-block fw-medium"><?= $student_data['ADDRESS'] ?></span>
-                        <span class="small text-muted"><?= $student_data['CITY'] ?>, <?= $student_data['STATE'] ?> - <?= $student_data['PINCODE'] ?></span>
-                    </div>
-                </div>
-            </div>
-            
-            <hr class="my-4">
-            <div class="d-grid">
-                <button type="button" onclick="window.print()" class="btn btn-outline-primary btn-sm">
-                    <i class="bi bi-printer me-2"></i>Print Statement
-                </button>
-            </div>
-        </div>
-        <div class="card-footer bg-white border-0 py-3 text-center">
-            <small class="text-muted">Admitted on: <?= date('d M Y', strtotime($student_data['ADMISSION_DATE'])) ?></small>
-        </div>
-    </div>
-</div>
-        </div>
+			<div class="card border-0 shadow-sm mb-4 overflow-hidden">
+				<div class="card-header bg-primary text-white p-3">
+					<div class="d-flex justify-content-between align-items-center">
+						<span class="fw-bold"><i class="bi bi-person-badge-fill me-2"></i>Student File</span>
+						<?php if($role === 'SUPERADMIN'): ?>
+							<span class="badge bg-white text-primary"><?= $student_data['INST_NAME'] ?></span>
+						<?php endif; ?>
+					</div>
+				</div>
+				
+				<div class="card-body">
+					<div class="text-center mb-4">
+						<div class="avatar-placeholder mb-2 mx-auto bg-light d-flex align-items-center justify-content-center rounded-circle" style="width: 80px; height: 80px; border: 2px solid #0d6efd;">
+							<i class="bi bi-person text-primary fs-1"></i>
+						</div>
+						<h5 class="fw-bold mb-0 text-dark"><?= strtoupper($student_data['FIRST_NAME'].' '.$student_data['LAST_NAME']) ?></h5>
+						<p class="text-muted small mb-2"><?= $student_data['GENDER'] ?> | DOB: <?= date('d M Y', strtotime($student_data['DOB'])) ?></p>
+						<div class="d-flex justify-content-center gap-2">
+							<span class="badge bg-primary">Reg: <?= $student_data['REGISTRATION_NO'] ?></span>
+							<span class="badge bg-dark">Roll: <?= $student_data['ROLL_NO'] ?></span>
+						</div>
+					</div>
+		
+					<div class="p-3 bg-light rounded mb-4 border-start border-4 border-primary">
+						<h6 class="fw-bold small text-uppercase text-primary mb-3">Academic & Finance</h6>
+						<div class="row g-2">
+							<div class="col-6">
+								<small class="text-muted d-block">Course</small>
+								<span class="fw-bold small"><?= $student_data['COURSE_NAME'] ?></span>
+							</div>
+							<div class="col-6">
+								<small class="text-muted d-block">Semester</small>
+								<span class="fw-bold small">Sem-<?= $student_data['SEMESTER'] ?></span>
+							</div>
+							<div class="col-6 mt-3">
+								<small class="text-muted d-block">Total Fees</small>
+								<span class="fw-bold text-dark">₹<?= number_format($student_data['TOTAL_FEE'], 2) ?></span>
+							</div>
+							<div class="col-6 mt-3">
+								<small class="text-muted d-block text-danger">Outstanding</small>
+								<span class="fw-bold text-danger">₹<?= number_format($student_data['BALANCE_AMOUNT'], 2) ?></span>
+							</div>
+						</div>
+					</div>
+		
+					<div class="mb-4">
+						<h6 class="fw-bold small text-uppercase text-muted mb-3">Contact Information</h6>
+						<div class="d-flex align-items-center mb-2">
+							<i class="bi bi-phone me-3 text-primary"></i>
+							<div>
+								<small class="text-muted d-block">Mobile</small>
+								<span class="small fw-medium"><?= $student_data['MOBILE'] ?></span>
+							</div>
+						</div>
+						<div class="d-flex align-items-center mb-2">
+							<i class="bi bi-envelope me-3 text-primary"></i>
+							<div class="text-truncate">
+								<small class="text-muted d-block">Email Address</small>
+								<span class="small fw-medium"><?= strtolower($student_data['EMAIL']) ?></span>
+							</div>
+						</div>
+					</div>
+		
+					<div>
+						<h6 class="fw-bold small text-uppercase text-muted mb-3">Residential Address</h6>
+						<div class="d-flex">
+							<i class="bi bi-geo-alt me-3 text-primary"></i>
+							<div>
+								<span class="small d-block fw-medium"><?= $student_data['ADDRESS'] ?></span>
+								<span class="small text-muted"><?= $student_data['CITY'] ?>, <?= $student_data['STATE'] ?> - <?= $student_data['PINCODE'] ?></span>
+							</div>
+						</div>
+					</div>
+					
+					<hr class="my-4">
+					<div class="d-grid">
+						<button type="button" onclick="window.print()" class="btn btn-outline-primary btn-sm">
+							<i class="bi bi-printer me-2"></i>Print Statement
+						</button>
+					</div>
+				</div>
+				<div class="card-footer bg-white border-0 py-3 text-center">
+					<small class="text-muted">Admitted on: <?= date('d M Y', strtotime($student_data['ADMISSION_DATE'])) ?></small>
+				</div>
+			</div>
+		</div>
 
         <div class="col-md-8">
             <div class="card border-0 shadow-sm">

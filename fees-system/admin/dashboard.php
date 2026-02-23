@@ -81,7 +81,7 @@ $logs = $conn->query($sql_logs);
 if ($role === 'SUPERADMIN') {
     // Global System Branding for Superadmin
     $instBranding = [
-        'INST_NAME'   => 'RMIT GROUP OF INSTITUTIONS',
+        'INST_NAME'   => 'https://rmitgroupsorg.infinityfree.me/images/logo.png',
         'INST_CODE'   => 'FMS v1.0.0',
         'LOGO_URL'    => 'https://rmitgroupsorg.infinityfree.me/images/logo.png', // Main group logo
         'BRAND_COLOR' => '#1a3a5a'          // Corporate dark blue
@@ -314,7 +314,7 @@ if ($role === 'SUPERADMIN') {
                     </span>
                     <span class="text-secondary small fw-semibold border-start ps-3">
                         <i class="bi bi-shield-lock me-1"></i> Auth: <strong><?= $adminName ?></strong> 
-                        <span class="badge rounded-pill bg-dark ms-1" style="font-size: 0.65rem;"><?= $_SESSION['role'] ?></span>
+                        <span class="badge rounded-pill bg-dark ms-1" style="font-size: 0.65rem;"><?= $_SESSION['role_name'] ?></span>
                     </span>
                 </div>
             </div>

@@ -17,53 +17,78 @@ function createStudent($conn, $data, $isBulk = false)
     if (!$isBulk) { $conn->begin_transaction(); }
 
     try {
-        // Use the ID directly from the session
-        $instId = $_SESSION['inst_id'];
+        /* --- 1. DETERMINE INSTITUTE ID --- */
+        // Use inst_id from data (Superadmin choice) or fallback to Session (Admin)
+        $instId = !empty($data['inst_id']) ? intval($data['inst_id']) : $_SESSION['inst_id'];
         
-        /* 1. INSERT STUDENT */
+        /* --- 2. INSERT STUDENT WITH PARENT DETAILS --- */
         $stmt = $conn->prepare("
             INSERT INTO STUDENTS 
-            (REGISTRATION_NO, ROLL_NO, FIRST_NAME, LAST_NAME, GENDER, DOB, 
-             MOBILE, EMAIL, ADDRESS, CITY, STATE, PINCODE, 
+            (REGISTRATION_NO, ROLL_NO, FIRST_NAME, LAST_NAME, FATHER_NAME, MOTHER_NAME, 
+             GENDER, DOB, MOBILE, EMAIL, ADDRESS, CITY, STATE, PINCODE, 
              COURSE_ID, INST_ID, SEMESTER, ADMISSION_DATE) 
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         ");
 
+        // String "ssssss" covers: Reg, Roll, Fname, Lname, Father, Mother (All Strings)
+        // Full bind string: 12 strings, 1 int, 1 int, 1 int, 1 string (Total 18 params)
         $stmt->bind_param(
-            "sssssssssssiisis",
-            $data['reg'], $data['roll'], $data['fname'], $data['lname'],
-            $data['gender'], $data['dob'], $data['mobile'], $data['email'],
-            $data['address'], $data['city'], $data['state'], $data['pincode'],
-            $data['course'], $instId , $data['semester'], $data['admission']
+            "sssssssssssssiisis",
+            $data['reg'], 
+            $data['roll'], 
+            $data['fname'], 
+            $data['lname'],
+            $data['father'], 
+            $data['mother'], 
+            $data['gender'], 
+            $data['dob'], 
+            $data['mobile'], 
+            $data['email'],
+            $data['address'], 
+            $data['city'], 
+            $data['state'], 
+            $data['pincode'],
+            $data['course'], 
+            $instId, 
+            $data['semester'], 
+            $data['admission']
         );
 
         if (!$stmt->execute()) throw new Exception($stmt->error);
         $studentId = $conn->insert_id;
 
-        /* 2. CALCULATE TOTAL MANDATORY FEES */
+        /* --- 3. CALCULATE MANDATORY FEES (Validate via Course-Institute Join) --- */
         $course_id = intval($data['course']);
+        
+        // Joining with COURSES to ensure we only get fees for this specific Institute
         $feeQ = $conn->query("
             SELECT SUM(D.AMOUNT) as total 
             FROM MASTER_FEES_DTL D
             INNER JOIN MASTER_FEES_HDR H ON D.FEES_HDR_ID = H.FEES_HDR_ID
+            INNER JOIN COURSES C ON D.COURSE_ID = C.COURSE_ID
             WHERE D.COURSE_ID = $course_id 
+            AND C.INST_ID = $instId
             AND D.ACTIVE_FLAG = 'A' 
             AND H.ACTIVE_FLAG = 'A'
             AND H.MANDATORY_FLAG = 'Y'
         ");
 
         $feeRow = $feeQ->fetch_assoc();
-        $total_mandatory_fees = $feeRow['total'] ?? 0;
+        $total_mandatory_fees = (float)($feeRow['total'] ?? 0);
 
-        /* 3. CREATE LEDGER - Corrected $fee to $total_mandatory_fees */
-        $conn->query("
+        /* --- 4. CREATE LEDGER --- */
+        $ledgerStmt = $conn->prepare("
             INSERT INTO STUDENT_FEE_LEDGER (STUDENT_ID, TOTAL_FEE, BALANCE_AMOUNT, LAST_UPDATED) 
-            VALUES ($studentId, $total_mandatory_fees, $total_mandatory_fees, NOW())
+            VALUES (?, ?, ?, NOW())
         ");
+        $ledgerStmt->bind_param("idd", $studentId, $total_mandatory_fees, $total_mandatory_fees);
+        
+        if (!$ledgerStmt->execute()) throw new Exception("Ledger creation failed: " . $conn->error);
 
-        /* 4. AUDIT */
+        /* --- 5. AUDIT LOG --- */
         if(function_exists('audit_log')){
-            audit_log($conn, 'STUDENT_REGISTRATION', 'STUDENTS', $studentId, null, "Bulk: " . ($isBulk ? 'Yes' : 'No'), $total_mandatory_fees);
+            $logMsg = "Registered for Inst: $instId | Fees: $total_mandatory_fees";
+            audit_log($conn, 'STUDENT_REGISTRATION', 'STUDENTS', $studentId, null, $logMsg);
         }
 
         if (!$isBulk) { $conn->commit(); }
@@ -71,6 +96,7 @@ function createStudent($conn, $data, $isBulk = false)
 
     } catch(Exception $e) {
         if (!$isBulk) { $conn->rollback(); }
+        error_log("Create Student Error: " . $e->getMessage());
         return false;
     }
 }

@@ -105,64 +105,67 @@ function createStudent($conn, $data, $isBulk = false)
 /* =====================================
    PROMOTION LOGIC (Add this to StudentService)
 ===================================== */
+/**
+ * Handles RMITC Specific Promotion Logic with Financial Integration
+ */
 function promoteStudent($conn, $studentId, $targetSemester, $isBulk = false)
 {
     if (!$isBulk) { $conn->begin_transaction(); }
 
     try {
-        // 1. Fetch Student, Course, and College Data
+        /* --- 1. FETCH CONTEXT --- */
         $stmt = $conn->prepare("
-            SELECT s.SEMESTER, s.COURSE_ID, c.COURSE_CODE, c.DURATION_YEARS 
+            SELECT s.SEMESTER, s.COURSE_ID, s.INST_ID, c.COURSE_CODE, c.DURATION_YEARS 
             FROM STUDENTS s
             JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
-            WHERE s.INST_ID = c.INST_ID
-            AND s.STUDENT_ID = ?
+            WHERE s.STUDENT_ID = ?
         ");
-        $stmt->execute([$studentId]);
+        $stmt->bind_param("i", $studentId);
+        $stmt->execute();
         $res = $stmt->get_result()->fetch_assoc();
         
-        if (!$res) throw new Exception("Student not found.");
+        if (!$res) throw new Exception("Student ID $studentId not found.");
         
         $currentSem = intval($res['SEMESTER']);
-        $targetSem = intval($targetSemester);
+        $targetSem  = intval($targetSemester);
         $courseCode = strtoupper($res['COURSE_CODE']);
-        $maxYears = intval($res['DURATION_YEARS']);
-        $maxSem = $maxYears * 2;
+        $maxSem     = intval($res['DURATION_YEARS']) * 2;
+        $instId     = intval($res['INST_ID']);
+        $courseId   = intval($res['COURSE_ID']);
 
-        // --- VALIDATION 1: Boundary Check ---
+        /* --- 2. VALIDATIONS --- */
+        if ($targetSem <= $currentSem) {
+            throw new Exception("Target semester ($targetSem) must be greater than current semester ($currentSem).");
+        }
         if ($targetSem > $maxSem) {
-            throw new Exception("Cannot promote beyond $maxSem Semesters for this course.");
+            throw new Exception("Promotion exceeds course limit of $maxSem semesters.");
+        }
+        if (in_array($courseCode, ['FIT', 'WLD', 'EMC', 'ELT']) && $targetSem > 4) {
+             throw new Exception("ITI Course $courseCode capped at 4 Semesters.");
         }
 
-        // --- VALIDATION 2: Year-to-Year Logic (1->3, 3->5, 5->7) ---
-        // Only trigger if target is ODD and strictly skipping a year level
-        $isYearlyJump = ($targetSem % 2 != 0 && $targetSem > $currentSem);
-        
-        // Custom Rule: If current is 1, they must jump to 3 to trigger yearly fees
-        // This ensures they don't just move 1->2 without paying the 'Year 2' fee at 3
-        
-        if ($isYearlyJump) {
-            
-            // --- VALIDATION 3: RMITC Specific Logic ---
-            // If it's an ITI course (RMITC), they usually only have 2 years (max 4 sems)
-            if (in_array($courseCode, ['FIT', 'WLD', 'EMC', 'ELT']) && $targetSem > 4) {
-                 throw new Exception("RMITC Courses cannot exceed 4 Semesters (2 Years).");
-            }
+        /* --- 3. FINANCIAL LOGIC --- */
+        $isYearlyJump = ($targetSem % 2 != 0); 
+        $auditRemarks = "";
 
-            // --- EXECUTE FINANCIAL UPDATE ---
-            
-            // A. Calculate Fees
-            $feeQ = $conn->query("
+        if ($isYearlyJump) {
+            // Fetch mandatory fees for the specific course and institute
+            $feeQ = $conn->prepare("
                 SELECT SUM(D.AMOUNT) as total 
                 FROM MASTER_FEES_DTL D
                 INNER JOIN MASTER_FEES_HDR H ON D.FEES_HDR_ID = H.FEES_HDR_ID
-                WHERE D.COURSE_ID = {$res['COURSE_ID']} 
-                AND D.ACTIVE_FLAG = 'A' AND H.ACTIVE_FLAG = 'A' AND H.MANDATORY_FLAG = 'Y'
+                WHERE D.COURSE_ID = ? 
+                AND D.INST_ID = ? 
+                AND D.ACTIVE_FLAG = 'A' 
+                AND H.ACTIVE_FLAG = 'A' 
+                AND H.MANDATORY_FLAG = 'Y'
             ");
-            $feeRow = $feeQ->fetch_assoc();
-            $new_yearly_fees = (float)($feeRow['total'] ?? 0);
+            $feeQ->bind_param("ii", $courseId, $instId);
+            $feeQ->execute();
+            $feeRow = $feeQ->get_result()->fetch_assoc();
+            $newFees = (float)($feeRow['total'] ?? 0);
 
-            // B. Snapshot & Add Fees
+            // Update Ledger: Shift balance to dues and add new fees
             $ledgerStmt = $conn->prepare("
                 UPDATE STUDENT_FEE_LEDGER 
                 SET PREVIOUS_DUES = BALANCE_AMOUNT,
@@ -171,19 +174,21 @@ function promoteStudent($conn, $studentId, $targetSemester, $isBulk = false)
                     LAST_UPDATED = NOW() 
                 WHERE STUDENT_ID = ?
             ");
-            $ledgerStmt->execute([$new_yearly_fees, $new_yearly_fees, $studentId]);
+            $ledgerStmt->bind_param("ddi", $newFees, $newFees, $studentId);
+            $ledgerStmt->execute();
             
-            $auditRemarks = "Yearly Promotion: $currentSem to $targetSem. Added ₹$new_yearly_fees";
+            $auditRemarks = "Yearly Promotion: Sem $currentSem -> $targetSem. Fees added: ₹$newFees";
         } else {
-            // Just a semester update (e.g., 1->2 or 3->4) - No fee addition
-            $auditRemarks = "Semester Update: $currentSem to $targetSem. No fees added.";
+            $auditRemarks = "Semester Update: Sem $currentSem -> $targetSem. No financial change.";
         }
 
-        // 4. FINAL UPDATE TO STUDENT RECORD
+        /* --- 4. DATA UPDATES --- */
+        // Update Student Table
         $updateStmt = $conn->prepare("UPDATE STUDENTS SET SEMESTER = ?, UPDATED_AT = NOW() WHERE STUDENT_ID = ?");
-        $updateStmt->execute([$targetSem, $studentId]);
+        $updateStmt->bind_param("ii", $targetSem, $studentId);
+        $updateStmt->execute();
 
-        // 5. AUDIT
+        // Standard Audit Log
         if(function_exists('audit_log')){
             audit_log($conn, 'STUDENT_PROMOTION', 'STUDENTS', $studentId, null, $auditRemarks);
         }
@@ -193,7 +198,7 @@ function promoteStudent($conn, $studentId, $targetSemester, $isBulk = false)
 
     } catch(Exception $e) {
         if (!$isBulk) { $conn->rollback(); }
-        error_log("Promotion Error: " . $e->getMessage());
+        error_log("Promotion Failure: " . $e->getMessage());
         return false;
     }
 }

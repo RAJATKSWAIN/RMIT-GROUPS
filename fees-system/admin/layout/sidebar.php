@@ -106,6 +106,7 @@ html, body {
     <a href="<?= $adminRoot ?>students/list.php"><i class="bi bi-people"></i> View / Edit</a>
     <a href="<?= $adminRoot ?>students/profile.php"><i class="bi bi-person-badge"></i> View Profile</a>
     <a href="<?= $adminRoot ?>students/disable.php"><i class="bi bi-person-x"></i> Disable Student</a>
+    <a href="<?= $adminRoot ?>students/promote.php"><i class="bi bi-person-up"></i> Promote Student</a>
     <a href="<?= $adminRoot ?>students/bulk_upload.php"><i class="bi bi-upload"></i> CSV Upload</a>
 	<a href="<?= $adminRoot ?>students/template.php"><i class="bi bi-download"></i> Download Template</a>
 

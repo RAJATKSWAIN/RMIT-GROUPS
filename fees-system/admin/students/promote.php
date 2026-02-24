@@ -187,6 +187,71 @@ if (!empty($course_id)) {
         <?php endif; ?>
     </div>
 </div>
+    
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-secondary text-white py-3">
+                <h6 class="mb-0"><i class="bi bi-clock-history me-2"></i>Recent Promotion Logs (Financial Snapshot)</h6>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Date/Time</th>
+                            <th>Student Details</th>
+                            <th class="text-center">Progression</th>
+                            <th>Financial Status at Promotion</th>
+                            <th>Processed By</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $history_q = "SELECT l.*, s.FIRST_NAME, s.LAST_NAME, s.REGISTRATION_NO, a.FULL_NAME 
+                                     FROM STUDENT_PROMOTION_LOGS l
+                                     JOIN STUDENTS s ON l.STUDENT_ID = s.STUDENT_ID
+                                     JOIN ADMIN_MASTER a ON l.PROMOTED_BY = a.ADMIN_ID
+                                     WHERE l.INST_ID = $instId
+                                     ORDER BY l.PROMOTED_AT DESC LIMIT 10";
+                        $hist_res = $conn->query($history_q);
+
+                        if ($hist_res && $hist_res->num_rows > 0):
+                            while($h = $hist_res->fetch_assoc()):
+                        ?>
+                        <tr>
+                            <td class="small"><?= date('d-M-Y', strtotime($h['PROMOTED_AT'])) ?><br><span class="text-muted"><?= date('h:i A', strtotime($h['PROMOTED_AT'])) ?></span></td>
+                            <td>
+                                <span class="fw-bold"><?= $h['FIRST_NAME'] ?> <?= $h['LAST_NAME'] ?></span><br>
+                                <code class="small"><?= $h['REGISTRATION_NO'] ?></code>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge bg-light text-dark border">Sem <?= $h['FROM_SEMESTER'] ?></span>
+                                <i class="bi bi-arrow-right text-success mx-2"></i>
+                                <span class="badge bg-success">Sem <?= $h['TO_SEMESTER'] ?></span>
+                            </td>
+                            <td>
+                                <div class="small">
+                                    <span class="text-muted">Total Due:</span> ₹<?= number_format($h['TOTAL_PAYABLE'], 2) ?><br>
+                                    <span class="text-muted">Paid:</span> ₹<?= number_format($h['TOTAL_PAID'], 2) ?><br>
+                                    <strong class="<?= $h['CURRENT_BALANCE'] > 0 ? 'text-danger' : 'text-success' ?>">
+                                        Balance: ₹<?= number_format($h['CURRENT_BALANCE'], 2) ?>
+                                    </strong>
+                                </div>
+                            </td>
+                            <td class="small fw-semibold text-primary"><?= $h['FULL_NAME'] ?></td>
+                        </tr>
+                        <?php endwhile; else: ?>
+                        <tr><td colspan="5" class="text-center py-4 text-muted">No promotion history found for this session.</td></tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer bg-white border-0 text-center">
+                <a href="promotion_history.php" class="btn btn-link btn-sm text-decoration-none">View Full Audit Trail</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php include BASE_PATH.'/admin/layout/footer.php'; ?>
 

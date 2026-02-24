@@ -237,6 +237,7 @@ if ($role === 'SUPERADMIN') {
 	<a href="students/list.php"><i class="bi bi-people"></i> View / Edit</a>
 	<a href="students/profile.php"><i class="bi bi-person-badge"></i> View Profile</a>
 	<a href="students/disable.php"><i class="bi bi-person-x"></i> Disable Student</a>
+	<a href="students/promote.php"><i class="bi bi-person-up"></i> Promote Student</a>
 	<a href="students/bulk_upload.php"><i class="bi bi-upload"></i> CSV Upload</a>
 	<a href="students/template.php"><i class="bi bi-download"></i> Download Template</a>
 	

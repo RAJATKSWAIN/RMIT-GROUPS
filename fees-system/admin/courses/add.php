@@ -1,11 +1,10 @@
 <!--======================================================
     File Name   : add.php
     Project     : RMIT Groups - FMS - Fees Management System
-    Description : FMS - Fees Management System | Course Creation Page
+    Description : COURSE MANAGEMENT
     Developed By: TrinityWebEdge
-    Date Created: 05-02-2026
-    Last Updated: 24-02-2026
-    Note         : This page defines the FMS - Fees Management System | Course Creation Page of RMIT Groups website.
+    Date Created: 06-02-2025
+    Note        : This page defines the FMS - Fees Management System | COURSE MANAGEMENT Module of RMIT Groups website.
 =======================================================-->
 <?php
 define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');

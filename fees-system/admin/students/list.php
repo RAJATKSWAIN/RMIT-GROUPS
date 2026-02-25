@@ -1,4 +1,4 @@
-/*======================================================
+<!--======================================================
     File Name   : list.php 
     Project     : RMIT Groups - FMS - Fees Management System
 	Module		: STUDENT MANAGEMENT
@@ -7,7 +7,7 @@
     Date Created: 05-02-2026
     Last Updated: 24-02-2026
     Note        : This page defines the FMS - Fees Management System | Student Module of RMIT Groups website.
-=======================================================*/
+======================================================= -->
 <?php
 define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
 require_once BASE_PATH.'/config/db.php';

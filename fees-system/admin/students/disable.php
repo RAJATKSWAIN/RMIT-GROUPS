@@ -4,11 +4,10 @@
     Module      : STUDENT MANAGEMENT
     Description : Student Registration & Profile Management
     Developed By: TrinityWebEdge
-    Date Created: 06-02-2025
-    Last Updated: <?php echo date("d-m-Y"); ?>
+    Date Created: 06-02-2026
+    Last Updated: 25-02-2026
     Note        : This page defines the FMS - Fees Management System | Student Module of RMIT Groups website.
 =======================================================-->
-
 <?php
 // disable.php - FMS V 1.0.0
 define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
@@ -29,10 +28,12 @@ $offset      = ($page - 1) * $limit;
 $filter_inst = $_GET['inst_id'] ?? ($role === 'SUPERADMIN' ? '' : $sessInstId);
 
 // --- 2. HANDLE ACTIONS ---
+// --- 2. HANDLE ACTIONS ---
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
     $status_to_set = ($_POST['action'] == 'disable') ? 'I' : 'A';
+    $status_label  = ($status_to_set == 'I') ? 'INACTIVE' : 'ACTIVE';
     
-    // Bulk Action
+    // A. Bulk Action Logic
     if (isset($_POST['student_ids']) && is_array($_POST['student_ids'])) {
         $ids = array_map('intval', $_POST['student_ids']);
         $id_str = implode(',', $ids);
@@ -41,28 +42,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         if ($role !== 'SUPERADMIN') $sql .= " AND INST_ID = $sessInstId";
 
         if ($conn->query($sql)) {
-            $message = count($ids) . " students updated successfully.";
-            audit_log($conn, 'BULK_STATUS_UPDATE', 'STUDENTS', null, "Status: Mixed", "Bulk updated " . count($ids) . " students to $status_to_set");
+            $affected = $conn->affected_rows;
+            $message = "$affected students updated successfully to $status_label.";
+            
+            // AUDIT LOG: Detailed payload for bulk updates
+            $details = "User ID: {$_SESSION['user_id']} updated status to $status_label for Student IDs: [$id_str]";
+            audit_log($conn, 'BULK_STATUS_CHANGE', 'STUDENTS', null, $status_label, $details);
         }
     } 
-    // Single Search Action
+    
+    // B. Single Search Action Logic
     elseif (!empty($_POST['search_id'])) {
-        $search = $_POST['search_id'];
-        $find = $conn->prepare("SELECT STUDENT_ID, FIRST_NAME FROM STUDENTS WHERE REGISTRATION_NO = ? OR ROLL_NO = ?");
+        $search = trim($_POST['search_id']);
+        
+        // Find student first to verify existence and get details for the log
+        $find = $conn->prepare("SELECT STUDENT_ID, FIRST_NAME, LAST_NAME, REGISTRATION_NO FROM STUDENTS WHERE REGISTRATION_NO = ? OR ROLL_NO = ?");
         $find->bind_param("ss", $search, $search);
         $find->execute();
-        $res = $find->get_result()->fetch_assoc();
+        $student = $find->get_result()->fetch_assoc();
 
-        if ($res) {
-            $sid = $res['STUDENT_ID'];
+        if ($student) {
+            $sid = $student['STUDENT_ID'];
+            $full_name = $student['FIRST_NAME'] . ' ' . $student['LAST_NAME'];
+            
             $upd = "UPDATE STUDENTS SET STATUS = '$status_to_set' WHERE STUDENT_ID = $sid";
             if ($role !== 'SUPERADMIN') $upd .= " AND INST_ID = $sessInstId";
             
-            $conn->query($upd);
-            $message = "Student {$res['FIRST_NAME']} updated to " . ($status_to_set == 'I' ? 'Inactive' : 'Active');
-            audit_log($conn, 'STATUS_CHANGE', 'STUDENTS', $sid, null, "Status manually toggled to $status_to_set via Search");
+            if ($conn->query($upd)) {
+                $message = "Student $full_name (Reg: {$student['REGISTRATION_NO']}) is now $status_label.";
+                
+                // AUDIT LOG: Individual change tracking
+                $details = "Status manually toggled to $status_label via Quick Action for Reg No: {$student['REGISTRATION_NO']}";
+                audit_log($conn, 'STATUS_CHANGE', 'STUDENTS', $sid, $status_label, $details);
+            }
         } else {
-            $message = "No student found with ID: $search";
+            $message = "Search Error: No student found with identifier: $search";
         }
     }
 }
@@ -107,25 +121,36 @@ if ($role === 'SUPERADMIN') {
     .table-hover tbody tr:hover { background-color: rgba(13, 110, 253, 0.04); }
 </style>
 
-<div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h3 class="fw-bold mb-0">Student Status Management</h3>
-            <p class="text-muted small">Update student activity and system access permissions.</p>
-        </div>
-        <?php if ($role === 'SUPERADMIN'): ?>
-        <div class="col-md-3">
-            <form method="GET" id="instFilter">
-                <select name="inst_id" class="form-select shadow-sm" onchange="this.form.submit()">
-                    <option value="">All Institutes (Global)</option>
-                    <?php foreach($institutes as $i): ?>
-                        <option value="<?= $i['INST_ID'] ?>" <?= $filter_inst == $i['INST_ID'] ? 'selected' : '' ?>><?= $i['INST_NAME'] ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </form>
-        </div>
-        <?php endif; ?>
+<div class="container-fluid py-1">
+    <div class="d-flex justify-content-between align-items-center mb-1 pb-1 border-bottom shadow-none" 
+     style="border-bottom: 2px solid #eee !important;">
+    <!-- Left Side: Headline -->
+    <div>
+        <!--<h3 class="fw-bold mb-0 d-flex align-items-center" style="color:#1a3a5a;">
+            <i class="bi bi-people-fill text-primary me-2"></i>
+            <?= $module_title ?>
+        </h3>
+        <p class="text-muted small mb-0">
+            Manage <?= strtolower($module_title) ?> records and system access.
+        </p> -->
     </div>
+
+    <!-- Right Side: Filter (only for SUPERADMIN) -->
+    <?php if ($role === 'SUPERADMIN'): ?>
+    <div class="col-md-3">
+        <form method="GET" id="instFilter">
+            <select name="inst_id" class="form-select shadow-sm" onchange="this.form.submit()">
+                <option value="">All Institutes (Global)</option>
+                <?php foreach($institutes as $i): ?>
+                    <option value="<?= $i['INST_ID'] ?>" <?= $filter_inst == $i['INST_ID'] ? 'selected' : '' ?>>
+                        <?= $i['INST_NAME'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </form>
+    </div>
+    <?php endif; ?>
+</div>
 
     <?php if ($message): ?>
         <div class="alert alert-primary border-0 shadow-sm alert-dismissible fade show">

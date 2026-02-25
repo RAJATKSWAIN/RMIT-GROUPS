@@ -4,12 +4,13 @@
     Module      : STUDENT MANAGEMENT
     Description : Student Registration & Profile Management
     Developed By: TrinityWebEdge
-    Date Created: 06-02-2025
-    Last Updated: <?php echo date("d-m-Y"); ?>
+    Date Created: 06-02-2026
+    Last Updated: 25-02-2026
     Note        : This page defines the FMS - Fees Management System | Student Module of RMIT Groups website.
 =======================================================-->
 
 <?php
+// bulk_upload.php - FMS V 1.0.0
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -22,17 +23,25 @@ require_once BASE_PATH . '/core/validator.php';
 
 checkLogin();
 
+$role = $_SESSION['role_name'];
+$sessInstId = $_SESSION['inst_id'];
 $message = "";
 $error = "";
 
+// 1. Fetch Institutes for Superadmin Dropdown
+$institutes = ($role === 'SUPERADMIN') ? $conn->query("SELECT INST_ID, INST_NAME FROM MASTER_INSTITUTES ORDER BY INST_NAME ASC") : null;
+
 if (isset($_POST['upload'])) {
-    // 1. Check File Validity
+    // Determine target institute
+    $target_inst = ($role === 'SUPERADMIN') ? intval($_POST['target_inst_id']) : $sessInstId;
+
+    // A. Check File Validity
     $file_err = validateCSV($_FILES['csv_file']);
     if ($file_err) {
         $error = $file_err;
     } else {
-        // 2. Check CSV Content Structure
-        $content_errs = validateCSVContent($_FILES['csv_file']['tmp_name'], 15);
+        // B. Check CSV Content Structure (Now 17 Columns due to Father/Mother names)
+        $content_errs = validateCSVContent($_FILES['csv_file']['tmp_name'], 17);
         if ($content_errs) {
             $error = is_array($content_errs) ? implode("<br>", array_slice($content_errs, 0, 5)) : $content_errs;
         } else {
@@ -40,8 +49,8 @@ if (isset($_POST['upload'])) {
             fgetcsv($handle); // Skip header
 
             $inserted_count = 0;
-            $failed_rows = []; // To store rows that didn't validate
-            $row_num = 2; // Start from 2 because 1 is header
+            $failed_rows = [];
+            $row_num = 2;
 
             $conn->begin_transaction();
             try {
@@ -49,106 +58,126 @@ if (isset($_POST['upload'])) {
                     if (empty(array_filter($row))) continue;
 
                     $data = [
-                        'reg'       => trim($row[0]),
-                        'roll'      => trim($row[1]),
-                        'fname'     => trim($row[2]),
-                        'lname'     => trim($row[3]),
-                        'gender'    => strtoupper(trim($row[4])),
-                        'dob'       => trim($row[5]),
-                        'mobile'    => trim($row[6]),
-                        'email'     => trim($row[7]),
-                        'address'   => trim($row[8]),
-                        'city'      => trim($row[9]),
-                        'state'     => trim($row[10]),
-                        'pincode'   => trim($row[11]),
-                        'course'    => trim($row[12]),
-                        'semester'  => trim($row[13]),
-                        'admission' => trim($row[14])
+                        'reg'           => trim($row[0]),
+                        'roll'          => trim($row[1]),
+                        'fname'         => trim($row[2]),
+                        'lname'         => trim($row[3]),
+                        'father_name'   => trim($row[4]), // Added
+                        'mother_name'   => trim($row[5]), // Added
+                        'gender'        => strtoupper(trim($row[6])),
+                        'dob'           => trim($row[7]),
+                        'mobile'        => trim($row[8]),
+                        'email'         => trim($row[9]),
+                        'address'       => trim($row[10]),
+                        'city'          => trim($row[11]),
+                        'state'         => trim($row[12]),
+                        'pincode'       => trim($row[13]),
+                        'course'        => intval(trim($row[14])),
+                        'semester'      => intval(trim($row[15])),
+                        'admission'     => trim($row[16]),
+                        'inst_id'       => $target_inst // Assigned based on UI selection or Session
                     ];
 
-                    // Validate this specific row
+                    // C. SECURITY: Ensure Course belongs to the selected Institute
+                    $courseCheck = $conn->query("SELECT COURSE_ID FROM COURSES WHERE COURSE_ID = {$data['course']} AND INST_ID = $target_inst");
+
+                    if ($courseCheck->num_rows == 0) {
+                        $failed_rows[] = "Row $row_num: Course ID {$data['course']} not found in the selected Institute.";
+                        $row_num++;
+                        continue;
+                    }
+
+                    // D. Validate row data (Ensure your validator handles father/mother names)
                     $data_errs = validateStudentData($data, $conn);
                     
                     if (empty($data_errs)) {
-                        // Pass 'true' for $isBulk to keep the transaction management here
                         if (createStudent($conn, $data, true)) {
                             $inserted_count++;
                         } else {
-                            $failed_rows[] = "Row $row_num (Reg: {$data['reg']}): Database insertion failed.";
+                            $failed_rows[] = "Row $row_num (Reg: {$data['reg']}): Database error.";
                         }
                     } else {
-                        // Instead of throwing an exception, we record the error and continue
-                        $failed_rows[] = "Row $row_num (Reg: {$data['reg']}): " . $data_errs[0];
+                        $failed_rows[] = "Row $row_num: " . $data_errs[0];
                     }
                     $row_num++;
                 }
 
                 $conn->commit();
-                $message = "Import completed! Successfully added: $inserted_count.";
-                
+                $message = "Success! $inserted_count students imported.";
                 if (!empty($failed_rows)) {
-                    $error = "The following rows failed:<br>" . implode("<br>", array_slice($failed_rows, 0, 10));
-                    if (count($failed_rows) > 10) $error .= "<br>...and " . (count($failed_rows) - 10) . " more errors.";
+                    $error = "Errors found:<br>" . implode("<br>", array_slice($failed_rows, 0, 5));
                 }
 
             } catch (Exception $e) {
                 $conn->rollback();
-                $error = "Critical System Error: " . $e->getMessage();
+                $error = "System Error: " . $e->getMessage();
             }
             fclose($handle);
         }
-      }
-   
-} // End of upload isset
+    }
+}
 ?>
 
 <?php include BASE_PATH . '/admin/layout/header.php'; ?>
 <?php include BASE_PATH . '/admin/layout/sidebar.php'; ?>
 
-<div class="container-fluid">
+<div class="container-fluid py-4">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0 mt-4">
-                <div class="card-header bg-white py-3">
-                    <h5 class="mb-0 text-primary"><i class="bi bi-upload"></i> Bulk Student Upload</h5>
+        <div class="col-md-7">
+            <div class="card shadow border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0"><i class="bi bi-file-earmark-excel me-2"></i>Bulk Student Import</h5>
                 </div>
                 <div class="card-body p-4">
+                    
                     <?php if ($message): ?>
-                        <div class="alert alert-success alert-dismissible fade show">
-                            <?= $message ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
+                        <div class="alert alert-success"><?= $message ?></div>
                     <?php endif; ?>
 
                     <?php if ($error): ?>
-                        <div class="alert alert-danger alert-dismissible fade show">
-                            <?= $error ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
+                        <div class="alert alert-danger small"><?= $error ?></div>
                     <?php endif; ?>
 
-                    <div class="alert alert-info small">
-                        <strong>Required CSV Columns (15):</strong><br>
-                        RegNo, RollNo, FirstName, LastName, Gender, DOB, Mobile, Email, Address, City, State, Pincode, CourseID, Semester, AdmissionDate
-                    </div>
-
                     <form action="" method="POST" enctype="multipart/form-data">
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">Select CSV File</label>
-                            <input type="file" name="csv_file" class="form-control" accept=".csv" required>
+                        
+                        <?php if ($role === 'SUPERADMIN'): ?>
+                        <div class="mb-4 p-3 bg-light border rounded">
+                            <label class="form-label fw-bold text-danger">Target Institute</label>
+                            <select name="target_inst_id" class="form-select border-danger" required>
+                                <option value="">-- Choose Institute to Upload Into --</option>
+                                <?php while($inst = $institutes->fetch_assoc()): ?>
+                                    <option value="<?= $inst['INST_ID'] ?>"><?= $inst['INST_NAME'] ?></option>
+                                <?php endwhile; ?>
+                            </select>
+                            <small class="text-muted">As Superadmin, you must select which college these students belong to.</small>
                         </div>
+                        <?php endif; ?>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">1. Download Template</label>
+                            <br>
+                            <a href="template.php" class="btn btn-outline-secondary btn-sm">
+                                <i class="bi bi-download"></i> Get Correct CSV Structure
+                            </a>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">2. Upload Filled CSV</label>
+                            <input type="file" name="csv_file" class="form-control" accept=".csv" required>
+                            <div class="form-text mt-2">
+                                <strong>Required Columns (17):</strong><br>
+                                <code class="small">
+                                    RegNo, RollNo, FName, LName, FatherName, MotherName, Gender, DOB, Mobile, Email, Address, City, State, Pincode, CourseID, Semester,	AdmDate
+                                </code>
+                            </div>
+                        </div>
+
                         <div class="d-grid">
-                            <button type="submit" name="upload" class="btn btn-primary">
-                                <i class="bi bi-cloud-arrow-up"></i> Start Import
+                            <button type="submit" name="upload" class="btn btn-primary btn-lg">
+                                <i class="bi bi-cloud-check me-2"></i> Start Bulk Import
                             </button>
                         </div>
                     </form>
-
-                    <div class="mt-4 text-center">
-                        <a href="template.php" class="text-decoration-none small">
-                            <i class="bi bi-download"></i> Download CSV Template
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

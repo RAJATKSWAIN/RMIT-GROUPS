@@ -1,14 +1,14 @@
-<?php
 /*======================================================
     File Name   : list.php 
     Project     : RMIT Groups - FMS - Fees Management System
 	Module		: STUDENT MANAGEMENT
     Description : Student Registration & Profile Management
     Developed By: TrinityWebEdge
-    Date Created: 05-02-2025
+    Date Created: 05-02-2026
     Last Updated: 24-02-2026
     Note        : This page defines the FMS - Fees Management System | Student Module of RMIT Groups website.
 =======================================================*/
+<?php
 define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
 require_once BASE_PATH.'/config/db.php';
 require_once BASE_PATH.'/core/auth.php';
@@ -73,7 +73,7 @@ $institutes = ($role === 'SUPERADMIN') ? $conn->query("SELECT INST_ID, INST_NAME
 <div class="card shadow-sm border-0 p-2 p-md-4">
     <div class="d-flex flex-column mb-4 gap-3">
         <div class="d-flex justify-content-between align-items-center">
-            <h4 class="mb-0">🎓 Students Profiles</h4>
+            <h4 class="mb-0 text-primary fw-bold">🎓 Student Profile Details</h4><hr>
             <div class="d-flex gap-2">
                 <a href="add.php" class="btn btn-primary btn-sm">+ Add Student</a>
                 <a href="bulk_upload.php" class="btn btn-success btn-sm">📤 Bulk Upload</a>

@@ -40,69 +40,60 @@ function validateCSVContent($file_path, $expected_column_count = 15) {
 }
 
 /**
- * 3. Validates Student Data (Shared for Single and Bulk)
+ * Universal Student Data Validator
+ * Works for both add.php (Single) and Bulk Upload
  */
 function validateStudentData($data, $conn) {
     $errors = [];
+    $instId = intval($data['inst_id']);
 
-    /* =====================================
-       A. NULL / EMPTY CHECK
-    ===================================== */
-    $required_fields = [
-        'reg'    => 'Registration No',
-        'roll'   => 'Roll No',
-        'fname'  => 'First Name',
-        'course' => 'Course ID',
-        'mobile' => 'Mobile No',
-        'email'  => 'Email'
+    // A. Required Fields Mapping
+    $required = [
+        'reg'         => 'Registration No', 
+        'roll'        => 'Roll No', 
+        'fname'       => 'First Name', 
+        'father_name' => 'Father Name', 
+        'mother_name' => 'Mother Name', 
+        'course'      => 'Course',
+        'mobile'      => 'Mobile Number'
     ];
 
-    foreach ($required_fields as $key => $label) {
-        if (empty(trim($data[$key]))) {
-            $errors[] = "$label is required and cannot be empty.";
+    foreach ($required as $key => $label) {
+        if (!isset($data[$key]) || trim($data[$key]) === '') {
+            $errors[] = "$label is required.";
         }
     }
-
-    // Return early if basic fields are missing to avoid unnecessary DB queries
+    
+    // Return early if basic fields are missing to save DB queries
     if (!empty($errors)) return $errors;
 
-    /* =====================================
-       B. COURSE EXISTENCE CHECK
-    ===================================== */
-    $course_id = intval($data['course']);
-    $course_check = $conn->query("SELECT COURSE_ID FROM COURSES WHERE COURSE_ID = $course_id LIMIT 1");
+    // B. Course-Institute Integrity Check
+    $courseId = intval($data['course']);
+    $cCheck = $conn->prepare("SELECT COURSE_ID FROM COURSES WHERE COURSE_ID = ? AND INST_ID = ? AND STATUS = 'A'");
+    $cCheck->bind_param("ii", $courseId, $instId);
+    $cCheck->execute();
+    if ($cCheck->get_result()->num_rows === 0) {
+        $errors[] = "The selected Course is not valid for this Institute.";
+    }
+
+    // C. Global & Institute-Scoped Uniqueness Check
+    // Reg/Roll must be unique PER Institute. Email/Mobile must be unique GLOBALLY.
+    $stmt = $conn->prepare("SELECT REGISTRATION_NO, ROLL_NO, MOBILE, EMAIL FROM STUDENTS 
+                            WHERE ((REGISTRATION_NO = ? OR ROLL_NO = ?) AND INST_ID = ?) 
+                            OR (MOBILE = ? AND MOBILE != '') 
+                            OR (EMAIL = ? AND EMAIL != '') LIMIT 1");
     
-    if ($course_check->num_rows === 0) {
-        $errors[] = "Course ID '$course_id' does not exist in the COURSES table.";
+    $stmt->bind_param("ssiss", $data['reg'], $data['roll'], $instId, $data['mobile'], $data['email']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        if ($row['REGISTRATION_NO'] === $data['reg']) $errors[] = "Registration No '{$data['reg']}' already exists in this institute.";
+        if ($row['ROLL_NO'] === $data['roll']) $errors[] = "Roll No '{$data['roll']}' already exists in this institute.";
+        if (!empty($data['mobile']) && $row['MOBILE'] === $data['mobile']) $errors[] = "Mobile '{$data['mobile']}' is already registered.";
+        if (!empty($data['email']) && $row['EMAIL'] === $data['email']) $errors[] = "Email '{$data['email']}' is already registered.";
     }
-
-    /* =====================================
-       C. UNIQUENESS CHECK (Reg, Roll, Mobile, Email)
-    ===================================== */
-    $reg    = $conn->real_escape_string(trim($data['reg']));
-    $roll   = $conn->real_escape_string(trim($data['roll']));
-    $mobile = $conn->real_escape_string(trim($data['mobile']));
-    $email  = $conn->real_escape_string(trim($data['email']));
-
-    // We check all unique constraints in one query for better performance
-    $sql = "SELECT REGISTRATION_NO, ROLL_NO, MOBILE, EMAIL FROM STUDENTS 
-            WHERE REGISTRATION_NO = '$reg' 
-            OR ROLL_NO = '$roll' 
-            OR MOBILE = '$mobile' 
-            OR EMAIL = '$email' 
-            LIMIT 1";
-            
-    $check = $conn->query($sql);
-
-    if ($check && $check->num_rows > 0) {
-        $row = $check->fetch_assoc();
-        
-        if ($row['REGISTRATION_NO'] === $reg) $errors[] = "Registration No '$reg' is already registered.";
-        if ($row['ROLL_NO'] === $roll) $errors[] = "Roll No '$roll' is already assigned.";
-        if ($row['MOBILE'] === $mobile) $errors[] = "Mobile number '$mobile' is already in use.";
-        if ($row['EMAIL'] === $email) $errors[] = "Email address '$email' is already in use.";
-    }
-
+    
     return $errors;
 }
 

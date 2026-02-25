@@ -17,6 +17,7 @@ ini_set('display_errors', 1);
 define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'] . '/fees-system');
 
 require_once BASE_PATH . '/config/db.php';
+require_once BASE_PATH . '/config/audit.php';
 require_once BASE_PATH . '/core/auth.php';
 require_once BASE_PATH . '/services/student_service.php';
 require_once BASE_PATH . '/core/validator.php';
@@ -55,15 +56,21 @@ if (isset($_POST['upload'])) {
             $conn->begin_transaction();
             try {
                 while (($row = fgetcsv($handle)) !== FALSE) {
-                    if (empty(array_filter($row))) continue;
+                    if (!isset($row[0]) || empty(array_filter($row))) continue;
+
+                    if (count($row) < 17) {
+                        $failed_rows[] = "Row $row_num: Column mismatch (Found " . count($row) . ", Expected 17).";
+                        $row_num++;
+                        continue;
+                    }
 
                     $data = [
                         'reg'           => trim($row[0]),
                         'roll'          => trim($row[1]),
                         'fname'         => trim($row[2]),
                         'lname'         => trim($row[3]),
-                        'father_name'   => trim($row[4]), // Added
-                        'mother_name'   => trim($row[5]), // Added
+                        'father_name'   => trim($row[4]),
+                        'mother_name'   => trim($row[5]),
                         'gender'        => strtoupper(trim($row[6])),
                         'dob'           => trim($row[7]),
                         'mobile'        => trim($row[8]),
@@ -75,42 +82,67 @@ if (isset($_POST['upload'])) {
                         'course'        => intval(trim($row[14])),
                         'semester'      => intval(trim($row[15])),
                         'admission'     => trim($row[16]),
-                        'inst_id'       => $target_inst // Assigned based on UI selection or Session
+                        'inst_id'       => $target_inst 
                     ];
 
-                    // C. SECURITY: Ensure Course belongs to the selected Institute
-                    $courseCheck = $conn->query("SELECT COURSE_ID FROM COURSES WHERE COURSE_ID = {$data['course']} AND INST_ID = $target_inst");
+                    // C. SECURITY: Validate Course-Institute Relationship
+                    $stmt = $conn->prepare("SELECT COURSE_ID FROM COURSES WHERE COURSE_ID = ? AND INST_ID = ?");
+                    $stmt->bind_param("ii", $data['course'], $target_inst);
+                    $stmt->execute();
+                    $res = $stmt->get_result();
 
-                    if ($courseCheck->num_rows == 0) {
-                        $failed_rows[] = "Row $row_num: Course ID {$data['course']} not found in the selected Institute.";
+                    if ($res->num_rows == 0) {
+                        $failed_rows[] = "Row $row_num (Reg: {$data['reg']}): Course ID {$data['course']} does not belong to this Institute.";
                         $row_num++;
                         continue;
                     }
 
-                    // D. Validate row data (Ensure your validator handles father/mother names)
+                    // D. Data Validation
                     $data_errs = validateStudentData($data, $conn);
                     
                     if (empty($data_errs)) {
                         if (createStudent($conn, $data, true)) {
                             $inserted_count++;
                         } else {
-                            $failed_rows[] = "Row $row_num (Reg: {$data['reg']}): Database error.";
+                            $failed_rows[] = "Row $row_num (Reg: {$data['reg']}): SQL Error during insert.";
                         }
                     } else {
+                        // Capture the specific validation error (e.g., Email already exists)
                         $failed_rows[] = "Row $row_num: " . $data_errs[0];
                     }
                     $row_num++;
                 }
 
+                // E. AUDIT LOGGING
+                if ($inserted_count > 0) {
+                    $audit_payload = [
+                        'total_processed' => ($row_num - 2),
+                        'success' => $inserted_count,
+                        'failed' => count($failed_rows),
+                        'inst_id' => $target_inst
+                    ];
+                    audit_log($conn, 'BULK_IMPORT', 'STUDENTS', 0, null, json_encode($audit_payload));
+                }
+
                 $conn->commit();
-                $message = "Success! $inserted_count students imported.";
+
+                // F. OUTPUT HANDLING (THE FIX)
+                if ($inserted_count > 0) {
+                    $message = "Success! $inserted_count students imported.";
+                }
+
                 if (!empty($failed_rows)) {
-                    $error = "Errors found:<br>" . implode("<br>", array_slice($failed_rows, 0, 5));
+                    // This ensures errors are visible even if some rows succeeded
+                    $error = "<strong>Import completed with errors:</strong><br>";
+                    $error .= implode("<br>", array_slice($failed_rows, 0, 10)); // Show first 10 errors
+                    if (count($failed_rows) > 10) {
+                        $error .= "<br>...and " . (count($failed_rows) - 10) . " more errors.";
+                    }
                 }
 
             } catch (Exception $e) {
                 $conn->rollback();
-                $error = "System Error: " . $e->getMessage();
+                $error = "Critical System Error: " . $e->getMessage();
             }
             fclose($handle);
         }

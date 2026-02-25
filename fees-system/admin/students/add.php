@@ -1,14 +1,14 @@
-<!--======================================================
+<?php
+/*======================================================
     File Name   : add.php
     Project     : RMIT Groups - FMS - Fees Management System
 	Module		: STUDENT MANAGEMENT
     Description : Student Registration & Profile Management
     Developed By: TrinityWebEdge
     Date Created: 05-02-2025
-    Last Updated: 24-02-2026
+    Last Updated: 25-02-2026
     Note        : This page defines the FMS - Fees Management System | Student Module of RMIT Groups website.
-=======================================================-->
-<?php
+=======================================================*/       
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -31,29 +31,29 @@ $instId = ($role === 'SUPERADMIN' && isset($_POST['target_inst_id'])) ? intval($
 
 /* --- 5. FORM SUBMISSION HANDLING --- */
 $error = "";
-if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['refresh_only'])){
 
+if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST['refresh_only'])){
     // Mapping Form Data to Database Schema
     $data = [
-        'inst_id'   => $instId,
-        'reg'       => trim($_POST['reg'] ?? ''),
-        'roll'      => trim($_POST['roll'] ?? ''),
-        'fname'     => trim($_POST['fname'] ?? ''),
-        'lname'     => trim($_POST['lname'] ?? ''),
-        'father'    => trim($_POST['father_name'] ?? ''),
-        'mother'    => trim($_POST['mother_name'] ?? ''),
-        'gender'    => $_POST['gender'] ?? '',
-        'dob'       => $_POST['dob'] ?? '',
-        'mobile'    => trim($_POST['mobile'] ?? ''),
-        'email'     => trim($_POST['email'] ?? ''),
-        'address'   => trim($_POST['address'] ?? ''),
-        'city'      => trim($_POST['city'] ?? ''),
-        'state'     => trim($_POST['state'] ?? ''),
-        'pincode'   => trim($_POST['pincode'] ?? ''),
-        'course'    => $_POST['course'] ?? '',
-        'semester'  => $_POST['semester'] ?? 1,
-        'admission' => $_POST['admission'] ?? date('Y-m-d')
-    ];
+    'inst_id'   => $instId,
+    'reg'       => trim($_POST['reg'] ?? ''),
+    'roll'      => trim($_POST['roll'] ?? ''),
+    'fname'     => trim($_POST['fname'] ?? ''),
+    'lname'     => trim($_POST['lname'] ?? ''),
+    'father_name' => trim($_POST['father_name'] ?? ''), // CHANGED from 'father'
+    'mother_name' => trim($_POST['mother_name'] ?? ''), // CHANGED from 'mother'
+    'gender'    => $_POST['gender'] ?? '',
+    'dob'       => $_POST['dob'] ?? '',
+    'mobile'    => trim($_POST['mobile'] ?? ''),
+    'email'     => trim($_POST['email'] ?? ''),
+    'address'   => trim($_POST['address'] ?? ''),
+    'city'      => trim($_POST['city'] ?? ''),
+    'state'     => trim($_POST['state'] ?? ''),
+    'pincode'   => trim($_POST['pincode'] ?? ''),
+    'course'    => $_POST['course'] ?? '',
+    'semester'  => $_POST['semester'] ?? 1,
+    'admission' => $_POST['admission'] ?? date('Y-m-d')
+	];
 
     /* --- 6. DATA VALIDATION --- */
     $validationErrors = validateStudentData($data, $conn);

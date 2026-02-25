@@ -1,5 +1,5 @@
 <!--======================================================
-    File Name   : add.php
+    File Name   : profile.php
     Project     : RMIT Groups - FMS - Fees Management System
 	Module		: STUDENT MANAGEMENT
     Description : Student Registration & Profile Management

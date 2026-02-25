@@ -1,5 +1,5 @@
 <!--======================================================
-    File Name   : profile.php
+    File Name   : add.php
     Project     : RMIT Groups - FMS - Fees Management System
 	Module		: STUDENT MANAGEMENT
     Description : Student Registration & Profile Management
@@ -13,6 +13,7 @@
 // FMS V 1.0.0
 define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
 require_once BASE_PATH.'/config/db.php';
+require_once BASE_PATH.'/config/audit.php';
 require_once BASE_PATH.'/core/auth.php';
 
 checkLogin();
@@ -71,6 +72,17 @@ if (!empty($search)) {
     
     if ($student) {
         $pid = $student['STUDENT_ID'];
+        
+        // --- NEW AUDIT LOG CALL ---
+    	audit_log(
+        	$conn, 
+        	'PROFILE_VIEW', 
+        	'STUDENTS', 
+        	$pid, 
+        	null, 
+        	"Viewed profile of {$student['FIRST_NAME']} {$student['LAST_NAME']} (Reg: {$student['REGISTRATION_NO']})"
+    		);
+        
         $current_year_due = (float)($student['BALANCE_AMOUNT'] ?? 0) - (float)($student['PREVIOUS_DUES'] ?? 0);
 
         $all_payments_res = $conn->query("SELECT PAYMENT_ID FROM PAYMENTS WHERE STUDENT_ID = $pid");

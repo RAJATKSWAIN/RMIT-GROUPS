@@ -4,11 +4,10 @@
 	Module		: STUDENT MANAGEMENT
     Description : Student Registration & Profile Management
     Developed By: TrinityWebEdge
-    Date Created: 05-02-2025
+    Date Created: 05-02-2026
     Last Updated: 24-02-2026
     Note        : This page defines the FMS - Fees Management System | Student Module of RMIT Groups website.
 =======================================================-->
-
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -61,16 +60,9 @@ if ($isSuperAdmin) {
 <?php include BASE_PATH.'/admin/layout/header.php'; ?>
 <?php include BASE_PATH.'/admin/layout/sidebar.php'; ?>
 
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-1">
     <div class="row mb-3">
         <div class="col-md-6">
-            <h4 class="fw-bold">Promotion Audit Log</h4>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="promote.php" class="text-decoration-none">Student Promotion</a></li>
-                    <li class="breadcrumb-item active">Audit History</li>
-                </ol>
-            </nav>
         </div>
         <div class="col-md-6 text-end">
              <a href="promote.php" class="btn btn-outline-primary btn-sm mt-2"><i class="bi bi-arrow-left me-1"></i> Back to Promotion</a>

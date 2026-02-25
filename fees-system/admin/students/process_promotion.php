@@ -85,6 +85,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bulk_promote'])) {
             }
         }
 
+        /* --- ADDED AUDIT LOGGING HERE --- */
+        if ($success_count > 0) {
+            require_once BASE_PATH.'/config/audit.php'; // Ensure audit service is loaded
+
+            $isYearly = ($target_semester % 2 != 0);
+            $action_type = "BULK_PROMOTION";
+            $table_name  = "STUDENTS";
+            
+            // Create a descriptive payload for the audit trail
+            $details = json_encode([
+                'count'           => $success_count,
+                'target_semester' => $target_semester,
+                'course_id'       => $course_id,
+                'promotion_type'  => $isYearly ? 'Yearly' : 'Semester',
+                'student_list'    => implode(',', $student_ids)
+            ]);
+
+            // Call your existing audit_log function
+            audit_log($conn, $action_type, $table_name, 0, null, $details);
+        }
+        /* --- END AUDIT LOGGING --- */
+        
+        
         $conn->commit();
 
         // 4. Dynamic Feedback Message (From your old logic)

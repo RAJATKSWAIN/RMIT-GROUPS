@@ -1,9 +1,14 @@
-<?php
-/* ======================================================
+<!--======================================================
     File Name   : process_promotion.php
     Project     : RMIT Groups - FMS - Fees Management System
+    Module      : STUDENT MANAGEMENT
     Description : Backend logic with Financial Snapshots & Fee Validation
-======================================================= */
+    Developed By: TrinityWebEdge
+    Date Created: 06-02-2026
+    Last Updated: 25-02-2026
+    Note        : This page defines the FMS - Fees Management System | Student Module of RMIT Groups website.
+=======================================================-->
+<?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 

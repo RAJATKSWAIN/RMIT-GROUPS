@@ -46,7 +46,7 @@ $history = $p_stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fee History | <?= APP_NAME ?></title>
+    <title>Fee History | <?= SMS_APP_NAME ?> </title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -200,7 +200,7 @@ $history = $p_stmt->get_result();
         <footer class="mt-4 pb-2">
             <div class="d-flex justify-content-end border-top pt-2">
                 <p class="text-muted mb-0" style="font-size: 0.7rem; opacity: 0.8; letter-spacing: 0.3px;">
-                    &copy; 2026 <strong>EduRemit&trade;</strong> <span class="mx-1">|</span> Product of <strong>TrinityWebEdge</strong>
+                    &copy; 2026 <strong><?= SMS_APP_NAME ?>  Ver  <?= SMS_APP_VERSION ?> </strong> <span class="mx-1">|</span> Product of <strong>TrinityWebEdge</strong>
                 </p>
             </div>
         </footer>

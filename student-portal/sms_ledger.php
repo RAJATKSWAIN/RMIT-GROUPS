@@ -179,7 +179,7 @@ $history = $p_stmt->get_result();
                             </td>
                             <td class="fw-bold text-success">+₹<?= number_format($h['PAID_AMOUNT'], 2) ?></td>
                             <td class="text-end">
-                                <a href="../fees-system/print/receipt.php?id=<?= $h['PAYMENT_ID'] ?>" class="btn btn-sm btn-light rounded-pill border shadow-sm">
+                                <a href="../fees-system/admin/payments/receipt.php?id=<?= $h['PAYMENT_ID'] ?>" class="btn btn-sm btn-light rounded-pill border shadow-sm">
                                     <i class="bi bi-download me-1"></i> PDF
                                 </a>
                             </td>

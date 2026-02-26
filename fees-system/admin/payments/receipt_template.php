@@ -1,77 +1,79 @@
 <?php
 /**
- * Modern Academic Receipt Template (DOMPDF Compatible)
+ * ======================================================
+ * File Name    : receipt_template.php
+ * Project      : EduRemit™ - Fees Management System
+ * Description  : DYNAMIC PAYMENT COLLECTIONS RECEIPT
+ * Developed By : TrinityWebEdge
+ * ======================================================
  */
-$courseCode = strtoupper($data['COURSE_CODE'] ?? '');
-$corporateAddress = "Baidyanath Nagar, Near Sales Tax Square, Berhampur-10 (Gm.), Odisha - 760010";
-$collegeName = "HOLY GROUP OF INSTITUTIONS";
-$brandLogo = "https://via.placeholder.com/150x50?text=HOLY+GROUP"; 
-$campusAddress = "Main Campus, Academic Row, City Center";
 
-// Mapping Logic (HIT/RMIT/RMITC)
-if (in_array($courseCode, ['DME','DEE','DEC','DCSE'])) {
-    $collegeName = "HOLY INSTITUTE OF TECHNOLOGY";
-    $brandLogo = "https://rmitgroupsorg.infinityfree.me/hit/images/footerlogo.png"; 
-    $campusAddress = "Govindapur, Konisi, Berhampur (Gm.), Odisha - 761008";
-} elseif (in_array($courseCode, ['BCA','BES'])) {
-    $collegeName = "RAJIV MEMORIAL INSTITUTE OF TECHNOLOGY";
-    $brandLogo = "https://rmitgroupsorg.infinityfree.me/rmit/images/homelogo.png"; 
-    $campusAddress = "Govindapur, Konisi, Berhampur (Gm.), Odisha - 761008";
-} elseif (in_array($courseCode, ['FIT','WLE','EMC','ELT'])) {
-    $collegeName = "RAJIV MEMORIAL INDUSTRIAL TRAINING CENTER";
-    $brandLogo = "https://rmitgroupsorg.infinityfree.me/rmitc/images/footerlogo.png"; 
-    $campusAddress = "Skill Campus: Annex Building B, Sector 5, Salt Lake City, PIN-700091";
-}
+require_once BASE_PATH . '/config/db.php';
 
 /**
- * NEW LOGIC: Parsing Distributed Fee Items
- * Format: [Settled: Fee Name (₹Amount), Fee Name (₹Amount)] User Remark
+ * 1. FETCH DYNAMIC INSTITUTE & COURSE DETAILS
+ * Uses the STUDENT_ID from the $data array passed to this template
+ */
+$studentId = $data['STUDENT_ID'] ?? 0;
+$instQuery = $conn->query("
+    SELECT 
+        I.INST_NAME, I.BRAND_COLOR,
+        D.CAMPUS_ADDRESS, D.CORPORATE_ADDRESS, D.LOGO_URL, D.OFFICIAL_EMAIL, D.WEBSITE_URL,
+        C.COURSE_CODE, C.COURSE_NAME
+    FROM STUDENTS S
+    JOIN COURSES C ON S.COURSE_ID = C.COURSE_ID
+    JOIN MASTER_INSTITUTES I ON C.INST_ID = I.INST_ID
+    JOIN MASTER_INSTITUTE_DTL D ON I.INST_ID = D.INST_ID
+    WHERE S.STUDENT_ID = '$studentId'
+    LIMIT 1
+");
+
+$inst = $instQuery->fetch_assoc();
+
+// Fallbacks for safety
+$collegeName      = $inst['INST_NAME'] ?? "HOLY GROUP OF INSTITUTIONS";
+$brandLogo        = $inst['LOGO_URL'] ?? "https://via.placeholder.com/150x50?text=LOGO";
+$campusAddress    = $inst['CAMPUS_ADDRESS'] ?? "Main Campus Address";
+$corporateAddress = $inst['CORPORATE_ADDRESS'] ?? "Corporate Office Address";
+$brandColor       = $inst['BRAND_COLOR'] ?? "#1a3a5a"; 
+$courseCode       = strtoupper($inst['COURSE_CODE'] ?? 'N/A');
+
+/**
+ * 2. REMARKS PARSING LOGIC
+ * Extracts individual fee headers from the "Settled:" block
  */
 $rawRemarks = $data['REMARKS'] ?? '';
 $settledItems = [];
-$userNote = $rawRemarks;
 
-// 1. Extract the "Settled:" portion
-// We use a more flexible regex that handles potential encoding issues with the Rupee symbol
-if (preg_match('/Settled:\s*(.*?)(\]|$)/u', $rawRemarks, $matches)) {
-    $itemsString = $matches[1];
-    
-    // The text after the last item might contain the user's manual remarks
-    // We'll clean that up later if needed.
-
-    // 2. Split by comma to get each numbered fee item
+if (preg_match('/Settled:\s*\[?(.*?)(\]|User|$)/u', $rawRemarks, $matches)) {
+    $itemsString = $matches[1]; 
     $parts = explode(',', $itemsString);
+    $seenFees = [];
+
     foreach ($parts as $part) {
-        /**
- 		* REFINED LOGIC: Parsing Distributed Fee Items
- 		* This regex now ignores the currency symbol (whether it's ₹, ?, or Rs.)
- 		*/
-		if (preg_match('/Settled: (.*?)(\]|$)/', $rawRemarks, $matches)) {
-    		$itemsString = $matches[1];
-    		$parts = explode(',', $itemsString);
-    
-    		foreach ($parts as $part) {
-        	// Updated Regex: \D* matches any non-digit (like ?, ₹, or Rs.) 
-        	// then captures the decimal number
-        	if (preg_match('/\{(.*?)\}\s*\(\D*\s*([\d\.]+)\)/u', trim($part), $itemMap)) {
-            	$settledItems[] = [
-                	'name' => strtoupper($itemMap[1]),
-                	'amount' => $itemMap[2]
-            	];
-        	  }
-    		}
-		}
+        $part = trim($part);
+        if (preg_match('/[\{\[\(](.*?)[\]\}\)]\s*\(\D*\s*([\d,.]+)\)/u', $part, $itemMap)) {
+            $feeName = strtoupper(trim($itemMap[1]));
+            $feeAmount = (float)str_replace(',', '', $itemMap[2]);
+
+            if (!isset($seenFees[$feeName])) {
+                $settledItems[] = ['name' => $feeName, 'amount' => $feeAmount];
+                $seenFees[$feeName] = true;
+            }
+        }
     }
 }
 
 $currentLevel = $data['APPLICABLE_LEVEL'] ?? 'COURSE';
 $isServiceFee = in_array($currentLevel, ['COURSE','SEMESTER','YEAR','ONETIME','GLOBAL']);
 
+/**
+ * 3. CURRENCY CONVERSION LOGIC
+ */
 function getIndianCurrencyInWords($number) {
     $decimal = round($number - ($no = floor($number)), 2) * 100;
     $digits_length = strlen($no);
-    $i = 0;
-    $str = array();
+    $i = 0; $str = array();
     $words = array(
         0 => '', 1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six', 7 => 'seven', 8 => 'eight', 9 => 'nine',
         10 => 'ten', 11 => 'eleven', 12 => 'twelve', 13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen', 16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen', 19 => 'nineteen',
@@ -93,7 +95,6 @@ function getIndianCurrencyInWords($number) {
     $paise = ($decimal > 0) ? ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
     return ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -101,45 +102,40 @@ function getIndianCurrencyInWords($number) {
 <head>
 <meta charset="utf-8"/>
 <style>
-    @page { margin: 15x; }
-    body { font-family: DejaVu Sans, sans-serif; font-size: 10.5px; color: #333; line-height: 1.2; }
-    .rupee-sign {font-family: 'DejaVu Sans';}
-    .container { border: 1px solid #ccc; padding: 12px; position: relative; height: 98%; }
-    .header { border-bottom: 2px solid #1a3a5a; padding-bottom: 5px; margin-bottom: 10px; }
-    .college-title { font-size: 15px; color: #1a3a5a; text-transform: uppercase; margin: 0;  line-height: 1.1}
-    .address-box { font-size: 8.5px; color: #555; margin-top: 2px; }
-    .receipt-label { background: #1a3a5a; color: #fff; padding: 3px 6px; font-size: 11px; font-weight: bold; text-align: center; }
-    .info-table, .items-table { width: 100%; border-collapse: collapse; margin-top: 10px;  }
-    .info-table { width: 100%; margin-top: 10px; border-bottom: 1px dashed #eee; padding-bottom: 8px; }
-    .info-label { font-size: 8px; color: #777; text-transform: uppercase; }
+    @page { margin: 10px; }
+    body { font-family: DejaVu Sans, sans-serif; font-size: 10px; color: #333; line-height: 1.2; }
+    .container { border: 1px solid #ddd; padding: 15px; position: relative; border-top: 4px solid <?= $brandColor ?>; }
+    .college-title { font-size: 15px; color: <?= $brandColor ?>; text-transform: uppercase; margin: 0; font-weight: bold; }
+    .address-box { font-size: 8px; color: #666; margin-top: 3px; line-height: 1.3; }
+    .receipt-label { background: <?= $brandColor ?>; color: #fff; padding: 3px 8px; font-size: 11px; font-weight: bold; text-align: center; border-radius: 2px; }
+    .info-table { width: 100%; margin-top: 15px; border-bottom: 1px dashed #ddd; padding-bottom: 10px; }
+    .info-label { font-size: 8px; color: #999; text-transform: uppercase; letter-spacing: 0.5px; }
     .bold { font-weight: bold; }
-    .items-table th { background: #f4f4f4; color: #333; padding: 6px; font-size: 9px; border-bottom: 2px solid #1a3a5a; text-transform: uppercase; }
-    .items-table td { border-bottom: 1px solid #eee; padding: 6px 8px; font-size: 9px; vertical-align: top; }
-    .balance-box { padding: 8px; margin-top: 10px; font-size: 10.5px; border: 1px solid #ddd; border-radius: 4px; }
-    .ledger-box { background: #fffdf5; border-left: 4px solid #f39c12; }
-    .service-box { background: #f0f7ff; border-left: 4px solid #1a3a5a; }
-    .footer { margin-top: 15px; border-top: 1px solid #ccc; padding-top: 8px; font-size: 9px; text-align: center; color: #666; }
-    .fee-badge { background: #eee; padding: 2px 5px; border-radius: 3px; font-size: 9px; margin-bottom: 3px; display: inline-block; }
+    .items-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .items-table th { background: #f9f9f9; color: #333; padding: 6px; font-size: 9px; border-bottom: 2px solid <?= $brandColor ?>; text-transform: uppercase; }
+    .items-table td { border-bottom: 1px solid #f0f0f0; padding: 8px 6px; font-size: 10px; }
+    .balance-box { padding: 8px; margin-top: 10px; font-size: 11px; border-radius: 4px; }
+    .ledger-box { background: #fffcf5; border: 1px solid #f39c12; color: #7d4e00; }
+    .service-box { background: #f0f7ff; border: 1px solid #1a3a5a; color: #1a3a5a; }
+    .footer { margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px; font-size: 8px; text-align: center; color: #999; }
 </style>
-    
 </head>
-    
 <body>
-    
+
 <div class="container">
     <table width="100%">
         <tr>
-            <td width="20%"><img src="<?= $brandLogo ?>" style="width:110px;"></td>
-            <td width="50%">
-                <h1 class="college-title"><?= $collegeName ?></h1>
+            <td width="20%"><img src="<?= $brandLogo ?>" style="max-width:120px; max-height: 60px;"></td>
+            <td width="55%">
+                <h1 class="college-title"><?= htmlspecialchars($collegeName) ?></h1>
                 <div class="address-box">
-                    <strong>Campus:</strong> <?= $campusAddress ?><br>
-                    <strong>Corporate:</strong> <?= $corporateAddress ?>
+                    <strong>Campus:</strong> <?= htmlspecialchars($campusAddress) ?><br>
+                    <strong>Office:</strong> <?= htmlspecialchars($corporateAddress) ?>
                 </div>
             </td>
-            <td width="30%" align="right">
+            <td width="25%" align="right" valign="top">
                 <div class="receipt-label">OFFICIAL RECEIPT</div>
-                <div style="margin-top:8px;">
+                <div style="margin-top:10px; font-size: 9px;">
                     <span class="bold">No:</span> <?= $data['RECEIPT_NO'] ?><br>
                     <span class="bold">Date:</span> <?= date('d-M-Y', strtotime($data['PAYMENT_DATE'])) ?>
                 </div>
@@ -149,88 +145,86 @@ function getIndianCurrencyInWords($number) {
 
     <table class="info-table">
         <tr>
-            <td width="55%">
-                <div class="info-label">Student Details</div>
-                <div class="bold" style="font-size:13px;"><?= strtoupper($data['FIRST_NAME'].' '.$data['LAST_NAME']) ?></div>
-                <div class="bold text-muted">REG NO: <?= $data['REGISTRATION_NO'] ?></div>
+            <td width="60%">
+                <div class="info-label">Candidate Particulars</div>
+                <div class="bold" style="font-size:14px; color: #111;"><?= strtoupper($data['FIRST_NAME'].' '.$data['LAST_NAME']) ?></div>
+                <div class="bold text-muted" style="margin-top: 2px;">REGISTRATION NO : <?= $data['REGISTRATION_NO'] ?></div>
             </td>
-            <td width="45%" align="right">
-                <div class="info-label">Academic Info</div>
-                <div class="bold"><?= $data['COURSE_NAME'] ?> (<?= $courseCode ?>)</div>
-                <div class="bold" style="color:#1a3a5a;">Mode: <?= $data['PAYMENT_MODE'] ?> <?= $data['TXN_REF'] ? "({$data['TXN_REF']})" : '' ?></div>
+            <td width="40%" align="right">
+                <div class="info-label">Academic Program</div>
+                <div class="bold"><?= $inst['COURSE_NAME'] ?></div>
+                <div class="bold" style="color:<?= $brandColor ?>; font-size: 9px;">CODE: <?= $courseCode ?> | MODE: <?= $data['PAYMENT_MODE'] ?></div>
             </td>
         </tr>
     </table>
 
     <table class="items-table">
-    <thead>
-        <tr>
-            <th align="left" width="70%">Description of Fee Particulars</th>
-            <th align="right" width="30%">Amount (INR)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php if (!empty($settledItems)): ?>
-            <?php foreach ($settledItems as $item): ?>
+        <thead>
             <tr>
-                <td>
-                    <div class="bold" style="color: #1a3a5a;"><?= $item['name'] ?></div>
-                    <div style="font-size: 8px; color: #888; text-transform: uppercase;">
-                        Payment received for <?= $item['name'] ?>
-                    </div>
+                <th align="left" width="70%">Description of Fees</th>
+                <th align="right" width="30%">Amount (INR)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($settledItems)): ?>
+                <?php foreach ($settledItems as $item): ?>
+                <tr>
+                    <td>
+                        <div class="bold" style="color: #333;"><?= htmlspecialchars($item['name']) ?></div>
+                        <div style="font-size: 7.5px; color: #aaa; text-transform: uppercase;">Payment Settlement for Academic Session</div>
+                    </td>
+                    <td align="right" class="bold">
+                        <?= number_format($item['amount'], 2) ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td>
+                        <div class="bold">ACADEMIC FEE COLLECTION</div>
+                        <div style="font-size: 8px; color: #aaa;">GENERAL CONSOLIDATED ACCOUNT</div>
+                    </td>
+                    <td align="right" class="bold">
+                        <?= number_format($data['PAID_AMOUNT'], 2) ?>
+                    </td>
+                </tr>
+            <?php endif; ?>
+
+            <tr style="background-color: #fcfcfc;">
+                <td align="right" style="border-top: 2px solid <?= $brandColor ?>; padding-top: 12px;">
+                    <span class="bold" style="font-size: 11px;">TOTAL SETTLED : </span>
                 </td>
-                <td align="right" class="bold">
-                    <?= number_format($item['amount'], 2) ?>
+                <td align="right" style="border-top: 2px solid <?= $brandColor ?>; padding-top: 12px;">
+                    <span class="bold" style="font-size: 14px; color: <?= $brandColor ?>;">
+                        &#8377; <?= number_format($data['PAID_AMOUNT'], 2) ?>
+                    </span>
                 </td>
             </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr>
-                <td>
-                    <div class="bold">ACADEMIC FEE COLLECTION</div>
-                    <div style="font-size: 8px; color: #888;">GENERAL CONSOLIDATED FEES</div>
-                </td>
-                <td align="right" class="bold">
-                    <?= number_format($data['PAID_AMOUNT'], 2) ?>
-                </td>
-            </tr>
-        <?php endif; ?>
+        </tbody>
+    </table>
 
-        <tr style="background-color: #f8f9fa;">
-            <td align="right" style="border-top: 2px solid #1a3a5a; padding-top: 12px;">
-                <span class="bold" style="font-size: 12px;">GRAND TOTAL PAID:</span>
-            </td>
-            <td align="right" style="border-top: 2px solid #1a3a5a; padding-top: 12px;">
-                <span class="bold" style="font-size: 14px; color: #1a3a5a;">
-                    &#8377; <?= number_format($data['PAID_AMOUNT'], 2) ?>
-                </span>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<div style="margin-top: 10px; padding: 5px; border-bottom: 1px solid #eee;">
-    <span style="font-size: 10px; font-style: italic;">
-        <strong>Rupees in words:</strong> 
-        <?php echo strtoupper(getIndianCurrencyInWords($data['PAID_AMOUNT'])); ?> ONLY
-    </span>
-</div>
+    <div style="margin-top: 15px; padding: 8px; background: #fbfbfb; border: 1px solid #eee;">
+        <span style="font-size: 9px; text-transform: uppercase;">
+            <strong>Amount in Words:</strong> 
+            <?php echo getIndianCurrencyInWords($data['PAID_AMOUNT']); ?> only
+        </span>
+    </div>
 
     <?php if ($isServiceFee): ?>
         <div class="balance-box service-box">
-            <span class="bold" style="color:#1a3a5a;">PAYMENT STATUS:</span><br>
-            <span>Your payment has been successfully adjusted against the selected fee headers. No further dues for these items this session.</span>
+            <span class="bold">PAYMENT STATUS : VERIFIED</span><br>
+            <span style="font-size: 9px;">This transaction has been successfully adjusted against specific service fee headers.</span>
         </div>
     <?php else: ?>
         <div class="balance-box ledger-box">
             <table width="100%">
                 <tr>
                     <td>
-                        <span class="bold">ACCOUNT STATUS:</span><br>
-                        <span style="color:#666; font-size:9px;">Current Outstanding Balance after this transaction.</span>
+                        <span class="bold">OUTSTANDING BALANCE :</span><br>
+                        <span style="font-size: 8.5px;">Remaining dues in the student ledger after this transaction.</span>
                     </td>
                     <td align="right">
-                        <span class="bold" style="font-size:16px; color:#d35400;">&#8377; <?= number_format($data['BALANCE_AMOUNT'],2) ?></span>
+                        <span class="bold" style="font-size:16px;">&#8377; <?= number_format($data['BALANCE_AMOUNT'],2) ?></span>
                     </td>
                 </tr>
             </table>
@@ -238,11 +232,11 @@ function getIndianCurrencyInWords($number) {
     <?php endif; ?>
 
     <div class="footer">
-        * This is a computer-generated academic receipt. No physical signature required.<br>
+        <p style="margin-bottom: 5px;">* This is a computer-generated document. It does not require a physical signature.</p>
         <strong>Note:</strong> Fees once paid are non-refundable and non-transferable.<br>
         Document Generated on <?= date('d-M-Y H:i:s') ?>
     </div>
 </div>
-        
+
 </body>
 </html>

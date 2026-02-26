@@ -1,69 +1,78 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| FMS Global Audit Logger (Refined for InfinityFree/PHP 8.x)
-|--------------------------------------------------------------------------
-*/
-
+/* ===========================================*/
+/* -- FMS Global Universal Audit Logger (Refined) -- */
+/*=========================================== */
 if (!function_exists('audit_log')) {
-
-    function audit_log(
-        $conn,
-        $action,
-        $table = null,
-        $refId = null,
-        $old = null,
-        $new = null,
-        $amount = 0
-    ) {
+    /**
+     * @param mysqli $conn    The active database connection
+     * @param string $action  e.g., 'INSERT', 'UPDATE', 'DELETE', 'LOGIN'
+     * @param string|null $table   The table name (e.g., 'STUDENTS')
+     * @param int|null $refId      The PK/ID of the record
+     * @param mixed $old           Previous data
+     * @param mixed $new           New data or Remarks
+     * @param float $amount        Financial value
+     */
+    function audit_log($conn, $action, $table = null, $refId = null, $old = null, $new = null, $amount = 0) {
         try {
-            // Safety check for connection
+            // 1. Connection & Session Guard
             if (!$conn || $conn->connect_error) return;
+            if (session_status() === PHP_SESSION_NONE) session_start();
 
-            // Ensure session is started to get admin_id
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
+            // 2. ADMIN_ID Identification
+            $adminId = $_SESSION['admin_id'] ?? $_SESSION['user_id'] ?? null;
+
+            // If no admin is logged in, we use a "System" ID (0) or skip.
+            // Check if your DB allows 0 in ADMIN_MASTER; if not, keep the return.
+            if (empty($adminId) || !is_numeric($adminId)) {
+                error_log("Audit Log Skipped: No valid ADMIN_ID session found for action: $action");
+                return;
             }
 
-            $adminId = $_SESSION['admin_id'] ?? null;
-            $ip      = $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
+            // 3. Data Preparation
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
+            // Split in case of multiple proxy IPs
+            $ip = explode(',', $ip)[0];
 
-            // Convert arrays to JSON strings, ensure they are strings or NULL
-            $oldValue = !is_null($old) ? json_encode($old) : null;
-            $newValue = !is_null($new) ? json_encode($new) : null;
-            
-            // Format amount to ensure it's a double/float for the 'd' type
+            $refIdVal  = ($refId !== null) ? intval($refId) : null;
             $amountVal = (float)$amount;
 
+            // JSON_UNESCAPED_SLASHES prevents URLs from looking messy
+            $oldValue = is_array($old) ? json_encode($old, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) : (string)$old;
+            $newValue = is_array($new) ? json_encode($new, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) : (string)$new;
+
+            // 4. Database Insertion
+            // Note: If REF_ID is null, we need to handle that in bind_param
             $sql = "INSERT INTO AUDIT_LOG 
                     (ACTION_TYPE, REF_TABLE, REF_ID, OLD_VALUE, NEW_VALUE, AMOUNT, ADMIN_ID, IP_ADDRESS, CREATED_AT) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
             $stmt = $conn->prepare($sql);
-            
             if ($stmt) {
-                // Type mapping: 
-                // s=string, i=integer, d=double
-                // action(s), table(s), refId(i), old(s), new(s), amount(d), adminId(i), ip(s)
-                $stmt->bind_param(
-                    "ssissdis", 
+                // We use 's' for refId if it can be null, or handle it specifically
+                $stmt->bind_param("ssissdis", 
                     $action, 
                     $table, 
-                    $refId, 
+                    $refIdVal, 
                     $oldValue, 
                     $newValue, 
                     $amountVal, 
                     $adminId, 
                     $ip
                 );
-
-                $stmt->execute();
+                
+                if (!$stmt->execute()) {
+                    // Check for Foreign Key failure (1452)
+                    if ($stmt->errno === 1452) {
+                        error_log("Audit Log FK Error: ADMIN_ID $adminId does not exist in ADMIN_MASTER.");
+                    } else {
+                        error_log("Audit Log Execution Error: " . $stmt->error);
+                    }
+                }
                 $stmt->close();
             }
-
-        } catch (Exception $e) {
-            // Silently fail so the main business logic (like a payment) still finishes
-            error_log("Audit Log Error: " . $e->getMessage());
+        } catch (Throwable $e) {
+            // Throwable catches both Errors and Exceptions (PHP 7+)
+            error_log("Universal Audit Error: " . $e->getMessage());
         }
     }
 }

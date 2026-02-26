@@ -3,18 +3,23 @@ define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
 require_once BASE_PATH.'/config/db.php';
 require_once BASE_PATH.'/core/auth.php';
 
-checkLogin();
+//checkLogin();
 
 $payment_id = $_GET['id'] ?? null;
 if (!$payment_id) die("Invalid Receipt Request.");
 
-$sql = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, s.REGISTRATION_NO, s.ROLL_NO, 
+// 1. UPDATED SQL: Joined with MASTER_INSTITUTES and MASTER_INSTITUTE_DTL
+$sql = "SELECT p.*, s.FIRST_NAME, s.LAST_NAME, s.REGISTRATION_NO, s.ROLL_NO, s.STUDENT_ID,
                c.COURSE_NAME, c.COURSE_CODE, 
-               a.FULL_NAME as COLLECTED_BY_NAME
+               a.FULL_NAME as COLLECTED_BY_NAME,
+               I.INST_NAME, I.BRAND_COLOR,
+               D.CAMPUS_ADDRESS, D.CORPORATE_ADDRESS, D.LOGO_URL
         FROM PAYMENTS p
         JOIN STUDENTS s ON p.STUDENT_ID = s.STUDENT_ID
         JOIN COURSES c ON s.COURSE_ID = c.COURSE_ID
         JOIN ADMIN_MASTER a ON p.COLLECTED_BY = a.ADMIN_ID
+        JOIN MASTER_INSTITUTES I ON c.INST_ID = I.INST_ID
+        JOIN MASTER_INSTITUTE_DTL D ON I.INST_ID = D.INST_ID
         WHERE p.PAYMENT_ID = ?";
 
 $stmt = $conn->prepare($sql);
@@ -24,27 +29,15 @@ $data = $stmt->get_result()->fetch_assoc();
 
 if (!$data) die("Receipt not found.");
 
-// --- BRANDING LOGIC ---
-$courseCode = strtoupper($data['COURSE_CODE']);
-$collegeName = "HOLY GROUP OF INSTITUTIONS";
-$brandLogo = "https://via.placeholder.com/150x50?text=HOLY+GROUP"; 
-$campusAddress = "Govindapur, Konisi, Berhampur (Gm.), Odisha - 761008";
-$corporateAddress = "Baidanath Nagar, Near Sales Tax Office, Berhampur, Odisha";
+// --- DYNAMIC BRANDING LOGIC (Replaces Hardcoded if/else) ---
+$courseCode       = strtoupper($data['COURSE_CODE']);
+$collegeName      = $data['INST_NAME'];
+$brandLogo        = $data['LOGO_URL'];
+$campusAddress    = $data['CAMPUS_ADDRESS'];
+$corporateAddress = $data['CORPORATE_ADDRESS'];
+$brandColor       = $data['BRAND_COLOR'] ?? '#0d6efd'; // Use this for dynamic styling if desired
 
-if (in_array($courseCode, ['DME', 'DEE', 'DEC', 'DCSE'])) {
-    $collegeName = "HOLY INSTITUTE OF TECHNOLOGY";
-    $brandLogo = "https://rmitgroupsorg.infinityfree.me/hit/images/footerlogo.png"; 
-} elseif (in_array($courseCode, ['BCA', 'BES'])) {
-    $collegeName = "RAJIV MEMORIAL INSTITUTE OF TECHNOLOGY";
-    $brandLogo = "https://rmitgroupsorg.infinityfree.me/rmit/images/homelogo.png"; 
-} elseif (in_array($courseCode, ['FIT', 'WLD', 'EMC', 'ELT'])) {
-    $collegeName = "RAJIV MEMORIAL INDUSTRIAL TRAINING CENTER";
-    $campusAddress = "Bye Pass N.H.-5, Berhampur ,Ganjam , Odisha - 760010";
-    $brandLogo = "https://rmitgroupsorg.infinityfree.me/rmitc/images/footerlogo.png"; 
-}
-
-
-// --- REMARKS PARSER ---
+// --- REMARKS PARSER (Keep your existing logic) ---
 $rawRemarks = $data['REMARKS'] ?? '';
 $cleanRemarks = str_replace('?', '&#8377;', $rawRemarks);
 $sanitized = str_replace(['{', '}', '(', ')'], '', $cleanRemarks);
@@ -59,11 +52,11 @@ $displayRemarks = $sanitized;
 $verify_base_url = "https://rmitgroupsorg.infinityfree.me/fees-system/verify_receipt.php?id=";
 $qr_code_url = "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" . urlencode($verify_base_url . $data['PAYMENT_ID']);
 
+// --- CURRENCY FUNCTION (Keep your existing logic) ---
 function getIndianCurrencyInWords($number) {
     $decimal = round($number - ($no = floor($number)), 2) * 100;
     $digits_length = strlen($no);
-    $i = 0;
-    $str = array();
+    $i = 0; $str = array();
     $words = array(
         0 => '', 1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six', 7 => 'seven', 8 => 'eight', 9 => 'nine',
         10 => 'ten', 11 => 'eleven', 12 => 'twelve', 13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen', 16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen', 19 => 'nineteen',
@@ -85,8 +78,6 @@ function getIndianCurrencyInWords($number) {
     $paise = ($decimal > 0) ? ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
     return ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
 }
-
-
 ?>
 
 <!DOCTYPE html>

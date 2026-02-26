@@ -1,3 +1,12 @@
+<!--======================================================
+    File Name   : InvoiceService.php
+    Project     : RMIT Groups - FMS - Fees Management System
+    Description : SERVICE FOR INVOICE GENERATION
+    Developed By: TrinityWebEdge
+    Date Created: 06-02-2025
+    Last Updated: 66-02-2025
+    Note        : This page defines the FMS - Fees Management System | BACKEND SERVICES MODULE of RMIT Groups website.
+=======================================================-->
 <?php
 /**
  * UPDATED INVOICE SERVICE
@@ -32,6 +41,11 @@ class InvoiceService {
         if (!$data) {
             throw new Exception("Unable to find payment record for ID: " . $payment_id);
         }
+        
+        // --- CRITICAL FIX START ---
+        // We define $conn here so the included template can "see" it inside this method's scope.
+        $conn = $this->conn; 
+        // --- CRITICAL FIX END ---
 
         // 2. Capture HTML Template
         ob_start();
@@ -89,8 +103,12 @@ class InvoiceService {
     }
 
     private function saveToDatabase($payment_id, $student_id, $invoice_no, $path) {
-        $stmt = $this->conn->prepare("INSERT INTO INVOICES (PAYMENT_ID, STUDENT_ID, INVOICE_NO, FILE_PATH) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("iiss", $payment_id, $student_id, $invoice_no, $path);
-        $stmt->execute();
-    }
+    	// USE ON DUPLICATE KEY UPDATE so you don't get multiple rows for one payment
+    	$sql = "INSERT INTO INVOICES (PAYMENT_ID, STUDENT_ID, INVOICE_NO, FILE_PATH) 
+            	VALUES (?, ?, ?, ?)
+            	ON DUPLICATE KEY UPDATE FILE_PATH = VALUES(FILE_PATH)";
+    	$stmt = $this->conn->prepare($sql);
+    	$stmt->bind_param("iiss", $payment_id, $student_id, $invoice_no, $path);
+    	$stmt->execute();
+	}
 }

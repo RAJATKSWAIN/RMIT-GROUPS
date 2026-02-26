@@ -238,10 +238,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="footer-text">
         <p class="text-muted mb-0" style="font-size: 0.7rem; opacity: 0.8; letter-spacing: 0.3px;">
-            &copy; 2026 <strong><?= SMS_APP_NAME ?> v<?= SMS_APP_VERSION ?></strong> 
+            &copy; 2026 <?= SMS_APP_NAME ?> v<?= SMS_APP_VERSION ?>
             <span class="mx-1">|</span> Product of <strong>TrinityWebEdge</strong>
         </p>
-        <p class="mb-0"> Powered by <strong>TrinityWebEdge</strong> </p>
     </div>
     
 </div>

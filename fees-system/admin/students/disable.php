@@ -28,7 +28,6 @@ $offset      = ($page - 1) * $limit;
 $filter_inst = $_GET['inst_id'] ?? ($role === 'SUPERADMIN' ? '' : $sessInstId);
 
 // --- 2. HANDLE ACTIONS ---
-// --- 2. HANDLE ACTIONS ---
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
     $status_to_set = ($_POST['action'] == 'disable') ? 'I' : 'A';
     $status_label  = ($status_to_set == 'I') ? 'INACTIVE' : 'ACTIVE';

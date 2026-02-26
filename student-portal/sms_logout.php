@@ -1,3 +1,12 @@
+<!--======================================================
+    File Name   : sms_logout.php
+    Project     : RMIT Groups - FMS - Fees Management System
+    Description : SMS - Student Management Portal | Logout Page
+    Developed By: TrinityWebEdge
+    Date Created: 25-02-2026
+    Last Updated: 26-02-2026
+    Note        : This page defines the SMS - Student Management Portal | Dashboard Page.
+=======================================================-->
 <?php
 // student-portal/sms_logout.php
 require_once __DIR__ . '/../fees-system/config/config.php';

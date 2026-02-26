@@ -4,132 +4,269 @@
     Module      : STUDENT MANAGEMENT
     Description : Student Registration & Profile Management
     Developed By: TrinityWebEdge
-    Date Created: 06-02-2025
-    Last Updated: <?php echo date("d-m-Y"); ?>
+    Date Created: 06-02-2026
+    Last Updated: 25-02-2026
     Note        : This page defines the FMS - Fees Management System | Student Module of RMIT Groups website.
 =======================================================-->
-
 <?php
+// disable.php - FMS V 1.0.0
 define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
 require_once BASE_PATH.'/config/db.php';
+require_once BASE_PATH.'/config/audit.php';
 require_once BASE_PATH.'/core/auth.php';
 
 checkLogin();
 
-$message = "";
+$role       = $_SESSION['role_name'];
+$sessInstId = $_SESSION['inst_id'];
+$message    = "";
 
-// --- HANDLE ACTION ---
+// --- 1. PAGINATION & FILTER CONFIG ---
+$limit       = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+$page        = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset      = ($page - 1) * $limit;
+$filter_inst = $_GET['inst_id'] ?? ($role === 'SUPERADMIN' ? '' : $sessInstId);
+
+// --- 2. HANDLE ACTIONS ---
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
     $status_to_set = ($_POST['action'] == 'disable') ? 'I' : 'A';
+    $status_label  = ($status_to_set == 'I') ? 'INACTIVE' : 'ACTIVE';
     
-    // 1. Bulk Disable Logic
+    // A. Bulk Action Logic
     if (isset($_POST['student_ids']) && is_array($_POST['student_ids'])) {
-        $ids = implode(',', array_map('intval', $_POST['student_ids']));
-        $conn->query("UPDATE STUDENTS SET STATUS = '$status_to_set' WHERE STUDENT_ID IN ($ids)");
-        $message = "Selected students updated successfully.";
+        $ids = array_map('intval', $_POST['student_ids']);
+        $id_str = implode(',', $ids);
+        
+        $sql = "UPDATE STUDENTS SET STATUS = '$status_to_set' WHERE STUDENT_ID IN ($id_str)";
+        if ($role !== 'SUPERADMIN') $sql .= " AND INST_ID = $sessInstId";
+
+        if ($conn->query($sql)) {
+            $affected = $conn->affected_rows;
+            $message = "$affected students updated successfully to $status_label.";
+            
+            // AUDIT LOG: Detailed payload for bulk updates
+            $details = "User ID: {$_SESSION['user_id']} updated status to $status_label for Student IDs: [$id_str]";
+            audit_log($conn, 'BULK_STATUS_CHANGE', 'STUDENTS', null, $status_label, $details);
+        }
     } 
-    // 2. Single Search Disable Logic
+    
+    // B. Single Search Action Logic
     elseif (!empty($_POST['search_id'])) {
-        $search = $_POST['search_id'];
-        $stmt = $conn->prepare("UPDATE STUDENTS SET STATUS = '$status_to_set' WHERE REGISTRATION_NO = ? OR ROLL_NO = ?");
-        $stmt->bind_param("ss", $search, $search);
-        $stmt->execute();
-        if ($stmt->affected_rows > 0) {
-            $message = "Student status updated successfully.";
+        $search = trim($_POST['search_id']);
+        
+        // Find student first to verify existence and get details for the log
+        $find = $conn->prepare("SELECT STUDENT_ID, FIRST_NAME, LAST_NAME, REGISTRATION_NO FROM STUDENTS WHERE REGISTRATION_NO = ? OR ROLL_NO = ?");
+        $find->bind_param("ss", $search, $search);
+        $find->execute();
+        $student = $find->get_result()->fetch_assoc();
+
+        if ($student) {
+            $sid = $student['STUDENT_ID'];
+            $full_name = $student['FIRST_NAME'] . ' ' . $student['LAST_NAME'];
+            
+            $upd = "UPDATE STUDENTS SET STATUS = '$status_to_set' WHERE STUDENT_ID = $sid";
+            if ($role !== 'SUPERADMIN') $upd .= " AND INST_ID = $sessInstId";
+            
+            if ($conn->query($upd)) {
+                $message = "Student $full_name (Reg: {$student['REGISTRATION_NO']}) is now $status_label.";
+                
+                // AUDIT LOG: Individual change tracking
+                $details = "Status manually toggled to $status_label via Quick Action for Reg No: {$student['REGISTRATION_NO']}";
+                audit_log($conn, 'STATUS_CHANGE', 'STUDENTS', $sid, $status_label, $details);
+            }
         } else {
-            $message = "No student found with that ID.";
+            $message = "Search Error: No student found with identifier: $search";
         }
     }
 }
 
-// Fetch only Active students for the list (to be disabled)
-$students = $conn->query("SELECT S.*, C.COURSE_NAME FROM STUDENTS S JOIN COURSES C ON S.COURSE_ID = C.COURSE_ID WHERE S.STATUS = 'A' ORDER BY S.FIRST_NAME ASC");
+// --- 3. FETCH DATA ---
+$where = " WHERE 1=1 ";
+if ($role !== 'SUPERADMIN' || !empty($filter_inst)) {
+    $target_inst = !empty($filter_inst) ? (int)$filter_inst : (int)$sessInstId;
+    $where .= " AND S.INST_ID = $target_inst ";
+}
 
-//include BASE_PATH.'/admin/layout/slider.php'; 
+// Total count for pagination
+$total_res = $conn->query("SELECT COUNT(*) as total FROM STUDENTS S $where");
+$total_records = $total_res->fetch_assoc()['total'];
+$total_pages = ceil($total_records / $limit);
+
+// Main List Query
+$sql = "SELECT S.*, C.COURSE_NAME, I.INST_NAME 
+        FROM STUDENTS S 
+        JOIN COURSES C ON S.COURSE_ID = C.COURSE_ID 
+        JOIN MASTER_INSTITUTES I ON S.INST_ID = I.INST_ID
+        $where 
+        ORDER BY S.STATUS ASC, S.FIRST_NAME ASC 
+        LIMIT $offset, $limit";
+$students = $conn->query($sql);
+
+$institutes = [];
+if ($role === 'SUPERADMIN') {
+    $inst_list = $conn->query("SELECT INST_ID, INST_NAME FROM MASTER_INSTITUTES");
+    while($row = $inst_list->fetch_assoc()) $institutes[] = $row;
+}
 ?>
 
 <?php include BASE_PATH.'/admin/layout/header.php'; ?>
-
 <?php include BASE_PATH.'/admin/layout/sidebar.php'; ?>
 
-<div class="container-fluid">
+<style>
+    .fms-card { border-radius: 12px; transition: transform 0.2s; }
+    .status-badge { font-size: 0.75rem; padding: 5px 12px; border-radius: 20px; }
+    .pagination .page-link { border-radius: 8px; margin: 0 3px; border: none; color: #555; }
+    .pagination .active .page-link { background: #0d6efd; color: white; }
+    .table-hover tbody tr:hover { background-color: rgba(13, 110, 253, 0.04); }
+</style>
+
+<div class="container-fluid py-1">
+    <div class="d-flex justify-content-between align-items-center mb-1 pb-1 border-bottom shadow-none" 
+     style="border-bottom: 2px solid #eee !important;">
+    <!-- Left Side: Headline -->
+    <div>
+        <!--<h3 class="fw-bold mb-0 d-flex align-items-center" style="color:#1a3a5a;">
+            <i class="bi bi-people-fill text-primary me-2"></i>
+            <?= $module_title ?>
+        </h3>
+        <p class="text-muted small mb-0">
+            Manage <?= strtolower($module_title) ?> records and system access.
+        </p> -->
+    </div>
+
+    <!-- Right Side: Filter (only for SUPERADMIN) -->
+    <?php if ($role === 'SUPERADMIN'): ?>
+    <div class="col-md-3">
+        <form method="GET" id="instFilter">
+            <select name="inst_id" class="form-select shadow-sm" onchange="this.form.submit()">
+                <option value="">All Institutes (Global)</option>
+                <?php foreach($institutes as $i): ?>
+                    <option value="<?= $i['INST_ID'] ?>" <?= $filter_inst == $i['INST_ID'] ? 'selected' : '' ?>>
+                        <?= $i['INST_NAME'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </form>
+    </div>
+    <?php endif; ?>
+</div>
+
     <?php if ($message): ?>
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-            <?= $message ?>
+        <div class="alert alert-primary border-0 shadow-sm alert-dismissible fade show">
+            <i class="bi bi-info-circle me-2"></i> <?= $message ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     <?php endif; ?>
 
     <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-white py-3">
-                    <h5 class="mb-0 text-danger">Single Disable</h5>
-                </div>
+        <div class="col-lg-3">
+            <div class="card fms-card border-0 shadow-sm mb-4">
                 <div class="card-body">
+                    <h6 class="fw-bold mb-3"><i class="bi bi-search me-2"></i>Quick Search & Action</h6>
                     <form method="POST">
                         <div class="mb-3">
-                            <label class="form-label small">Reg No or Roll No</label>
-                            <input type="text" name="search_id" class="form-control" placeholder="Enter ID..." required>
+                            <input type="text" name="search_id" class="form-control" placeholder="Reg No / Roll No" required>
                         </div>
                         <div class="d-grid gap-2">
-                            <button type="submit" name="action" value="disable" class="btn btn-danger">Disable Student</button>
-                            <button type="submit" name="action" value="activate" class="btn btn-outline-success">Re-Activate</button>
+                            <button type="submit" name="action" value="activate" class="btn btn-success"><i class="bi bi-person-check"></i> Re-Activate</button>
+                            <button type="submit" name="action" value="disable" class="btn btn-outline-danger"><i class="bi bi-person-x"></i> Disable Student</button>
                         </div>
                     </form>
                 </div>
             </div>
-            
-            <div class="card shadow-sm border-0 mt-4 bg-light">
-                <div class="card-body small text-muted">
-                    <strong>Note:</strong> Disabling a student will set their status to 'I' (Inactive). They will still remain in the database for financial records.
+
+            <div class="card fms-card border-0 shadow-sm bg-primary text-white">
+                <div class="card-body">
+                    <div class="small opacity-75">Total Records Found</div>
+                    <h2 class="fw-bold mb-0"><?= $total_records ?></h2>
+                    <hr class="my-2 opacity-25">
+                    <div class="small">Page <?= $page ?> of <?= $total_pages ?></div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-8">
-            <form method="POST" id="bulkForm">
-                <div class="card shadow-sm border-0">
-                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Active Students List</h5>
-                        <button type="submit" name="action" value="disable" class="btn btn-sm btn-danger" onclick="return confirm('Disable selected students?')">
-                            Disable Selected
-                        </button>
+        <div class="col-lg-9">
+            <form method="POST">
+                <div class="card fms-card border-0 shadow-sm">
+                    <div class="card-header bg-white py-3">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h6 class="fw-bold mb-0">Student Registry</h6>
+                            </div>
+                            <div class="col-auto d-flex align-items-center">
+                                <label class="me-2 small text-muted">Show:</label>
+                                <select class="form-select form-select-sm me-3" style="width: 80px;" onchange="location.href='?limit='+this.value">
+                                    <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
+                                    <option value="25" <?= $limit == 25 ? 'selected' : '' ?>>25</option>
+                                    <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
+                                    <option value="100" <?= $limit == 100 ? 'selected' : '' ?>>100</option>
+                                </select>
+                                <button type="submit" name="action" value="disable" class="btn btn-sm btn-danger px-3 shadow-sm rounded-pill" onclick="return confirm('Disable selected?')">
+                                    <i class="bi bi-person-x-fill me-1"></i> Bulk Disable
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-hover align-middle mb-0">
-                                <thead class="table-light">
+                                <thead class="table-light text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
                                     <tr>
-                                        <th width="40" class="text-center">
-                                            <input type="checkbox" id="selectAll" class="form-check-input">
-                                        </th>
-                                        <th>Student Details</th>
-                                        <th>Course</th>
+                                        <th width="50" class="text-center"><input type="checkbox" id="selectAll" class="form-check-input"></th>
+                                        <th>Student Info</th>
+                                        <th>Course & Institute</th>
                                         <th>Reg No</th>
+                                        <th class="text-center">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if($students->num_rows > 0): ?>
-                                        <?php while($r = $students->fetch_assoc()): ?>
-                                        <tr>
-                                            <td class="text-center">
-                                                <input type="checkbox" name="student_ids[]" value="<?= $r['STUDENT_ID'] ?>" class="form-check-input student-checkbox">
-                                            </td>
-                                            <td>
-                                                <div class="fw-bold"><?= $r['FIRST_NAME'] ?> <?= $r['LAST_NAME'] ?></div>
-                                                <div class="small text-muted"><?= $r['MOBILE'] ?></div>
-                                            </td>
-                                            <td><?= $r['COURSE_NAME'] ?></td>
-                                            <td class="text-primary fw-bold"><?= $r['REGISTRATION_NO'] ?></td>
-                                        </tr>
-                                        <?php endwhile; ?>
-                                    <?php else: ?>
-                                        <tr><td colspan="4" class="text-center py-4">No active students found.</td></tr>
+                                    <?php if($students->num_rows > 0): while($r = $students->fetch_assoc()): ?>
+                                    <tr>
+                                        <td class="text-center">
+                                            <input type="checkbox" name="student_ids[]" value="<?= $r['STUDENT_ID'] ?>" class="form-check-input student-checkbox">
+                                        </td>
+                                        <td>
+                                            <div class="fw-bold text-dark"><?= $r['FIRST_NAME'].' '.$r['LAST_NAME'] ?></div>
+                                            <div class="small text-muted"><?= $r['MOBILE'] ?></div>
+                                        </td>
+                                        <td>
+                                            <div class="small fw-bold"><?= $r['COURSE_NAME'] ?></div>
+                                            <div class="text-primary small" style="font-size: 0.7rem;"><?= $r['INST_NAME'] ?></div>
+                                        </td>
+                                        <td><code class="fw-bold text-dark"><?= $r['REGISTRATION_NO'] ?></code></td>
+                                        <td class="text-center">
+                                            <?php if($r['STATUS'] == 'A'): ?>
+                                                <span class="status-badge bg-success-soft text-success border border-success">Active</span>
+                                            <?php else: ?>
+                                                <span class="status-badge bg-danger-soft text-danger border border-danger">Inactive</span>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <?php endwhile; else: ?>
+                                        <tr><td colspan="5" class="text-center py-5">No students found for this selection.</td></tr>
                                     <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    
+                    <div class="card-footer bg-white py-3">
+                        <nav class="d-flex justify-content-between align-items-center">
+                            <div class="small text-muted">Showing <?= $offset+1 ?>-<?= min($offset+$limit, $total_records) ?> of <?= $total_records ?></div>
+                            <ul class="pagination pagination-sm mb-0">
+                                <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                                    <a class="page-link" href="?page=<?= $page-1 ?>&limit=<?= $limit ?>&inst_id=<?= $filter_inst ?>"><i class="bi bi-chevron-left"></i></a>
+                                </li>
+                                <?php for($i=1; $i<=$total_pages; $i++): ?>
+                                    <li class="page-item <?= $page == $i ? 'active' : '' ?>">
+                                        <a class="page-link" href="?page=<?= $i ?>&limit=<?= $limit ?>&inst_id=<?= $filter_inst ?>"><?= $i ?></a>
+                                    </li>
+                                <?php endfor; ?>
+                                <li class="page-item <?= $page >= $total_pages ? 'disabled' : '' ?>">
+                                    <a class="page-link" href="?page=<?= $page+1 ?>&limit=<?= $limit ?>&inst_id=<?= $filter_inst ?>"><i class="bi bi-chevron-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </form>
@@ -138,11 +275,8 @@ $students = $conn->query("SELECT S.*, C.COURSE_NAME FROM STUDENTS S JOIN COURSES
 </div>
 
 <script>
-    // Checkbox "Select All" Logic
     document.getElementById('selectAll').addEventListener('change', function() {
-        const checkboxes = document.querySelectorAll('.student-checkbox');
-        checkboxes.forEach(cb => cb.checked = this.checked);
+        document.querySelectorAll('.student-checkbox').forEach(cb => cb.checked = this.checked);
     });
 </script>
-
 <?php include BASE_PATH.'/admin/layout/footer.php'; ?>

@@ -12,20 +12,30 @@ $inst_id   = $_SESSION['inst_id'];
 $current_page = $_SERVER['SCRIPT_NAME'];
 
 // 2. Determine the Module Title based on folder name
-$module_title = "FMS ADMIN"; // Default title
+$module_title = "FMS ADMIN";
+$module_icon  = "bi-gear"; // universal default icon
 
+$current_page = $_SERVER['SCRIPT_NAME'];
+
+// Map modules to titles + icons
 if (str_contains($current_page, '/students/')) {
     $module_title = "STUDENT MANAGEMENT";
+    $module_icon  = "bi-people";
 } elseif (str_contains($current_page, '/courses/')) {
     $module_title = "COURSE MANAGEMENT";
+    $module_icon  = "bi-journal-bookmark";
 } elseif (str_contains($current_page, '/fees/')) {
     $module_title = "FEES CONFIGURATION";
+    $module_icon  = "bi-wallet2";
 } elseif (str_contains($current_page, '/payments/')) {
     $module_title = "COLLECTIONS";
+    $module_icon  = "bi-cash-stack";
 } elseif (str_contains($current_page, '/reports/')) {
     $module_title = "REPORTS & ANALYTICS";
+    $module_icon  = "bi-bar-chart-line";
 } elseif (str_contains($current_page, '/dashboard.php')) {
     $module_title = "DASHBOARD";
+    $module_icon  = "bi-speedometer2";
 }
 
 ?>
@@ -150,7 +160,43 @@ html, body {
 </div>
 
 <div class="main">
-    <h5 class="mb-3">Welcome, <?= htmlspecialchars($adminName) ?></h5>
+    <div class="d-flex align-items-center justify-content-between mb-4 pb-3 border-bottom shadow-none" style="border-bottom: 2px solid #eee !important;">
+    <div>
+        <!-- Module Title -->
+        <h2 class="mb-1 fw-bold text-uppercase d-flex align-items-center" style="color: #1a3a5a; font-size: 1.4rem;">
+            <i class="bi <?= $module_icon ?> text-primary me-2"></i>
+            <?= $module_title ?>
+        </h2>
+
+        <!-- Sub Info Row -->
+        <div class="d-flex align-items-center flex-wrap gap-3">
+            <!--<span class="text-secondary small fw-semibold">
+                <i class="bi bi-cash-stack me-1"></i> FMS ver-1.0.0
+            </span> -->
+            <span class="text-secondary small fw-semibold border-start ps-1">
+                <i class="bi bi-calendar-check me-1"></i> Session: <?= date('Y') ?>-<?= date('Y')+1 ?>
+            </span>
+            <span class="text-secondary small fw-semibold border-start ps-1">
+                <i class="bi bi-shield-lock me-1"></i> Auth: <strong><?= htmlspecialchars($adminName) ?></strong>
+                <span class="badge rounded-pill bg-dark ms-1" style="font-size: 0.65rem;">
+                    <?= ($role === 'SUPERADMIN') ? "System Master" : $role ?>
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <!-- Right Side: Portal Status -->
+    <div class="text-end d-none d-lg-block border-start ps-4">
+        <div class="small text-uppercase text-muted fw-bold mb-1" style="letter-spacing: 1px;">Portal Status</div>
+        <div class="d-flex align-items-center justify-content-end text-success fw-bold">
+            <span class="spinner-grow spinner-grow-sm me-2" role="status"></span>
+            SYSTEM ACTIVE
+        </div>
+        <div class="small text-muted mt-1"><?= date('l, d F Y') ?></div>
+    </div>
+</div>
+
+
 
 <script>
     // Toggle Logic for Mobile

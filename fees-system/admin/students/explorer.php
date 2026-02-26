@@ -1,9 +1,22 @@
+<!--======================================================
+    File Name   : explorer.php
+    Project     : RMIT Groups - FMS - Fees Management System
+	Module		: STUDENT MANAGEMENT
+    Description : Student Registration & Profile Management
+    Developed By: TrinityWebEdge
+    Date Created: 05-02-2026
+    Last Updated: 25-02-2026
+    Note        : This page defines the FMS - Fees Management System | Student Module of RMIT Groups website.
+=======================================================-->
 <?php
 define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');
 require_once BASE_PATH.'/config/db.php';
 require_once BASE_PATH.'/core/auth.php';
 
 checkLogin();
+
+$instId 	= $_SESSION['inst_id'];
+$role       = $_SESSION['role_name'];
 
 // 1. Handle Search Input
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';

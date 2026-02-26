@@ -71,6 +71,8 @@ function authorize($required_role = ROLE_SUPERADMIN)
  */
 function logout()
 {
+    $is_student = (isset($_SESSION['role_name']) && $_SESSION['role_name'] === ROLE_STUDENT);
+    
     $_SESSION = array(); 
     if (ini_get("session.use_cookies")) {
         $params = session_get_cookie_params();
@@ -80,6 +82,12 @@ function logout()
         );
     }
     session_destroy();
-    header("Location: " . BASE_URL . "/admin/login.php?logout=success");
+
+    // Redirect based on who was logged in
+    if ($is_student) {
+        header("Location: " . STUDENT_URL . "sms_login.php?logout=success");
+    } else {
+        header("Location: " . BASE_URL . "/admin/login.php?logout=success");
+    }
     exit;
 }

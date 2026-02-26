@@ -8,7 +8,8 @@
     Date Created: 05-02-2025
     Last Updated: 25-02-2026
     Note        : This page defines the FMS - Fees Management System | Student Module of RMIT Groups website.
-=======================================================*/       
+=======================================================*/
+        
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 

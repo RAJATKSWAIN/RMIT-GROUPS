@@ -5,7 +5,7 @@
     Description : Student Registration & Profile Management
     Developed By: TrinityWebEdge
     Date Created: 05-02-2026
-    Last Updated: 24-02-2026
+    Last Updated: 26-02-2026
     Note        : This page defines the FMS - Fees Management System | Student Module of RMIT Groups website.
 =======================================================-->
 <?php

@@ -7,14 +7,24 @@
  * ======================================================
  */
 
-// Critical fix for variable scope when called from InvoiceService
-global $conn;
-if (!isset($conn)) { $conn = $this->conn; }
+// 1. Ensure DB connection is available in the local scope
+require_once BASE_PATH . '/config/db.php';
+global $conn; // CRITICAL: This allows the template to see the $conn variable defined in db.php
+
+/**
+ * 2. FETCH DYNAMIC INSTITUTE & COURSE DETAILS
+ */
+$studentId = $data['STUDENT_ID'] ?? 0;
+
+// Verify $conn is not null before querying
+if (!$conn) {
+    die("Database Connection Error: Connection variable is null.");
+}
 
 /**
  * 1. FETCH DYNAMIC INSTITUTE & COURSE DETAILS
  */
-$studentId = $data['STUDENT_ID'] ?? 0;
+//$studentId = $data['STUDENT_ID'] ?? 0;
 $instQuery = $conn->query("
     SELECT 
         I.INST_NAME, I.BRAND_COLOR,

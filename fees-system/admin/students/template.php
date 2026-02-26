@@ -1,3 +1,11 @@
+<!--======================================================
+    File Name   : template.php
+    Project     : RMIT Groups - FMS - Fees Management System
+    Module      : STUDENT MANAGEMENT
+    Description : Student Bulk upload Template
+    Date Created: 06-02-2026
+    Last Updated: 25-02-2026
+=======================================================-->
 <?php
 // generate_template.php - FMS V 1.0.0
 define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'].'/fees-system');

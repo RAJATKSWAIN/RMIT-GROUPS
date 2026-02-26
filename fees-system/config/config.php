@@ -6,10 +6,13 @@
 define('BASE_URL', '/fees-system/');          // Staff/Admin Root
 define('STUDENT_URL', '/student-portal/');    // New Student Portal Root
 
-define('APP_NAME', 'FMS - Fees Management System');
+define('APP_NAME', 'EduRemit™ FMS - Fees Management System');
 define('APP_VERSION', '1.0.0');
 define('DEVELOPED_BY', 'TrinityWebEdge');
 date_default_timezone_set('Asia/Kolkata');
+
+define('SMS_APP_NAME', 'EduRemit™ SMS - Student Management System');
+define('SMS_APP_VERSION', '1.0.0');
 
 /* --- 2. PRODUCT OWNER / SYSTEM DEFAULTS --- */
 define('ORG_NAME', 'TRINITYWEBEDGE');

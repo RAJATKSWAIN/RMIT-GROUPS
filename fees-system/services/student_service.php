@@ -8,7 +8,6 @@
     Note        : This page defines the FMS - Fees Management System | BACKEND SERVICE Module of RMIT Groups website.
 =======================================================-->        
 <?php
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 

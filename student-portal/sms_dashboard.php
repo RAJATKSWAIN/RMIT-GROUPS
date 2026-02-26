@@ -276,19 +276,10 @@ $payments = $p_stmt->get_result();
         <footer class="mt-4 pb-2">
             <div class="d-flex justify-content-end border-top pt-2">
                 <p class="text-muted mb-0" style="font-size: 0.7rem; opacity: 0.8; letter-spacing: 0.3px;">
-                    &copy; 2026 <strong><?= SMS_APP_NAME ?> <?= SMS_APP_VERSION ?>;</strong> <span class="mx-1">|</span> Product of <strong>TrinityWebEdge</strong>
+                    &copy; 2026 <strong><?= SMS_APP_NAME ?>  Ver  <?= SMS_APP_VERSION ?> </strong> <span class="mx-1">|</span> Product of <strong>TrinityWebEdge</strong>
                 </p>
             </div>
         </footer>
-
-		<footer class="mt-4 pb-2">
-    <div class="d-flex justify-content-end border-top pt-2">
-        <p class="text-muted mb-0" style="font-size: 0.7rem; opacity: 0.8; letter-spacing: 0.3px;">
-            &copy; 2026 <strong><?= SMS_APP_NAME ?> v<?= SMS_APP_VERSION ?></strong> 
-            <span class="mx-1">|</span> Product of <strong>TrinityWebEdge</strong>
-        </p>
-    </div>
-</footer>
         
     </div> </div> </body>
 </html>

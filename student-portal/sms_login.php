@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portal Login</title>
+    <title>Student Portal Login | <?= SMS_APP_NAME ?></title> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -237,8 +237,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
     <div class="footer-text">
-        <p class="mb-1">&copy; 2026 EduRemit&trade;</p>
-        <p class="mb-0">Powered by <a href="#">TrinityWebEdge</a></p>
+        <p class="text-muted mb-0" style="font-size: 0.7rem; opacity: 0.8; letter-spacing: 0.3px;">
+         &copy; 2026 <strong><?= SMS_APP_NAME ?>  Ver  <?= SMS_APP_VERSION ?> </strong> <span class="mx-1">|</span> Product of <strong>TrinityWebEdge</strong>
+        </p>
+        <p class="mb-1">&copy; 2026 <strong><?= SMS_APP_NAME ?>  Ver  <?= SMS_APP_VERSION ?> </strong></p>
+        <p class="mb-0">Powered by <a href="#"> Product of <strong>TrinityWebEdge</strong></a></p>
     </div>
 </div>
 
